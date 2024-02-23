@@ -1,0 +1,23 @@
+{
+    "workbench.colorTheme": "Atom Just Black",
+    "editor.tokenColorCustomizations": {
+      "textMateRules": [
+        {
+          "scope": [
+            "comment",
+            "string"
+          ],
+          "settings": {
+            "foreground": "#00ff00"
+          }
+        },
+        {
+          "scope": "keyword",
+          "settings": {
+            "foreground": "#ffff00"
+          }
+        }
+      ]
+    }
+  }
+  

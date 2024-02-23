@@ -1,0 +1,18 @@
+/* Add this CSS to your stylesheet */
+
+/* Table header color */
+.table-header {
+    background-color: #f0f0f0; /* Light gray */
+}
+
+/* Even row color */
+.table-even {
+    background-color: #f9f9f9; /* Lighter gray */
+}
+
+/* Odd row color */
+.table-odd {
+    background-color: #ffffff; /* White */
+}
+
+
