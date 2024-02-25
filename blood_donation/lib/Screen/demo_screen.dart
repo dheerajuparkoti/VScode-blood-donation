@@ -1,3 +1,4 @@
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 
 class Tabbar extends StatefulWidget {
@@ -10,32 +11,33 @@ class Tabbar extends StatefulWidget {
 class _TabbarState extends State<Tabbar> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
         body: Column(children: <Widget>[
-      const SizedBox(height: 50),
+      SizedBox(height: 25.75 * asr),
       const Text("Call Manager",
           style: TextStyle(color: Colors.black, fontSize: 30)),
-      const SizedBox(
-        height: 10,
+      SizedBox(
+        height: 5.1 * asr,
       ),
       Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-        elevation: 5,
+        elevation: 2.58 * asr,
         child: Container(
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(6.2 * asr),
           ),
           child: TabBar(
             indicator: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(6.2 * asr),
               color: Colors.orange,
             ),
             controller: tabController,
             isScrollable: true,
-            labelPadding: const EdgeInsets.symmetric(horizontal: 30),
+            labelPadding: EdgeInsets.symmetric(horizontal: 15.5 * asr),
             tabs: const <Widget>[
               Tab(
                 child: Text(

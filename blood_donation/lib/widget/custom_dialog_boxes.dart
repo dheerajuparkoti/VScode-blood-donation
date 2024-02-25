@@ -1,3 +1,4 @@
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 
 class CustomDialog {
@@ -6,6 +7,7 @@ class CustomDialog {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        double asr = ScreenResolution().sh / ScreenResolution().sw;
         return AlertDialog(
           content: SizedBox(
             width: double.maxFinite, // Adjust the width as needed
@@ -14,23 +16,23 @@ class CustomDialog {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,
-                    fontSize: 18.0,
+                    fontSize: 9.30 * asr,
                   ),
                 ),
-                const SizedBox(height: 10.0),
+                SizedBox(height: 5.1 * asr),
                 Icon(
                   iconData,
                   color: Colors.red,
-                  size: 40.0,
+                  size: 20.4 * asr,
                 ),
-                const SizedBox(height: 10.0),
+                SizedBox(height: 5.1 * asr),
                 Text(
                   message,
-                  style: const TextStyle(
-                    fontSize: 16.0,
+                  style: TextStyle(
+                    fontSize: 8.26 * asr,
                   ),
                 ),
               ],
@@ -44,10 +46,10 @@ class CustomDialog {
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
               ),
-              child: const Text(
+              child: Text(
                 'OK',
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 9.30 * asr,
                 ),
               ),
             ),
@@ -68,6 +70,7 @@ class CustomSnackBar {
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.floating,
   }) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -77,7 +80,7 @@ class CustomSnackBar {
               icon,
               color: Colors.white,
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 4.08 * asr),
             Flexible(
               child: Text(
                 message,
@@ -105,6 +108,7 @@ class CustomSnackBar {
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.floating,
   }) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -114,7 +118,7 @@ class CustomSnackBar {
               icon,
               color: Colors.white,
             ),
-            const SizedBox(width: 8),
+            SizedBox(width: 4.08 * asr),
             Flexible(
               child: Text(
                 message,

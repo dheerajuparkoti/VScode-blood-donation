@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:blood_donation/Screen/available_list.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -516,6 +517,7 @@ class _RequestScreenState extends State<RequestScreen>
 
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     super.build(context); // to maintain state between two tabs
 
     return Scaffold(
@@ -524,9 +526,9 @@ class _RequestScreenState extends State<RequestScreen>
       body: Stack(
         children: <Widget>[
           Container(
-            height: 300.0,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
+            height: 155 * asr,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomRight,
                 colors: [
@@ -535,46 +537,46 @@ class _RequestScreenState extends State<RequestScreen>
                 ],
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(150.0),
-                bottomRight: Radius.circular(200.0),
+                bottomLeft: Radius.circular(77.5 * asr),
+                bottomRight: Radius.circular(103.3 * asr),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20.0,
-              vertical: 20.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.33 * asr,
+              vertical: 10.33 * asr,
             ),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(35.0),
-                  topRight: Radius.circular(35.0),
-                  bottomLeft: Radius.circular(35.0),
-                  bottomRight: Radius.circular(35.0),
+                  topLeft: Radius.circular(18.1 * asr),
+                  topRight: Radius.circular(18.1 * asr),
+                  bottomLeft: Radius.circular(18.1 * asr),
+                  bottomRight: Radius.circular(18.1 * asr),
                 ),
               ),
               child: Column(children: [
                 Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(170, 255, 255, 255),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(170, 255, 255, 255),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(35.0),
-                      topRight: Radius.circular(35.0),
-                      // bottomLeft: Radius.circular(35.0),
-                      // bottomRight: Radius.circular(35.0),
+                      topLeft: Radius.circular(18.1 * asr),
+                      topRight: Radius.circular(18.1 * asr),
+                      // bottomLeft: Radius.circular(18.1*asr),
+                      // bottomRight: Radius.circular(18.1*asr),
                     ),
                   ),
 
                   // Set to transparent
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  padding: EdgeInsets.only(top: 5.1 * asr, bottom: 5.1 * asr),
 
                   child: TabBar(
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(7.75 * asr),
                       color: const Color(0xffFF0025),
                     ),
                     controller: _tabController,
@@ -624,35 +626,35 @@ class _RequestScreenState extends State<RequestScreen>
                       //code for add request i.e 1st tab
                       SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 15.5 * asr,
                           ),
                           child: Center(
                               child: Column(
                             children: [
-                              const Text(
+                              Text(
                                 'Fill the Blood Donation Request Form.',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFFF44336),
-                                  fontSize: 16,
+                                  color: const Color(0xFFF44336),
+                                  fontSize: 8.26 * asr,
                                 ),
                               ),
 
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
-                              const Align(
+                              Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
                                   'Patient Details * ',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF706969),
-                                    fontSize: 14,
+                                    color: const Color(0xFF706969),
+                                    fontSize: 7.23 * asr,
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
                               TextField(
                                 controller: fullNameController,
                                 decoration: const InputDecoration(
@@ -662,7 +664,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 30,
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               //DROPDOWN BLOOD GROUP
                               DropdownButtonFormField<String>(
@@ -702,7 +704,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   });
                                 },
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               TextField(
                                 controller: requiredPintController,
@@ -713,7 +715,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 2,
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               TextField(
                                 controller: caseDetailController,
@@ -724,7 +726,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 30,
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               TextField(
                                 controller: contactPersonNameController,
@@ -735,7 +737,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 30,
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               TextField(
                                 controller: contactNoController,
@@ -747,7 +749,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 10,
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               TextField(
                                 controller: requiredDateController,
@@ -764,7 +766,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                               ),
 
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
                               TextField(
                                 controller: requiredTimeController,
                                 readOnly: true,
@@ -779,20 +781,20 @@ class _RequestScreenState extends State<RequestScreen>
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 5.0),
-                              const Align(
+                              SizedBox(height: 2.58 * asr),
+                              Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
                                   'Hospital Details * ',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF706969),
-                                    fontSize: 14,
+                                    color: const Color(0xFF706969),
+                                    fontSize: 7.23 * asr,
                                   ),
                                 ),
                               ),
 
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
                               TextField(
                                 controller: hospitalNameController,
                                 decoration: const InputDecoration(
@@ -802,7 +804,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 30,
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               //DROPDOWN PROVINCE
                               DropdownButtonFormField<String>(
@@ -837,7 +839,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   });
                                 },
                               ),
-                              const SizedBox(height: 24.0),
+                              SizedBox(height: 12.24 * asr),
 
                               // DROPDOWN DISTRICT LISTS BASED ON PROVINCE
                               DropdownButtonFormField<String>(
@@ -873,7 +875,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   });
                                 },
                               ),
-                              const SizedBox(height: 24.0),
+                              SizedBox(height: 12.24 * asr),
 
                               // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                               DropdownButtonFormField<String>(
@@ -908,7 +910,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   });
                                 },
                               ),
-                              const SizedBox(height: 20.0),
+                              SizedBox(height: 10.33 * asr),
 
                               TextField(
                                 //controller: _textControllers['wardNo'],
@@ -921,7 +923,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 2,
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               CheckboxListTile(
                                 title: const Text(
@@ -948,13 +950,14 @@ class _RequestScreenState extends State<RequestScreen>
                               // CheckboxListTile widget for emergency status
 
                               // Making SignUp button
-                              const SizedBox(height: 30.0),
+                              SizedBox(height: 15.5 * asr),
                               Container(
-                                height: 50,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 25),
+                                height: 25.75 * asr,
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 12.9 * asr),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
+                                  borderRadius:
+                                      BorderRadius.circular(25.75 * asr),
                                   color: const Color(0xffFF0025),
                                 ),
                                 //calling insert function when button is pressed
@@ -973,7 +976,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 30.0),
+                              SizedBox(height: 15.5 * asr),
                             ],
                           )),
                         ),
@@ -987,8 +990,8 @@ class _RequestScreenState extends State<RequestScreen>
                             child: Column(
                           children: <Widget>[
                             Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 10.0,
+                                padding: EdgeInsets.only(
+                                  left: 5.1 * asr,
                                   bottom: 0,
                                   top: 0,
                                 ),
@@ -996,10 +999,10 @@ class _RequestScreenState extends State<RequestScreen>
                                   alignment: Alignment.bottomLeft,
                                   child: Text(
                                     'Total My Requests : ${loadingAllMyRequests.length}',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                      fontSize: 8.26 * asr,
                                     ),
                                   ),
                                 )),
@@ -1028,22 +1031,22 @@ class _RequestScreenState extends State<RequestScreen>
                                   }
 
                                   return SizedBox(
-                                    height: 290,
+                                    height: 147.9 * asr,
                                     child: Card(
                                       margin: const EdgeInsets.all(0.0),
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(0.0),
                                       ),
-                                      elevation: 1.0,
+                                      elevation: 0.51 * asr,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: <Widget>[
                                           // First Row Container
                                           Container(
-                                            height: 30.0,
-                                            padding: const EdgeInsets.all(5.0),
+                                            height: 15.5 * asr,
+                                            padding: EdgeInsets.all(2.58 * asr),
                                             color: const Color(0xFF444242),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1067,8 +1070,8 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Second Row Container
 
                                           Container(
-                                            height: 210.0,
-                                            padding: const EdgeInsets.all(10.0),
+                                            height: 25.1 * asr,
+                                            padding: EdgeInsets.all(5.1 * asr),
                                             color: Colors.white,
                                             child: Align(
                                               alignment: Alignment.centerLeft,
@@ -1081,117 +1084,128 @@ class _RequestScreenState extends State<RequestScreen>
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Patient Name :  ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${requestData['fullName']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Required Pint : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${requestData['requiredPint']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Case Detail : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${requestData['caseDetail']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Contact Person : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${requestData['contactPersonName']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Phone : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${requestData['contactNo']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Hospital : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${requestData['hospitalName']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Address: ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Expanded(
                                                         child: Text(
                                                           '${requestData['localLevel']} - ${requestData['wardNo']}, ${requestData['district']},  Pro. ${requestData['province']}',
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize:
-                                                                      12.0),
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize:
+                                                                  6.2 * asr),
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           maxLines:
@@ -1204,32 +1218,34 @@ class _RequestScreenState extends State<RequestScreen>
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Date & Time : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${requestData['requiredDate']}, ${_formatTimeFromDatabase(requestData['requiredTime'])}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(children: [
-                                                    const Text(
+                                                    Text(
                                                       'Donors Available Up-to-date: ',
                                                       style: TextStyle(
                                                           color: Colors.black,
-                                                          fontSize: 12.0),
+                                                          fontSize: 6.2 * asr),
                                                     ),
                                                     Text(
                                                       '${allMydonorCount ?? 'Loading...'}',
-                                                      style: const TextStyle(
+                                                      style: TextStyle(
                                                           color: Colors.red,
-                                                          fontSize: 12.0),
+                                                          fontSize: 6.2 * asr),
                                                     ),
                                                   ]),
                                                 ],
@@ -1240,8 +1256,8 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Third Row Container
 
                                           Container(
-                                            height: 40.0,
-                                            padding: const EdgeInsets.all(5.0),
+                                            height: 20.4 * asr,
+                                            padding: EdgeInsets.all(2.58 * asr),
                                             color: const Color(0xFF8CC653),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1269,14 +1285,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                             emergencyRequestId);
                                                       }
                                                     },
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.delete_forever,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color: Colors.red,
                                                     ),
-                                                    label: const Text('Delete',
+                                                    label: Text('Delete',
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: Colors.red,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1295,19 +1311,18 @@ class _RequestScreenState extends State<RequestScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 2.5),
+                                                SizedBox(width: 1.29 * asr),
                                                 Expanded(
                                                   child: TextButton.icon(
                                                     onPressed: () {},
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.map,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color: Colors.blue,
                                                     ),
-                                                    label: const Text(
-                                                        'Map View',
+                                                    label: Text('Map View',
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: Colors.blue,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1326,7 +1341,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 2.5),
+                                                SizedBox(width: 1.29 * asr),
                                                 Expanded(
                                                   child: TextButton.icon(
                                                     onPressed: () {
@@ -1373,15 +1388,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         ),
                                                       );
                                                     },
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.list,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color: Colors.green,
                                                     ),
-                                                    label: const Text(
-                                                        'List View',
+                                                    label: Text('List View',
                                                         style: TextStyle(
-                                                            fontSize: 12.0,
+                                                            fontSize: 6.2 * asr,
                                                             color:
                                                                 Colors.green)),
                                                     style: TextButton.styleFrom(
@@ -1424,8 +1438,8 @@ class _RequestScreenState extends State<RequestScreen>
                             child: Column(
                           children: <Widget>[
                             Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 10.0,
+                                padding: EdgeInsets.only(
+                                  left: 5.1 * asr,
                                   bottom: 0,
                                   top: 0,
                                 ),
@@ -1433,10 +1447,10 @@ class _RequestScreenState extends State<RequestScreen>
                                   alignment: Alignment.bottomLeft,
                                   child: Text(
                                     'Total Requests : ${loadingOtherRequests.length}',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                      fontSize: 8.26 * asr,
                                     ),
                                   ),
                                 )),
@@ -1452,22 +1466,22 @@ class _RequestScreenState extends State<RequestScreen>
                                   final int donorCount =
                                       donorCounts[requestId] ?? 0;
                                   return SizedBox(
-                                    height: 290,
+                                    height: 147.9 * asr,
                                     child: Card(
                                       margin: const EdgeInsets.all(0.0),
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(0.0),
                                       ),
-                                      elevation: 1.0,
+                                      elevation: 0.51 * asr,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: <Widget>[
                                           // First Row Container
                                           Container(
-                                            height: 30.0,
-                                            padding: const EdgeInsets.all(5.0),
+                                            height: 15.5 * asr,
+                                            padding: EdgeInsets.all(2.58 * asr),
                                             color: const Color(0xFF444242),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1491,8 +1505,8 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Second Row Container
 
                                           Container(
-                                            height: 210.0,
-                                            padding: const EdgeInsets.all(10.0),
+                                            height: 107.1 * asr,
+                                            padding: EdgeInsets.all(5.1 * asr),
                                             color: Colors.white,
                                             child: Align(
                                               alignment: Alignment.centerLeft,
@@ -1505,117 +1519,128 @@ class _RequestScreenState extends State<RequestScreen>
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Patient Name : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['fullName']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Required Pint : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['requiredPint']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Case Detail : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['caseDetail']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Contact Person : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['contactPersonName']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Phone : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['contactNo']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Hospital : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['hospitalName']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Address : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Expanded(
                                                         child: Text(
                                                           '${otherRequestData['localLevel']} - ${otherRequestData['wardNo']}, ${otherRequestData['district']},  Pro. ${otherRequestData['province']}',
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .red,
-                                                                  fontSize:
-                                                                      12.0),
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize:
+                                                                  6.2 * asr),
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           maxLines:
@@ -1628,33 +1653,37 @@ class _RequestScreenState extends State<RequestScreen>
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Date & Time : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['requiredDate']}, ${_formatTimeFromDatabase(otherRequestData['requiredTime'])}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Donors Available Up-to-date: ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         donorCount.toString(),
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
@@ -1666,8 +1695,8 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Third Row Container
 
                                           Container(
-                                            height: 40.0,
-                                            padding: const EdgeInsets.all(5.0),
+                                            height: 20.4 * asr,
+                                            padding: EdgeInsets.all(2.58 * asr),
                                             color: const Color(0xFF8CC653),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1680,14 +1709,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                       makePhoneCall(
                                                           'tel:+977 ${otherRequestData['contactNo']}');
                                                     },
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.phone,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color: Colors.green,
                                                     ),
-                                                    label: const Text('Call',
+                                                    label: Text('Call',
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: Colors.green,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1702,7 +1731,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 2.5),
+                                                SizedBox(width: 1.29 * asr),
                                                 Expanded(
                                                   child: TextButton.icon(
                                                     onPressed: () {
@@ -1719,14 +1748,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         'App: Mobile Blood Bank Nepal',
                                                       );
                                                     },
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.share,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color: Colors.blue,
                                                     ),
-                                                    label: const Text('Share',
+                                                    label: Text('Share',
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: Colors.blue,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1741,7 +1770,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 2.5),
+                                                SizedBox(width: 1.29 * asr),
                                                 Expanded(
                                                   flex: 2,
                                                   child: TextButton.icon(
@@ -1755,15 +1784,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                       rAvailableDonors(reqId);
                                                       // }
                                                     },
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.waving_hand,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color: Colors.red,
                                                     ),
-                                                    label: const Text(
-                                                        "I'm Available",
+                                                    label: Text("I'm Available",
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: Colors.red,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1782,8 +1810,8 @@ class _RequestScreenState extends State<RequestScreen>
                                             ),
                                           ),
 
-                                          const SizedBox(
-                                            height: 10.0,
+                                          SizedBox(
+                                            height: 5.1 * asr,
                                           ),
                                         ],
                                       ),
@@ -1809,7 +1837,7 @@ class _RequestScreenState extends State<RequestScreen>
               child: CircularProgressIndicator(
                 valueColor: const AlwaysStoppedAnimation<Color>(
                     Colors.red), // Color of the progress indicator
-                strokeWidth: 5.0, // Thickness of the progress indicator
+                strokeWidth: 2.58 * asr, // Thickness of the progress indicator
                 backgroundColor: Colors.black.withOpacity(
                     0.5), // Background color of the progress indicator
               ),

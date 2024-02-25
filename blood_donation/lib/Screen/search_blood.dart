@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
@@ -92,14 +93,15 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
 
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Stack(
           children: <Widget>[
             Container(
-              height: 300.0,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
+              height: 155 * asr,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomRight,
                   colors: [
@@ -108,18 +110,19 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                   ],
                 ),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(150.0),
-                  bottomRight: Radius.circular(300.0),
+                  bottomLeft: Radius.circular(77.5 * asr),
+                  bottomRight: Radius.circular(155 * asr),
                 ),
               ),
             ),
             // FOR LOGO
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              padding: EdgeInsets.symmetric(
+                  horizontal: 15.5 * asr, vertical: 7.75 * asr),
               child: SizedBox(
-                width: 300.0,
-                height: 200.0,
+                width: 155 * asr,
+                height: 103.3 * asr,
                 child: Image.asset(
                   'images/mbblogo.png',
                   fit: BoxFit.contain,
@@ -130,9 +133,9 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
 // FROM HERE
 
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 30.0,
-                vertical: 30.0,
+              padding: EdgeInsets.symmetric(
+                horizontal: 15.5 * asr,
+                vertical: 15.5 * asr,
               ),
               //),
 
@@ -140,14 +143,14 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   width: double.infinity,
-                  height: 600.0,
-                  decoration: const BoxDecoration(
+                  height: 306 * asr,
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(35.0),
-                      topRight: Radius.circular(35.0),
-                      bottomLeft: Radius.circular(35.0),
-                      bottomRight: Radius.circular(35.0),
+                      topLeft: Radius.circular(18.1 * asr),
+                      topRight: Radius.circular(18.1 * asr),
+                      bottomLeft: Radius.circular(18.1 * asr),
+                      bottomRight: Radius.circular(18.1 * asr),
                     ),
                   ),
                   child: SingleChildScrollView(
@@ -156,20 +159,20 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                         children: [
                           //HEADER
                           Padding(
-                            padding: const EdgeInsets.only(top: 30.0),
+                            padding: EdgeInsets.only(top: 15.5 * asr),
                             child: Container(
-                                height: 30,
+                                height: 15.5 * asr,
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
                                   color: Color(0xFFFF0025),
                                   borderRadius: BorderRadius.only(),
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: Text(
                                     'Search Blood Group By',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 10.33 * asr,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
@@ -179,8 +182,10 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
 
                           //SEARCH BY Group
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 15.0, right: 15.0, top: 15.0),
+                            padding: EdgeInsets.only(
+                                left: 7.75 * asr,
+                                right: 7.75 * asr,
+                                top: 7.75 * asr),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -222,7 +227,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                     });
                                   },
                                 ),
-                                const SizedBox(height: 15.0),
+                                SizedBox(height: 7.75 * asr),
 
                                 //DROPDOWN PROVINCE
                                 DropdownButtonFormField<String>(
@@ -257,7 +262,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                     });
                                   },
                                 ),
-                                const SizedBox(height: 15.0),
+                                SizedBox(height: 7.75 * asr),
 
                                 // DROPDOWN DISTRICT LISTS BASED ON PROVINCE
                                 DropdownButtonFormField<String>(
@@ -293,7 +298,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                     });
                                   },
                                 ),
-                                const SizedBox(height: 15.0),
+                                SizedBox(height: 7.75 * asr),
 
                                 // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                                 DropdownButtonFormField<String>(
@@ -328,7 +333,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                     });
                                   },
                                 ),
-                                const SizedBox(height: 15.0),
+                                SizedBox(height: 7.75 * asr),
 
                                 TextField(
                                   controller: wardNoController,
@@ -346,13 +351,14 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                           // end of selection search
 
                           // Making Search button
-                          const SizedBox(height: 15.0),
+                          SizedBox(height: 7.75 * asr),
 
                           Container(
-                            height: 40,
-                            margin: const EdgeInsets.symmetric(horizontal: 25),
+                            height: 20.4 * asr,
+                            margin:
+                                EdgeInsets.symmetric(horizontal: 12.9 * asr),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
+                              borderRadius: BorderRadius.circular(25.75 * asr),
                               color: const Color(0xffFF0025),
                             ),
                             //calling insert function when button is pressed
@@ -363,12 +369,13 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                   searchBlood();
                                 }
                               },
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   "Search Now",
                                   style: TextStyle(
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      fontSize: 16),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255),
+                                      fontSize: 8.26 * asr),
                                 ),
                               ),
                             ),
@@ -377,36 +384,37 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                           // search button end
                           //search results start
 
-                          const SizedBox(height: 15.0),
-                          const Text(
+                          SizedBox(height: 7.75 * asr),
+                          Text(
                             'Searched results', // import total members from database
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 7.23 * asr,
                               fontWeight: FontWeight.w300,
-                              color: Color(0xffaba7a7),
+                              color: const Color(0xffaba7a7),
                             ),
                           ),
 
-                          const SizedBox(height: 5.0),
+                          SizedBox(height: 2.58 * asr),
 
                           Text(
                             '$searchResultcount', // import count number from database as per matched query
-                            style: const TextStyle(
-                              fontSize: 30,
+                            style: TextStyle(
+                              fontSize: 15.5 * asr,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xffFF0025),
+                              color: const Color(0xffFF0025),
                             ),
                           ),
 
                           // view searched results button
 
-                          const SizedBox(height: 5.0),
+                          SizedBox(height: 2.58 * asr),
                           Container(
-                            height: 20,
-                            width: 150,
-                            margin: const EdgeInsets.symmetric(horizontal: 25),
+                            height: 10.33 * asr,
+                            width: 77.5 * asr,
+                            margin:
+                                EdgeInsets.symmetric(horizontal: 12.9 * asr),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
+                              borderRadius: BorderRadius.circular(25.75 * asr),
                               color: const Color(0xffFF0025),
                             ),
                             //calling insert function when button is pressed
@@ -430,12 +438,13 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                       );
                                     }
                                   : null,
-                              child: const Center(
+                              child: Center(
                                 child: Text(
                                   "View Search Results",
                                   style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 14,
+                                    color: const Color.fromARGB(
+                                        255, 255, 255, 255),
+                                    fontSize: 7.23 * asr,
                                     decoration: TextDecoration.underline,
                                     decorationColor: Colors.white,
                                     decorationThickness: 2.0,
@@ -457,7 +466,8 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                 child: CircularProgressIndicator(
                   valueColor: const AlwaysStoppedAnimation<Color>(
                       Colors.red), // Color of the progress indicator
-                  strokeWidth: 5.0, // Thickness of the progress indicator
+                  strokeWidth:
+                      2.58 * asr, // Thickness of the progress indicator
                   backgroundColor: Colors.black.withOpacity(
                       0.5), // Background color of the progress indicator
                 ),

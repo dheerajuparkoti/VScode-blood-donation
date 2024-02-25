@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:blood_donation/api/api.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -70,16 +71,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('I am here'),
-            const SizedBox(height: 20),
+            SizedBox(height: 10.33 * asr),
             Text(
               'Notification Count: $notificationCount', // Display the notification count
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 9.30 * asr),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_const
 import 'dart:convert';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/Screen/profile_screen.dart';
 import 'package:blood_donation/api/api.dart';
@@ -52,6 +53,7 @@ class _BloodSearchListState extends State<BloodSearchList> {
 
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     return Scaffold(
         // backgroundColor: const Color(0xffF00808),
         /*
@@ -70,8 +72,8 @@ class _BloodSearchListState extends State<BloodSearchList> {
         body: Stack(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: ScreenResolution().sw,
+          height: ScreenResolution().sh,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -86,20 +88,20 @@ class _BloodSearchListState extends State<BloodSearchList> {
 
         //HEADER
         Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: EdgeInsets.only(top: 15.5 * asr),
           child: Container(
-              height: 30,
+              height: 15.5 * asr,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Color(0xFFFF0025),
                 borderRadius: BorderRadius.only(),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
                   'Searched Results',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 10.39 * asr,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -108,44 +110,44 @@ class _BloodSearchListState extends State<BloodSearchList> {
         ),
 
         Padding(
-          padding: const EdgeInsets.only(
-            top: 70.0,
-            left: 1.0,
-            right: 1.0,
+          padding: EdgeInsets.only(
+            top: 35.7 * asr,
+            left: 0.51 * asr,
+            right: 0.51 * asr,
             bottom: 0.0,
           ),
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: const BoxDecoration(
+            width: ScreenResolution().sw,
+            height: ScreenResolution().sh,
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.0),
-                topRight: Radius.circular(25.0),
+                topLeft: Radius.circular(12.9 * asr),
+                topRight: Radius.circular(12.9 * asr),
                 //bottomLeft: Radius.circular(25.0),
                 //bottomRight: Radius.circular(25.0),
               ),
             ),
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: EdgeInsets.all(12.9 * asr),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                          padding: const EdgeInsets.only(
-                            left: 10.0,
+                          padding: EdgeInsets.only(
+                            left: 5.1 * asr,
                             bottom: 0,
-                            top: 10.0,
+                            top: 5.1 * asr,
                           ),
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
                               'Searched Results : ${matchedResults.length}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 8.26 * asr,
                               ),
                             ),
                           )),
@@ -183,7 +185,8 @@ class _BloodSearchListState extends State<BloodSearchList> {
                                   children: <Widget>[
                                     // for underline
                                     Container(
-                                      height: 1.0, // Height of the underline
+                                      height:
+                                          0.51 * asr, // Height of the underline
                                       color: Colors.green,
                                       //width:300.0, // Adjust the width accordingly
                                     ),
@@ -192,7 +195,7 @@ class _BloodSearchListState extends State<BloodSearchList> {
                                       padding: const EdgeInsets.all(10.0),
                                       child: Row(children: [
                                         CircleAvatar(
-                                          radius: 20.0,
+                                          radius: 10.39 * asr,
                                           backgroundImage: isValidUrl
                                               ? NetworkImage(profilePicUrl)
                                               : null, // Set to null if 'profilePicUrl' is not a valid URL
@@ -201,8 +204,8 @@ class _BloodSearchListState extends State<BloodSearchList> {
                                               : const Icon(Icons
                                                   .person), // Show an icon if 'profilePicUrl' is not a valid URL
                                         ),
-                                        const SizedBox(
-                                          width: 25.0,
+                                        SizedBox(
+                                          width: 12.9 * asr,
                                         ),
                                         // Text('Name: ${result['fullname']}'),
                                         Text(result['fullname']),
@@ -225,7 +228,7 @@ class _BloodSearchListState extends State<BloodSearchList> {
             child: CircularProgressIndicator(
               valueColor: const AlwaysStoppedAnimation<Color>(
                   Colors.red), // Color of the progress indicator
-              strokeWidth: 5.0, // Thickness of the progress indicator
+              strokeWidth: 2.58 * asr, // Thickness of the progress indicator
               backgroundColor: Colors.black.withOpacity(
                   0.5), // Background color of the progress indicator
             ),

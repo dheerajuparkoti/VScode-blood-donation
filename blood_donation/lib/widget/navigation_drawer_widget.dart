@@ -3,6 +3,7 @@ import 'package:blood_donation/Screen/add_donor_screen.dart';
 import 'package:blood_donation/Screen/events_appointment.dart';
 import 'package:blood_donation/Screen/privacy_policy.dart';
 import 'package:blood_donation/Screen/profile_screen.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/drawer_items.dart';
@@ -26,9 +27,7 @@ class NavigationDrawerScreen extends StatelessWidget {
   final CallApi callApi = CallApi();
   @override
   Widget build(BuildContext context) {
-    double sw = MediaQuery.of(context).size.width;
-    double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
 
     final safeArea =
         EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top);
@@ -38,14 +37,15 @@ class NavigationDrawerScreen extends StatelessWidget {
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      width: isCollapsed ? 56 : MediaQuery.of(context).size.width * 1.0,
+      width: isCollapsed ? 28.56 * asr : ScreenResolution().sw * 1.0,
       child: Drawer(
         child: Container(
           color: const Color(0xff161616),
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 24).add(safeArea),
+                padding:
+                    EdgeInsets.symmetric(vertical: 12.24 * asr).add(safeArea),
                 width: double.infinity,
                 color: const Color(0xff161616),
                 child: buildHeader(isCollapsed),
@@ -58,7 +58,7 @@ class NavigationDrawerScreen extends StatelessWidget {
               const Divider(color: Colors.white70),
 
               buildCollapseIcon(context, isCollapsed),
-              const SizedBox(height: 6), // Add a small space below the icon
+              SizedBox(height: 3.06 * asr), // Add a small space below the icon
             ],
           ),
         ),
@@ -144,6 +144,7 @@ class NavigationDrawerScreen extends StatelessWidget {
     } else {}
   }
 
+  double asr = ScreenResolution().sh / ScreenResolution().sw;
   Widget buildMenuItem({
     required bool isCollapsed,
     required String text,
@@ -163,17 +164,17 @@ class NavigationDrawerScreen extends StatelessWidget {
           : ListTile(
               leading: leading,
               title: Text(text,
-                  style: const TextStyle(color: color, fontSize: 12)),
+                  style: TextStyle(color: color, fontSize: 6.2 * asr)),
               onTap: onClicked,
             ),
     );
   }
 
   Widget buildCollapseIcon(BuildContext context, bool isCollapsed) {
-    const double size = 50;
+    double size = 25.75 * asr;
     final icon = isCollapsed ? Icons.arrow_forward_ios : Icons.arrow_back_ios;
     final alignment = isCollapsed ? Alignment.center : Alignment.centerRight;
-    final margin = isCollapsed ? null : const EdgeInsets.only(right: 20);
+    final margin = isCollapsed ? null : EdgeInsets.only(right: 10.33 * asr);
     final width = isCollapsed ? double.infinity : size;
 
     return Container(
@@ -202,10 +203,10 @@ class NavigationDrawerScreen extends StatelessWidget {
       ? Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 12.0),
+              padding: EdgeInsets.only(left: 6.2 * asr),
               child: SizedBox(
-                width: 40,
-                height: 40,
+                width: 20.4 * asr,
+                height: 20.4 * asr,
                 child: Image.asset(
                   'images/logo.png',
                   fit: BoxFit.contain,
@@ -222,21 +223,21 @@ class NavigationDrawerScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 30.0),
+                      padding: EdgeInsets.only(left: 15.5 * asr),
                       child: SizedBox(
-                        width: 50,
-                        height: 50,
+                        width: 25.75 * asr,
+                        height: 25.75 * asr,
                         child: Image.asset(
                           'images/logo.png',
                           fit: BoxFit.contain,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 6),
-                    const Text(
+                    SizedBox(width: 3.06 * asr),
+                    Text(
                       'Mobile Blood Bank',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 12.24 * asr,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

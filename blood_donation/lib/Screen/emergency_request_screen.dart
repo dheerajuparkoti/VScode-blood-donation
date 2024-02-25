@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:blood_donation/api/api.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -174,6 +175,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
 
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     super.build(context);
 
     return Scaffold(
@@ -181,8 +183,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
       backgroundColor: const Color(0xFFD3B5B5),
       body: Stack(children: [
         Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: ScreenResolution().sw,
+          height: ScreenResolution().sh,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -197,44 +199,42 @@ class _EmergencyRequestState extends State<EmergencyRequest>
 
         //HEADER
         Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: EdgeInsets.only(top: 15.5 * asr),
           child: Container(
-              height: 30,
+              height: 15.5 * asr,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.green,
                 borderRadius: BorderRadius.only(),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
                   '"Donate Blood Save Life Now"',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 10.39 * asr,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               )),
         ),
 
         Padding(
-          padding: const EdgeInsets.only(
-            top: 70.0,
-            left: 1.0,
-            right: 1.0,
+          padding: EdgeInsets.only(
+            top: 35.7 * asr,
+            left: 0.51 * asr,
+            right: 0.51 * asr,
             bottom: 0.0,
           ),
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: const BoxDecoration(
+            width: ScreenResolution().sw,
+            height: ScreenResolution().sh,
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10.0),
-                topRight: Radius.circular(10.0),
-                //bottomLeft: Radius.circular(25.0),
-                //bottomRight: Radius.circular(25.0),
+                topLeft: Radius.circular(5.1 * asr),
+                topRight: Radius.circular(5.1 * asr),
               ),
             ),
             child: SingleChildScrollView(
@@ -242,8 +242,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                   child: Column(
                 children: <Widget>[
                   Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10.0,
+                      padding: EdgeInsets.only(
+                        left: 5.1 * asr,
                         bottom: 0,
                         top: 0.0,
                       ),
@@ -251,10 +251,10 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                         alignment: Alignment.bottomLeft,
                         child: Text(
                           'Total E-Requests : ${loadingEmergencyRequests.length}',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 8.26 * asr,
                           ),
                         ),
                       )),
@@ -270,20 +270,20 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                             donorCounts[emergencyRequestId] ?? 0;
 
                         return SizedBox(
-                          height: 290,
+                          height: 147.9 * asr,
                           child: Card(
                             margin: const EdgeInsets.all(0.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0.0),
                             ),
-                            elevation: 1.0,
+                            elevation: 0.51 * asr,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 // First Row Container
                                 Container(
-                                  height: 30.0,
-                                  padding: const EdgeInsets.all(5.0),
+                                  height: 15.5 * asr,
+                                  padding: EdgeInsets.all(2.58 * asr),
                                   color: const Color(0xFF444242),
                                   child: Row(
                                     mainAxisAlignment:
@@ -306,8 +306,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                 // Second Row Container
 
                                 Container(
-                                  height: 210.0,
-                                  padding: const EdgeInsets.all(10.0),
+                                  height: 107.1 * asr,
+                                  padding: EdgeInsets.all(5.1 * asr),
                                   color: Colors.white,
                                   child: Align(
                                     alignment: Alignment.centerLeft,
@@ -319,147 +319,147 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                       children: [
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Patient Name : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               '${emergencyData['fullName']}',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Required Pint : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               '${emergencyData['requiredPint']}',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Case Detail : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               '${emergencyData['caseDetail']}',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Contact Person : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               '${emergencyData['contactPersonName']}',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Phone : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               '${emergencyData['contactNo']}',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Hospital : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               '${emergencyData['hospitalName']}',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Address : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               '${emergencyData['localLevel']}-${emergencyData['wardNo']}, ${emergencyData['district']}, Pro. ${emergencyData['province']}',
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Date & Time : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               //  '${emergencyData['requiredDate']}, ${emergencyData['requiredTime']}',
                                               '${emergencyData['requiredDate']}, ${_formatTimeFromDatabase(emergencyData['requiredTime'])}',
 
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
                                         Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               'Donors Available Up-to-date: ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                             Text(
                                               donorCount.toString(),
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 12.0),
+                                                  fontSize: 6.2 * asr),
                                             ),
                                           ],
                                         ),
@@ -471,8 +471,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                 // Third Row Container
 
                                 Container(
-                                  height: 40.0,
-                                  padding: const EdgeInsets.all(5.0),
+                                  height: 20.4 * asr,
+                                  padding: EdgeInsets.all(2.58 * asr),
                                   color: const Color(0xFF8CC653),
                                   child: Row(
                                     mainAxisAlignment:
@@ -484,14 +484,14 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                             makePhoneCall(
                                                 'tel:+977 ${emergencyData['contactNo']}');
                                           },
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.phone,
-                                            size: 14.0,
+                                            size: 7.23 * asr,
                                             color: Colors.green,
                                           ),
-                                          label: const Text('Call',
+                                          label: Text('Call',
                                               style: TextStyle(
-                                                fontSize: 12.0,
+                                                fontSize: 6.2 * asr,
                                                 color: Colors.green,
                                               )),
                                           style: TextButton.styleFrom(
@@ -504,7 +504,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(width: 2.5),
+                                      SizedBox(width: 1.29 * asr),
                                       Expanded(
                                         child: TextButton.icon(
                                           onPressed: () {
@@ -521,14 +521,14 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'App: Mobile Blood Bank Nepal',
                                             );
                                           },
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.share,
-                                            size: 14.0,
+                                            size: 7.23 * asr,
                                             color: Colors.blue,
                                           ),
-                                          label: const Text('Share',
+                                          label: Text('Share',
                                               style: TextStyle(
-                                                fontSize: 12.0,
+                                                fontSize: 6.2 * asr,
                                                 color: Colors.blue,
                                               )),
                                           style: TextButton.styleFrom(
@@ -541,7 +541,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(width: 2.5),
+                                      SizedBox(width: 1.29 * asr),
                                       Expanded(
                                         flex: 2,
                                         child: TextButton.icon(
@@ -561,14 +561,14 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                             */
                                             // Call onPressedButton with reqId
                                           },
-                                          icon: const Icon(
+                                          icon: Icon(
                                             Icons.waving_hand,
-                                            size: 14.0,
+                                            size: 7.23 * asr,
                                             color: Colors.red,
                                           ),
-                                          label: const Text("I'm Available",
+                                          label: Text("I'm Available",
                                               style: TextStyle(
-                                                fontSize: 12.0,
+                                                fontSize: 6.2 * asr,
                                                 color: Colors.red,
                                               )),
                                           style: TextButton.styleFrom(
@@ -605,7 +605,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
             child: CircularProgressIndicator(
               valueColor: const AlwaysStoppedAnimation<Color>(
                   Colors.red), // Color of the progress indicator
-              strokeWidth: 5.0, // Thickness of the progress indicator
+              strokeWidth: 2.58 * asr, // Thickness of the progress indicator
               backgroundColor: Colors.black.withOpacity(
                   0.5), // Background color of the progress indicator
             ),

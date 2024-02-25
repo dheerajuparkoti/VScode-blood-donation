@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:blood_donation/Screen/edit_profile.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart'; // for phone make
 import 'package:share/share.dart'; // Import the share package
@@ -198,14 +199,14 @@ class _ProfileState extends State<Profile> {
       editBtnText = "Back";
     }
     */
-
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 40.0,
+          toolbarHeight: 20.4 * asr,
           title: Text(
             'Profile : $donorId',
-            style: const TextStyle(
-              fontSize: 20.0,
+            style: TextStyle(
+              fontSize: 10.33 * asr,
             ),
           ),
           centerTitle: true,
@@ -230,28 +231,28 @@ class _ProfileState extends State<Profile> {
 
             SingleChildScrollView(
                 child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0,
-                      vertical: 16.0,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.26 * asr,
+                      vertical: 8.26 * asr,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          height: 30,
-                          width: 100,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF444242),
+                          height: 15.5 * asr,
+                          width: 51.5 * asr,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF444242),
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(35.0),
-                              bottomRight: Radius.circular(35.0),
+                              topRight: Radius.circular(18.1 * asr),
+                              bottomRight: Radius.circular(18.1 * asr),
                             ),
                           ),
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: const Text(
+                          padding: EdgeInsets.only(left: 8.26 * asr),
+                          child: Text(
                             'Profile',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 10.33 * asr,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
@@ -259,8 +260,8 @@ class _ProfileState extends State<Profile> {
                         ),
 
                         // Details of Donor Profile
-                        const SizedBox(
-                            height: 16.0), // providing vertical spacing
+                        SizedBox(
+                            height: 8.26 * asr), // providing vertical spacing
                         Row(
                           children: [
                             Column(
@@ -270,18 +271,19 @@ class _ProfileState extends State<Profile> {
                                 Text(
                                   fullName,
                                   // get name from user database
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: Color(0xffBF371A),
+                                    fontSize: 10.33 * asr,
+                                    color: const Color(0xffBF371A),
                                   ),
                                 ),
 
                                 //for underline
                                 Container(
-                                  height: 2, // Height of the underline
+                                  height: 1.03 * asr, // Height of the underline
                                   color: Colors.white,
-                                  width: 300.0, // Adjust the width accordingly
+                                  width:
+                                      155 * asr, // Adjust the width accordingly
                                 ),
                               ],
                             ),
@@ -289,15 +291,15 @@ class _ProfileState extends State<Profile> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                            //horizontal: 16.0,
-                            vertical: 6.0,
+                          padding: EdgeInsets.symmetric(
+                            //horizontal: 8.26*asr,
+                            vertical: 3.06 * asr,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               //first column starts
-                              const Column(
+                              Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
@@ -305,48 +307,48 @@ class _ProfileState extends State<Profile> {
                                       'Date of Birth',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       'Phone No.',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       'Account Type',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       'Blood Group',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       'Donation Times',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       'Can Donate',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                   ]),
@@ -354,8 +356,9 @@ class _ProfileState extends State<Profile> {
                               // first column ends
 
                               //second column starts
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 5.1 * asr),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -363,44 +366,44 @@ class _ProfileState extends State<Profile> {
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                   ],
@@ -415,37 +418,37 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   Text(
                                     dob,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                    style: TextStyle(
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     phone,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                    style: TextStyle(
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     accountType,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                    style: TextStyle(
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     bloodGroup,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                    style: TextStyle(
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     totalDonationTimesForDonor.toString(),
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                    style: TextStyle(
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
@@ -454,25 +457,25 @@ class _ProfileState extends State<Profile> {
                                         : (lastDonationExceeds72Days
                                             ? 'No'
                                             : 'Yes'),
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                 ],
                               ),
                               //Third Column Ends
 
-                              const SizedBox(
-                                width: 65.0,
+                              SizedBox(
+                                width: 33.15 * asr,
                               ),
 
                               // Check if 'profilePic' is a valid URL
                               Padding(
-                                padding: const EdgeInsets.only(right: 5.0),
+                                padding: EdgeInsets.only(right: 2.58 * asr),
                                 child: CircleAvatar(
-                                  radius: 55.0,
+                                  radius: 28.05 * asr,
 
                                   backgroundImage: isValidUrl
                                       ? NetworkImage(profilePic)
@@ -491,20 +494,20 @@ class _ProfileState extends State<Profile> {
 
                         //making underline
                         Container(
-                          height: 2, // Height of the underline
+                          height: 1.03 * asr, // Height of the underline
                           color: Colors.white,
-                          width: 300.0, // Adjust the width accordingly
+                          width: 155 * asr, // Adjust the width accordingly
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                            //horizontal: 16.0,
-                            vertical: 6.0,
+                          padding: EdgeInsets.symmetric(
+                            //horizontal: 8.26*asr,
+                            vertical: 3.06 * asr,
                           ),
                           child: Row(
                             children: [
                               //first column starts
-                              const Column(
+                              Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
@@ -512,16 +515,16 @@ class _ProfileState extends State<Profile> {
                                       'Address',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       'E-mail',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                   ]),
@@ -529,8 +532,9 @@ class _ProfileState extends State<Profile> {
                               // first column ends
 
                               //second column starts
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 5.1 * asr),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -538,15 +542,15 @@ class _ProfileState extends State<Profile> {
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 12,
-                                        color: Color(0xffffffff),
+                                        fontSize: 6.2 * asr,
+                                        color: const Color(0xffffffff),
                                       ),
                                     ),
                                   ],
@@ -561,16 +565,16 @@ class _ProfileState extends State<Profile> {
                                 children: [
                                   Text(
                                     address, // import data for address
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                    style: TextStyle(
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     email,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                    style: TextStyle(
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                 ],
@@ -582,31 +586,31 @@ class _ProfileState extends State<Profile> {
 
                         //making underline
                         Container(
-                          height: 2, // Height of the underline
+                          height: 1.03 * asr, // Height of the underline
                           color: Colors.white,
-                          width: 300.0, // Adjust the width accordingly
+                          width: 155 * asr, // Adjust the width accordingly
                         ),
 
                         // DONATION HISTORY RECORDS
-                        const SizedBox(height: 16.0),
+                        SizedBox(height: 8.26 * asr),
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                height: 30,
-                                width: 200.0,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF444242),
+                                height: 15.5 * asr,
+                                width: 103.3 * asr,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF444242),
                                   borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(35.0),
-                                    bottomRight: Radius.circular(35.0),
+                                    topRight: Radius.circular(18.1 * asr),
+                                    bottomRight: Radius.circular(18.1 * asr),
                                   ),
                                 ),
-                                padding: const EdgeInsets.only(left: 16.0),
-                                child: const Text(
+                                padding: EdgeInsets.only(left: 8.26 * asr),
+                                child: Text(
                                   'Donation History',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 10.33 * asr,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -618,7 +622,7 @@ class _ProfileState extends State<Profile> {
 
                         // for underline
                         Container(
-                          height: 1, // Height of the underline
+                          height: 0.51 * asr, // Height of the underline
                           color: Colors.white,
                           width:
                               double.infinity, // Adjust the width accordingly
@@ -634,7 +638,7 @@ class _ProfileState extends State<Profile> {
                                   'Date',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontSize: 6.2*asr,
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -642,7 +646,7 @@ class _ProfileState extends State<Profile> {
                                   'No. of Pints',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontSize: 6.2*asr,
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -650,7 +654,7 @@ class _ProfileState extends State<Profile> {
                                   'Hospital',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontSize: 6.2*asr,
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -658,7 +662,7 @@ class _ProfileState extends State<Profile> {
                                   'Address',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
+                                    fontSize: 6.2*asr,
                                     color: Color(0xffffffff),
                                   ),
                                 ),
@@ -670,14 +674,14 @@ class _ProfileState extends State<Profile> {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: DataTable(
-                              columns: const [
+                              columns: [
                                 DataColumn(
                                   label: Text(
                                     'Donated Date',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   ),
                                 ),
@@ -686,8 +690,8 @@ class _ProfileState extends State<Profile> {
                                   'Donated To',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
-                                    color: Color(0xffffffff),
+                                    fontSize: 6.2 * asr,
+                                    color: const Color(0xffffffff),
                                   ),
                                 )),
                                 DataColumn(
@@ -695,8 +699,8 @@ class _ProfileState extends State<Profile> {
                                   'No. of Pint',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
-                                    color: Color(0xffffffff),
+                                    fontSize: 6.2 * asr,
+                                    color: const Color(0xffffffff),
                                   ),
                                 )),
                                 DataColumn(
@@ -704,8 +708,8 @@ class _ProfileState extends State<Profile> {
                                   'Contact',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12,
-                                    color: Color(0xffffffff),
+                                    fontSize: 6.2 * asr,
+                                    color: const Color(0xffffffff),
                                   ),
                                 )),
                               ],
@@ -713,34 +717,34 @@ class _ProfileState extends State<Profile> {
                                 return DataRow(cells: [
                                   DataCell(Text(
                                     '${record['donatedDate']}',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   )),
                                   DataCell(Text(
                                     '${record['donatedTo']}',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   )),
                                   DataCell(Text(
                                     '${record['bloodPint']}',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   )),
                                   DataCell(Text(
                                     '${record['contact']}',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 12,
-                                      color: Color(0xffffffff),
+                                      fontSize: 6.2 * asr,
+                                      color: const Color(0xffffffff),
                                     ),
                                   )),
                                 ]);
@@ -762,8 +766,8 @@ class _ProfileState extends State<Profile> {
                     0xFF4CAF50), // Change the background color as needed
 
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 0.0, horizontal: 5.0),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0.0, horizontal: 2.58 * asr),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -787,12 +791,12 @@ class _ProfileState extends State<Profile> {
                                 0xFFFFFFFF), // Change the button color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  10.0), // Adjust the border radius
+                                  5.1 * asr), // Adjust the border radius
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 5.0),
+                      SizedBox(width: 2.58 * asr),
                       Expanded(
                         child: TextButton.icon(
                           onPressed: () {
@@ -812,12 +816,12 @@ class _ProfileState extends State<Profile> {
                                 0xFFFFFFFF), // Change the button color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  10.0), // Adjust the border radius
+                                  5.1 * asr), // Adjust the border radius
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 5.0),
+                      SizedBox(width: 2.58 * asr),
                       Expanded(
                         child: TextButton.icon(
                           onPressed: () {
@@ -850,7 +854,7 @@ class _ProfileState extends State<Profile> {
                                 0xFFFFFFFF), // Change the button color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  10.0), // Adjust the border radius
+                                  5.1 * asr), // Adjust the border radius
                             ),
                           ),
                         ),
@@ -867,7 +871,7 @@ class _ProfileState extends State<Profile> {
                   valueColor: const AlwaysStoppedAnimation<Color>(
                     Colors.red,
                   ),
-                  strokeWidth: 5.0,
+                  strokeWidth: 2.58 * asr,
                   backgroundColor: Colors.black.withOpacity(0.5),
                 ),
               ),

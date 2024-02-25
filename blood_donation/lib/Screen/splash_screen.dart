@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:blood_donation/Screen/sign_in_up_screen.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
@@ -31,24 +32,26 @@ class _LoginState extends State<SplashScreen> {
     }
   }
 
+  double asr = ScreenResolution().sh / ScreenResolution().sw;
   void _showNoInternetDialog() {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
-            Icon(
+            const Icon(
               Icons.error,
               color: Colors.red, // Set the color of the error icon to red
             ),
             SizedBox(
-                width: 8), // Add some spacing between the icon and the text
+                width: 4.08 *
+                    asr), // Add some spacing between the icon and the text
             Text(
               'No Internet',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18.0,
+                fontSize: 9.30 * asr,
                 color: Colors.red, // Set the color of the title text to red
               ),
             ),
@@ -103,8 +106,8 @@ class _LoginState extends State<SplashScreen> {
             ),
             child: Center(
               child: SizedBox(
-                width: 300.0,
-                height: 300.0,
+                width: 155 * asr,
+                height: 155 * asr,
                 child: Image.asset(
                   'images/mbblogo.png',
                   fit: BoxFit.contain,
@@ -113,19 +116,19 @@ class _LoginState extends State<SplashScreen> {
             ),
           ),
           if (isLoading) // Show custom styled circular progress indicator if isLoading is true
-            const Positioned(
+            Positioned(
               left: 0,
               right: 0,
-              bottom: 20, // Adjust bottom value as needed
+              bottom: 10.33 * asr, // Adjust bottom value as needed
               child: Center(
                 child: SizedBox(
-                  width: 50,
-                  height: 50,
+                  width: 25.758 * asr,
+                  height: 25.75 * asr,
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
+                    valueColor: const AlwaysStoppedAnimation<Color>(
                       Colors.white, // Change color of the progress indicator
                     ),
-                    strokeWidth: 5, // Adjust strokeWidth as needed
+                    strokeWidth: 2.58 * asr, // Adjust strokeWidth as needed
                     backgroundColor: Colors
                         .black12, // Change background color of the progress indicator
                     semanticsLabel: 'Loading', // Add a semantics label

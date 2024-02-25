@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blood_donation/api/api.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
@@ -126,13 +127,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 40.0,
-        title: const Text(
+        toolbarHeight: 20.4 * asr,
+        title: Text(
           'Settings',
           style: TextStyle(
-            fontSize: 20.0,
+            fontSize: 10.33 * asr,
           ),
         ),
         centerTitle: true,
@@ -155,8 +157,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
         SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(
-              left: 30.0, right: 30.0, top: 0, bottom: 0,
+            padding: EdgeInsets.only(
+              left: 15.5 * asr, right: 15.5 * asr, top: 0, bottom: 0,
               //horizontal: 30,
             ),
             child: Center(
@@ -166,7 +168,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 /*
                 Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
+                  padding: const EdgeInsets.only(top: 15.5*asr),
                   child: Container(
                       height: 30,
                       width: double.infinity,
@@ -189,7 +191,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                 */
 
-                const SizedBox(height: 25.0),
+                SizedBox(height: 12.9 * asr),
                 TextField(
                   controller: emailController,
                   style: const TextStyle(
@@ -201,7 +203,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   maxLength: 50,
                 ),
-                const SizedBox(height: 5.0),
+                SizedBox(height: 2.58 * asr),
 
                 TextField(
                   controller: usernameController,
@@ -214,7 +216,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   maxLength: 30,
                 ),
-                const SizedBox(height: 5.0),
+                SizedBox(height: 2.58 * asr),
 
                 const Align(
                   alignment: Alignment.topLeft,
@@ -227,7 +229,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 5.0),
+                SizedBox(height: 2.58 * asr),
                 TextField(
                   controller: oldPasswordController,
                   style: const TextStyle(
@@ -254,7 +256,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   maxLength: 20,
                 ),
 
-                const SizedBox(height: 5.0),
+                SizedBox(height: 2.58 * asr),
 
                 TextField(
                   controller: passwordController,
@@ -281,15 +283,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   obscureText: !_isPasswordVisible,
                   maxLength: 20,
                 ),
-                const SizedBox(height: 30.0),
+                SizedBox(height: 15.5 * asr),
 
                 // Making send button
-                const SizedBox(height: 30.0),
+                SizedBox(height: 15.5 * asr),
                 Container(
-                  height: 40,
-                  margin: const EdgeInsets.symmetric(horizontal: 25),
+                  height: 20.4 * asr,
+                  margin: EdgeInsets.symmetric(horizontal: 12.9 * asr),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(25.75 * asr),
                     color: const Color(0xffBF371A),
                   ),
                   //calling insert function when button is pressed
@@ -305,17 +307,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         updateUserData();
                       }
                     },
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         "Apply Changes",
                         style: TextStyle(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 18),
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 9.30 * asr),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 30.0),
+                SizedBox(height: 15.5 * asr),
               ],
             )),
           ),
@@ -327,7 +329,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Center(
             child: CircularProgressIndicator(
               valueColor: const AlwaysStoppedAnimation<Color>(Colors.red),
-              strokeWidth: 5.0,
+              strokeWidth: 2.58 * asr,
               backgroundColor: Colors.black.withOpacity(0.5),
             ),
           ),

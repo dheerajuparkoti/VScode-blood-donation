@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // for date format
@@ -283,6 +284,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
 
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     super.build(context); // to maintain state between two tabs
     return Scaffold(
       //resizeToAvoidBottomInset: false,
@@ -290,9 +292,9 @@ class _EventsAppointmentsState extends State<EventsAppointments>
       body: Stack(
         children: <Widget>[
           Container(
-            height: 300.0,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
+            height: 155 * asr,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomRight,
                 colors: [
@@ -301,46 +303,46 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                 ],
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(150.0),
-                bottomRight: Radius.circular(200.0),
+                bottomLeft: Radius.circular(77.5 * asr),
+                bottomRight: Radius.circular(103.3 * asr),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20.0,
-              vertical: 20.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.39 * asr,
+              vertical: 10.39 * asr,
             ),
             child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
+              width: ScreenResolution().sw,
+              height: ScreenResolution().sh,
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(35.0),
-                  topRight: Radius.circular(35.0),
-                  bottomLeft: Radius.circular(35.0),
-                  bottomRight: Radius.circular(35.0),
+                  topLeft: Radius.circular(18.1 * asr),
+                  topRight: Radius.circular(18.1 * asr),
+                  bottomLeft: Radius.circular(18.1 * asr),
+                  bottomRight: Radius.circular(18.1 * asr),
                 ),
               ),
               child: Column(children: [
                 Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(170, 255, 255, 255),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(170, 255, 255, 255),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(35.0),
-                      topRight: Radius.circular(35.0),
-                      // bottomLeft: Radius.circular(35.0),
-                      // bottomRight: Radius.circular(35.0),
+                      topLeft: Radius.circular(18.1 * asr),
+                      topRight: Radius.circular(18.1 * asr),
+                      // bottomLeft: Radius.circular(18.1*asr),
+                      // bottomRight: Radius.circular(18.1*asr),
                     ),
                   ),
 
                   // Set to transparent
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  padding: EdgeInsets.only(top: 5.1 * asr, bottom: 5.1 * asr),
 
                   child: TabBar(
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(7.75 * asr),
                       color: const Color(0xffFF0025),
                     ),
                     controller: _tabController,
@@ -384,19 +386,19 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                             child: Column(
                           children: <Widget>[
                             Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 10.0,
+                                padding: EdgeInsets.only(
+                                  left: 5.1 * asr,
                                   bottom: 0,
-                                  top: 10.0,
+                                  top: 5.1 * asr,
                                 ),
                                 child: Align(
                                   alignment: Alignment.bottomLeft,
                                   child: Text(
                                     'Total Events : ${loadingEvents.length}',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                      fontSize: 8.26 * asr,
                                     ),
                                   ),
                                 )),
@@ -408,22 +410,22 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                   final eventData = loadingEvents[index];
 
                                   return SizedBox(
-                                    height: 280,
+                                    height: 142.8 * asr,
                                     child: Card(
                                       margin: const EdgeInsets.all(0.0),
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(0.0),
                                       ),
-                                      elevation: 1.0,
+                                      elevation: 0.51 * asr,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: <Widget>[
                                           // First Row Container
                                           Container(
-                                            height: 30.0,
-                                            padding: const EdgeInsets.all(5.0),
+                                            height: 15.5 * asr,
+                                            padding: EdgeInsets.all(2.58 * asr),
                                             color: const Color(0xFF444242),
                                             child: Row(
                                               mainAxisAlignment:
@@ -442,8 +444,8 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                           // Second Row Container
 
                                           Container(
-                                            height: 200.0,
-                                            padding: const EdgeInsets.all(10.0),
+                                            height: 103.3 * asr,
+                                            padding: EdgeInsets.all(5.1 * asr),
                                             color: Colors.white,
                                             child: Align(
                                               alignment: Alignment.centerLeft,
@@ -456,128 +458,142 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Event Name : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${eventData['eventName']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Venue : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${eventData['venue']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Chief Guest : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${eventData['chiefGuest']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(children: [
-                                                    const Text(
+                                                    Text(
                                                       'Event Details : ',
                                                       style: TextStyle(
                                                           color: Colors.black,
-                                                          fontSize: 12.0),
+                                                          fontSize: 6.2 * asr),
                                                     ),
                                                     Text(
                                                       '${eventData['eventDetail']}',
-                                                      style: const TextStyle(
+                                                      style: TextStyle(
                                                           color: Colors.red,
-                                                          fontSize: 10.0),
+                                                          fontSize: 5.1 * asr),
                                                       maxLines: 2,
                                                     ),
                                                   ]),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Organized By : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${eventData['organizedBy']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Phone : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${eventData['contactNo']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Address : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${eventData['localLevel']} - ${eventData['wardNo']}, ${eventData['district']}, Province ${eventData['province']}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
                                                   Row(
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Date & Time : ',
                                                         style: TextStyle(
                                                             color: Colors.black,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                       Text(
                                                         '${eventData['eventDate']}, ${_formatTimeFromDatabase(eventData['eventTime'])}',
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.red,
-                                                            fontSize: 12.0),
+                                                            fontSize:
+                                                                6.2 * asr),
                                                       ),
                                                     ],
                                                   ),
@@ -589,8 +605,8 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                           // Third Row Container
 
                                           Container(
-                                            height: 40.0,
-                                            padding: const EdgeInsets.all(5.0),
+                                            height: 20.4 * asr,
+                                            padding: EdgeInsets.all(2.58 * asr),
                                             color: const Color(0xFF8CC653),
                                             child: Row(
                                               mainAxisAlignment:
@@ -603,14 +619,14 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                       makePhoneCall(
                                                           'tel:+977 ${eventData['contactNo']}');
                                                     },
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.phone,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color: Colors.green,
                                                     ),
-                                                    label: const Text('',
+                                                    label: Text('',
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: Colors.green,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -625,7 +641,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 2.5),
+                                                SizedBox(width: 1.29 * asr),
                                                 Expanded(
                                                   child: TextButton.icon(
                                                     onPressed: () {
@@ -642,14 +658,14 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                         'Our App: Mobile Blood Bank Nepal',
                                                       );
                                                     },
-                                                    icon: const Icon(
+                                                    icon: Icon(
                                                       Icons.share,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color: Colors.blue,
                                                     ),
-                                                    label: const Text('',
+                                                    label: Text('',
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: Colors.blue,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -664,7 +680,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 2.5),
+                                                SizedBox(width: 1.29 * asr),
                                                 Expanded(
                                                   flex: 2,
                                                   child: TextButton.icon(
@@ -675,7 +691,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                     },
                                                     icon: Icon(
                                                       Icons.waving_hand,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color:
                                                           eventData['attend'] ==
                                                                   true
@@ -688,7 +704,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                             ? 'Attended'
                                                             : 'Attend',
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: eventData[
                                                                       'attend'] ==
                                                                   true
@@ -707,7 +723,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                     ),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 2.5),
+                                                SizedBox(width: 1.29 * asr),
                                                 Expanded(
                                                   flex: 2,
                                                   child: TextButton.icon(
@@ -718,7 +734,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                     },
                                                     icon: Icon(
                                                       Icons.thumb_up,
-                                                      size: 14.0,
+                                                      size: 7.23 * asr,
                                                       color:
                                                           eventData['like'] ==
                                                                   true
@@ -731,7 +747,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                                             ? 'Liked'
                                                             : 'Like',
                                                         style: TextStyle(
-                                                          fontSize: 12.0,
+                                                          fontSize: 6.2 * asr,
                                                           color: eventData[
                                                                       'like'] ==
                                                                   true
@@ -754,8 +770,8 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                             ),
                                           ),
 
-                                          const SizedBox(
-                                            height: 10.0,
+                                          SizedBox(
+                                            height: 5.1 * asr,
                                           ),
                                         ],
                                       ),
@@ -770,8 +786,9 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                       //code for Set Appointment i.e 2nd tab
                       SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 30.0, right: 30.0, top: 0, bottom: 0,
+                          padding: EdgeInsets.only(
+                            left: 15.5 * asr, right: 15.5 * asr, top: 0,
+                            bottom: 0,
                             //horizontal: 30,
                           ),
                           child: Center(
@@ -780,20 +797,20 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 30.0),
+                                padding: EdgeInsets.only(top: 15.5 * asr),
                                 child: Container(
-                                    height: 30,
+                                    height: 15.5 * asr,
                                     width: double.infinity,
                                     decoration: const BoxDecoration(
                                       color: Color(0xFF444242),
                                       borderRadius: BorderRadius.only(),
                                     ),
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
                                         'Set Appointment',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 10.39 * asr,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
@@ -801,19 +818,19 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                     )),
                               ),
 
-                              const SizedBox(height: 5.0),
-                              const Align(
+                              SizedBox(height: 2.58 * asr),
+                              Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
                                   'Fill the appointment details form.',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.red,
-                                    fontSize: 14,
+                                    fontSize: 7.23 * asr,
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
                               TextField(
                                 controller: aboutController,
                                 decoration: const InputDecoration(
@@ -823,7 +840,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                 ),
                                 maxLength: 50,
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
                               TextField(
                                 controller: setDateController,
                                 readOnly: true,
@@ -839,7 +856,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                 ),
                               ),
 
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
                               TextField(
                                 controller: setTimeController,
                                 readOnly: true,
@@ -854,7 +871,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 5.0),
+                              SizedBox(height: 2.58 * asr),
 
                               TextField(
                                 controller: remarksController,
@@ -867,13 +884,14 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                               ),
 
                               // Making send button
-                              const SizedBox(height: 30.0),
+                              SizedBox(height: 15.5 * asr),
                               Container(
-                                height: 40,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 25),
+                                height: 20.4 * asr,
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: 12.9 * asr),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
+                                  borderRadius:
+                                      BorderRadius.circular(25.75 * asr),
                                   color: const Color(0xffFF0025),
                                 ),
                                 //calling insert function when button is pressed
@@ -881,18 +899,18 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                   onTap: () {
                                     validationFields();
                                   },
-                                  child: const Center(
+                                  child: Center(
                                     child: Text(
                                       "Click here to send",
                                       style: TextStyle(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 255, 255, 255),
-                                          fontSize: 18),
+                                          fontSize: 9.30 * asr),
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 30.0),
+                              SizedBox(height: 15.5 * asr),
                             ],
                           )),
                         ),
@@ -912,7 +930,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
               child: CircularProgressIndicator(
                 valueColor: const AlwaysStoppedAnimation<Color>(
                     Colors.red), // Color of the progress indicator
-                strokeWidth: 5.0, // Thickness of the progress indicator
+                strokeWidth: 2.58 * asr, // Thickness of the progress indicator
                 backgroundColor: Colors.black.withOpacity(
                     0.5), // Background color of the progress indicator
               ),
