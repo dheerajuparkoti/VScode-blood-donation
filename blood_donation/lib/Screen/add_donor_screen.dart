@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:blood_donation/Screen/profile_screen.dart';
 import 'package:blood_donation/api/api.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
-
 import 'package:provider/provider.dart';
 
 class AddNewDonor extends StatefulWidget {
@@ -188,15 +188,16 @@ class _AddNewDonorState extends State<AddNewDonor>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFD3B5B5),
       body: Stack(
         children: <Widget>[
           Container(
-            height: 300.0,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
+            height: 155.0 * asr,
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomRight,
                 colors: [
@@ -205,46 +206,44 @@ class _AddNewDonorState extends State<AddNewDonor>
                 ],
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(150.0),
-                bottomRight: Radius.circular(200.0),
+                bottomLeft: Radius.circular(77.5 * asr),
+                bottomRight: Radius.circular(103.3 * asr),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20.0,
-              vertical: 20.0,
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.3 * asr,
+              vertical: 10.3 * asr,
             ),
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(35.0),
-                  topRight: Radius.circular(35.0),
-                  bottomLeft: Radius.circular(35.0),
-                  bottomRight: Radius.circular(35.0),
+                  topLeft: Radius.circular(18.1 * asr),
+                  topRight: Radius.circular(18.1 * asr),
+                  bottomLeft: Radius.circular(18.1 * asr),
+                  bottomRight: Radius.circular(18.1 * asr),
                 ),
               ),
               child: Column(children: [
                 Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(170, 255, 255, 255),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(170, 255, 255, 255),
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(35.0),
-                      topRight: Radius.circular(35.0),
-                      // bottomLeft: Radius.circular(35.0),
-                      // bottomRight: Radius.circular(35.0),
+                      topLeft: Radius.circular(18.1 * asr),
+                      topRight: Radius.circular(18.1 * asr),
                     ),
                   ),
 
                   // Set to transparent
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  padding: EdgeInsets.only(top: 5.1 * asr, bottom: 5.1 * asr),
 
                   child: TabBar(
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(7.75 * asr),
                       color: const Color(0xffFF0025),
                     ),
                     controller: _tabController,
@@ -285,23 +284,23 @@ class _AddNewDonorState extends State<AddNewDonor>
                         SingleChildScrollView(
                           child: Column(children: [
                             Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 30,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 15.5 * asr,
                                 ),
                                 child: Column(
                                   children: [
-                                    const SizedBox(height: 5.0),
-                                    const Text(
+                                    SizedBox(height: 2.58 * asr),
+                                    Text(
                                       '[Note: Only Admins are allow to fill the new donor form. The donor must use this details to register in our app.]',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xFFF44336),
-                                        fontSize: 16,
+                                        color: const Color(0xFFF44336),
+                                        fontSize: 8.26 * asr,
                                       ),
                                       textAlign: TextAlign.left,
                                     ),
 
-                                    const SizedBox(height: 5.0),
+                                    SizedBox(height: 2.58 * asr),
                                     TextField(
                                       //controller: _textControllers['fullName'],
                                       controller: fullnameController,
@@ -312,7 +311,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       ),
                                       maxLength: 30,
                                     ),
-                                    const SizedBox(height: 5.0),
+                                    SizedBox(height: 2.58 * asr),
 
                                     TextField(
                                       //controller: _dateController,
@@ -367,7 +366,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         });
                                       },
                                     ),
-                                    const SizedBox(height: 24.0),
+                                    SizedBox(height: 12.24 * asr),
 
                                     //DROPDOWN BLOOD GROUP
                                     DropdownButtonFormField<String>(
@@ -412,7 +411,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       },
                                     ),
 
-                                    const SizedBox(height: 24),
+                                    SizedBox(height: 12.24 * asr),
 
                                     //DROPDOWN PROVINCE
                                     DropdownButtonFormField<String>(
@@ -451,7 +450,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         });
                                       },
                                     ),
-                                    const SizedBox(height: 24.0),
+                                    SizedBox(height: 12.24 * asr),
 
                                     // DROPDOWN DISTRICT LISTS BASED ON PROVINCE
                                     DropdownButtonFormField<String>(
@@ -492,7 +491,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         });
                                       },
                                     ),
-                                    const SizedBox(height: 24.0),
+                                    SizedBox(height: 12.24 * asr),
 
                                     // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                                     DropdownButtonFormField<String>(
@@ -532,7 +531,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         });
                                       },
                                     ),
-                                    const SizedBox(height: 20.0),
+                                    SizedBox(height: 10.3 * asr),
 
                                     TextField(
                                       //controller: _textControllers['wardNo'],
@@ -578,13 +577,14 @@ class _AddNewDonorState extends State<AddNewDonor>
                                     ),
 
                                     // Making SignUp button
-                                    const SizedBox(height: 30.0),
+                                    SizedBox(height: 15.5 * asr),
                                     Container(
-                                      height: 50,
+                                      height: 25.75 * asr,
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 25),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50),
+                                        borderRadius:
+                                            BorderRadius.circular(25.75 * asr),
                                         color: const Color(0xffFF0025),
                                       ),
                                       //calling insert function when button is pressed
@@ -592,18 +592,18 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         onTap: () {
                                           validationFields();
                                         },
-                                        child: const Center(
+                                        child: Center(
                                           child: Text(
                                             "Add Donor",
                                             style: TextStyle(
-                                                color: Color.fromARGB(
+                                                color: const Color.fromARGB(
                                                     255, 255, 255, 255),
-                                                fontSize: 18),
+                                                fontSize: 9.30 * asr),
                                           ),
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(height: 30.0),
+                                    SizedBox(height: 15.5 * asr),
                                   ],
                                 )),
                           ]),
@@ -615,13 +615,13 @@ class _AddNewDonorState extends State<AddNewDonor>
                         //HEADER
                         SingleChildScrollView(
                           child: Padding(
-                            padding: const EdgeInsets.all(25.0),
+                            padding: EdgeInsets.all(12.9 * asr),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 10.0,
+                                      padding: EdgeInsets.only(
+                                        left: 5.1 * asr,
                                         bottom: 0,
                                         top: 0.0,
                                       ),
@@ -629,10 +629,10 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         alignment: Alignment.bottomLeft,
                                         child: Text(
                                           'My Added Donors : ${donorData.length}',
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             color: Colors.red,
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16,
+                                            fontSize: 8.26 * asr,
                                           ),
                                         ),
                                       )),
@@ -644,8 +644,8 @@ class _AddNewDonorState extends State<AddNewDonor>
                                                 Color>(
                                             Colors
                                                 .red), // Color of the progress indicator
-                                        strokeWidth:
-                                            5.0, // Thickness of the progress indicator
+                                        strokeWidth: 2.58 *
+                                            asr, // Thickness of the progress indicator
                                         backgroundColor: Colors.black.withOpacity(
                                             0.5), // Background color of the progress indicator
                                       ),
@@ -688,18 +688,18 @@ class _AddNewDonorState extends State<AddNewDonor>
                                               children: <Widget>[
                                                 // for underline
                                                 Container(
-                                                  height:
-                                                      1.0, // Height of the underline
+                                                  height: 0.51 *
+                                                      asr, // Height of the underline
                                                   color: Colors.green,
                                                   //width:300.0, // Adjust the width accordingly
                                                 ),
 
                                                 Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
+                                                  padding:
+                                                      EdgeInsets.all(5.1 * asr),
                                                   child: Row(children: [
                                                     CircleAvatar(
-                                                      radius: 20.0,
+                                                      radius: 10.3 * asr,
                                                       backgroundImage: isValidUrl
                                                           ? NetworkImage(
                                                               profilePicUrl)
@@ -709,8 +709,8 @@ class _AddNewDonorState extends State<AddNewDonor>
                                                           : const Icon(Icons
                                                               .person), // Show an icon if 'profilePicUrl' is not a valid URL
                                                     ),
-                                                    const SizedBox(
-                                                      width: 25.0,
+                                                    SizedBox(
+                                                      width: 12.9 * asr,
                                                     ),
                                                     // Text('Name: ${result['fullname']}'),
                                                     Text(result['fullname']),
