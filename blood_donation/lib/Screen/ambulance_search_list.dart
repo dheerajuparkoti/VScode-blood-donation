@@ -1,7 +1,6 @@
 import 'dart:convert';
-// i am here for testing 
-
 import 'package:blood_donation/api/api.dart';
+import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -65,12 +64,13 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
 
   @override
   Widget build(BuildContext context) {
+    double asr = ScreenResolution().sh / ScreenResolution().sw;
     return Scaffold(
         body: Stack(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: ScreenResolution().sw,
+          height: ScreenResolution().sh,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -85,20 +85,20 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
 
         //HEADER
         Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: EdgeInsets.only(top: 15.5 * asr),
           child: Container(
-              height: 30,
+              height: 15.5 * asr,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Color(0xFFFF0025),
                 borderRadius: BorderRadius.only(),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
                   'Searched Ambulance Results',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 10.39 * asr,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -107,44 +107,42 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
         ),
 
         Padding(
-          padding: const EdgeInsets.only(
-            top: 70.0,
-            left: 1.0,
-            right: 1.0,
+          padding: EdgeInsets.only(
+            top: 35.7 * asr,
+            left: 0.51 * asr,
+            right: 0.51 * asr,
             bottom: 0.0,
           ),
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: const BoxDecoration(
+            width: ScreenResolution().sw,
+            height: ScreenResolution().sh,
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.0),
-                topRight: Radius.circular(25.0),
-                //bottomLeft: Radius.circular(25.0),
-                //bottomRight: Radius.circular(25.0),
+                topLeft: Radius.circular(12.9 * asr),
+                topRight: Radius.circular(12.9 * asr),
               ),
             ),
             child: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: EdgeInsets.all(12.9 * asr),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                          padding: const EdgeInsets.only(
-                            left: 10.0,
+                          padding: EdgeInsets.only(
+                            left: 5.1 * asr,
                             bottom: 0,
-                            top: 10.0,
+                            top: 5.1 * asr,
                           ),
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
                               'Searched Results : ${matchedResults.length}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 8.26 * asr,
                               ),
                             ),
                           )),
@@ -158,7 +156,7 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
                                 result['name'].toUpperCase();
 
                             return SizedBox(
-                              height: 100,
+                              height: 51.5 * asr,
                               child: Card(
                                 margin: const EdgeInsets.all(0.0),
                                 shape: RoundedRectangleBorder(
@@ -169,14 +167,15 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
                                   children: <Widget>[
                                     // for underline
                                     Container(
-                                      height: 1.0, // Height of the underline
+                                      height:
+                                          0.51 * asr, // Height of the underline
                                       color: Colors.red,
                                       //width:300.0, // Adjust the width accordingly
                                     ),
                                     //First Row container
                                     Container(
-                                      height: 53.0,
-                                      padding: const EdgeInsets.all(5.0),
+                                      height: 27.03 * asr,
+                                      padding: EdgeInsets.all(2.58 * asr),
                                       color: const Color(0xFFFFFFFF),
                                       child: Row(
                                         mainAxisAlignment:
@@ -185,10 +184,10 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
                                           Expanded(
                                             child: Text(
                                               capitalizedItem,
-                                              style: const TextStyle(
-                                                fontSize: 14,
+                                              style: TextStyle(
+                                                fontSize: 7.23 * asr,
                                                 fontWeight: FontWeight.bold,
-                                                color: Color.fromARGB(
+                                                color: const Color.fromARGB(
                                                     255, 1, 1, 1),
                                               ),
                                               maxLines: 2,
@@ -197,12 +196,12 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(height: 5.0),
+                                    SizedBox(height: 2.58 * asr),
                                     //Second  Row container
 
                                     Container(
-                                      height: 40.0,
-                                      padding: const EdgeInsets.all(5.0),
+                                      height: 20.4 * asr,
+                                      padding: EdgeInsets.all(2.58 * asr),
                                       color: const Color(0xFFFFFFFF),
                                       child: Row(
                                         mainAxisAlignment:
@@ -214,14 +213,14 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
                                                 makePhoneCall(
                                                     'tel:+977 ${result['contactNo']}');
                                               },
-                                              icon: const Icon(
+                                              icon: Icon(
                                                 Icons.phone,
-                                                size: 16.0,
+                                                size: 8.26 * asr,
                                                 color: Colors.white,
                                               ),
-                                              label: const Text('Call',
+                                              label: Text('Call',
                                                   style: TextStyle(
-                                                    fontSize: 14.0,
+                                                    fontSize: 7.23 * asr,
                                                     color: Colors.white,
                                                   )),
                                               style: TextButton.styleFrom(
@@ -235,7 +234,7 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(width: 2.5),
+                                          SizedBox(width: 1.29 * asr),
                                           Expanded(
                                             child: TextButton.icon(
                                               onPressed: () {
@@ -247,14 +246,14 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
                                                   'App: Mobile Blood Bank Nepal',
                                                 );
                                               },
-                                              icon: const Icon(
+                                              icon: Icon(
                                                 Icons.share,
-                                                size: 16.0,
+                                                size: 8.26 * asr,
                                                 color: Colors.white,
                                               ),
-                                              label: const Text('Share',
+                                              label: Text('Share',
                                                   style: TextStyle(
-                                                    fontSize: 14.0,
+                                                    fontSize: 7.23 * asr,
                                                     color: Colors.white,
                                                   )),
                                               style: TextButton.styleFrom(
@@ -289,7 +288,7 @@ class _AmbulanceSearchListState extends State<AmbulanceSearchList> {
             child: CircularProgressIndicator(
               valueColor: const AlwaysStoppedAnimation<Color>(
                   Colors.red), // Color of the progress indicator
-              strokeWidth: 5.0, // Thickness of the progress indicator
+              strokeWidth: 2.58 * asr, // Thickness of the progress indicator
               backgroundColor: Colors.black.withOpacity(
                   0.5), // Background color of the progress indicator
             ),
