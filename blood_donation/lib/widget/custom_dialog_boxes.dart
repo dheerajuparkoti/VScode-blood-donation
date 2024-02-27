@@ -1,4 +1,3 @@
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 
 class CustomDialog {
@@ -7,7 +6,9 @@ class CustomDialog {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        double asr = ScreenResolution().sh / ScreenResolution().sw;
+        double sw = MediaQuery.of(context).size.width;
+        double sh = MediaQuery.of(context).size.height;
+        double asr = sh / sw;
         return AlertDialog(
           content: SizedBox(
             width: double.maxFinite, // Adjust the width as needed
@@ -70,7 +71,9 @@ class CustomSnackBar {
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.floating,
   }) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -108,7 +111,9 @@ class CustomSnackBar {
     Duration duration = const Duration(seconds: 3),
     SnackBarBehavior behavior = SnackBarBehavior.floating,
   }) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(

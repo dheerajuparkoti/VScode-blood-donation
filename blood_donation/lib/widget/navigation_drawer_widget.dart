@@ -3,7 +3,6 @@ import 'package:blood_donation/Screen/add_donor_screen.dart';
 import 'package:blood_donation/Screen/events_appointment.dart';
 import 'package:blood_donation/Screen/privacy_policy.dart';
 import 'package:blood_donation/Screen/profile_screen.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/drawer_items.dart';
@@ -27,7 +26,9 @@ class NavigationDrawerScreen extends StatelessWidget {
   final CallApi callApi = CallApi();
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
 
     final safeArea =
         EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top);
@@ -37,7 +38,7 @@ class NavigationDrawerScreen extends StatelessWidget {
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      width: isCollapsed ? 28.56 * asr : ScreenResolution().sw * 1.0,
+      width: isCollapsed ? 28.56 * asr : sw * 1.0,
       child: Drawer(
         child: Container(
           color: const Color(0xff161616),
@@ -144,7 +145,6 @@ class NavigationDrawerScreen extends StatelessWidget {
     } else {}
   }
 
-  double asr = ScreenResolution().sh / ScreenResolution().sw;
   Widget buildMenuItem({
     required bool isCollapsed,
     required String text,
@@ -153,7 +153,6 @@ class NavigationDrawerScreen extends StatelessWidget {
   }) {
     const color = Color(0xFFFFFFFF);
     final leading = Icon(icon, color: color);
-
     return Material(
       color: const Color(0xff161616),
       child: isCollapsed
@@ -164,13 +163,16 @@ class NavigationDrawerScreen extends StatelessWidget {
           : ListTile(
               leading: leading,
               title: Text(text,
-                  style: TextStyle(color: color, fontSize: 6.2 * asr)),
+                  style: const TextStyle(color: color, fontSize: 12)),
               onTap: onClicked,
             ),
     );
   }
 
   Widget buildCollapseIcon(BuildContext context, bool isCollapsed) {
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     double size = 25.75 * asr;
     final icon = isCollapsed ? Icons.arrow_forward_ios : Icons.arrow_back_ios;
     final alignment = isCollapsed ? Alignment.center : Alignment.centerRight;
@@ -203,10 +205,10 @@ class NavigationDrawerScreen extends StatelessWidget {
       ? Row(
           children: [
             Padding(
-              padding: EdgeInsets.only(left: 6.2 * asr),
+              padding: const EdgeInsets.only(left: 12),
               child: SizedBox(
-                width: 20.4 * asr,
-                height: 20.4 * asr,
+                width: 40,
+                height: 40,
                 child: Image.asset(
                   'images/logo.png',
                   fit: BoxFit.contain,
@@ -223,21 +225,21 @@ class NavigationDrawerScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 15.5 * asr),
+                      padding: const EdgeInsets.only(left: 30),
                       child: SizedBox(
-                        width: 25.75 * asr,
-                        height: 25.75 * asr,
+                        width: 50,
+                        height: 50,
                         child: Image.asset(
                           'images/logo.png',
                           fit: BoxFit.contain,
                         ),
                       ),
                     ),
-                    SizedBox(width: 3.06 * asr),
-                    Text(
+                    const SizedBox(width: 6),
+                    const Text(
                       'Mobile Blood Bank',
                       style: TextStyle(
-                        fontSize: 12.24 * asr,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

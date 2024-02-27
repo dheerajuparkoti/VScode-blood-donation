@@ -1,4 +1,3 @@
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 
 class Tabbar extends StatefulWidget {
@@ -11,7 +10,9 @@ class Tabbar extends StatefulWidget {
 class _TabbarState extends State<Tabbar> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     TabController tabController = TabController(length: 3, vsync: this);
     return Scaffold(
         body: Column(children: <Widget>[

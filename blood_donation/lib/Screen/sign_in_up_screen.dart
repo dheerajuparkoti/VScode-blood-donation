@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:blood_donation/data/internet_connectivity.dart';
 import 'package:blood_donation/main.dart';
 import 'package:blood_donation/api/api.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
 import 'package:provider/provider.dart';
@@ -181,7 +180,9 @@ class _SignInSignUpState extends State<SignInSignUp>
   Widget build(BuildContext context) {
     super.build(context); // to maintain state between two tabs
 
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
 
     return Scaffold(
       //resizeToAvoidBottomInset: false,

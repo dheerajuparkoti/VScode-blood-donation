@@ -16,7 +16,6 @@ import 'package:blood_donation/Screen/search_blood.dart';
 import 'package:blood_donation/Screen/request_screen.dart';
 import 'package:blood_donation/Screen/emergency_request_screen.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -176,7 +175,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
 
     return Scaffold(
       backgroundColor: const Color(0xFF592424),

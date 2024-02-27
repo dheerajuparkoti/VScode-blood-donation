@@ -1,5 +1,4 @@
 import 'package:blood_donation/Screen/blood_bank_search_list.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +120,9 @@ class _SearchBloodBankState extends State<SearchBloodBank>
 
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     super.build(context);
     return Scaffold(
         // resizeToAvoidBottomInset: true,

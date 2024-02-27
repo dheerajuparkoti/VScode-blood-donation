@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // for date format
@@ -284,7 +283,9 @@ class _EventsAppointmentsState extends State<EventsAppointments>
 
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     super.build(context); // to maintain state between two tabs
     return Scaffold(
       //resizeToAvoidBottomInset: false,
@@ -314,8 +315,8 @@ class _EventsAppointmentsState extends State<EventsAppointments>
               vertical: 10.39 * asr,
             ),
             child: Container(
-              width: ScreenResolution().sw,
-              height: ScreenResolution().sh,
+              width: sw,
+              height: sh,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:blood_donation/Screen/available_list.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -517,7 +516,9 @@ class _RequestScreenState extends State<RequestScreen>
 
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     super.build(context); // to maintain state between two tabs
 
     return Scaffold(
@@ -1070,7 +1071,7 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Second Row Container
 
                                           Container(
-                                            height: 25.1 * asr,
+                                            height: 107.1 * asr,
                                             padding: EdgeInsets.all(5.1 * asr),
                                             color: Colors.white,
                                             child: Align(
@@ -1811,7 +1812,7 @@ class _RequestScreenState extends State<RequestScreen>
                                           ),
 
                                           SizedBox(
-                                            height: 5.1 * asr,
+                                            height: 2.58 * asr,
                                           ),
                                         ],
                                       ),

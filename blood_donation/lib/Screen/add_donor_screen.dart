@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:blood_donation/Screen/profile_screen.dart';
 import 'package:blood_donation/api/api.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
@@ -188,7 +187,9 @@ class _AddNewDonorState extends State<AddNewDonor>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFD3B5B5),

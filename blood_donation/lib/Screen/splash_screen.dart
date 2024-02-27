@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:blood_donation/Screen/sign_in_up_screen.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
@@ -32,8 +31,10 @@ class _LoginState extends State<SplashScreen> {
     }
   }
 
-  double asr = ScreenResolution().sh / ScreenResolution().sw;
   void _showNoInternetDialog() {
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -89,6 +90,9 @@ class _LoginState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     return Scaffold(
       body: Stack(
         children: [

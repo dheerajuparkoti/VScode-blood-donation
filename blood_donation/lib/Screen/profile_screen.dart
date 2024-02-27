@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:blood_donation/Screen/edit_profile.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart'; // for phone make
 import 'package:share/share.dart'; // Import the share package
@@ -199,7 +198,9 @@ class _ProfileState extends State<Profile> {
       editBtnText = "Back";
     }
     */
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: 20.4 * asr,

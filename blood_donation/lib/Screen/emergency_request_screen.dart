@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:blood_donation/api/api.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -175,7 +174,9 @@ class _EmergencyRequestState extends State<EmergencyRequest>
 
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     super.build(context);
 
     return Scaffold(
@@ -183,8 +184,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
       backgroundColor: const Color(0xFFD3B5B5),
       body: Stack(children: [
         Container(
-          width: ScreenResolution().sw,
-          height: ScreenResolution().sh,
+          width: sw,
+          height: sh,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -228,8 +229,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
             bottom: 0.0,
           ),
           child: Container(
-            width: ScreenResolution().sw,
-            height: ScreenResolution().sh,
+            width: sw,
+            height: sh,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(

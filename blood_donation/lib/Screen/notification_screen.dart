@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:blood_donation/api/api.dart';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,10 +36,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
     try {
       // Make API request to fetch notifications
       var res = await CallApi().loadNotification({}, 'loadNotification');
-      print("I am started");
+
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = json.decode(res.body);
-        print('API Response: $jsonResponse');
+
         // Extract notifications and count from the response
         final List<dynamic> notifications = jsonResponse['notifications'];
         notificationCount =
@@ -50,7 +49,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           // Update state with the loaded notifications and count
           loadingAllNotifications = notifications;
           isLoading = false; // Set loading to false after data is loaded
-          print("Success notified");
         });
       } else {
         // Handle different status codes appropriately
@@ -71,20 +69,159 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
+
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 10.33 * asr),
-            Text(
-              'Notification Count: $notificationCount', // Display the notification count
-              style: TextStyle(fontSize: 9.30 * asr),
+      //resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xFFD3B5B5),
+      body: Stack(children: [
+        Container(
+          width: sw,
+          height: sh,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Color(0xffBF371A),
+                Color(0xffF00808),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+
+        //HEADER
+        Padding(
+          padding: EdgeInsets.only(top: 15.5 * asr),
+          child: Container(
+              height: 15.5 * asr,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.only(),
+              ),
+              child: Center(
+                child: Text(
+                  '"Donate Blood Save Life Now"',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 10.39 * asr,
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                  ),
+                ),
+              )),
+        ),
+
+        Padding(
+          padding: EdgeInsets.only(
+            top: 35.7 * asr,
+            left: 0.51 * asr,
+            right: 0.51 * asr,
+            bottom: 0.0,
+          ),
+          child: Container(
+            width: sw,
+            height: sh,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(5.1 * asr),
+                topRight: Radius.circular(5.1 * asr),
+              ),
+            ),
+            child: SingleChildScrollView(
+              child: Center(
+                  child: Column(
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.only(
+                        left: 5.1 * asr,
+                        bottom: 0,
+                        top: 0.0,
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Text(
+                          'Total Notifications : ${loadingAllNotifications.length}',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 8.26 * asr,
+                          ),
+                        ),
+                      )),
+                  ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: loadingAllNotifications.length,
+                      itemBuilder: (context, index) {
+                        final emergencyData = loadingAllNotifications[index];
+                        //  final int emergencyRequestId =
+                        //      emergencyData['emergencyRequestId'] ?? 0;
+
+                        return SizedBox(
+                          height: 147.9 * asr,
+                          child: Card(
+                            margin: const EdgeInsets.all(0.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0.0),
+                            ),
+                            elevation: 0.51 * asr,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                // First Row Container
+                                Container(
+                                  height: 15.5 * asr,
+                                  padding: EdgeInsets.all(2.58 * asr),
+                                  color: const Color(0xFF444242),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        '# E- Request : ${emergencyData['emergencyRequestId']}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                      Text(
+                                        'Required Blood: ${emergencyData['bloodGroup']}',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      })
+                ],
+              )
+                  //content for my request
+
+                  ),
+            ),
+          ),
+        ),
+        //end of other request i.e 3rd tab
+
+        // circular progress bar
+        if (isLoading)
+          Center(
+            child: CircularProgressIndicator(
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                  Colors.red), // Color of the progress indicator
+              strokeWidth: 2.58 * asr, // Thickness of the progress indicator
+              backgroundColor: Colors.black.withOpacity(
+                  0.5), // Background color of the progress indicator
+            ),
+          ),
+      ]),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicy extends StatelessWidget {
@@ -6,7 +5,9 @@ class PrivacyPolicy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 20.4 * asr,
@@ -171,7 +172,7 @@ class PrivacyPolicy extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 6.2 * asr,
                         fontWeight: FontWeight.w300,
-                        color: Color(0xFFFFFFFF),
+                        color: const Color(0xFFFFFFFF),
                       ),
                       children: const <TextSpan>[
                         TextSpan(

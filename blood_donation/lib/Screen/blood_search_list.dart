@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_const
 import 'dart:convert';
-import 'package:blood_donation/model/screen_resolution.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/Screen/profile_screen.dart';
 import 'package:blood_donation/api/api.dart';
@@ -53,7 +52,9 @@ class _BloodSearchListState extends State<BloodSearchList> {
 
   @override
   Widget build(BuildContext context) {
-    double asr = ScreenResolution().sh / ScreenResolution().sw;
+    double sw = MediaQuery.of(context).size.width;
+    double sh = MediaQuery.of(context).size.height;
+    double asr = sh / sw;
     return Scaffold(
         // backgroundColor: const Color(0xffF00808),
         /*
@@ -72,8 +73,8 @@ class _BloodSearchListState extends State<BloodSearchList> {
         body: Stack(
       children: [
         Container(
-          width: ScreenResolution().sw,
-          height: ScreenResolution().sh,
+          width: sw,
+          height: sh,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -117,8 +118,8 @@ class _BloodSearchListState extends State<BloodSearchList> {
             bottom: 0.0,
           ),
           child: Container(
-            width: ScreenResolution().sw,
-            height: ScreenResolution().sh,
+            width: sw,
+            height: sh,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
