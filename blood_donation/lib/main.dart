@@ -589,8 +589,8 @@ class _MainPageState extends State<MainPage> {
                     0xFF592424), // Change the background color as needed
 
                 child: Padding(
-                  padding: EdgeInsets.only(
-                      top: 2.58 * asr, right: 2.58 * asr, left: 2.58 * asr),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 1.5 * asr, vertical: 1.5 * asr),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -600,7 +600,9 @@ class _MainPageState extends State<MainPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const RequestScreen()),
+                                  builder: (context) => const RequestScreen(
+                                        notificationReId: 0,
+                                      )),
                             );
                           },
                           icon: const Icon(
@@ -609,7 +611,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                           label: Text('Add New Request',
                               style: TextStyle(
-                                fontSize: 6.2 * asr,
+                                fontSize: 6.0 * asr,
                                 color: Colors.black,
                               )),
                           style: TextButton.styleFrom(
@@ -629,17 +631,17 @@ class _MainPageState extends State<MainPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      const EmergencyRequest()),
+                                  builder: (context) => const EmergencyRequest(
+                                      notificationErId: 0)),
                             );
                           },
                           icon: const Icon(
                             Icons.view_list_outlined,
                             color: Colors.black,
                           ),
-                          label: Text('Emergency Requests',
+                          label: Text('Urgent Requests',
                               style: TextStyle(
-                                fontSize: 6.2 * asr,
+                                fontSize: 6.0 * asr,
                                 color: Colors.black,
                               )),
                           style: TextButton.styleFrom(
@@ -670,7 +672,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                           label: Text('Search Blood',
                               style: TextStyle(
-                                fontSize: 6.2 * asr,
+                                fontSize: 6.0 * asr,
                                 color: Colors.black,
                               )),
                           style: TextButton.styleFrom(

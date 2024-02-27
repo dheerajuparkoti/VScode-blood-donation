@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:blood_donation/Screen/emergency_request_screen.dart';
+import 'package:blood_donation/Screen/events_appointment.dart';
+import 'package:blood_donation/Screen/request_screen.dart';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     // Load emergency requests after userProvider is initialized
     loadingNotifications();
   }
+
   // loading all notification
 
   List<dynamic> loadingAllNotifications = [];
@@ -62,6 +66,75 @@ class _NotificationScreenState extends State<NotificationScreen> {
     }
   }
 
+// update notification read status
+  bool isRead = false;
+  notifiReadEr(int erId) async {
+    var data = {
+      'erId': erId,
+      'doId': userProvider!.donorId,
+    };
+
+    var res = await CallApi().notificationRead(data, 'notificationReadErId');
+
+    // Check if the response is not null
+    if (res.statusCode == 200) {
+      setState(() {
+        isRead = !isRead;
+        loadingNotifications();
+      });
+    } else {}
+  }
+
+// ending of notification status
+
+// update notification read status
+  bool isReadReq = false;
+  notifiReadRe(int rId) async {
+    var data = {
+      'rId': rId,
+      'doId': userProvider!.donorId,
+    };
+
+    var res = await CallApi().notificationRead(data, 'notificationReadReId');
+
+    // Check if the response is not null
+    if (res.statusCode == 200) {
+      setState(() {
+        isReadReq = !isReadReq;
+        loadingNotifications();
+      });
+    } else {
+      // Handle error
+      print(' ${res.statusCode}');
+    }
+  }
+
+// ending of notification status
+
+// update notification read status
+  bool isReadEvent = false;
+  notifiReadEvent(int evId) async {
+    var data = {
+      'evId': evId,
+      'doId': userProvider!.donorId,
+    };
+
+    var res = await CallApi().notificationRead(data, 'notificationReadEvent');
+
+    // Check if the response is not null
+    if (res.statusCode == 200) {
+      setState(() {
+        isReadReq = !isReadReq;
+        loadingNotifications();
+      });
+    } else {
+      // Handle error
+      print(' ${res.statusCode}');
+    }
+  }
+
+// ending of notification status
+
   @override
   void dispose() {
     super.dispose();
@@ -92,32 +165,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
         ),
 
-        //HEADER
-        Padding(
-          padding: EdgeInsets.only(top: 15.5 * asr),
-          child: Container(
-              height: 15.5 * asr,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.only(),
-              ),
-              child: Center(
-                child: Text(
-                  '"Donate Blood Save Life Now"',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 10.39 * asr,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                  ),
-                ),
-              )),
-        ),
-
         Padding(
           padding: EdgeInsets.only(
-            top: 35.7 * asr,
+            top: 20.4 * asr,
             left: 0.51 * asr,
             right: 0.51 * asr,
             bottom: 0.0,
@@ -158,44 +208,93 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       shrinkWrap: true,
                       itemCount: loadingAllNotifications.length,
                       itemBuilder: (context, index) {
-                        final emergencyData = loadingAllNotifications[index];
-                        //  final int emergencyRequestId =
-                        //      emergencyData['emergencyRequestId'] ?? 0;
+                        final notificationData = loadingAllNotifications[index];
 
-                        return SizedBox(
-                          height: 147.9 * asr,
-                          child: Card(
-                            margin: const EdgeInsets.all(0.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(0.0),
-                            ),
-                            elevation: 0.51 * asr,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                // First Row Container
-                                Container(
-                                  height: 15.5 * asr,
-                                  padding: EdgeInsets.all(2.58 * asr),
-                                  color: const Color(0xFF444242),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '# E- Request : ${emergencyData['emergencyRequestId']}',
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                      Text(
-                                        'Required Blood: ${emergencyData['bloodGroup']}',
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
-                                    ],
+                        return InkWell(
+                          onTap: () {
+                            if (notificationData['erId'] != null) {
+                              notifiReadEr(notificationData['erId']);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EmergencyRequest(
+                                    notificationErId: notificationData[
+                                        'erId'], // Pass the required parameter
                                   ),
                                 ),
-                              ],
+                              );
+                            } else if (notificationData['rId'] != null) {
+                              notifiReadRe(notificationData['rId']);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RequestScreen(
+                                    notificationReId: notificationData[
+                                        'rId'], // Pass the required parameter
+                                  ),
+                                ),
+                              );
+                            } else if (notificationData['evId'] != null) {
+                              notifiReadEvent(notificationData['evId']);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EventsAppointments(
+                                    notificationEvId: notificationData[
+                                        'evId'], // Pass the required parameter
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                          child: SizedBox(
+                            height: 25.75 * asr,
+                            child: Card(
+                              margin: const EdgeInsets.all(0.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(0.0),
+                              ),
+                              elevation: 0.51 * asr,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  // First Row Container
+                                  Container(
+                                    height: 25 * asr,
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 2.58 * asr,
+                                        vertical: 0 * asr),
+                                    color: const Color(0xFF444242),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Flexible(
+                                          // Wrap with Flexible widget
+                                          child: Text(
+                                            notificationData['erId'] != null
+                                                ? 'New emergency request available. Tap here to view details. Request no. is ${notificationData['erId']}'
+                                                : notificationData['rId'] !=
+                                                        null
+                                                    ? 'New request available. Tap here to view details. Request no. is: ${notificationData['rId']}'
+                                                    : notificationData[
+                                                                'evId'] !=
+                                                            null
+                                                        ? 'New event available. Tap here to view details. Event no. is: ${notificationData['evId']}'
+                                                        : 'Unknown notification type',
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

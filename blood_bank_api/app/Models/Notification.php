@@ -9,12 +9,13 @@ class Notification extends Model
 {
     use HasFactory;
     protected $table = 'notifications';
-    protected $primaryKey = 'notId';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'rId',
         'erId',
         'evId',
         'doId',
+        'isRead',
         // Add other fillable fields here if needed
     ];
 

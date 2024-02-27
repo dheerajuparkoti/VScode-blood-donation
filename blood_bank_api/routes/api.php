@@ -86,6 +86,9 @@ Route::post('/LoadEmergencyRequests',[EmergencyRequestBloodController::class,'Lo
 Route::post('/LoadMyRequests', [LoadRequestController::class, 'LoadMyRequests']); // for retrieving all my requests from request_blood and emergency_request_blood table
 
 Route::post('/loadNotification', [NotificationController::class, 'loadNotification']); // for retrieving all my requests from request_blood and emergency_request_blood table
+Route::post('/notificationReadErId',[NotificationController::class,'notificationReadErId']);
+Route::post('/notificationReadReId',[NotificationController::class,'notificationReadReId']);
+Route::post('/notificationReadEvent',[NotificationController::class,'notificationReadEvent']);
 
 
 Route::post('/SetAppointment',[SetAppointmentController::class,'SetAppointment']); // setting Appointment 

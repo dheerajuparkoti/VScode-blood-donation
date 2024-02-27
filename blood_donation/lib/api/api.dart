@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
 
 class CallApi {
-  final String baseUrl = "http://192.168.100.53:8000/api/";
+  final String baseUrl = "http://192.168.100.50:8000/api/";
 
   final String loginUrl = "login";
 
@@ -271,7 +271,7 @@ class CallApi {
     );
   }
 
-  // sending likes to events
+  // sending attends to events
   eventAttends(data, apiUrl) async {
     final eventAttendsUrl = baseUrl + apiUrl;
     return await http.post(
@@ -281,7 +281,17 @@ class CallApi {
     );
   }
 
-  // sending likes to events
+  // sending attends to events
+  notificationRead(data, apiUrl) async {
+    final notiReadUrl = baseUrl + apiUrl;
+    return await http.post(
+      Uri.parse(notiReadUrl),
+      body: jsonEncode(data),
+      headers: _setHeaders(),
+    );
+  }
+
+  // fetching status events
   fetchEventStatus(data, apiUrl) async {
     final fetchEventUrl = baseUrl + apiUrl;
     return await http.post(

@@ -96,7 +96,7 @@ class _AvailableListViewState extends State<AvailableListView> {
               ),
               child: Center(
                 child: Text(
-                  'Searched Results',
+                  'Donors Available List',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 10.39 * asr,
@@ -139,7 +139,7 @@ class _AvailableListViewState extends State<AvailableListView> {
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              'Searched Results : ${donorData.length}',
+                              'Available Donors up-to-date : ${donorData.length}',
                               style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,

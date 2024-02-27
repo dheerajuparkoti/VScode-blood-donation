@@ -114,7 +114,9 @@ class NavigationDrawerScreen extends StatelessWidget {
           navigateTo(const NotificationScreen());
           break;
         case 3:
-          navigateTo(const EventsAppointments());
+          navigateTo(const EventsAppointments(
+            notificationEvId: 0,
+          ));
           break;
         case 4:
           navigateTo(const SearchAmbulance());
@@ -207,8 +209,8 @@ class NavigationDrawerScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 12),
               child: SizedBox(
-                width: 40,
-                height: 40,
+                width: 30,
+                height: 30,
                 child: Image.asset(
                   'images/logo.png',
                   fit: BoxFit.contain,

@@ -8,7 +8,10 @@ import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyRequest extends StatefulWidget {
-  const EmergencyRequest({Key? key}) : super(key: key);
+  final int notificationErId;
+
+  const EmergencyRequest({Key? key, required this.notificationErId})
+      : super(key: key);
 
   @override
   State<EmergencyRequest> createState() => _EmergencyRequestState();
@@ -473,7 +476,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
 
                                 Container(
                                   height: 20.4 * asr,
-                                  padding: EdgeInsets.all(2.58 * asr),
+                                  padding: EdgeInsets.all(1.5 * asr),
                                   color: const Color(0xFF8CC653),
                                   child: Row(
                                     mainAxisAlignment:

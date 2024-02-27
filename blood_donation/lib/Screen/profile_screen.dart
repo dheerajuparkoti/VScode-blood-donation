@@ -469,7 +469,7 @@ class _ProfileState extends State<Profile> {
                               //Third Column Ends
 
                               SizedBox(
-                                width: 33.15 * asr,
+                                width: 10.0 * asr,
                               ),
 
                               // Check if 'profilePic' is a valid URL

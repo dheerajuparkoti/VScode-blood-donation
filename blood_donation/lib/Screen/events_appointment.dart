@@ -12,7 +12,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../provider/user_provider.dart';
 
 class EventsAppointments extends StatefulWidget {
-  const EventsAppointments({super.key});
+  final int notificationEvId;
+  const EventsAppointments({Key? key, required this.notificationEvId})
+      : super(key: key);
 
   @override
   State<EventsAppointments> createState() => _EventsAppointmentsState();
@@ -411,7 +413,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                   final eventData = loadingEvents[index];
 
                                   return SizedBox(
-                                    height: 142.8 * asr,
+                                    height: 145 * asr,
                                     child: Card(
                                       margin: const EdgeInsets.all(0.0),
                                       shape: RoundedRectangleBorder(
@@ -607,7 +609,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
 
                                           Container(
                                             height: 20.4 * asr,
-                                            padding: EdgeInsets.all(2.58 * asr),
+                                            padding: EdgeInsets.all(1.5 * asr),
                                             color: const Color(0xFF8CC653),
                                             child: Row(
                                               mainAxisAlignment:

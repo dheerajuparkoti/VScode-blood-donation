@@ -14,7 +14,9 @@ import 'package:url_launcher/url_launcher.dart';
 import '../provider/user_provider.dart';
 
 class RequestScreen extends StatefulWidget {
-  const RequestScreen({super.key});
+  final int notificationReId;
+  const RequestScreen({Key? key, required this.notificationReId})
+      : super(key: key);
 
   @override
   State<RequestScreen> createState() => _RequestScreenState();
@@ -51,7 +53,11 @@ class _RequestScreenState extends State<RequestScreen>
     super.initState();
     // Access the UserProvider within initState
     userProvider = Provider.of<UserProvider>(context, listen: false);
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
+
+    if (widget.notificationReId != 0) {
+      _tabController = TabController(initialIndex: 2, length: 3, vsync: this);
+    }
     _tabController.addListener(_handleTabChange);
     requiredTime = TimeOfDay.now();
     loadOtherRequests();
@@ -158,7 +164,7 @@ class _RequestScreenState extends State<RequestScreen>
           message: "Your request for blood is sent successfully to others",
           icon: Icons.check_circle,
         );
-        _tabController.animateTo(0);
+        _tabController.animateTo(1);
       } else {
         // ignore: use_build_context_synchronously
         CustomSnackBar.showUnsuccess(
@@ -207,7 +213,8 @@ class _RequestScreenState extends State<RequestScreen>
               "Your emergency request for blood is sent successfully to others",
           icon: Icons.check_circle,
         );
-        _tabController.animateTo(0);
+
+        _tabController.animateTo(1);
       } else {
         // ignore: use_build_context_synchronously
         CustomSnackBar.showUnsuccess(
@@ -436,8 +443,7 @@ class _RequestScreenState extends State<RequestScreen>
       wardNoController.clear();
       isEmergency = false;
       loadMyRequests();
-    } else if (_tabController.index == 0) {
-    } else if (_tabController.index == 2) {
+    } else {
       loadOtherRequests();
     }
   }
@@ -696,7 +702,11 @@ class _RequestScreenState extends State<RequestScreen>
                                 ].map((bloodGroup) {
                                   return DropdownMenuItem<String>(
                                     value: bloodGroup,
-                                    child: Text('Blood Group $bloodGroup'),
+                                    child: Text(
+                                      'Blood Group $bloodGroup',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.normal),
+                                    ),
                                   );
                                 }).toList(),
                                 onChanged: (value) {
@@ -828,7 +838,11 @@ class _RequestScreenState extends State<RequestScreen>
                                     .map((province) {
                                   return DropdownMenuItem<String>(
                                     value: province,
-                                    child: Text('Province $province'),
+                                    child: Text(
+                                      'Province $province',
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.normal),
+                                    ),
                                   );
                                 }).toList(),
                                 onChanged: (value) {
@@ -865,7 +879,11 @@ class _RequestScreenState extends State<RequestScreen>
                                         .map((district) {
                                         return DropdownMenuItem<String>(
                                           value: district,
-                                          child: Text(district),
+                                          child: Text(
+                                            district,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.normal),
+                                          ),
                                         );
                                       }).toList()
                                     : [],
@@ -901,7 +919,11 @@ class _RequestScreenState extends State<RequestScreen>
                                         .map((locallevel) {
                                         return DropdownMenuItem<String>(
                                           value: locallevel,
-                                          child: Text(locallevel),
+                                          child: Text(
+                                            locallevel,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.normal),
+                                          ),
                                         );
                                       }).toList()
                                     : [],
@@ -948,9 +970,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 },
                               ),
 
-                              // CheckboxListTile widget for emergency status
-
-                              // Making SignUp button
+                              // Making Request Now Button
                               SizedBox(height: 15.5 * asr),
                               Container(
                                 height: 25.75 * asr,
@@ -1258,7 +1278,7 @@ class _RequestScreenState extends State<RequestScreen>
 
                                           Container(
                                             height: 20.4 * asr,
-                                            padding: EdgeInsets.all(2.58 * asr),
+                                            padding: EdgeInsets.all(1.5 * asr),
                                             color: const Color(0xFF8CC653),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1270,21 +1290,31 @@ class _RequestScreenState extends State<RequestScreen>
                                                 Expanded(
                                                   child: TextButton.icon(
                                                     onPressed: () {
-                                                      if (source ==
-                                                          'requestBloods') {
-                                                        int requestId =
-                                                            requestData[
-                                                                'requestId'];
-                                                        deleteRequest(
-                                                            requestId);
-                                                      } else if (source ==
-                                                          'emergencyRequestBloods') {
-                                                        int emergencyRequestId =
-                                                            requestData[
-                                                                'emergencyRequestId'];
-                                                        deleteERequest(
-                                                            emergencyRequestId);
-                                                      }
+                                                      CustomDialog
+                                                          .showConfirmationDialog(
+                                                        context,
+                                                        'Delete Confirmation', // Title
+                                                        'Are you sure you want to delete this request ?', // Message
+                                                        Icons.warning, // Icon
+                                                        () {
+                                                          // Your action when 'Yes' is pressed
+                                                          if (source ==
+                                                              'requestBloods') {
+                                                            int requestId =
+                                                                requestData[
+                                                                    'requestId'];
+                                                            deleteRequest(
+                                                                requestId);
+                                                          } else if (source ==
+                                                              'emergencyRequestBloods') {
+                                                            int emergencyRequestId =
+                                                                requestData[
+                                                                    'emergencyRequestId'];
+                                                            deleteERequest(
+                                                                emergencyRequestId);
+                                                          }
+                                                        },
+                                                      );
                                                     },
                                                     icon: Icon(
                                                       Icons.delete_forever,
@@ -1697,7 +1727,7 @@ class _RequestScreenState extends State<RequestScreen>
 
                                           Container(
                                             height: 20.4 * asr,
-                                            padding: EdgeInsets.all(2.58 * asr),
+                                            padding: EdgeInsets.all(1.5 * asr),
                                             color: const Color(0xFF8CC653),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1863,11 +1893,18 @@ class _RequestScreenState extends State<RequestScreen>
         selectedDistrict != null &&
         selectedLocalLevel != null &&
         wardNoController.text.trim() != '') {
-      if (isEmergency == false) {
-        requestBloodForm();
-      } else {
-        emergencyRequestBloodForm();
-      }
+      CustomDialog.showConfirmationDialog(
+          context,
+          'Request Confirmation', // Title
+          'Are you sure you want to create new request ?', // Message
+          Icons.warning, // Icon
+          () {
+        if (isEmergency == false) {
+          requestBloodForm();
+        } else {
+          emergencyRequestBloodForm();
+        }
+      });
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,

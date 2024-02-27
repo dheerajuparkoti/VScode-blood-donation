@@ -59,6 +59,83 @@ class CustomDialog {
       },
     );
   }
+
+  // for confirmation dialog box
+
+  static void showConfirmationDialog(
+    BuildContext context,
+    String title,
+    String message,
+    IconData iconData,
+    Function onYesPressed,
+  ) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        double sw = MediaQuery.of(context).size.width;
+        double sh = MediaQuery.of(context).size.height;
+        double asr = sh / sw;
+        return AlertDialog(
+          title: Text(
+            title,
+            style: TextStyle(
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
+              fontSize: 8.26 * asr,
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                iconData,
+                color: Colors.red,
+                size: 15.5 * asr,
+              ),
+              SizedBox(height: 5.1 * asr),
+              Text(
+                message,
+                style: TextStyle(
+                  fontSize: 8.26 * asr,
+                ),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                onYesPressed(); // Execute the function when 'Yes' is pressed
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+              ),
+              child: Text(
+                'Yes',
+                style: TextStyle(
+                  fontSize: 9.30 * asr,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+              ),
+              child: Text(
+                'No',
+                style: TextStyle(
+                  fontSize: 9.30 * asr,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
 // for snackbar
