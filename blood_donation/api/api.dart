@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CallApi {
-  final String baseUrl = "http://192.168.1.67:8000/api/";
+  final String baseUrl = "http://192.168.100.53:8000/api/";
 
 // for login and logout session
 

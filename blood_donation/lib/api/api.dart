@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
 
 class CallApi {
-  final String baseUrl = "http://192.168.1.69:8000/api/";
+  final String baseUrl = "http://192.168.100.53:8000/api/";
 
   final String loginUrl = "login";
 
