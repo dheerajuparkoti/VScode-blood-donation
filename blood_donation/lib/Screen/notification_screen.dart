@@ -30,28 +30,35 @@ class _NotificationScreenState extends State<NotificationScreen> {
   // loading all notification
 
   List<dynamic> loadingAllNotifications = [];
+  List<dynamic> loadingNotificationWithDonorId = [];
   int notificationCount = 0; // Change the type to int
 
   Future<void> loadingNotifications() async {
+    var data = {
+      'doId': userProvider!.donorId,
+    };
     setState(() {
       isLoading = true; // Set loading to true when starting to load data
     });
 
     try {
       // Make API request to fetch notifications
-      var res = await CallApi().loadNotification({}, 'loadNotification');
+      var res = await CallApi().loadNotification(data, 'loadNotification');
 
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = json.decode(res.body);
 
         // Extract notifications and count from the response
         final List<dynamic> notifications = jsonResponse['notifications'];
+        final List<dynamic> notificationswithDonorId =
+            jsonResponse['notificationswithDonorId'];
         notificationCount =
             jsonResponse['count']; // Assign count directly to the variable
 
         setState(() {
           // Update state with the loaded notifications and count
           loadingAllNotifications = notifications;
+          loadingNotificationWithDonorId = notificationswithDonorId;
           isLoading = false; // Set loading to false after data is loaded
         });
       } else {
@@ -67,7 +74,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
 // update notification read status
-  bool isRead = false;
   notifiReadEr(int erId) async {
     var data = {
       'erId': erId,
@@ -79,7 +85,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     // Check if the response is not null
     if (res.statusCode == 200) {
       setState(() {
-        isRead = !isRead;
         loadingNotifications();
       });
     } else {}
@@ -88,7 +93,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 // ending of notification status
 
 // update notification read status
-  bool isReadReq = false;
+
   notifiReadRe(int rId) async {
     var data = {
       'rId': rId,
@@ -100,7 +105,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     // Check if the response is not null
     if (res.statusCode == 200) {
       setState(() {
-        isReadReq = !isReadReq;
         loadingNotifications();
       });
     } else {
@@ -112,7 +116,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 // ending of notification status
 
 // update notification read status
-  bool isReadEvent = false;
+
   notifiReadEvent(int evId) async {
     var data = {
       'evId': evId,
@@ -124,7 +128,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
     // Check if the response is not null
     if (res.statusCode == 200) {
       setState(() {
-        isReadReq = !isReadReq;
         loadingNotifications();
       });
     } else {
@@ -158,8 +161,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
-                Color(0xffBF371A),
-                Color(0xffF00808),
+                Color(0xFF343333),
+                Color(0xFF343333),
               ],
             ),
           ),
@@ -176,7 +179,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             width: sw,
             height: sh,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color(0xFF343333),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(5.1 * asr),
                 topRight: Radius.circular(5.1 * asr),
@@ -190,25 +193,71 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       padding: EdgeInsets.only(
                         left: 5.1 * asr,
                         bottom: 0,
-                        top: 0.0,
+                        top: 5.1 * asr,
                       ),
                       child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text(
-                          'Total Notifications : ${loadingAllNotifications.length}',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 8.26 * asr,
-                          ),
-                        ),
-                      )),
+                          alignment: Alignment.bottomLeft,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Unread Notifications : $notificationCount',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 8.26 * asr,
+                                ),
+                              ),
+                            ],
+                          ))),
                   ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: loadingAllNotifications.length,
                       itemBuilder: (context, index) {
                         final notificationData = loadingAllNotifications[index];
+                        // check if Emergency request has been read
+                        final bool isErReadByDonor =
+                            loadingNotificationWithDonorId.any((notification) {
+                          final dynamic erId = notification[
+                              'erId']; // Use dynamic type for flexibility
+                          final dynamic notificationErId =
+                              notificationData['erId'];
+
+                          // Check if both erId fields are not null and match
+                          return erId != null &&
+                              notificationErId != null &&
+                              erId.toString() == notificationErId.toString();
+                        });
+
+                        // check if Request has been read
+                        final bool isReReadByDonor =
+                            loadingNotificationWithDonorId.any((notification) {
+                          final dynamic rId = notification[
+                              'rId']; // Use dynamic type for flexibility
+                          final dynamic notificationReId =
+                              notificationData['rId'];
+
+                          // Check if both erId fields are not null and match
+                          return rId != null &&
+                              notificationReId != null &&
+                              rId.toString() == notificationReId.toString();
+                        });
+
+                        // check if Request has been read
+                        final bool isEventReadByDonor =
+                            loadingNotificationWithDonorId.any((notification) {
+                          final dynamic evId = notification[
+                              'evId']; // Use dynamic type for flexibility
+                          final dynamic notificationEventId =
+                              notificationData['evId'];
+
+                          // Check if both erId fields are not null and match
+                          return evId != null &&
+                              notificationEventId != null &&
+                              evId.toString() == notificationEventId.toString();
+                        });
 
                         return InkWell(
                           onTap: () {
@@ -253,7 +302,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             child: Card(
                               margin: const EdgeInsets.all(0.0),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0.0),
+                                borderRadius: BorderRadius.circular(0 * asr),
                               ),
                               elevation: 0.51 * asr,
                               child: Column(
@@ -265,7 +314,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 2.58 * asr,
                                         vertical: 0 * asr),
-                                    color: const Color(0xFF444242),
+                                    color: isErReadByDonor
+                                        ? const Color.fromARGB(
+                                            255, 51, 103, 163)
+                                        : isReReadByDonor
+                                            ? const Color.fromARGB(
+                                                255, 51, 103, 163)
+                                            : isEventReadByDonor
+                                                ? const Color.fromARGB(
+                                                    255, 51, 103, 163)
+                                                : const Color(0xC9272727),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,

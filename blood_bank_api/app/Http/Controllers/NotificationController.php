@@ -9,13 +9,29 @@ class NotificationController extends Controller
 {
     public function loadNotification(Request $request)
     {
-        $notifications = Notification::whereNull('doId')
-                                  ->orderBy('created_at', 'desc')
-                                  ->get();
+  
+        $validatedData = $request->validate([          
+            'doId' => 'required',       
+        ]);
+
        
-        $count = count($notifications);
+            
+            $notificationswithDonorId = Notification::where('doId', $validatedData['doId'])
+                                          ->orderBy('created_at', 'desc')
+                                          ->get();    
         
-        return response()->json(['notifications' => $notifications, 'count' => $count],200);
+     
+            $notifications = Notification::whereNull('doId')
+            ->orderBy('created_at', 'desc')
+            ->get();    
+
+            $countTotalNotification = count($notifications);
+            $countNotificationwithDonorId=count($notificationswithDonorId);
+            
+            $count = $countTotalNotification-$countNotificationwithDonorId;
+          
+            return response()->json(['notifications' => $notifications,'notificationswithDonorId'=>$notificationswithDonorId, 'count' => $count], 200);
+        
     }
 
     public function notificationReadErId(Request $request)
@@ -96,7 +112,7 @@ class NotificationController extends Controller
             'evId' => 'required|exists:notifications,evId',
             'doId' => 'required',
         ], [
-            'erId.exists' => 'The notification with the provided erId does not exist.',
+            'evId.exists' => 'The notification with the provided erId does not exist.',
         ]); 
     
         // Find the notification by ID
