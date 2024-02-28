@@ -2,21 +2,21 @@ import 'package:blood_donation/model/drawer_item.dart';
 import 'package:flutter/material.dart';
 
 final itemsFirst = [
-  const DrawerItem(title: 'Profile', icon: Icons.person_rounded),
-  const DrawerItem(title: 'Add Donor', icon: Icons.bloodtype),
-  const DrawerItem(title: 'Notification', icon: Icons.notification_important),
-  const DrawerItem(title: 'Events & Appointment', icon: Icons.event_note),
-  const DrawerItem(title: 'Ambulance Services', icon: Icons.bus_alert),
-  const DrawerItem(title: 'Blood Banks Info', icon: Icons.local_hospital),
-  const DrawerItem(title: 'Settings', icon: Icons.settings),
-  const DrawerItem(title: 'Privacy Policy', icon: Icons.privacy_tip),
-  const DrawerItem(title: 'About Us', icon: Icons.info),
-  const DrawerItem(title: 'Sign Out', icon: Icons.logout),
+  DrawerItem(title: 'Profile', icon: Icons.person_rounded),
+  DrawerItem(title: 'Add Donor', icon: Icons.bloodtype),
+  DrawerItem(title: 'Notification', icon: Icons.notification_important),
+  DrawerItem(title: 'Events & Appointment', icon: Icons.event_note),
+  DrawerItem(title: 'Ambulance Services', icon: Icons.bus_alert),
+  DrawerItem(title: 'Blood Banks Info', icon: Icons.local_hospital),
+  DrawerItem(title: 'Settings', icon: Icons.settings),
+  DrawerItem(title: 'Privacy Policy', icon: Icons.privacy_tip),
+  DrawerItem(title: 'About Us', icon: Icons.info),
+  DrawerItem(title: 'Sign Out', icon: Icons.logout),
 ];
 
 final itemsSecond = [
-  const DrawerItem(title: 'Settings', icon: Icons.settings),
-  const DrawerItem(title: 'Privacy Policy', icon: Icons.privacy_tip),
-  const DrawerItem(title: 'About Us', icon: Icons.info),
-  const DrawerItem(title: 'Sign Out', icon: Icons.logout),
+  DrawerItem(title: 'Settings', icon: Icons.settings),
+  DrawerItem(title: 'Privacy Policy', icon: Icons.privacy_tip),
+  DrawerItem(title: 'About Us', icon: Icons.info),
+  DrawerItem(title: 'Sign Out', icon: Icons.logout),
 ];
