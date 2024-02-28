@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:blood_donation/Screen/available_list.dart';
+import 'package:blood_donation/notification_service.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -215,6 +216,10 @@ class _RequestScreenState extends State<RequestScreen>
         );
 
         _tabController.animateTo(1);
+        LocalNotifications.showSimpleNotification(
+            title: "Simple Notification",
+            body: "This is a simiple Notification",
+            payload: "This is simple data");
       } else {
         // ignore: use_build_context_synchronously
         CustomSnackBar.showUnsuccess(

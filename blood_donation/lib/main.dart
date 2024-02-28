@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:blood_donation/Screen/splash_screen.dart';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/data/internet_connectivity.dart';
+import 'package:blood_donation/notification_service.dart';
 import 'package:blood_donation/provider/navigation_provider.dart';
 import 'package:blood_donation/widget/navigation_drawer_widget.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotifications.init();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
