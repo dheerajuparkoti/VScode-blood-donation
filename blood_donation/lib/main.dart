@@ -6,9 +6,10 @@ import 'dart:convert';
 import 'package:blood_donation/Screen/splash_screen.dart';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/data/internet_connectivity.dart';
-import 'package:blood_donation/notification_service.dart';
 import 'package:blood_donation/provider/navigation_provider.dart';
 import 'package:blood_donation/widget/navigation_drawer_widget.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +19,18 @@ import 'package:blood_donation/Screen/request_screen.dart';
 import 'package:blood_donation/Screen/emergency_request_screen.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 
+// firebase notification
+Future<void> backgroundHandler(RemoteMessage message) async {
+  print(message.data.toString());
+  print(message.notification!.title);
+}
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalNotifications.init();
+
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
