@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:blood_donation/Screen/splash_screen.dart';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/data/internet_connectivity.dart';
@@ -72,6 +73,16 @@ class MyApp extends StatelessWidget {
       );
 }
 
+void checkInternetConnection() async {
+  bool isConnected = await ConnectivityUtil.isInternetConnected();
+  if (!isConnected) {
+    print("Im showing you message");
+    // Show message to user or perform any necessary cleanup
+    // Then exit the app
+    exit(0);
+  }
+}
+
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -102,38 +113,28 @@ class _MainPageState extends State<MainPage> {
         Timer.periodic(const Duration(seconds: 5), (Timer t) => topDonorList());
   }
 
+  bool stopDisplayDialog = false;
+
 // DONOR COUNTS TO SHOW IN MAIN SCREEN STARTS HERE
   fetchDonorCounts() async {
     bool isConnected = await ConnectivityUtil.isInternetConnected();
     if (isConnected) {
-      try {
-        final res = await CallApi().countDonors({}, 'DonorCountsByBloodGroup');
-        if (res.statusCode == 200) {
-          final Map<String, dynamic> jsonResponse = json.decode(res.body);
-          if (mounted) {
-            setState(() {
-              totalDonors = jsonResponse['totalDonors'];
-              bloodGroupCounts =
-                  Map<String, int>.from(jsonResponse['bloodGroupCounts']);
-            });
-          }
-        } else {
-          throw Exception(
-              'Failed to load donor counts. Status code: ${res.statusCode}');
-        }
-      } catch (e) {
+      final res = await CallApi().countDonors({}, 'DonorCountsByBloodGroup');
+      if (res.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = json.decode(res.body);
         if (mounted) {
-          // Check if the widget is still mounted before showing the dialog
-          CustomDialog.showAlertDialog(
-            context,
-            'Server Error',
-            'There was an error connecting to the server. Please try again later.',
-            Icons.error_outline,
-          );
+          setState(() {
+            stopDisplayDialog == false;
+            totalDonors = jsonResponse['totalDonors'];
+            bloodGroupCounts =
+                Map<String, int>.from(jsonResponse['bloodGroupCounts']);
+          });
         }
+      } else {
+        throw Exception(
+            'Failed to load donor counts. Status code: ${res.statusCode}');
       }
     } else {
-      // No internet connection
       // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
@@ -152,30 +153,19 @@ class _MainPageState extends State<MainPage> {
   topDonorList() async {
     bool isConnected = await ConnectivityUtil.isInternetConnected();
     if (isConnected) {
-      try {
-        final res = await CallApi().topDonors({}, 'getTopDonors');
+      final res = await CallApi().topDonors({}, 'getTopDonors');
 
-        if (res.statusCode == 200) {
-          final List<dynamic> jsonResponse = json.decode(res.body);
+      if (res.statusCode == 200) {
+        final List<dynamic> jsonResponse = json.decode(res.body);
 
-          setState(() {
-            topDonors = jsonResponse.cast<Map<String, dynamic>>();
-          });
-        } else {
-          throw Exception(
-              'Failed to load donor lists. Status code: ${res.statusCode}');
-        }
-      } catch (e) {
-        // ignore: use_build_context_synchronously
-        CustomDialog.showAlertDialog(
-          context,
-          'Server Error',
-          'There was an error connecting to the server. Please try again later.',
-          Icons.error_outline,
-        );
+        setState(() {
+          topDonors = jsonResponse.cast<Map<String, dynamic>>();
+        });
+      } else {
+        throw Exception(
+            'Failed to load donor lists. Status code: ${res.statusCode}');
       }
     } else {
-      // No internet connection
       // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
