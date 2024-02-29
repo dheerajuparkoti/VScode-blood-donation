@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,7 @@ import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/Screen/blood_search_list.dart';
 
 class SearchBloodGroup extends StatefulWidget {
-  const SearchBloodGroup({super.key});
+  const SearchBloodGroup({Key? key}) : super(key: key);
 
   @override
   State<SearchBloodGroup> createState() => _SearchBloodGroupState();
@@ -49,7 +51,6 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
       });
     } else {
       // No internet connection
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',

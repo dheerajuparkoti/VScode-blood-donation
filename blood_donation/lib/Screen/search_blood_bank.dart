@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:blood_donation/Screen/blood_bank_search_list.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
@@ -8,7 +10,7 @@ import 'package:blood_donation/api/api.dart';
 import 'package:provider/provider.dart';
 
 class SearchBloodBank extends StatefulWidget {
-  const SearchBloodBank({super.key});
+  const SearchBloodBank({Key? key}) : super(key: key);
 
   @override
   State<SearchBloodBank> createState() => _SearchBloodBankState();
@@ -62,7 +64,6 @@ class _SearchBloodBankState extends State<SearchBloodBank>
         isLoading = false;
       });
     } else {
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',

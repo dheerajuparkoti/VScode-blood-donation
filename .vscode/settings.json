@@ -18,6 +18,7 @@
           }
         }
       ]
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
   }
   

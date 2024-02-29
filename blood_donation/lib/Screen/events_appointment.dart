@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +92,6 @@ class _EventsAppointmentsState extends State<EventsAppointments>
       //  var body = jsonDecode(res.body);
 
       if (res.statusCode == 200) {
-        // ignore: use_build_context_synchronously
         CustomSnackBar.showSuccess(
           context: context,
           message:
@@ -99,7 +100,6 @@ class _EventsAppointmentsState extends State<EventsAppointments>
         );
         _tabController.animateTo(0);
       } else {
-        // ignore: use_build_context_synchronously
         CustomSnackBar.showUnsuccess(
           context: context,
           message: 'Internal Server Error: Something went wrong',

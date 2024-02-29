@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:blood_donation/Screen/ambulance_search_list.dart';
@@ -9,7 +11,7 @@ import 'package:blood_donation/api/api.dart';
 import 'package:provider/provider.dart';
 
 class SearchAmbulance extends StatefulWidget {
-  const SearchAmbulance({super.key});
+  const SearchAmbulance({Key? key}) : super(key: key);
 
   @override
   State<SearchAmbulance> createState() => _SearchAmbulanceState();
@@ -67,7 +69,6 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
       });
     } else {
       // No internet connection
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',

@@ -8,7 +8,7 @@ import 'package:blood_donation/data/district_data.dart';
 import 'package:provider/provider.dart';
 
 class AddNewDonor extends StatefulWidget {
-  const AddNewDonor({super.key});
+  const AddNewDonor({Key? key}) : super(key: key);
 
   @override
   State<AddNewDonor> createState() => _AddNewDonorState();
@@ -91,6 +91,7 @@ class _AddNewDonorState extends State<AddNewDonor>
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously
       CustomSnackBar.showSuccess(
+        // ignore: use_build_context_synchronously
         context: context,
         message: 'Donor registered successfully',
         icon: Icons.check_circle,
@@ -99,6 +100,7 @@ class _AddNewDonorState extends State<AddNewDonor>
     } else if (response.statusCode == 400) {
       // ignore: use_build_context_synchronously
       CustomSnackBar.showUnsuccess(
+        // ignore: use_build_context_synchronously
         context: context,
         message:
             'Registration failed. You are member, only Admin are allow to register new donor.',
@@ -107,6 +109,7 @@ class _AddNewDonorState extends State<AddNewDonor>
     } else if (response.statusCode == 400) {
       // ignore: use_build_context_synchronously
       CustomSnackBar.showUnsuccess(
+        // ignore: use_build_context_synchronously
         context: context,
         message: 'Registration failed. User not found',
         icon: Icons.error,
@@ -114,6 +117,7 @@ class _AddNewDonorState extends State<AddNewDonor>
     } else {
       // ignore: use_build_context_synchronously
       CustomSnackBar.showUnsuccess(
+        // ignore: use_build_context_synchronously
         context: context,
         message: 'Internal Server Error: Something went wrong',
         icon: Icons.error,
@@ -142,6 +146,7 @@ class _AddNewDonorState extends State<AddNewDonor>
     } else {
       // ignore: use_build_context_synchronously
       CustomSnackBar.showUnsuccess(
+        // ignore: use_build_context_synchronously
         context: context,
         message: 'Internal Server Error: Something went wrong',
         icon: Icons.error,

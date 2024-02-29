@@ -1,11 +1,12 @@
 //import 'package:blood_donation/Screen/sign_in_up_screen.dart';
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'dart:async';
 import 'dart:convert';
 import 'package:blood_donation/Screen/splash_screen.dart';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/data/internet_connectivity.dart';
+import 'package:blood_donation/notificationservice/local_notification_service.dart';
 import 'package:blood_donation/provider/navigation_provider.dart';
 import 'package:blood_donation/widget/navigation_drawer_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,6 +31,7 @@ Future main() async {
 
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+  LocalNotificationService.initialize();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -48,7 +50,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key?key}): super(key: key);
 
   static const String title = 'Mobile Blood Bank Nepal';
 
@@ -63,7 +65,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  const MainPage({Key? key}): super(key: key);
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -123,7 +125,6 @@ class _MainPageState extends State<MainPage> {
       }
     } else {
       // No internet connection
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',
@@ -155,7 +156,6 @@ class _MainPageState extends State<MainPage> {
               'Failed to load donor lists. Status code: ${res.statusCode}');
         }
       } catch (e) {
-        // ignore: use_build_context_synchronously
         CustomDialog.showAlertDialog(
           context,
           'Server Error',
@@ -165,7 +165,6 @@ class _MainPageState extends State<MainPage> {
       }
     } else {
       // No internet connection
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',

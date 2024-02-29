@@ -1047,7 +1047,7 @@ class ForgotPasswordDialog extends StatelessWidget {
 
 // RESET PASSWORD DIALOG START HERE  ------------------------------------------
 class ResetMessageDialog extends StatelessWidget {
-  const ResetMessageDialog({super.key});
+  const ResetMessageDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -1088,6 +1088,7 @@ Future<bool> sendEmail(String email, String appPassword) async {
     String username = 'civilconsultancychoice@gmail.com'; // Your Gmail address
     String password = 'cvwo ayel etvf cinq'; // Your Gmail password
 
+    // ignore: deprecated_member_use
     final smtpServer = gmail(username, password);
     //   final smtpServer = gmailSaslXoauth2(username, Password);  // if u use this mail doesnot work
     final message = Message()

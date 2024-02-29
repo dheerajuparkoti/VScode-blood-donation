@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:blood_donation/api/api.dart';
@@ -7,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -60,7 +62,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         isLoading = false;
       });
     } else {
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',
@@ -92,7 +93,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // Handle the response
 
     if (response.statusCode == 200) {
-      // ignore: use_build_context_synchronously
       CustomSnackBar.showSuccess(
         context: context,
         message: "Updated successfully",
@@ -103,7 +103,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       isLoading = false;
     } else {
       // var responseData = json.decode(response.body);
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',

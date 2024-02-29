@@ -1,3 +1,4 @@
+import 'package:blood_donation/notificationservice/local_notification_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           print(message.notification!.title);
           print(message.notification!.body);
           print("message.data11 ${message.data}");
-          // LocalNotificationService.display(message);
+          LocalNotificationService.createanddisplaynotification(message);
         }
       },
     );

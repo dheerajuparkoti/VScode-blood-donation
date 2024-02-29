@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:convert';
 import 'dart:io';
@@ -137,7 +137,6 @@ class _EditProfileState extends State<EditProfile>
     if (response.statusCode == 200) {
       //  var responseData = json.decode(response.body);
       //  print('Added successfully: ${responseData['message']}');
-      // ignore: use_build_context_synchronously
       CustomSnackBar.showSuccess(
         context: context,
         message: "New donation record has been added successfully",
@@ -146,14 +145,12 @@ class _EditProfileState extends State<EditProfile>
 
       _resetDropdowns();
     } else if (response.statusCode == 403) {
-      // ignore: use_build_context_synchronously
       CustomSnackBar.showUnsuccess(
         context: context,
         message: "You cannot donate blood within 75 days of your last donation",
         icon: Icons.error,
       );
     } else {
-      // ignore: use_build_context_synchronously
       CustomSnackBar.showUnsuccess(
         context: context,
         message: "You cannot update this guest user",
@@ -198,7 +195,6 @@ class _EditProfileState extends State<EditProfile>
         profilePic = data['profilePic'] ?? '';
       });
     } else {
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',
@@ -251,7 +247,6 @@ class _EditProfileState extends State<EditProfile>
 
       // Handle the response
       if (response.statusCode == 200) {
-        // ignore: use_build_context_synchronously
         CustomSnackBar.showSuccess(
           context: context,
           message: "New donation record has been added successfully",
@@ -259,7 +254,6 @@ class _EditProfileState extends State<EditProfile>
         );
         fetchDonorData();
       } else {
-        // ignore: use_build_context_synchronously
         CustomDialog.showAlertDialog(
           context,
           'Server Error',

@@ -1,6 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:blood_donation/Screen/available_list.dart';
-import 'package:blood_donation/notification_service.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -159,7 +160,6 @@ class _RequestScreenState extends State<RequestScreen>
       //var body = jsonDecode(res.body);
 
       if (res.statusCode == 200) {
-        // ignore: use_build_context_synchronously
         CustomSnackBar.showSuccess(
           context: context,
           message: "Your request for blood is sent successfully to others",
@@ -167,7 +167,6 @@ class _RequestScreenState extends State<RequestScreen>
         );
         _tabController.animateTo(1);
       } else {
-        // ignore: use_build_context_synchronously
         CustomSnackBar.showUnsuccess(
           context: context,
           message: 'Internal Server Error: Something went wrong',
@@ -207,7 +206,6 @@ class _RequestScreenState extends State<RequestScreen>
     // Check if the response is not null
     if (res != null) {
       if (res.statusCode == 200) {
-        // ignore: use_build_context_synchronously
         CustomSnackBar.showSuccess(
           context: context,
           message:
@@ -216,12 +214,7 @@ class _RequestScreenState extends State<RequestScreen>
         );
 
         _tabController.animateTo(1);
-        LocalNotifications.showSimpleNotification(
-            title: "Simple Notification",
-            body: "This is a simiple Notification",
-            payload: "This is simple data");
       } else {
-        // ignore: use_build_context_synchronously
         CustomSnackBar.showUnsuccess(
           context: context,
           message: 'Internal Server Error: Something went wrong',
@@ -263,7 +256,6 @@ class _RequestScreenState extends State<RequestScreen>
           isLoading = false;
         });
       } catch (e) {
-        // ignore: use_build_context_synchronously
         CustomDialog.showAlertDialog(
           context,
           'Server Error',
@@ -274,7 +266,6 @@ class _RequestScreenState extends State<RequestScreen>
       }
     } else {
       // Handle different status codes appropriately
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',
@@ -320,7 +311,6 @@ class _RequestScreenState extends State<RequestScreen>
           }
         });
       } catch (e) {
-        // ignore: use_build_context_synchronously
         CustomDialog.showAlertDialog(
           context,
           'Server Error',
@@ -330,7 +320,6 @@ class _RequestScreenState extends State<RequestScreen>
         isLoading = false;
       }
     } else {
-      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',
@@ -479,7 +468,6 @@ class _RequestScreenState extends State<RequestScreen>
     var res = await CallApi().delRequest(data, 'deleteRequest');
 
     if (res.statusCode == 200) {
-      // ignore: use_build_context_synchronously
       CustomSnackBar.showSuccess(
         context: context,
         message: "Your request has been deleted successfully",
@@ -487,7 +475,6 @@ class _RequestScreenState extends State<RequestScreen>
       );
       loadMyRequests();
     } else {
-      // ignore: use_build_context_synchronously
       CustomSnackBar.showUnsuccess(
         context: context,
         message:
@@ -507,7 +494,6 @@ class _RequestScreenState extends State<RequestScreen>
     var res = await CallApi().delERequest(data, 'deleteEmergencyRequest');
 
     if (res.statusCode == 200) {
-      // ignore: use_build_context_synchronously
       CustomSnackBar.showSuccess(
         context: context,
         message: "Your emergency request has been deleted successfully",
@@ -515,7 +501,6 @@ class _RequestScreenState extends State<RequestScreen>
       );
       loadMyRequests();
     } else {
-      // ignore: use_build_context_synchronously
       CustomSnackBar.showUnsuccess(
         context: context,
         message:
