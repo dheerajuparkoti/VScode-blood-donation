@@ -1,6 +1,3 @@
-//import 'package:blood_donation/Screen/sign_in_up_screen.dart';
-// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
-
 import 'dart:async';
 import 'dart:convert';
 import 'package:blood_donation/Screen/splash_screen.dart';
@@ -30,6 +27,17 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
+
+  String? deviceToken = await FirebaseMessaging.instance.getToken();
+  if (deviceToken != null) {
+    print("Device Token is $deviceToken");
+  } else {}
+
+// for sending to all devices
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  await messaging.subscribeToTopic('mobilebloodbanknepalnotifications');
+
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   LocalNotificationService.initialize();
 
@@ -50,7 +58,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key?key}): super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   static const String title = 'Mobile Blood Bank Nepal';
 
@@ -65,9 +73,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}): super(key: key);
+  const MainPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MainPageState createState() => _MainPageState();
 }
 
@@ -125,6 +134,7 @@ class _MainPageState extends State<MainPage> {
       }
     } else {
       // No internet connection
+      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',
@@ -156,6 +166,7 @@ class _MainPageState extends State<MainPage> {
               'Failed to load donor lists. Status code: ${res.statusCode}');
         }
       } catch (e) {
+        // ignore: use_build_context_synchronously
         CustomDialog.showAlertDialog(
           context,
           'Server Error',
@@ -165,6 +176,7 @@ class _MainPageState extends State<MainPage> {
       }
     } else {
       // No internet connection
+      // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
         'Network Error',

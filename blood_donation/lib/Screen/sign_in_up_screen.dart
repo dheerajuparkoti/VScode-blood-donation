@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:blood_donation/data/internet_connectivity.dart';
 import 'package:blood_donation/main.dart';
 import 'package:blood_donation/api/api.dart';
+import 'package:blood_donation/notificationservice/local_notification_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +29,7 @@ class _SignInSignUpState extends State<SignInSignUp>
   bool isLoading = false;
   bool passwordsMatch = true;
   bool phoneNumberError = false;
+  String deviceTokenToSendPushNotification = "";
 
   TextEditingController fullnameController = TextEditingController();
   TextEditingController wardNoController = TextEditingController();
@@ -132,9 +135,65 @@ class _SignInSignUpState extends State<SignInSignUp>
   @override
   void initState() {
     super.initState();
+    // 1. This method call when app in terminated state and you get a notification
+    // when you click on notification app open from terminated state and you can get notification data in this method
+
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (message) {
+        print("FirebaseMessaging.instance.getInitialMessage");
+        print("Im closed calling from signin screen");
+        if (message != null) {
+          print("New Notification");
+          // if (message.data['_id'] != null) {
+          //   Navigator.of(context).push(
+          //     MaterialPageRoute(
+          //       builder: (context) => DemoScreen(
+          //         id: message.data['_id'],
+          //       ),
+          //     ),
+          //   );
+          // }
+        }
+      },
+    );
+
+    // 2. This method only call when App in forground it mean app must be opened
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        print("FirebaseMessaging.onMessage.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data11 im from signin screen ${message.data}");
+          LocalNotificationService.createanddisplaynotification(message);
+        }
+      },
+    );
+
+    // 3. This method only call when App in background and not terminated(not closed)
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        print("FirebaseMessaging.onMessageOpenedApp.listen");
+        if (message.notification != null) {
+          print(message.notification!.title);
+          print(message.notification!.body);
+          print("message.data22 from sign in screen ${message.data['_id']}");
+        }
+      },
+    );
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(_handleTabChange);
+    //getDeviceTokenToSendNotification();
   }
+
+/*
+  Future<void> getDeviceTokenToSendNotification() async {
+    final FirebaseMessaging fcm = FirebaseMessaging.instance;
+    final token = await fcm.getToken();
+    deviceTokenToSendPushNotification = token.toString();
+    print("Token Value $deviceTokenToSendPushNotification");
+  }
+  */
 
 // HANDLE TAB CHANGES START HERE
   void _handleTabChange() {

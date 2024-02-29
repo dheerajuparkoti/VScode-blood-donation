@@ -14,8 +14,6 @@ class NotificationController extends Controller
             'doId' => 'required',       
         ]);
 
-       
-            
             $notificationswithDonorId = Notification::where('doId', $validatedData['doId'])
                                           ->orderBy('created_at', 'desc')
                                           ->get();    

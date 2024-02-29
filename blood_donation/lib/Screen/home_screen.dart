@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     FirebaseMessaging.instance.getInitialMessage().then(
       (message) {
         print("FirebaseMessaging.instance.getInitialMessage");
+        print("Im closed calling from home screen");
         if (message != null) {
           print("New Notification");
           // if (message.data['_id'] != null) {
@@ -39,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     FirebaseMessaging.onMessage.listen(
       (message) {
         print("FirebaseMessaging.onMessage.listen");
+        print("Im closed from home screen");
         if (message.notification != null) {
           print(message.notification!.title);
           print(message.notification!.body);
@@ -55,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (message.notification != null) {
           print(message.notification!.title);
           print(message.notification!.body);
-          print("message.data22 ${message.data['_id']}");
+          print("message.data22 from home screen ${message.data['_id']}");
         }
       },
     );
