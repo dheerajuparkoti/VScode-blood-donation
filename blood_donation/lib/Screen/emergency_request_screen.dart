@@ -248,6 +248,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                   Padding(
                       padding: EdgeInsets.only(
                         left: 5.1 * asr,
+                        right: 5.1 * asr,
                         bottom: 0,
                         top: 0.0,
                       ),
@@ -310,7 +311,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                 // Second Row Container
 
                                 Container(
-                                  height: 107.1 * asr,
+                                  height: 110 * asr,
                                   padding: EdgeInsets.all(5.1 * asr),
                                   color: Colors.white,
                                   child: Align(
@@ -425,11 +426,17 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                                   color: Colors.black,
                                                   fontSize: 6.2 * asr),
                                             ),
-                                            Text(
-                                              '${emergencyData['localLevel']}-${emergencyData['wardNo']}, ${emergencyData['district']}, Pro. ${emergencyData['province']}',
-                                              style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                            Expanded(
+                                              child: Text(
+                                                '${emergencyData['localLevel']}-${emergencyData['wardNo']}, ${emergencyData['district']}, Pro. ${emergencyData['province']}',
+                                                style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontSize: 6.2 * asr),
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines:
+                                                    2, // Adjust this value as needed
+                                                textAlign: TextAlign.start,
+                                              ),
                                             ),
                                           ],
                                         ),

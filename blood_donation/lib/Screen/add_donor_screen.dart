@@ -20,6 +20,7 @@ class _AddNewDonorState extends State<AddNewDonor>
   late final UserProvider userProvider; // Declare userProvider
   bool isLoading = false;
   bool phoneNumberError = false;
+  bool dobError = false;
   TextEditingController fullnameController = TextEditingController();
   TextEditingController wardNoController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -38,8 +39,7 @@ class _AddNewDonorState extends State<AddNewDonor>
   String? selectedDistrict;
   String? selectedLocalLevel;
 
-//Date Time Picker
-
+//DATE TIME PICKER STARTS HERE
   DateTime selectedDate = DateTime.now();
   final TextEditingController dobController = TextEditingController();
 
@@ -53,9 +53,41 @@ class _AddNewDonorState extends State<AddNewDonor>
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        dobController.text = "${picked.year}/${picked.month}/${picked.day}";
+        //dobController.text = "${picked.year}/${picked.month}/${picked.day}";
+        dobController.text = picked.toString().split(" ")[0];
+        _validateDOB(dobController.text);
       });
     }
+  }
+// ENDS HERE
+
+//Date of Birth Validation
+  bool isValidDOB(String dob) {
+    // Parse the input DOB string into a DateTime object
+    DateTime? dobDate = DateTime.tryParse(dob);
+
+    // Check if DOB is not null and falls within the age range of 18 to 60
+    if (dobDate != null) {
+      // Calculate age based on the DOB and current date
+      DateTime currentDate = DateTime.now();
+      int age = currentDate.year - dobDate.year;
+      if (currentDate.month < dobDate.month ||
+          (currentDate.month == dobDate.month &&
+              currentDate.day < dobDate.day)) {
+        age--;
+      }
+
+      // Check if the age falls within the desired range (18 to 60)
+      return age >= 18 && age <= 60;
+    } else {
+      return false; // Return false if DOB is null
+    }
+  }
+
+  void _validateDOB(String dob) {
+    setState(() {
+      dobError = !isValidDOB(dob);
+    });
   }
 
   @override
@@ -326,6 +358,9 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       onTap: () => _selectDate(context),
                                       decoration: InputDecoration(
                                         hintText: "*Date of Birth (yyyy/mm/dd)",
+                                        errorText: dobError
+                                            ? 'Age must be between 18-60 to donate blood'
+                                            : null,
                                         hintStyle: const TextStyle(
                                             color: Color(0xffaba7a7)),
                                         suffixIcon: GestureDetector(
@@ -745,6 +780,8 @@ class _AddNewDonorState extends State<AddNewDonor>
   void validationFields() {
     if (fullnameController.text.trim() != '' &&
         dobController.text.trim() != '' &&
+        phoneNumberError == false &&
+        dobError == false &&
         selectedGender != null &&
         selectedBloodGroup != null &&
         selectedProvince != null &&
@@ -756,7 +793,7 @@ class _AddNewDonorState extends State<AddNewDonor>
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,
-          message: "Please fill all fields indicated as *.",
+          message: "Please fill all fields correctly indicated as *.",
           icon: Icons.info);
     }
   }

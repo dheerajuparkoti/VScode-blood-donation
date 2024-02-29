@@ -693,7 +693,7 @@ class _MainPageState extends State<MainPage> {
                             Icons.bloodtype_outlined,
                             color: Colors.black,
                           ),
-                          label: Text('Search Blood',
+                          label: Text('Search Blood Group',
                               style: TextStyle(
                                 fontSize: 6.0 * asr,
                                 color: Colors.black,

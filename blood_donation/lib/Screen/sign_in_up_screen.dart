@@ -29,6 +29,7 @@ class _SignInSignUpState extends State<SignInSignUp>
   bool isLoading = false;
   bool passwordsMatch = true;
   bool phoneNumberError = false;
+  bool dobError = false;
   String deviceTokenToSendPushNotification = "";
 
   TextEditingController fullnameController = TextEditingController();
@@ -126,11 +127,42 @@ class _SignInSignUpState extends State<SignInSignUp>
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        dobController.text = "${picked.year}/${picked.month}/${picked.day}";
+        //dobController.text = "${picked.year}/${picked.month}/${picked.day}";
+        dobController.text = picked.toString().split(" ")[0];
+        _validateDOB(dobController.text);
       });
     }
   }
 // ENDS HERE
+
+//Date of Birth Validation
+  bool isValidDOB(String dob) {
+    // Parse the input DOB string into a DateTime object
+    DateTime? dobDate = DateTime.tryParse(dob);
+
+    // Check if DOB is not null and falls within the age range of 18 to 60
+    if (dobDate != null) {
+      // Calculate age based on the DOB and current date
+      DateTime currentDate = DateTime.now();
+      int age = currentDate.year - dobDate.year;
+      if (currentDate.month < dobDate.month ||
+          (currentDate.month == dobDate.month &&
+              currentDate.day < dobDate.day)) {
+        age--;
+      }
+
+      // Check if the age falls within the desired range (18 to 60)
+      return age >= 18 && age <= 60;
+    } else {
+      return false; // Return false if DOB is null
+    }
+  }
+
+  void _validateDOB(String dob) {
+    setState(() {
+      dobError = !isValidDOB(dob);
+    });
+  }
 
   @override
   void initState() {
@@ -232,6 +264,7 @@ class _SignInSignUpState extends State<SignInSignUp>
   void dispose() {
     _tabController.removeListener(_handleTabChange);
     _tabController.dispose();
+    dobController.dispose();
     super.dispose();
   }
 
@@ -511,6 +544,9 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       onTap: () => _selectDate(context),
                                       decoration: InputDecoration(
                                         hintText: "Date of Birth (yyyy/mm/dd)",
+                                        errorText: dobError
+                                            ? 'Age must be between 18-60 to donate blood'
+                                            : null,
                                         hintStyle: const TextStyle(
                                             color: Color(0xffaba7a7)),
                                         suffixIcon: GestureDetector(
@@ -921,6 +957,8 @@ class _SignInSignUpState extends State<SignInSignUp>
         selectedLocalLevel != null &&
         wardNoController.text.trim() != '' &&
         phoneController.text.trim() != '' &&
+        phoneNumberError == false &&
+        dobError == false &&
         emailController.text.trim() != '' &&
         usernameController.text.trim() != '' &&
         newPasswordController.text.trim() != '' &&
@@ -932,7 +970,7 @@ class _SignInSignUpState extends State<SignInSignUp>
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,
-          message: "Please fill all fields.",
+          message: "Please fill all fields correctly.",
           icon: Icons.info);
       isLoading = false;
     }

@@ -1081,7 +1081,7 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Second Row Container
 
                                           Container(
-                                            height: 107.1 * asr,
+                                            height: 110 * asr,
                                             padding: EdgeInsets.all(5.1 * asr),
                                             color: Colors.white,
                                             child: Align(
@@ -1487,7 +1487,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   final int donorCount =
                                       donorCounts[requestId] ?? 0;
                                   return SizedBox(
-                                    height: 147.9 * asr,
+                                    height: 150 * asr,
                                     child: Card(
                                       margin: const EdgeInsets.all(0.0),
                                       shape: RoundedRectangleBorder(
@@ -1526,7 +1526,7 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Second Row Container
 
                                           Container(
-                                            height: 107.1 * asr,
+                                            height: 110 * asr,
                                             padding: EdgeInsets.all(5.1 * asr),
                                             color: Colors.white,
                                             child: Align(

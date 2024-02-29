@@ -25,18 +25,17 @@ class _EditProfileState extends State<EditProfile>
   late TabController _tabController;
   late final UserProvider userProvider; // Declare userProvider
   bool isLoading = false;
+  bool selectedDateError = false;
+  bool dobError = false;
+  bool phoneNumberError = false;
   String profilePic = '';
 
   final TextEditingController fullnameController = TextEditingController();
   final TextEditingController wardNoController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController newPasswordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController accountTypeController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
   TextEditingController signInUsernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
 
   String? selectedGender;
   String? selectedBloodGroup;
@@ -67,11 +66,56 @@ class _EditProfileState extends State<EditProfile>
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        dobController.text = "${picked.year}/${picked.month}/${picked.day}";
-        donatedDateController.text =
-            "${picked.year}/${picked.month}/${picked.day}";
+        dobController.text = picked.toString().split(" ")[0];
+        donatedDateController.text = picked.toString().split(" ")[0];
+        _validSelectedDate(donatedDateController.text);
+        _validateDOB(dobController.text);
       });
     }
+  }
+
+  bool isValidSelectedDate(String selectedDate) {
+    DateTime? selectDate = DateTime.tryParse(selectedDate);
+    DateTime currentDate = DateTime.now();
+
+    // Check if DOB is not null and is less than or equal to today's date
+    return selectDate != null && selectDate.isBefore(currentDate) ||
+        selectDate!.isAtSameMomentAs(currentDate);
+  }
+
+  void _validSelectedDate(String selectedDate) {
+    setState(() {
+      selectedDateError = !isValidSelectedDate(selectedDate);
+    });
+  }
+
+  //Date of Birth Validation
+  bool isValidDOB(String dob) {
+    // Parse the input DOB string into a DateTime object
+    DateTime? dobDate = DateTime.tryParse(dob);
+
+    // Check if DOB is not null and falls within the age range of 18 to 60
+    if (dobDate != null) {
+      // Calculate age based on the DOB and current date
+      DateTime currentDate = DateTime.now();
+      int age = currentDate.year - dobDate.year;
+      if (currentDate.month < dobDate.month ||
+          (currentDate.month == dobDate.month &&
+              currentDate.day < dobDate.day)) {
+        age--;
+      }
+
+      // Check if the age falls within the desired range (18 to 60)
+      return age >= 18 && age <= 60;
+    } else {
+      return false; // Return false if DOB is null
+    }
+  }
+
+  void _validateDOB(String dob) {
+    setState(() {
+      dobError = !isValidDOB(dob);
+    });
   }
 
   @override
@@ -491,6 +535,9 @@ class _EditProfileState extends State<EditProfile>
                                 onTap: () => _selectDate(context),
                                 decoration: InputDecoration(
                                   hintText: "Donated Date (yyyy/mm/dd)",
+                                  errorText: selectedDateError
+                                      ? 'You cant set donation date for future'
+                                      : null,
                                   hintStyle:
                                       const TextStyle(color: Color(0xffaba7a7)),
                                   suffixIcon: GestureDetector(
@@ -547,7 +594,9 @@ class _EditProfileState extends State<EditProfile>
                                 //calling insert function when button is pressed
                                 child: InkWell(
                                   onTap: () {
-                                    addDonationRecord();
+                                    if (selectedDateError == false) {
+                                      addDonationRecord();
+                                    }
                                   },
                                   child: Center(
                                     child: Text(
@@ -668,6 +717,9 @@ class _EditProfileState extends State<EditProfile>
                                     onTap: () => _selectDate(context),
                                     decoration: InputDecoration(
                                       labelText: "Date of Birth (yyyy/mm/dd)",
+                                      errorText: dobError
+                                          ? 'Age must be between 18-60 to donate blood'
+                                          : null,
                                       labelStyle: const TextStyle(
                                           color: Color(0xffaba7a7)),
                                       suffixIcon: GestureDetector(
@@ -909,16 +961,24 @@ class _EditProfileState extends State<EditProfile>
                                   ),
 
                                   TextField(
-                                    // controller:_textControllers['phoneNumber'],
-                                    controller: phoneController,
-                                    keyboardType: TextInputType.phone,
-                                    decoration: const InputDecoration(
-                                      labelText: "Phone Number",
-                                      labelStyle:
-                                          TextStyle(color: Color(0xffaba7a7)),
-                                    ),
-                                    maxLength: 10,
-                                  ),
+                                      // controller:_textControllers['phoneNumber'],
+                                      controller: phoneController,
+                                      keyboardType: TextInputType.phone,
+                                      decoration: InputDecoration(
+                                        labelText: "Phone Number",
+                                        errorText: phoneNumberError
+                                            ? 'Phone number must be 10 digits'
+                                            : null,
+                                        labelStyle:
+                                            TextStyle(color: Color(0xffaba7a7)),
+                                      ),
+                                      maxLength: 10,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          // Check if the length of phone number is not 10
+                                          phoneNumberError = value.length != 10;
+                                        });
+                                      }),
 
                                   // Making SignUp button
                                   SizedBox(height: 15.5 * asr),
@@ -934,7 +994,7 @@ class _EditProfileState extends State<EditProfile>
                                     //calling insert function when button is pressed
                                     child: InkWell(
                                       onTap: () {
-                                        updateProfile();
+                                        validationFields();
                                       },
                                       child: const Center(
                                         child: Text(
@@ -974,5 +1034,32 @@ class _EditProfileState extends State<EditProfile>
         ],
       ),
     );
+  }
+
+  void validationFields() {
+    setState(() {
+      isLoading = true;
+    });
+    if (fullnameController.text.trim() != '' &&
+        dobController.text.trim() != '' &&
+        selectedGender != null &&
+        selectedBloodGroup != null &&
+        selectedProvince != null &&
+        selectedDistrict != null &&
+        selectedLocalLevel != null &&
+        wardNoController.text.trim() != '' &&
+        wardNoController.text.trim() != '0' &&
+        phoneController.text.trim() != '' &&
+        phoneNumberError == false &&
+        dobError == false) {
+      updateProfile();
+      isLoading = false;
+    } else {
+      CustomSnackBar.showUnsuccess(
+          context: context,
+          message: "Please fill all fields correctly.",
+          icon: Icons.info);
+      isLoading = false;
+    }
   }
 }
