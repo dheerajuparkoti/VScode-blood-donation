@@ -287,7 +287,8 @@ class _SignInSignUpState extends State<SignInSignUp>
       body: Stack(
         children: <Widget>[
           Container(
-            height: 155 * asr,
+            // height: 155 * asr,
+            height: 0.45 * sh,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 begin: Alignment.topCenter,
@@ -307,8 +308,10 @@ class _SignInSignUpState extends State<SignInSignUp>
             padding: EdgeInsets.symmetric(
                 horizontal: 15.5 * asr, vertical: 7.75 * asr),
             child: SizedBox(
-              width: 155 * asr,
-              height: 103.3 * asr,
+              //width: 155 * asr,
+              //height: 103.3 * asr,
+              width: 0.7 * sw,
+              height: 0.25 * sh,
               child: Image.asset(
                 'images/mbblogo.png',
                 fit: BoxFit.contain,
@@ -317,14 +320,17 @@ class _SignInSignUpState extends State<SignInSignUp>
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 15.50 * asr,
-              vertical: 15.50 * asr,
+              //horizontal: 15.50 * asr,
+              //vertical: 15.50 * asr,
+              horizontal: 0.05 * sw,
+              vertical: 0.03 * sh,
             ),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity,
-                height: 310 * asr,
+                //height: 310 * asr,
+                height: 0.75 * sh,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(

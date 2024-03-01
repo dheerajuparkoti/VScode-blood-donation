@@ -122,14 +122,14 @@ class _MainPageState extends State<MainPage> {
       final res = await CallApi().countDonors({}, 'DonorCountsByBloodGroup');
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = json.decode(res.body);
-        // if (mounted) {
-        setState(() {
-          stopDisplayDialog == false;
-          totalDonors = jsonResponse['totalDonors'];
-          bloodGroupCounts =
-              Map<String, int>.from(jsonResponse['bloodGroupCounts']);
-        });
-        // }
+        if (mounted) {
+          setState(() {
+            stopDisplayDialog == false;
+            totalDonors = jsonResponse['totalDonors'];
+            bloodGroupCounts =
+                Map<String, int>.from(jsonResponse['bloodGroupCounts']);
+          });
+        }
       } else {
         throw Exception(
             'Failed to load donor counts. Status code: ${res.statusCode}');
@@ -253,14 +253,17 @@ class _MainPageState extends State<MainPage> {
               physics: const NeverScrollableScrollPhysics(),
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 8.26 * asr,
-                  vertical: 8.26 * asr,
+                  //horizontal: 8.26 * asr,
+                  //vertical: 8.26 * asr,
+                  horizontal: 0.02 * sw,
+                  vertical: 0.02 * sh,
                 ),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        height: 77.5 * asr,
+                        //height: 77.5 * asr,
+                        height: 0.15 * sh,
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
@@ -298,13 +301,16 @@ class _MainPageState extends State<MainPage> {
                       //ENDING FOR EMERGENCY MESSAGE
 
                       // FOR TOTAL MEMBERS SHOWN
+
                       SizedBox(height: 5.1 * asr),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            height: 15.5 * asr,
-                            width: 103.3 * asr,
+                            // height: 15.5 * asr,
+                            //width: 103.3 * asr,
+                            height: 0.05 * sh,
+                            width: 0.5 * sw,
                             decoration: BoxDecoration(
                               color: const Color(0xFF444242),
                               borderRadius: BorderRadius.only(
@@ -340,7 +346,8 @@ class _MainPageState extends State<MainPage> {
                       SizedBox(height: 5.1 * asr),
                       Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.26 * asr),
-                          height: 15.5 * asr,
+                          //height: 15.5 * asr,
+                          height: 0.04 * sh,
                           width: double.infinity,
                           decoration: const BoxDecoration(
                             color: Color(0xFF444242),
@@ -355,7 +362,8 @@ class _MainPageState extends State<MainPage> {
                               Text(
                                 'Blood Groups',
                                 style: TextStyle(
-                                  fontSize: 8.26 * asr,
+                                  //fontSize: 8.26 * asr,
+                                  fontSize: 0.02 * sh,
                                   fontWeight: FontWeight.w300,
                                   color: Colors.white,
                                 ),
@@ -363,7 +371,8 @@ class _MainPageState extends State<MainPage> {
                               Text(
                                 'No. of Donors Available',
                                 style: TextStyle(
-                                  fontSize: 8.26 * asr,
+                                  //fontSize: 8.26 * asr,
+                                  fontSize: 0.02 * sh,
                                   fontWeight: FontWeight.w300,
                                   color: Colors.white,
                                 ),
@@ -376,7 +385,7 @@ class _MainPageState extends State<MainPage> {
                       // TOTAL MEMBERS AS PER BLOOD CATEGORY
                       SizedBox(height: 5.1 * asr),
                       Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8.26 * asr),
+                          padding: EdgeInsets.symmetric(horizontal: 0.05 * sw),
                           //  height: 200.0,
                           //   width: double.infinity,
                           child: Row(
@@ -388,7 +397,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     'A+',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -396,7 +406,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     'B+',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -404,7 +415,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     'O+',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -412,7 +424,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     'A-',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -420,7 +433,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     'B-',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -428,7 +442,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     'O-',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -436,7 +451,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     'AB+',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -444,7 +460,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     'AB-',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -459,7 +476,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     '${bloodGroupCounts['A+'] ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -467,7 +485,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     '${bloodGroupCounts['B+'] ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -475,7 +494,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     '${bloodGroupCounts['O+'] ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -483,7 +503,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     '${bloodGroupCounts['A-'] ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -491,7 +512,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     '${bloodGroupCounts['B-'] ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -499,7 +521,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     '${bloodGroupCounts['O-'] ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -507,7 +530,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     '${bloodGroupCounts['AB+'] ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -515,7 +539,8 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     '${bloodGroupCounts['AB-'] ?? 0}',
                                     style: TextStyle(
-                                      fontSize: 8.26 * asr,
+                                      //fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: Colors.white,
                                     ),
@@ -528,8 +553,10 @@ class _MainPageState extends State<MainPage> {
                       SizedBox(height: 5.1 * asr),
                       // TOP 3 DONOR LISTS header
                       Container(
-                        height: 15.5 * asr,
-                        width: 155.0 * asr,
+                        // height: 15.5 * asr,
+                        //width: 103.3 * asr,
+                        height: 0.04 * sh,
+                        width: 0.7 * sw,
                         decoration: BoxDecoration(
                           color: const Color(0xFF444242),
                           borderRadius: BorderRadius.only(
@@ -541,7 +568,8 @@ class _MainPageState extends State<MainPage> {
                         child: Text(
                           'Top 3 Donor List  🏆 🏆 🏆',
                           style: TextStyle(
-                            fontSize: 10.33 * asr,
+                            //fontSize: 10.33 * asr,
+                            fontSize: 0.025 * sh,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -553,17 +581,21 @@ class _MainPageState extends State<MainPage> {
                       const SizedBox(height: 0.0),
 
                       SizedBox(
-                        height: 155.0 * asr, // Set the height of the container
+                        //height: 155.0 * asr, // Set the height of the container
+                        height: 0.5 * sh,
                         child: ListView.builder(
                           itemCount: topDonors.length,
                           itemBuilder: (context, index) {
                             final donor = topDonors[index];
                             return Container(
-                              height: 25.75 * asr, // Set the height of each row
+                              //height: 25.75 * asr, // Set the height of each row
+                              height: 0.06 * sh,
                               color: const Color.fromARGB(49, 158, 158,
                                   158), // Set the background color
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 10.33 * asr, vertical: 5.1 * asr),
+                                  // horizontal: 10.33 * asr, vertical: 5.1 * asr),
+                                  horizontal: 0.05 * sw,
+                                  vertical: 0.01 * sh),
                               child: Column(
                                 children: [
                                   Row(
@@ -574,7 +606,8 @@ class _MainPageState extends State<MainPage> {
                                         '${donor['fullName']}',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 7.23 * asr,
+                                          //fontSize: 7.23 * asr,
+                                          fontSize: 0.018 * sh,
                                           color: const Color.fromARGB(
                                               255, 255, 255, 255),
                                         ),
@@ -583,7 +616,8 @@ class _MainPageState extends State<MainPage> {
                                         '${donor['donationCount']}',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 7.23 * asr,
+                                          //fontSize: 7.23 * asr,
+                                          fontSize: 0.018 * sh,
                                           color: const Color.fromARGB(
                                               255, 255, 255, 255),
                                         ),
@@ -593,7 +627,8 @@ class _MainPageState extends State<MainPage> {
                                   // for underline
                                   Container(
                                     height:
-                                        0.51 * asr, // Height of the underline
+                                        //0.51 * asr,
+                                        0.001 * sh, // Height of the underline
                                     color: Colors.white,
                                     //width:300.0, // Adjust the width accordingly
                                   ),
@@ -614,15 +649,18 @@ class _MainPageState extends State<MainPage> {
             Align(
               alignment: FractionalOffset.bottomCenter,
               child: Container(
+                height: 0.08 * sh,
                 width: double.infinity,
                 color: const Color(
                     0xFF592424), // Change the background color as needed
 
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: 1.5 * asr, vertical: 1.5 * asr),
+                      // horizontal: 1.5 * asr, vertical: 1.5 * asr),
+                      horizontal: 0.01 * sw,
+                      vertical: 0.005 * sh),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Expanded(
                         child: TextButton.icon(
@@ -641,7 +679,8 @@ class _MainPageState extends State<MainPage> {
                           ),
                           label: Text('Add New Request',
                               style: TextStyle(
-                                fontSize: 6.0 * asr,
+                                // fontSize: 6.0 * asr,
+                                fontSize: 0.015 * sh,
                                 color: Colors.black,
                               )),
                           style: TextButton.styleFrom(
@@ -654,7 +693,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 2.58 * asr),
+                      SizedBox(width: 0.01 * sw),
                       Expanded(
                         child: TextButton.icon(
                           onPressed: () {
@@ -671,7 +710,8 @@ class _MainPageState extends State<MainPage> {
                           ),
                           label: Text('Urgent Requests',
                               style: TextStyle(
-                                fontSize: 6.0 * asr,
+                                // fontSize: 6.0 * asr,
+                                fontSize: 0.015 * sh,
                                 color: Colors.black,
                               )),
                           style: TextButton.styleFrom(
@@ -684,7 +724,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 2.58 * asr),
+                      SizedBox(width: 0.01 * sw),
                       Expanded(
                         child: TextButton.icon(
                           onPressed: () {
@@ -700,9 +740,10 @@ class _MainPageState extends State<MainPage> {
                             Icons.bloodtype_outlined,
                             color: Colors.black,
                           ),
-                          label: Text('Search Blood Group',
+                          label: Text('Search Blood',
                               style: TextStyle(
-                                fontSize: 6.0 * asr,
+                                // fontSize: 6.0 * asr,
+                                fontSize: 0.015 * sh,
                                 color: Colors.black,
                               )),
                           style: TextButton.styleFrom(

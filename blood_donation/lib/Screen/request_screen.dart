@@ -301,15 +301,14 @@ class _RequestScreenState extends State<RequestScreen>
 
         // Use null-aware operator to handle the case where the key is not present or is null
         final List<dynamic> otherRequests = jsonResponse['otherRequestBloods'];
-
-        setState(() {
-          if (mounted) {
+        if (mounted) {
+          setState(() {
             loadingOtherRequests = otherRequests;
             //donorCounts = Map<int, int>.from(jsonResponse['donorCounts']);
             donorCounts = _parseDonorCounts(jsonResponse['donorCounts']);
             isLoading = false;
-          }
-        });
+          });
+        }
       } catch (e) {
         CustomDialog.showAlertDialog(
           context,
