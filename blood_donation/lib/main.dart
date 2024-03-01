@@ -135,6 +135,7 @@ class _MainPageState extends State<MainPage> {
             'Failed to load donor counts. Status code: ${res.statusCode}');
       }
     } else {
+      /*
       // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
@@ -142,6 +143,13 @@ class _MainPageState extends State<MainPage> {
         'There was an error connecting to the server. Please try again later.',
         Icons.error_outline,
       );
+      */
+      // ignore: use_build_context_synchronously
+      CustomSnackBar.showUnsuccess(
+          context: context,
+          message:
+              'Network Error, There was an error connecting to the server. Please check your internet connection.',
+          icon: Icons.error_outline);
     }
   }
 
@@ -157,15 +165,17 @@ class _MainPageState extends State<MainPage> {
 
       if (res.statusCode == 200) {
         final List<dynamic> jsonResponse = json.decode(res.body);
-
-        setState(() {
-          topDonors = jsonResponse.cast<Map<String, dynamic>>();
-        });
+        if (mounted) {
+          setState(() {
+            topDonors = jsonResponse.cast<Map<String, dynamic>>();
+          });
+        }
       } else {
         throw Exception(
             'Failed to load donor lists. Status code: ${res.statusCode}');
       }
     } else {
+      /*
       // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
         context,
@@ -173,6 +183,13 @@ class _MainPageState extends State<MainPage> {
         'There was an error connecting to the server. Please try again later.',
         Icons.error_outline,
       );
+      */
+      // ignore: use_build_context_synchronously
+      CustomSnackBar.showUnsuccess(
+          context: context,
+          message:
+              'Network Error, There was an error connecting to the server. Please check your internet connection.',
+          icon: Icons.error_outline);
     }
   }
 

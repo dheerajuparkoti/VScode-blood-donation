@@ -58,6 +58,10 @@ class _SignInSignUpState extends State<SignInSignUp>
     setState(() {
       isLoading = true;
     });
+    String? deviceToken = await FirebaseMessaging.instance.getToken();
+    if (deviceToken != null) {
+      print("Device Token is from signUp state $deviceToken");
+    }
     var data = {
       'email': emailController.text.trim(),
       'username': usernameController.text.trim(),
@@ -71,6 +75,7 @@ class _SignInSignUpState extends State<SignInSignUp>
       'localLevel': selectedLocalLevel,
       'wardNo': wardNoController.text.trim(),
       'phone': phoneController.text.trim(),
+      'deviceToken': deviceToken
     };
 
     var response = await CallApi().postData(data, 'RegUser');

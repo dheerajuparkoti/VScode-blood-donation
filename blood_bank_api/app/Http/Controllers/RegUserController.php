@@ -4,40 +4,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RegUser;
 use App\Models\RegDonor;
+use App\Models\DeviceToken;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class RegUserController extends Controller
 {
-    //
 
-    /*
-
-
-   public function RegUser(Request $request)
-{
-    // Validation rules
-    $request->validate([
-        'username' => 'required|unique:reg_users',
-        'email' => 'required|email|unique:reg_users',
-        'password' => 'required',
-        // Add more validation rules as needed
-    ]);
-
-    // Create a new user in the reg_users table
-    $reg_users = new RegUser();          
-    $reg_users->email = $request->post('email');
-    $reg_users->username = $request->post('username');
-    $reg_users->password = Hash::make($request->post('password'));
-
-    // Check if the user was successfully created
-    if($reg_users->save()){
-        return response()->json(['success' => true, 'message' => 'Registration Successful!', 'id' => $reg_users->id], 200);
-    } else {
-        return response()->json(['message' => false], 409);
-    }
-}
-    */
     public function RegUser(Request $request)
     {
         // Check if the donor already exists in reg_donors table
@@ -74,8 +48,11 @@ class RegUserController extends Controller
                 'email' => $request->input('email'),
                 'userId'=> $regUser->id,
                 ]);
-
-               
+                 // Create a new device token record associated with the user
+                $deviceToken = new DeviceToken();
+                $deviceToken->deviceToken = $request->post('deviceToken');
+                $deviceToken->userId = $regUser->id;
+                $deviceToken->save();                    
             }
         
             return response()->json([
@@ -95,6 +72,7 @@ class RegUserController extends Controller
         'username' => 'required|unique:reg_users',
         'email' => 'required|email|unique:reg_users',
         'password' => 'required',
+        'deviceToken' => 'required'
         // Add more validation rules as needed
     ]);
 
@@ -121,9 +99,15 @@ class RegUserController extends Controller
             'email' => $reg_users->email,
             'userId' => $reg_users->id,
         ]);
+
+        // Create a new device token record associated with the user
+        $deviceToken = new DeviceToken();
+        $deviceToken->deviceToken = $request->post('deviceToken');
+        $deviceToken->userId = $reg_users->id;
+        $deviceToken->save();
+
         return response()->json(['success' => true, 'message' => 'User and donor registered successfully', 'id' => $reg_users->id], 201);
 
-       
     } else {
         return response()->json(['message' => false], 409);
     }
