@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Models\RequestBlood;
+use App\Models\RegDonor;
+use App\Models\DeviceToken;
 use App\Models\Notification;
 
 
@@ -17,6 +19,14 @@ class RequestBloodsObserver
             'rId' => $requestBlood->requestId,
             // Add other fields as needed
         ]);
+         // retrieve donorId associated with erId
+         $donorId = RequestBlood::where('requestId', $requestBlood->requestId)->pluck('doId');
+
+         // retrieve userId from associated with donorId
+         $userId = RegDonor::where('donorId', $donorId)->value('userId');
+ 
+         // retrieve all device tokens except asscociated with that userId        
+         $deviceTokens = DeviceToken::where('userId', '<>', $userId)->pluck('deviceToken')->toArray();
 
          // Retrieve data from EmergencyRequestBlood table based on erId
          $relatedData = RequestBlood::where('requestId', $requestBlood->requestId)->first();
@@ -35,7 +45,7 @@ class RequestBloodsObserver
          // for sending notification when request created 
             // Construct the notification payload
      $notificationPayload = [
-         'to' => '/topics/mobilebloodbanknepalnotifications',
+        'registration_ids' => $deviceTokens,
          'notification' => [
              'body' => $notificationBody,
              'title' => $notificationTitle,

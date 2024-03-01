@@ -709,6 +709,7 @@ class _RequestScreenState extends State<RequestScreen>
 
                               TextField(
                                 controller: requiredPintController,
+                                keyboardType: TextInputType.phone,
                                 decoration: const InputDecoration(
                                   hintText: "Required pint",
                                   hintStyle:

@@ -93,8 +93,13 @@ Route::post('/notificationReadEvent',[NotificationController::class,'notificatio
 
 Route::post('/SetAppointment',[SetAppointmentController::class,'SetAppointment']); // setting Appointment 
 Route::post('/LoadEvents',[LoadEventsController::class,'LoadEvents']); // loading Events
+
 Route::post('/LoadAmbulanceInfo',[AmbulanceInfoController::class,'LoadAmbulanceInfo']); // loading Ambulance data
+Route::post('/regAmbulance',[AmbulanceInfoController::class,'regAmbulance']); // Adding Ambulance data
+
 Route::post('/LoadBloodBankInfo',[BloodBankInfoController::class,'LoadBloodBankInfo']); // loading BloodBank data
+Route::post('/regBloodBank',[BloodBankInfoController::class,'regBloodBank']); // Adding BloodBank data
+
 Route::post('/test',[TestController::class,'test']);
 
 

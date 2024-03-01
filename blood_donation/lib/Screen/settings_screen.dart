@@ -78,14 +78,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 // try new code for uploading data profilepic too
 // Method to update profile including image
-  Future<void> updateUserData() async {
+  Future<void> updateUserData(String newPassword) async {
     setState(() {
       isLoading = true;
     });
     var data = {
       'email': emailController.text.trim(),
       'username': usernameController.text.trim(),
-      'password': passwordController.text.trim(),
+      'password': newPassword,
       'oldPassword': oldPasswordController.text.trim(),
       'id': userProvider.userId,
     };
@@ -97,6 +97,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
         context: context,
         message: "Updated successfully",
         icon: Icons.check_circle,
+      );
+      fetchUserData();
+      _resetDropdowns();
+      isLoading = false;
+    } else if (response.statusCode == 400) {
+      CustomSnackBar.showUnsuccess(
+        context: context,
+        message: "Your old password did not matched. Please enter correct one.",
+        icon: Icons.warning,
       );
       fetchUserData();
       _resetDropdowns();
@@ -297,14 +306,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   //calling insert function when button is pressed
                   child: InkWell(
                     onTap: () {
-                      if (passwordController.text.trim() != '' ||
-                          oldPasswordController.text.trim() != '') {
-                        if (oldPasswordController.text.trim() !=
-                            passwordController.text.trim()) {
-                          updateUserData();
+                      if (oldPasswordController.text.trim() != '') {
+                        if (passwordController.text.trim() != '') {
+                          updateUserData(passwordController.text.trim());
+                          // if new password is not given and only try to update
+                          //either email or username
+                        } else {
+                          updateUserData(oldPasswordController.text.trim());
                         }
+                        // if old password is not provided
                       } else {
-                        updateUserData();
+                        CustomSnackBar.showUnsuccess(
+                            context: context,
+                            message:
+                                "Please enter old password to make changes.",
+                            icon: Icons.info);
                       }
                     },
                     child: Center(

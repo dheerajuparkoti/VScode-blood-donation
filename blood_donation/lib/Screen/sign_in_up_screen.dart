@@ -427,7 +427,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         showDialog(
                                           context: context,
                                           builder: (BuildContext context) =>
-                                              ForgotPasswordDialog(),
+                                              const ForgotPasswordDialog(),
                                         );
                                         // loginData(context);
                                       },
@@ -1075,11 +1075,18 @@ Future<bool> checkUserExists(
 // ENDS HERE ------------------------
 
 // FORGOT PASSWORD SEND EMAIL TO RESET THE PASSWORD OF THE ACCOUNT
-class ForgotPasswordDialog extends StatelessWidget {
+class ForgotPasswordDialog extends StatefulWidget {
+  const ForgotPasswordDialog({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _ForgotPasswordDialogState createState() => _ForgotPasswordDialogState();
+}
+
+class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-
-  ForgotPasswordDialog({Key? key}) : super(key: key);
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -1087,8 +1094,9 @@ class ForgotPasswordDialog extends StatelessWidget {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
     double asr = sh / sw;
+
     return AlertDialog(
-      title: const Text('Forgot Password'),
+      title: const Text('Reset Password'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -1106,39 +1114,51 @@ class ForgotPasswordDialog extends StatelessWidget {
           ),
           SizedBox(height: 8.25 * asr),
           ElevatedButton(
-            onPressed: () async {
-              String email = _emailController.text.trim();
-              String phone = _phoneController.text.trim();
-              String newPassword = generateRandomPassword();
+            onPressed: isLoading
+                ? null
+                : () async {
+                    setState(() {
+                      isLoading = true;
+                    });
 
-              // Check if the user exists
-              bool userExists =
-                  await checkUserExists(email, phone, newPassword);
+                    String email = _emailController.text.trim();
+                    String phone = _phoneController.text.trim();
+                    String newPassword = generateRandomPassword();
 
-              // If the user exists, send the email and show the reset message dialog
-              // If the user exists, send the email and show the reset message dialog
-              if (userExists) {
-                bool emailSent = await sendEmail(email, newPassword);
-                if (emailSent) {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) =>
-                        const ResetMessageDialog(),
-                  );
-                } else {
-                  // If the email address does not exist, show a snackbar with an error message
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Failed to send email.'),
-                  ));
-                }
-              } else {
-                // If the user does not exist, show a snackbar with an error message
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('Email or phone does not exist.'),
-                ));
-              }
-            },
-            child: const Text('Reset Password'),
+                    // Check if the user exists
+                    bool userExists =
+                        await checkUserExists(email, phone, newPassword);
+
+                    if (userExists) {
+                      bool emailSent = await sendEmail(email, newPassword);
+                      if (emailSent) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              const ResetMessageDialog(),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Failed to send email.'),
+                          ),
+                        );
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Email or phone does not exist.'),
+                        ),
+                      );
+                    }
+
+                    setState(() {
+                      isLoading = false;
+                    });
+                  },
+            child: isLoading
+                ? const CircularProgressIndicator()
+                : const Text('Reset Password'),
           ),
         ],
       ),
@@ -1155,7 +1175,8 @@ class ResetMessageDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Reset Password'),
-      content: const Text('Password reset instructions sent to your email.'),
+      content: const Text(
+          'Password reset instructions sent to your email. Please check inbox.'),
       actions: [
         TextButton(
           onPressed: () {

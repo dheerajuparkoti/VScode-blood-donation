@@ -186,30 +186,32 @@ class RegUserController extends Controller
         $oldEmail = RegUser::where('id', $userId)->value('email');
         $matchedDonors = RegDonor::where('email', $oldEmail)->get();
 
-        if ($oldEmail != $newEmail) {
-            foreach ($matchedDonors as $donor) {
-                if ($donor->userId == $userId) {
-                    $donor->update(['email' => $newEmail]);
+        if ($oldPassword && Hash::check($oldPassword, RegUser::where('id', $userId)->value('password'))) {
+            if ($oldEmail != $newEmail) {
+                foreach ($matchedDonors as $donor) {
+                    if ($donor->userId == $userId) {
+                        $donor->update(['email' => $newEmail]);
+                    }
                 }
             }
-        }
-
+            
         // Check if the new username is different from the old username associated with the userId
         $oldUsername = RegUser::where('id', $userId)->value('username');
         if ($oldUsername != $newUsername) {
-            RegUser::where('id', $userId)->update(['username' => $newUsername]);
+        RegUser::where('id', $userId)->update(['username' => $newUsername]);
+        }
+        RegUser::where('id', $userId)->update(['password' => Hash::make($newPassword)]);
+        RegUser::where('id', $userId)->update(['email' => $newEmail]);
+        return response()->json(['message' => 'User data updated successfully'], 200);
         }
 
-        // Check if oldPassword is provided and matches the current password
-        if ($oldPassword && Hash::check($oldPassword, RegUser::where('id', $userId)->value('password'))) {
-            // Update password if old password matches
-            RegUser::where('id', $userId)->update(['password' => Hash::make($newPassword)]);
+        else {
+            // If old password is incorrect, return an error response
+            return response()->json(['error' => 'Incorrect old password'], 400);
         }
 
         // Update email in reg_users table
-        RegUser::where('id', $userId)->update(['email' => $newEmail]);
 
-        return response()->json(['message' => 'User data updated successfully'], 200);
     }
 
        

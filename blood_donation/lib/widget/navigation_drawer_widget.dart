@@ -134,14 +134,54 @@ class NavigationDrawerScreen extends StatelessWidget {
           navigateTo(const AboutUs());
           break;
         case 9:
-          callApi.logout();
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SignInSignUp(),
-            ),
+          // Show confirmation dialog
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text(
+                  'Logout Confirmation',
+                  style: TextStyle(fontSize: 20), // Set font size for the title
+                ),
+                content: RichText(
+                  text: const TextSpan(
+                    text: 'Are you sure you want to logout? ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16), // Set font size for the content
+                    children: [
+                      WidgetSpan(
+                        child: Icon(Icons.warning, color: Colors.red),
+                      ),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                    },
+                    child:
+                        const Text('No', style: TextStyle(color: Colors.red)),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Perform logout operation
+                      callApi.logout();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignInSignUp(),
+                        ),
+                      );
+                    },
+                    child:
+                        const Text('Yes', style: TextStyle(color: Colors.red)),
+                  ),
+                ],
+              );
+            },
           );
-
           break;
       }
     } else {}

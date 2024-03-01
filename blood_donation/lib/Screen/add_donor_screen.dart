@@ -151,7 +151,7 @@ class _AddNewDonorState extends State<AddNewDonor>
       CustomSnackBar.showUnsuccess(
         // ignore: use_build_context_synchronously
         context: context,
-        message: 'Internal Server Error: Something went wrong',
+        message: 'Registration Failed, phone number or email already in use',
         icon: Icons.error,
       );
     }
@@ -206,19 +206,21 @@ class _AddNewDonorState extends State<AddNewDonor>
   }
 
   resetDropdowns() {
-    fullnameController.clear();
-    dobController.clear();
-    wardNoController.clear();
-    phoneController.clear();
-    emailController.clear();
-    usernameController.clear();
-    newPasswordController.clear();
-    confirmPasswordController.clear();
-    selectedGender = null;
-    selectedBloodGroup = null;
-    selectedProvince = null;
-    selectedDistrict = null;
-    selectedLocalLevel = null;
+    setState(() {
+      fullnameController.clear();
+      dobController.clear();
+      wardNoController.clear();
+      phoneController.clear();
+      emailController.clear();
+      usernameController.clear();
+      newPasswordController.clear();
+      confirmPasswordController.clear();
+      selectedGender = null;
+      selectedBloodGroup = null;
+      selectedProvince = null;
+      selectedDistrict = null;
+      selectedLocalLevel = null;
+    });
   }
 
   @override

@@ -25,7 +25,6 @@ class _EditProfileState extends State<EditProfile>
   late TabController _tabController;
   late final UserProvider userProvider; // Declare userProvider
   bool isLoading = false;
-  bool selectedDateError = false;
   bool dobError = false;
   bool phoneNumberError = false;
   String profilePic = '';
@@ -49,6 +48,8 @@ class _EditProfileState extends State<EditProfile>
   TextEditingController donatedToController = TextEditingController();
   TextEditingController contactController = TextEditingController();
   TextEditingController bloodPintController = TextEditingController();
+  bool contactNumberError = false;
+  bool selectedDateError = false;
 
 //Date Time Picker
 
@@ -126,20 +127,22 @@ class _EditProfileState extends State<EditProfile>
     super.initState();
     // Access the UserProvider within initState
     userProvider = Provider.of<UserProvider>(context, listen: false);
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(initialIndex: 0, length: 2, vsync: this);
     _tabController.addListener(_handleTabChange);
   }
 
   void _handleTabChange() {
-    if (_tabController.index == 0) {
-      donatedDateController.clear();
-      donatedToController.clear();
-      contactController.clear();
-      bloodPintController.clear();
-      dobController.clear();
-    } else if (_tabController.index == 1) {
-      fetchDonorData();
-    }
+    setState(() {
+      if (_tabController.index == 0) {
+        donatedDateController.clear();
+        donatedToController.clear();
+        contactController.clear();
+        bloodPintController.clear();
+        dobController.clear();
+      } else if (_tabController.index == 1) {
+        fetchDonorData();
+      }
+    });
   }
 
   void _resetDropdowns() {
@@ -222,7 +225,6 @@ class _EditProfileState extends State<EditProfile>
 
       setState(() {
         data = profileData;
-
         // Assign fetched data to variables
 
         // Assign fetched data to controllers
@@ -274,13 +276,17 @@ class _EditProfileState extends State<EditProfile>
 
       // Handle the response
       if (response.statusCode == 200) {
-        // Image uploaded successfully
-
-        // Handle response as needed
+        CustomSnackBar.showSuccess(
+          context: context,
+          message: "Donor profile has been updated successfully.",
+          icon: Icons.check_circle,
+        );
       } else {
-        // Image upload failed
-
-        // Handle response as needed
+        CustomSnackBar.showUnsuccess(
+          context: context,
+          message: "Image upload failed. please try again later!",
+          icon: Icons.info,
+        );
       }
     } else {
       // If no image is selected, send only the other data
@@ -293,7 +299,7 @@ class _EditProfileState extends State<EditProfile>
       if (response.statusCode == 200) {
         CustomSnackBar.showSuccess(
           context: context,
-          message: "New donation record has been added successfully",
+          message: "Donor profile has been updated successfully.",
           icon: Icons.check_circle,
         );
         fetchDonorData();
@@ -569,15 +575,25 @@ class _EditProfileState extends State<EditProfile>
                                 keyboardType: TextInputType.phone,
                               ),
                               TextField(
-                                controller: contactController,
-                                decoration: const InputDecoration(
-                                  hintText: "Contact",
-                                  hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
-                                ),
-                                maxLength: 10,
-                                keyboardType: TextInputType.phone,
-                              ),
+                                  controller: contactController,
+                                  keyboardType: TextInputType.phone,
+                                  decoration: InputDecoration(
+                                    hintText: "Contact",
+                                    hintStyle:
+                                        TextStyle(color: Color(0xffaba7a7)),
+                                    errorText: contactNumberError
+                                        ? 'Phone number must be 10 digits'
+                                        : null,
+                                    labelStyle:
+                                        TextStyle(color: Color(0xffaba7a7)),
+                                  ),
+                                  maxLength: 10,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      // Check if the length of phone number is not 10
+                                      contactNumberError = value.length != 10;
+                                    });
+                                  }),
                               SizedBox(height: 2.58 * asr),
 
                               // Making Add button
@@ -594,8 +610,20 @@ class _EditProfileState extends State<EditProfile>
                                 //calling insert function when button is pressed
                                 child: InkWell(
                                   onTap: () {
-                                    if (selectedDateError == false) {
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                    if (selectedDateError == false &&
+                                        contactNumberError == false) {
                                       addDonationRecord();
+                                      isLoading = false;
+                                    } else {
+                                      CustomSnackBar.showUnsuccess(
+                                          context: context,
+                                          message:
+                                              "Please fill all fields correctly.",
+                                          icon: Icons.info);
+                                      isLoading = false;
                                     }
                                   },
                                   child: Center(
@@ -644,6 +672,7 @@ class _EditProfileState extends State<EditProfile>
                                       child: Stack(
                                         alignment: Alignment.center,
                                         children: [
+                                          /*
                                           CircleAvatar(
                                             radius: 51.5 * asr,
                                             backgroundColor: Colors.grey,
@@ -660,24 +689,18 @@ class _EditProfileState extends State<EditProfile>
                                                   )
                                                 : null,
                                           ),
-
+*/
                                           // Use profilePic as String in CircleAvatar widget
-                                          /*
+
                                           CircleAvatar(
                                             radius: 100.0,
-
-                                            backgroundImage: isValidUrl
-                                                ? NetworkImage(
-                                                    'profile_pictures/GiIq7WbVkwroxX71c6EK0w2ywUmNHqm09unwmg4R.jpg')
-                                                : null, // Set to null if 'profilePicUrl' is not a valid URL
-                                            child: isValidUrl
-                                                ? null // Don't show a child widget if 'profilePicUrl' is a valid URL
-                                                : const Icon(
-                                                    Icons.person,
-                                                    color: Colors.red,
-                                                  ),
+                                            backgroundImage: NetworkImage(
+                                                'https://cdn2.vectorstock.com/i/1000x1000/23/91/small-size-emoticon-vector-9852391.jpg'),
+                                            child: const Icon(
+                                              Icons.person,
+                                              color: Colors.red,
+                                            ),
                                           ),
-                                          */
 
                                           Container(
                                             padding: EdgeInsets.all(4.08 * asr),

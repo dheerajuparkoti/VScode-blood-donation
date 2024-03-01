@@ -216,34 +216,25 @@ if ($regDonor->save()) {
 
 public function adminAddedDonors(Request $request)
 {
-    // Log the start of the method execution
-    \Log::info('adminAddedDonors method started.');
 
     // Retrieve the provided userId from the request
     $userId = $request->input('id');
-
-    // Log the retrieved userId
-    \Log::info('Retrieved User Id: ' . $userId);
-
     // Get the email associated with the provided userId
     $userEmail = RegUser::where('id', $userId)->value('email');
 
-    // Log the retrieved email
-    \Log::info('Retrieved Email data: ' . $userEmail);
 
     // Retrieve data from the reg_donors table, joining with the reg_users table
-    $donorData = RegDonor::select('reg_donors.donorId', 'reg_donors.fullname', 'reg_donors.profilePic')
+    $donorData = DB::table('reg_donors')
+        ->select('reg_donors.donorId', 'reg_donors.fullname', 'reg_donors.profilePic')
         ->join('reg_users', 'reg_users.id', '=', 'reg_donors.userId')
-        ->where('reg_donors.userId', $userId) // Match userId
-        ->where('reg_donors.email', '!=', $userEmail) // Exclude donors with the same email as the user
+        ->where('reg_donors.userId', $userId)
+        ->where(function ($query) use ($userEmail) {
+            $query->where('reg_donors.email', '!=', $userEmail)
+                  ->orWhereNull('reg_donors.email');
+        })
         ->get();
-
     // Log the retrieved donor data
     \Log::info('Retrieved donor data: ' . json_encode($donorData));
-
-    // Log the end of the method execution
-    \Log::info('adminAddedDonors method completed.');
-
     // Return the retrieved data as JSON
     return response()->json($donorData);
 }

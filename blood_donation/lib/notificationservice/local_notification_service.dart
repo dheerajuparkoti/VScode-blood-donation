@@ -17,7 +17,6 @@ class LocalNotificationService {
         print("onSelectNotification");
         if (id!.isNotEmpty) {
           print("Router Value1234 $id");
-
           // Navigator.of(context).push(
           //   MaterialPageRoute(
           //     builder: (context) => DemoScreen(

@@ -80,6 +80,50 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
     }
   }
 
+  // ADDING NEW AMBULANCE DATA
+  regAmbulanceData() async {
+    var data = {
+      'name': nameCont.text.trim(),
+      'province': selectProvince,
+      'district': selectDistrict,
+      'localLevel': selectLocalLevel,
+      'wardNo': wardNoCont.text.trim(),
+      'contactNo': phoneCont.text.trim(),
+      'doId': userProvider.donorId,
+      'userId': userProvider.userId
+    };
+
+    var response = await CallApi().addAmbulance(data, 'regAmbulance');
+    // Handle the response
+    if (response.statusCode == 200) {
+      CustomSnackBar.showSuccess(
+        context: context,
+        message: 'Ambulance data added successfully',
+        icon: Icons.check_circle,
+      );
+      resetDropdowns();
+    } else if (response.statusCode == 400) {
+      CustomSnackBar.showUnsuccess(
+        context: context,
+        message: 'Submission failed. Your account type is member',
+        icon: Icons.error,
+      );
+    } else if (response.statusCode == 400) {
+      CustomSnackBar.showUnsuccess(
+        context: context,
+        message: 'Submission failed. something went wrong',
+        icon: Icons.error,
+      );
+    } else {
+      CustomSnackBar.showUnsuccess(
+        context: context,
+        message: 'Internal Server Error: Something went wrong',
+        icon: Icons.error,
+      );
+    }
+  }
+//ENDS HERE
+
   @override
   bool get wantKeepAlive => true;
   @override
@@ -109,12 +153,14 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
   }
 
   resetDropdowns() {
-    nameCont.clear();
-    wardNoCont.clear();
-    phoneCont.clear();
-    selectProvince = null;
-    selectDistrict = null;
-    selectLocalLevel = null;
+    setState(() {
+      nameCont.clear();
+      wardNoCont.clear();
+      phoneCont.clear();
+      selectProvince = null;
+      selectDistrict = null;
+      selectLocalLevel = null;
+    });
   }
 
   resetSearchDropdowns() {
@@ -551,7 +597,7 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                                           hintStyle: TextStyle(
                                               color: Color(0xffaba7a7)),
                                         ),
-                                        value: selectedProvince,
+                                        value: selectProvince,
                                         items: [
                                           '1',
                                           '2',
@@ -573,10 +619,10 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                                         }).toList(),
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedProvince = value;
+                                            selectProvince = value;
                                             // Reset selected values for subsequent dropdowns
-                                            selectedDistrict = null;
-                                            selectedLocalLevel = null;
+                                            selectDistrict = null;
+                                            selectLocalLevel = null;
                                           });
                                         },
                                       ),
@@ -598,10 +644,10 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                                           hintStyle: TextStyle(
                                               color: Color(0xffaba7a7)),
                                         ),
-                                        value: selectedDistrict,
-                                        items: selectedProvince != null
-                                            ? DistrictData.districtList[
-                                                    selectedProvince!]!
+                                        value: selectDistrict,
+                                        items: selectProvince != null
+                                            ? DistrictData
+                                                .districtList[selectProvince!]!
                                                 .map((district) {
                                                 return DropdownMenuItem<String>(
                                                   value: district,
@@ -616,8 +662,8 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                                             : [],
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedDistrict = value;
-                                            selectedLocalLevel = null;
+                                            selectDistrict = value;
+                                            selectLocalLevel = null;
                                           });
                                         },
                                       ),
@@ -639,10 +685,10 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                                           hintStyle: TextStyle(
                                               color: Color(0xffaba7a7)),
                                         ),
-                                        value: selectedLocalLevel,
-                                        items: selectedDistrict != null
+                                        value: selectLocalLevel,
+                                        items: selectDistrict != null
                                             ? DistrictData.localLevelList[
-                                                    selectedDistrict!]!
+                                                    selectDistrict!]!
                                                 .map((locallevel) {
                                                 return DropdownMenuItem<String>(
                                                   value: locallevel,
@@ -657,7 +703,7 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                                             : [],
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedLocalLevel = value;
+                                            selectLocalLevel = value;
                                           });
                                         },
                                       ),
@@ -709,7 +755,7 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                                         //calling insert function when button is pressed
                                         child: InkWell(
                                           onTap: () {
-                                            // validationFields();
+                                            validationFields();
                                           },
                                           child: Center(
                                             child: Text(
@@ -747,5 +793,28 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
               ),
           ],
         ));
+  }
+
+  void validationFields() {
+    setState(() {
+      isLoading = true;
+    });
+    if (nameCont.text.trim() != '' &&
+        selectProvince != null &&
+        selectDistrict != null &&
+        selectLocalLevel != null &&
+        wardNoCont.text.trim() != '' &&
+        wardNoCont.text.trim() != '0' &&
+        phoneCont.text.trim() != '' &&
+        phoneNumberError == false) {
+      regAmbulanceData();
+      isLoading = false;
+    } else {
+      CustomSnackBar.showUnsuccess(
+          context: context,
+          message: "Please fill all fields correctly.",
+          icon: Icons.info);
+      isLoading = false;
+    }
   }
 }

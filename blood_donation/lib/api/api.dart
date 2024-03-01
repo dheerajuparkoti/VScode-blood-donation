@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
 
 class CallApi {
-  final String baseUrl = "http://192.168.1.69:8000/api/";
+  final String baseUrl = "http://192.168.1.70:8000/api/";
 
   final String loginUrl = "login";
 
@@ -180,11 +180,31 @@ class CallApi {
     );
   }
 
+  // for adding new ambulance data
+  addAmbulance(data, apiUrl) async {
+    final regAmbulanceUrl = baseUrl + apiUrl;
+    return await http.post(
+      Uri.parse(regAmbulanceUrl),
+      body: jsonEncode(data),
+      headers: _setHeaders(),
+    );
+  }
+
 // for searching BloodBank Info
   searchBloodBank(data, apiUrl) async {
     final searchBloodBankUrl = baseUrl + apiUrl;
     return await http.post(
       Uri.parse(searchBloodBankUrl),
+      body: jsonEncode(data),
+      headers: _setHeaders(),
+    );
+  }
+
+  // for adding new blood bank data
+  addBloodBank(data, apiUrl) async {
+    final regBloodBankUrl = baseUrl + apiUrl;
+    return await http.post(
+      Uri.parse(regBloodBankUrl),
       body: jsonEncode(data),
       headers: _setHeaders(),
     );

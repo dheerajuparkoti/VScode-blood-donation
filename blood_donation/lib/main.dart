@@ -122,14 +122,14 @@ class _MainPageState extends State<MainPage> {
       final res = await CallApi().countDonors({}, 'DonorCountsByBloodGroup');
       if (res.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = json.decode(res.body);
-        if (mounted) {
-          setState(() {
-            stopDisplayDialog == false;
-            totalDonors = jsonResponse['totalDonors'];
-            bloodGroupCounts =
-                Map<String, int>.from(jsonResponse['bloodGroupCounts']);
-          });
-        }
+        // if (mounted) {
+        setState(() {
+          stopDisplayDialog == false;
+          totalDonors = jsonResponse['totalDonors'];
+          bloodGroupCounts =
+              Map<String, int>.from(jsonResponse['bloodGroupCounts']);
+        });
+        // }
       } else {
         throw Exception(
             'Failed to load donor counts. Status code: ${res.statusCode}');
@@ -410,14 +410,6 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                   ),
                                   Text(
-                                    'AB+',
-                                    style: TextStyle(
-                                      fontSize: 8.26 * asr,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
                                     'A-',
                                     style: TextStyle(
                                       fontSize: 8.26 * asr,
@@ -435,6 +427,14 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   Text(
                                     'O-',
+                                    style: TextStyle(
+                                      fontSize: 8.26 * asr,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    'AB+',
                                     style: TextStyle(
                                       fontSize: 8.26 * asr,
                                       fontWeight: FontWeight.w300,
@@ -481,14 +481,6 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                   ),
                                   Text(
-                                    '${bloodGroupCounts['AB+'] ?? 0}',
-                                    style: TextStyle(
-                                      fontSize: 8.26 * asr,
-                                      fontWeight: FontWeight.w300,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
                                     '${bloodGroupCounts['A-'] ?? 0}',
                                     style: TextStyle(
                                       fontSize: 8.26 * asr,
@@ -506,6 +498,14 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                   Text(
                                     '${bloodGroupCounts['O-'] ?? 0}',
+                                    style: TextStyle(
+                                      fontSize: 8.26 * asr,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${bloodGroupCounts['AB+'] ?? 0}',
                                     style: TextStyle(
                                       fontSize: 8.26 * asr,
                                       fontWeight: FontWeight.w300,

@@ -7,12 +7,18 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+   
+    protected $commands = [
+        Commands\NotifyCanDonate::class,
+    ];
+
     /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
-    {
-        // $schedule->command('inspire')->hourly();
+    {  
+        // Schedule the NotifyCanDonate command to run daily at a specific time
+        $schedule->command('app:notify-can-donate')->everyMinute();
     }
 
     /**

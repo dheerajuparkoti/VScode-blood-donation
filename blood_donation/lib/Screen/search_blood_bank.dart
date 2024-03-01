@@ -31,7 +31,6 @@ class _SearchBloodBankState extends State<SearchBloodBank>
   String? selectLocalLevel;
   //
 
-  String? selectedBloodGroup;
   String? selectedProvince;
   String? selectedDistrict;
   String? selectedLocalLevel;
@@ -75,6 +74,52 @@ class _SearchBloodBankState extends State<SearchBloodBank>
     }
   }
 
+// ADDING NEW BLOOD BANK DATA
+  regBloodBank() async {
+    var data = {
+      'name': nameCont.text.trim(),
+      'province': selectProvince,
+      'district': selectDistrict,
+      'localLevel': selectLocalLevel,
+      'wardNo': wardNoCont.text.trim(),
+      'contactNo': phoneCont.text.trim(),
+      'doId': userProvider.donorId,
+      'userId': userProvider.userId
+    };
+
+    var response = await CallApi().addBloodBank(data, 'regBloodBank');
+    print(data);
+    // Handle the response
+    if (response.statusCode == 200) {
+      CustomSnackBar.showSuccess(
+        context: context,
+        message: 'Blood bank data added successfully',
+        icon: Icons.check_circle,
+      );
+      resetDropdowns();
+    } else if (response.statusCode == 400) {
+      CustomSnackBar.showUnsuccess(
+        context: context,
+        message: 'Submission failed. Your account type is member',
+        icon: Icons.error,
+      );
+    } else if (response.statusCode == 400) {
+      CustomSnackBar.showUnsuccess(
+        context: context,
+        message: 'Submission failed. something went wrong',
+        icon: Icons.error,
+      );
+    } else {
+      CustomSnackBar.showUnsuccess(
+        context: context,
+        message: 'Internal Server Error: Something went wrong',
+        icon: Icons.error,
+      );
+      print(response.statusCode);
+    }
+  }
+//ENDS HERE
+
   @override
   bool get wantKeepAlive => true;
   @override
@@ -104,12 +149,14 @@ class _SearchBloodBankState extends State<SearchBloodBank>
   }
 
   resetDropdowns() {
-    nameCont.clear();
-    wardNoCont.clear();
-    phoneCont.clear();
-    selectProvince = null;
-    selectDistrict = null;
-    selectLocalLevel = null;
+    setState(() {
+      nameCont.clear();
+      wardNoCont.clear();
+      phoneCont.clear();
+      selectProvince = null;
+      selectDistrict = null;
+      selectLocalLevel = null;
+    });
   }
 
   resetSearchDropdowns() {
@@ -545,7 +592,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           hintStyle: TextStyle(
                                               color: Color(0xffaba7a7)),
                                         ),
-                                        value: selectedProvince,
+                                        value: selectProvince,
                                         items: [
                                           '1',
                                           '2',
@@ -567,10 +614,10 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                         }).toList(),
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedProvince = value;
+                                            selectProvince = value;
                                             // Reset selected values for subsequent dropdowns
-                                            selectedDistrict = null;
-                                            selectedLocalLevel = null;
+                                            selectDistrict = null;
+                                            selectLocalLevel = null;
                                           });
                                         },
                                       ),
@@ -592,10 +639,10 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           hintStyle: TextStyle(
                                               color: Color(0xffaba7a7)),
                                         ),
-                                        value: selectedDistrict,
-                                        items: selectedProvince != null
-                                            ? DistrictData.districtList[
-                                                    selectedProvince!]!
+                                        value: selectDistrict,
+                                        items: selectProvince != null
+                                            ? DistrictData
+                                                .districtList[selectProvince!]!
                                                 .map((district) {
                                                 return DropdownMenuItem<String>(
                                                   value: district,
@@ -610,8 +657,8 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                             : [],
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedDistrict = value;
-                                            selectedLocalLevel = null;
+                                            selectDistrict = value;
+                                            selectLocalLevel = null;
                                           });
                                         },
                                       ),
@@ -633,10 +680,10 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           hintStyle: TextStyle(
                                               color: Color(0xffaba7a7)),
                                         ),
-                                        value: selectedLocalLevel,
-                                        items: selectedDistrict != null
+                                        value: selectLocalLevel,
+                                        items: selectDistrict != null
                                             ? DistrictData.localLevelList[
-                                                    selectedDistrict!]!
+                                                    selectDistrict!]!
                                                 .map((locallevel) {
                                                 return DropdownMenuItem<String>(
                                                   value: locallevel,
@@ -651,7 +698,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                             : [],
                                         onChanged: (value) {
                                           setState(() {
-                                            selectedLocalLevel = value;
+                                            selectLocalLevel = value;
                                           });
                                         },
                                       ),
@@ -703,7 +750,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                         //calling insert function when button is pressed
                                         child: InkWell(
                                           onTap: () {
-                                            // validationFields();
+                                            validationFields();
                                           },
                                           child: Center(
                                             child: Text(
@@ -741,5 +788,28 @@ class _SearchBloodBankState extends State<SearchBloodBank>
               ),
           ],
         ));
+  }
+
+  void validationFields() {
+    setState(() {
+      isLoading = true;
+    });
+    if (nameCont.text.trim() != '' &&
+        selectProvince != null &&
+        selectDistrict != null &&
+        selectLocalLevel != null &&
+        wardNoCont.text.trim() != '' &&
+        wardNoCont.text.trim() != '0' &&
+        phoneCont.text.trim() != '' &&
+        phoneNumberError == false) {
+      regBloodBank();
+      isLoading = false;
+    } else {
+      CustomSnackBar.showUnsuccess(
+          context: context,
+          message: "Please fill all fields correctly.",
+          icon: Icons.info);
+      isLoading = false;
+    }
   }
 }

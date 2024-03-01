@@ -11,7 +11,6 @@ use App\Data\DistrictData;
 
 
 
-
 class AmbulanceInfoController extends Controller
 {
     /**
@@ -64,7 +63,7 @@ class AmbulanceInfoController extends Controller
 {
     $storeData = $request->all();  
     // Set doId
-    $storeData['doId'] = 2;
+    $storeData['doId'] = 3;
     
     // Create AmbulanceInfo instance with modified store data
     AmbulanceInfo::create($storeData);
