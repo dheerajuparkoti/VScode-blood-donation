@@ -281,7 +281,7 @@ class _MainPageState extends State<MainPage> {
                             //bottomRight: Radius.circular(25.75*asr),
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(horizontal: 7.75 * asr),
+                        padding: EdgeInsets.symmetric(horizontal: 0.025 * sw),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

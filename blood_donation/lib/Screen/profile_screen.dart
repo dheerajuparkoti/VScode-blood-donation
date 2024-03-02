@@ -284,7 +284,7 @@ class _ProfileState extends State<Profile> {
                                   height: 1.03 * asr, // Height of the underline
                                   color: Colors.white,
                                   width:
-                                      155 * asr, // Adjust the width accordingly
+                                      0.9 * sw, // Adjust the width accordingly
                                 ),
                               ],
                             ),
@@ -567,14 +567,14 @@ class _ProfileState extends State<Profile> {
                                   Text(
                                     address, // import data for address
                                     style: TextStyle(
-                                      fontSize: 0.012 * sh,
+                                      fontSize: 0.013 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     email,
                                     style: TextStyle(
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.013 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),

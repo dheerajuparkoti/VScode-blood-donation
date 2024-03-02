@@ -85,7 +85,7 @@ class PrivacyPolicy extends StatelessWidget {
                         Container(
                           height: 1.03 * asr, // Height of the underline
                           color: Colors.white,
-                          width: 155 * asr, // Adjust the width accordingly
+                          width: 0.9 * sw, // Adjust the width accordingly
                         ),
                       ],
                     ),
