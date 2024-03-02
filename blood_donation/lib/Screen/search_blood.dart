@@ -112,8 +112,8 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                   ],
                 ),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(77.5 * asr),
-                  bottomRight: Radius.circular(155 * asr),
+                  bottomLeft: Radius.circular(0.15 * sh),
+                  bottomRight: Radius.circular(0.25 * sh),
                 ),
               ),
             ),
@@ -164,7 +164,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                             padding: EdgeInsets.only(top: 15.5 * asr),
                             child: Container(
                                 //height: 15.5 * asr,
-                                height: 0.05 * sh,
+                                height: 0.04 * sh,
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
                                   color: Color(0xFFFF0025),
@@ -186,9 +186,9 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                           //SEARCH BY Group
                           Padding(
                             padding: EdgeInsets.only(
-                                left: 0.025 * sw,
-                                right: 0.025 * sw,
-                                top: 0.025 * sw),
+                                left: 0.04 * sw,
+                                right: 0.04 * sw,
+                                top: 0.04 * sw),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
@@ -221,7 +221,11 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                   ].map((bloodGroup) {
                                     return DropdownMenuItem<String>(
                                       value: bloodGroup,
-                                      child: Text('Blood Group $bloodGroup'),
+                                      child: Text(
+                                        'Blood Group $bloodGroup',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.normal),
+                                      ),
                                     );
                                   }).toList(),
                                   onChanged: (value) {
@@ -231,7 +235,6 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                   },
                                 ),
                                 SizedBox(height: 0.02 * sh),
-
                                 //DROPDOWN PROVINCE
                                 DropdownButtonFormField<String>(
                                   decoration: const InputDecoration(
@@ -253,7 +256,11 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                       .map((province) {
                                     return DropdownMenuItem<String>(
                                       value: province,
-                                      child: Text('Province $province'),
+                                      child: Text(
+                                        'Province $province',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.normal),
+                                      ),
                                     );
                                   }).toList(),
                                   onChanged: (value) {
@@ -290,7 +297,12 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                           .map((district) {
                                           return DropdownMenuItem<String>(
                                             value: district,
-                                            child: Text(district),
+                                            child: Text(
+                                              district,
+                                              style: const TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.normal),
+                                            ),
                                           );
                                         }).toList()
                                       : [],
@@ -326,7 +338,12 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                           .map((locallevel) {
                                           return DropdownMenuItem<String>(
                                             value: locallevel,
-                                            child: Text(locallevel),
+                                            child: Text(
+                                              locallevel,
+                                              style: const TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.normal),
+                                            ),
                                           );
                                         }).toList()
                                       : [],
@@ -358,10 +375,9 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
 
                           Container(
                             height: 0.05 * sh,
-                            margin:
-                                EdgeInsets.symmetric(horizontal: 12.9 * asr),
+                            margin: EdgeInsets.symmetric(horizontal: 0.2 * sw),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25.75 * asr),
+                              borderRadius: BorderRadius.circular(0.05 * sh),
                               color: const Color(0xffFF0025),
                             ),
                             //calling insert function when button is pressed
@@ -378,7 +394,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                   style: TextStyle(
                                       color: const Color.fromARGB(
                                           255, 255, 255, 255),
-                                      fontSize: 0.025 * sh),
+                                      fontSize: 0.02 * sh),
                                 ),
                               ),
                             ),
@@ -450,7 +466,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                     fontSize: 0.015 * sh,
                                     decoration: TextDecoration.underline,
                                     decorationColor: Colors.white,
-                                    decorationThickness: 2.0,
+                                    decorationThickness: 0.002 * sh,
                                   ),
                                 ),
                               ),
@@ -469,8 +485,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                 child: CircularProgressIndicator(
                   valueColor: const AlwaysStoppedAnimation<Color>(
                       Colors.red), // Color of the progress indicator
-                  strokeWidth:
-                      0.005 * sh, // Thickness of the progress indicator
+                  strokeWidth: 0.01 * sw, // Thickness of the progress indicator
                   backgroundColor: Colors.black.withOpacity(
                       0.5), // Background color of the progress indicator
                 ),

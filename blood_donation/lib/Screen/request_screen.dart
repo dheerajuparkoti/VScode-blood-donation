@@ -36,6 +36,7 @@ class _RequestScreenState extends State<RequestScreen>
   TextEditingController caseDetailController = TextEditingController();
   TextEditingController contactPersonNameController = TextEditingController();
   TextEditingController contactNoController = TextEditingController();
+  bool phoneNumberError = false;
 
 //Hospital Details Declaration
 
@@ -522,7 +523,7 @@ class _RequestScreenState extends State<RequestScreen>
       body: Stack(
         children: <Widget>[
           Container(
-            height: 155 * asr,
+            height: 0.45 * sh,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 begin: Alignment.topCenter,
@@ -533,15 +534,15 @@ class _RequestScreenState extends State<RequestScreen>
                 ],
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(77.5 * asr),
-                bottomRight: Radius.circular(103.3 * asr),
+                bottomLeft: Radius.circular(0.15 * sh),
+                bottomRight: Radius.circular(0.25 * sh),
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 10.33 * asr,
-              vertical: 10.33 * asr,
+              horizontal: 0.05 * sw,
+              vertical: 0.05 * sh,
             ),
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -549,30 +550,24 @@ class _RequestScreenState extends State<RequestScreen>
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(18.1 * asr),
-                  topRight: Radius.circular(18.1 * asr),
-                  bottomLeft: Radius.circular(18.1 * asr),
-                  bottomRight: Radius.circular(18.1 * asr),
+                  topLeft: Radius.circular(0.05 * sh),
+                  topRight: Radius.circular(0.05 * sh),
+                  bottomLeft: Radius.circular(0.05 * sh),
+                  bottomRight: Radius.circular(0.05 * sh),
                 ),
               ),
               child: Column(children: [
                 Container(
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(170, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(18.1 * asr),
-                      topRight: Radius.circular(18.1 * asr),
-                      // bottomLeft: Radius.circular(18.1*asr),
-                      // bottomRight: Radius.circular(18.1*asr),
-                    ),
-                  ),
-
                   // Set to transparent
-                  padding: EdgeInsets.only(top: 5.1 * asr, bottom: 5.1 * asr),
+                  padding: EdgeInsets.only(
+                      top: 0.02 * sh,
+                      bottom: 0.02 * sh,
+                      left: 0.02 * sw,
+                      right: 0.02 * sw),
 
                   child: TabBar(
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7.75 * asr),
+                      borderRadius: BorderRadius.circular(0.03 * sh),
                       color: const Color(0xffFF0025),
                     ),
                     controller: _tabController,
@@ -633,11 +628,11 @@ class _RequestScreenState extends State<RequestScreen>
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: const Color(0xFFF44336),
-                                  fontSize: 8.26 * asr,
+                                  fontSize: 0.02 * sh,
                                 ),
                               ),
 
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.005 * sh),
 
                               Align(
                                 alignment: Alignment.topLeft,
@@ -646,11 +641,11 @@ class _RequestScreenState extends State<RequestScreen>
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: const Color(0xFF706969),
-                                    fontSize: 7.23 * asr,
+                                    fontSize: 0.02 * sh,
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.005 * sh),
                               TextField(
                                 controller: fullNameController,
                                 decoration: const InputDecoration(
@@ -660,7 +655,6 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 30,
                               ),
-                              SizedBox(height: 2.58 * asr),
 
                               //DROPDOWN BLOOD GROUP
                               DropdownButtonFormField<String>(
@@ -704,7 +698,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   });
                                 },
                               ),
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.02 * sh),
 
                               TextField(
                                 controller: requiredPintController,
@@ -714,9 +708,8 @@ class _RequestScreenState extends State<RequestScreen>
                                   hintStyle:
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
-                                maxLength: 2,
+                                maxLength: 1,
                               ),
-                              SizedBox(height: 2.58 * asr),
 
                               TextField(
                                 controller: caseDetailController,
@@ -727,7 +720,6 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 30,
                               ),
-                              SizedBox(height: 2.58 * asr),
 
                               TextField(
                                 controller: contactPersonNameController,
@@ -738,19 +730,25 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 30,
                               ),
-                              SizedBox(height: 2.58 * asr),
 
                               TextField(
-                                controller: contactNoController,
-                                keyboardType: TextInputType.phone,
-                                decoration: const InputDecoration(
-                                  hintText: "Contact No.",
-                                  hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
-                                ),
-                                maxLength: 10,
-                              ),
-                              SizedBox(height: 2.58 * asr),
+                                  controller: contactNoController,
+                                  keyboardType: TextInputType.phone,
+                                  decoration: InputDecoration(
+                                    hintText: "Contact No.",
+                                    errorText: phoneNumberError
+                                        ? 'Phone number must be 10 digits'
+                                        : null,
+                                    hintStyle: const TextStyle(
+                                        color: Color(0xffaba7a7)),
+                                  ),
+                                  maxLength: 10,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      // Check if the length of phone number is not 10
+                                      phoneNumberError = value.length != 10;
+                                    });
+                                  }),
 
                               TextField(
                                 controller: requiredDateController,
@@ -767,7 +765,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                               ),
 
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.02 * sh),
                               TextField(
                                 controller: requiredTimeController,
                                 readOnly: true,
@@ -782,7 +780,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.02 * sh),
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
@@ -790,12 +788,12 @@ class _RequestScreenState extends State<RequestScreen>
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: const Color(0xFF706969),
-                                    fontSize: 7.23 * asr,
+                                    fontSize: 0.02 * sh,
                                   ),
                                 ),
                               ),
 
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.005 * sh),
                               TextField(
                                 controller: hospitalNameController,
                                 decoration: const InputDecoration(
@@ -805,7 +803,6 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 30,
                               ),
-                              SizedBox(height: 2.58 * asr),
 
                               //DROPDOWN PROVINCE
                               DropdownButtonFormField<String>(
@@ -844,7 +841,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   });
                                 },
                               ),
-                              SizedBox(height: 12.24 * asr),
+                              SizedBox(height: 0.02 * sh),
 
                               // DROPDOWN DISTRICT LISTS BASED ON PROVINCE
                               DropdownButtonFormField<String>(
@@ -884,7 +881,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   });
                                 },
                               ),
-                              SizedBox(height: 12.24 * asr),
+                              SizedBox(height: 0.02 * sh),
 
                               // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                               DropdownButtonFormField<String>(
@@ -923,7 +920,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   });
                                 },
                               ),
-                              SizedBox(height: 10.33 * asr),
+                              SizedBox(height: 0.02 * sh),
 
                               TextField(
                                 //controller: _textControllers['wardNo'],
@@ -936,7 +933,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 ),
                                 maxLength: 2,
                               ),
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.005 * sh),
 
                               CheckboxListTile(
                                 title: const Text(
@@ -960,15 +957,15 @@ class _RequestScreenState extends State<RequestScreen>
                                 },
                               ),
 
-                              // Making Request Now Button
-                              SizedBox(height: 15.5 * asr),
+                              // Making Search button
+                              SizedBox(height: 0.02 * sh),
                               Container(
-                                height: 25.75 * asr,
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 12.9 * asr),
+                                height: 0.05 * sh,
+                                margin:
+                                    EdgeInsets.symmetric(horizontal: 0.05 * sw),
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.circular(25.75 * asr),
+                                      BorderRadius.circular(0.05 * sh),
                                   color: const Color(0xffFF0025),
                                 ),
                                 //calling insert function when button is pressed
@@ -976,13 +973,13 @@ class _RequestScreenState extends State<RequestScreen>
                                   onTap: () {
                                     validationFields();
                                   },
-                                  child: const Center(
+                                  child: Center(
                                     child: Text(
                                       "Request Now",
                                       style: TextStyle(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 255, 255, 255),
-                                          fontSize: 18),
+                                          fontSize: 0.02 * sh),
                                     ),
                                   ),
                                 ),
@@ -1869,6 +1866,9 @@ class _RequestScreenState extends State<RequestScreen>
   }
 
   void validationFields() {
+    // Define a regular expression to match only numbers
+    RegExp numericRegex = RegExp(r'^[0-9]+$');
+
     if (fullNameController.text.trim() != '' &&
         selectedBloodGroup != null &&
         requiredPintController.text.trim() != '' &&
@@ -1882,19 +1882,29 @@ class _RequestScreenState extends State<RequestScreen>
         selectedDistrict != null &&
         selectedDistrict != null &&
         selectedLocalLevel != null &&
-        wardNoController.text.trim() != '') {
-      CustomDialog.showConfirmationDialog(
-          context,
-          'Request Confirmation', // Title
-          'Are you sure you want to create new request ?', // Message
-          Icons.warning, // Icon
-          () {
-        if (isEmergency == false) {
-          requestBloodForm();
-        } else {
-          emergencyRequestBloodForm();
-        }
-      });
+        wardNoController.text.trim() != '' &&
+        wardNoController.text.trim() != '0' &&
+        phoneNumberError == false) {
+      // Check if the phone number contains only numbers
+      if (numericRegex.hasMatch(contactNoController.text.trim())) {
+        CustomDialog.showConfirmationDialog(
+            context,
+            'Request Confirmation', // Title
+            'Are you sure you want to create new request ?', // Message
+            Icons.warning, // Icon
+            () {
+          if (isEmergency == false) {
+            requestBloodForm();
+          } else {
+            emergencyRequestBloodForm();
+          }
+        });
+      } else {
+        CustomSnackBar.showUnsuccess(
+            context: context,
+            message: "Contact number should contain only numbers.",
+            icon: Icons.info);
+      }
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,

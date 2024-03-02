@@ -110,8 +110,8 @@ class _LoginState extends State<SplashScreen> {
             ),
             child: Center(
               child: SizedBox(
-                width: 155 * asr,
-                height: 155 * asr,
+                width: 0.7 * sw,
+                height: 0.25 * sh,
                 child: Image.asset(
                   'images/mbblogo.png',
                   fit: BoxFit.contain,
@@ -123,16 +123,16 @@ class _LoginState extends State<SplashScreen> {
             Positioned(
               left: 0,
               right: 0,
-              bottom: 10.33 * asr, // Adjust bottom value as needed
+              bottom: 0.025 * sh, // Adjust bottom value as needed
               child: Center(
                 child: SizedBox(
-                  width: 25.758 * asr,
-                  height: 25.75 * asr,
+                  width: 0.05 * sh,
+                  height: 0.05 * sh,
                   child: CircularProgressIndicator(
                     valueColor: const AlwaysStoppedAnimation<Color>(
                       Colors.white, // Change color of the progress indicator
                     ),
-                    strokeWidth: 2.58 * asr, // Adjust strokeWidth as needed
+                    strokeWidth: 0.01 * sw, // Adjust strokeWidth as needed
                     backgroundColor: Colors
                         .black12, // Change background color of the progress indicator
                     semanticsLabel: 'Loading', // Add a semantics label

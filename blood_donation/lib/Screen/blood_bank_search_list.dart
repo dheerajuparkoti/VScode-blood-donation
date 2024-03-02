@@ -87,9 +87,9 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
 
         //HEADER
         Padding(
-          padding: EdgeInsets.only(top: 15.5 * asr),
+          padding: EdgeInsets.only(top: 0.03 * sh),
           child: Container(
-              height: 15.5 * asr,
+              height: 0.04 * sh,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Color(0xFFFF0025),
@@ -100,7 +100,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                   'Searched Blood Bank Results',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 10.33 * asr,
+                    fontSize: 0.025 * sh,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -110,9 +110,9 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
 
         Padding(
           padding: EdgeInsets.only(
-            top: 35.7 * asr,
-            left: 0.51 * asr,
-            right: 0.51 * asr,
+            top: 0.08 * sh,
+            left: 0.03 * sw,
+            right: 0.03 * sw,
             bottom: 0.0,
           ),
           child: Container(
@@ -121,21 +121,23 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12.9 * asr),
-                topRight: Radius.circular(12.9 * asr),
+                topLeft: Radius.circular(0.025 * sh),
+                topRight: Radius.circular(0.025 * sh),
+                //bottomLeft: Radius.circular(25.0),
+                //bottomRight: Radius.circular(25.0),
               ),
             ),
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(12.9 * asr),
+                padding: EdgeInsets.all(0.03 * sw),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
                           padding: EdgeInsets.only(
-                            left: 5.1 * asr,
+                            left: 0.03 * sw,
                             bottom: 0,
-                            top: 5.1 * asr,
+                            top: 0.025 * sh,
                           ),
                           child: Align(
                             alignment: Alignment.bottomLeft,
@@ -144,7 +146,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                               style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 8.26 * asr,
+                                fontSize: 0.02 * sh,
                               ),
                             ),
                           )),
@@ -158,7 +160,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                 result['name'].toUpperCase();
 
                             return SizedBox(
-                              height: 51.5 * asr,
+                              height: 0.13 * sh,
                               child: Card(
                                 margin: const EdgeInsets.all(0.0),
                                 shape: RoundedRectangleBorder(
@@ -170,14 +172,14 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                     // for underline
                                     Container(
                                       height:
-                                          0.51 * asr, // Height of the underline
+                                          0.001 * sh, // Height of the underline
                                       color: Colors.red,
                                       //width:300.0, // Adjust the width accordingly
                                     ),
                                     //First Row container
                                     Container(
-                                      height: 27.03 * asr,
-                                      padding: EdgeInsets.all(2.58 * asr),
+                                      height: 0.06 * sh,
+                                      padding: EdgeInsets.all(0.02 * sw),
                                       color: const Color(0xFFFFFFFF),
                                       child: Row(
                                         mainAxisAlignment:
@@ -187,7 +189,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                             child: Text(
                                               capitalizedItem,
                                               style: TextStyle(
-                                                fontSize: 7.23 * asr,
+                                                fontSize: 0.017 * sh,
                                                 fontWeight: FontWeight.bold,
                                                 color: const Color.fromARGB(
                                                     255, 1, 1, 1),
@@ -198,12 +200,12 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 2.58 * asr),
+                                    SizedBox(height: 0.005 * sh),
                                     //Second  Row container
 
                                     Container(
-                                      height: 20.4 * asr,
-                                      padding: EdgeInsets.all(2.58 * asr),
+                                      height: 0.06 * sh,
+                                      padding: EdgeInsets.all(0.02 * sw),
                                       color: const Color(0xFFFFFFFF),
                                       child: Row(
                                         mainAxisAlignment:
@@ -217,12 +219,12 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                               },
                                               icon: Icon(
                                                 Icons.phone,
-                                                size: 8.26 * asr,
+                                                size: 0.02 * sh,
                                                 color: Colors.white,
                                               ),
                                               label: Text('Call',
                                                   style: TextStyle(
-                                                    fontSize: 7.23 * asr,
+                                                    fontSize: 0.015 * sh,
                                                     color: Colors.white,
                                                   )),
                                               style: TextButton.styleFrom(
@@ -236,7 +238,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                               ),
                                             ),
                                           ),
-                                          SizedBox(width: 1.29 * asr),
+                                          SizedBox(width: 0.02 * sw),
                                           Expanded(
                                             child: TextButton.icon(
                                               onPressed: () {
@@ -250,12 +252,12 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                               },
                                               icon: Icon(
                                                 Icons.share,
-                                                size: 8.26 * asr,
+                                                size: 0.02 * sh,
                                                 color: Colors.white,
                                               ),
                                               label: Text('Share',
                                                   style: TextStyle(
-                                                    fontSize: 7.23 * asr,
+                                                    fontSize: 0.015 * sh,
                                                     color: Colors.white,
                                                   )),
                                               style: TextButton.styleFrom(
@@ -290,7 +292,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
             child: CircularProgressIndicator(
               valueColor: const AlwaysStoppedAnimation<Color>(
                   Colors.red), // Color of the progress indicator
-              strokeWidth: 2.58 * asr, // Thickness of the progress indicator
+              strokeWidth: 0.01 * sw, // Thickness of the progress indicator
               backgroundColor: Colors.black.withOpacity(
                   0.5), // Background color of the progress indicator
             ),

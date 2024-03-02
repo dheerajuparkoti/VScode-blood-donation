@@ -150,155 +150,139 @@ class _NotificationScreenState extends State<NotificationScreen> {
     double asr = sh / sw;
 
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0.045 * sh,
+        title: Text(
+          'Notifications ($notificationCount)',
+          style: TextStyle(
+            fontSize: 0.025 * sh,
+          ),
+        ),
+        centerTitle: true,
+        foregroundColor: const Color.fromRGBO(255, 255, 255, 1),
+        backgroundColor: const Color.fromARGB(255, 125, 27, 27),
+      ),
       //resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFFD3B5B5),
-      body: Stack(children: [
+
+      body: Stack(children: <Widget>[
         Container(
-          width: sw,
-          height: sh,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomRight,
               colors: [
-                Color(0xFF343333),
-                Color(0xFF343333),
+                Color.fromARGB(255, 125, 27, 27),
+                Color.fromARGB(255, 198, 84, 59),
               ],
             ),
           ),
         ),
-
-        Padding(
-          padding: EdgeInsets.only(
-            top: 20.4 * asr,
-            left: 0.51 * asr,
-            right: 0.51 * asr,
-            bottom: 0.0,
-          ),
-          child: Container(
-            width: sw,
-            height: sh,
-            decoration: BoxDecoration(
-              color: const Color(0xFF343333),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(5.1 * asr),
-                topRight: Radius.circular(5.1 * asr),
-              ),
+        SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 0.01 * sw,
+              right: 0.01 * sw,
+              top: 0,
+              bottom: 0,
             ),
-            child: SingleChildScrollView(
-              child: Center(
-                  child: Column(
-                children: <Widget>[
-                  Padding(
-                      padding: EdgeInsets.only(
-                        left: 5.1 * asr,
-                        bottom: 0,
-                        top: 5.1 * asr,
-                      ),
-                      child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Unread Notifications : $notificationCount',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 8.26 * asr,
-                                ),
-                              ),
-                            ],
-                          ))),
-                  ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: loadingAllNotifications.length,
-                      itemBuilder: (context, index) {
-                        final notificationData = loadingAllNotifications[index];
-                        // check if Emergency request has been read
-                        final bool isErReadByDonor =
-                            loadingNotificationWithDonorId.any((notification) {
-                          final dynamic erId = notification[
-                              'erId']; // Use dynamic type for flexibility
-                          final dynamic notificationErId =
-                              notificationData['erId'];
+            child: SizedBox(
+              width: sw,
+              height: sh,
+              child: SingleChildScrollView(
+                child: Center(
+                    child: Column(
+                  children: <Widget>[
+                    ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: loadingAllNotifications.length,
+                        itemBuilder: (context, index) {
+                          final notificationData =
+                              loadingAllNotifications[index];
+                          // check if Emergency request has been read
+                          final bool isErReadByDonor =
+                              loadingNotificationWithDonorId
+                                  .any((notification) {
+                            final dynamic erId = notification[
+                                'erId']; // Use dynamic type for flexibility
+                            final dynamic notificationErId =
+                                notificationData['erId'];
 
-                          // Check if both erId fields are not null and match
-                          return erId != null &&
-                              notificationErId != null &&
-                              erId.toString() == notificationErId.toString();
-                        });
+                            // Check if both erId fields are not null and match
+                            return erId != null &&
+                                notificationErId != null &&
+                                erId.toString() == notificationErId.toString();
+                          });
 
-                        // check if Request has been read
-                        final bool isReReadByDonor =
-                            loadingNotificationWithDonorId.any((notification) {
-                          final dynamic rId = notification[
-                              'rId']; // Use dynamic type for flexibility
-                          final dynamic notificationReId =
-                              notificationData['rId'];
+                          // check if Request has been read
+                          final bool isReReadByDonor =
+                              loadingNotificationWithDonorId
+                                  .any((notification) {
+                            final dynamic rId = notification[
+                                'rId']; // Use dynamic type for flexibility
+                            final dynamic notificationReId =
+                                notificationData['rId'];
 
-                          // Check if both erId fields are not null and match
-                          return rId != null &&
-                              notificationReId != null &&
-                              rId.toString() == notificationReId.toString();
-                        });
+                            // Check if both erId fields are not null and match
+                            return rId != null &&
+                                notificationReId != null &&
+                                rId.toString() == notificationReId.toString();
+                          });
 
-                        // check if Request has been read
-                        final bool isEventReadByDonor =
-                            loadingNotificationWithDonorId.any((notification) {
-                          final dynamic evId = notification[
-                              'evId']; // Use dynamic type for flexibility
-                          final dynamic notificationEventId =
-                              notificationData['evId'];
+                          // check if Request has been read
+                          final bool isEventReadByDonor =
+                              loadingNotificationWithDonorId
+                                  .any((notification) {
+                            final dynamic evId = notification[
+                                'evId']; // Use dynamic type for flexibility
+                            final dynamic notificationEventId =
+                                notificationData['evId'];
 
-                          // Check if both erId fields are not null and match
-                          return evId != null &&
-                              notificationEventId != null &&
-                              evId.toString() == notificationEventId.toString();
-                        });
+                            // Check if both erId fields are not null and match
+                            return evId != null &&
+                                notificationEventId != null &&
+                                evId.toString() ==
+                                    notificationEventId.toString();
+                          });
 
-                        return InkWell(
-                          onTap: () {
-                            if (notificationData['erId'] != null) {
-                              notifiReadEr(notificationData['erId']);
+                          return InkWell(
+                            onTap: () {
+                              if (notificationData['erId'] != null) {
+                                notifiReadEr(notificationData['erId']);
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EmergencyRequest(
-                                    notificationErId: notificationData[
-                                        'erId'], // Pass the required parameter
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EmergencyRequest(
+                                      notificationErId: notificationData[
+                                          'erId'], // Pass the required parameter
+                                    ),
                                   ),
-                                ),
-                              );
-                            } else if (notificationData['rId'] != null) {
-                              notifiReadRe(notificationData['rId']);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RequestScreen(
-                                    notificationReId: notificationData[
-                                        'rId'], // Pass the required parameter
+                                );
+                              } else if (notificationData['rId'] != null) {
+                                notifiReadRe(notificationData['rId']);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RequestScreen(
+                                      notificationReId: notificationData[
+                                          'rId'], // Pass the required parameter
+                                    ),
                                   ),
-                                ),
-                              );
-                            } else if (notificationData['evId'] != null) {
-                              notifiReadEvent(notificationData['evId']);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EventsAppointments(
-                                    notificationEvId: notificationData[
-                                        'evId'], // Pass the required parameter
+                                );
+                              } else if (notificationData['evId'] != null) {
+                                notifiReadEvent(notificationData['evId']);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EventsAppointments(
+                                      notificationEvId: notificationData[
+                                          'evId'], // Pass the required parameter
+                                    ),
                                   ),
-                                ),
-                              );
-                            }
-                          },
-                          child: SizedBox(
-                            height: 25.75 * asr,
+                                );
+                              }
+                            },
                             child: Card(
                               margin: const EdgeInsets.all(0.0),
                               shape: RoundedRectangleBorder(
@@ -310,9 +294,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 children: <Widget>[
                                   // First Row Container
                                   Container(
-                                    height: 25 * asr,
+                                    height: 0.07 * sh,
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 2.58 * asr,
+                                        horizontal: 0.025 * sw,
                                         vertical: 0 * asr),
                                     color: isErReadByDonor
                                         ? const Color.fromARGB(
@@ -351,29 +335,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                       ],
                                     ),
                                   ),
+                                  SizedBox(height: 0.001 * sh),
                                 ],
                               ),
                             ),
-                          ),
-                        );
-                      })
-                ],
-              )
-                  //content for my request
+                          );
+                        })
+                  ],
+                )
+                    //content for my request
 
-                  ),
+                    ),
+              ),
             ),
           ),
-        ),
-        //end of other request i.e 3rd tab
+          //end of other request i.e 3rd tab
 
-        // circular progress bar
+          // circular progress bar
+        ),
         if (isLoading)
           Center(
             child: CircularProgressIndicator(
               valueColor: const AlwaysStoppedAnimation<Color>(
                   Colors.red), // Color of the progress indicator
-              strokeWidth: 2.58 * asr, // Thickness of the progress indicator
+              strokeWidth: 0.01 * sw, // Thickness of the progress indicator
               backgroundColor: Colors.black.withOpacity(
                   0.5), // Background color of the progress indicator
             ),

@@ -115,7 +115,6 @@ class _SearchBloodBankState extends State<SearchBloodBank>
         message: 'Internal Server Error: Something went wrong',
         icon: Icons.error,
       );
-      print(response.statusCode);
     }
   }
 //ENDS HERE
@@ -170,7 +169,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
+
     super.build(context);
     return Scaffold(
         // resizeToAvoidBottomInset: true,
@@ -178,7 +177,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
         body: Stack(
           children: <Widget>[
             Container(
-              height: 155 * asr,
+              height: 0.45 * sh,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
                   begin: Alignment.topCenter,
@@ -189,15 +188,15 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                   ],
                 ),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(77.5 * asr),
-                  bottomRight: Radius.circular(103.3 * asr),
+                  bottomLeft: Radius.circular(0.15 * sh),
+                  bottomRight: Radius.circular(0.25 * sh),
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 10.33 * asr,
-                vertical: 10.33 * asr,
+                horizontal: 0.05 * sw,
+                vertical: 0.05 * sh,
               ),
               child: Container(
                 width: MediaQuery.of(context).size.width,
@@ -205,30 +204,24 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(18.1 * asr),
-                    topRight: Radius.circular(18.1 * asr),
-                    bottomLeft: Radius.circular(18.1 * asr),
-                    bottomRight: Radius.circular(18.1 * asr),
+                    topLeft: Radius.circular(0.05 * sh),
+                    topRight: Radius.circular(0.05 * sh),
+                    bottomLeft: Radius.circular(0.05 * sh),
+                    bottomRight: Radius.circular(0.05 * sh),
                   ),
                 ),
                 child: Column(children: [
                   Container(
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(170, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(18.1 * asr),
-                        topRight: Radius.circular(18.1 * asr),
-                        // bottomLeft: Radius.circular(35.0),
-                        // bottomRight: Radius.circular(35.0),
-                      ),
-                    ),
-
                     // Set to transparent
-                    padding: EdgeInsets.only(top: 5.1 * asr, bottom: 5.1 * asr),
+                    padding: EdgeInsets.only(
+                        top: 0.02 * sh,
+                        bottom: 0.02 * sh,
+                        left: 0.02 * sw,
+                        right: 0.02 * sw),
 
                     child: TabBar(
                       indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7.75 * asr),
+                        borderRadius: BorderRadius.circular(0.03 * sh),
                         color: const Color(0xffFF0025),
                       ),
                       controller: _tabController,
@@ -271,9 +264,9 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                 children: [
                                   //HEADER
                                   Padding(
-                                    padding: EdgeInsets.only(top: 15.5 * asr),
+                                    padding: EdgeInsets.only(top: 0.04 * sh),
                                     child: Container(
-                                        height: 15.5 * asr,
+                                        height: 0.04 * sh,
                                         width: double.infinity,
                                         decoration: const BoxDecoration(
                                           color: Color(0xFFFF0025),
@@ -284,7 +277,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                             'Search Blood Bank Info By',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              fontSize: 10.33 * asr,
+                                              fontSize: 0.025 * sh,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                             ),
@@ -295,9 +288,9 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                   //SEARCH BY Group
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        left: 7.75 * asr,
-                                        right: 7.75 * asr,
-                                        top: 7.75 * asr),
+                                        left: 0.04 * sw,
+                                        right: 0.04 * sw,
+                                        top: 0.04 * sw),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.stretch,
@@ -330,7 +323,12 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           ].map((province) {
                                             return DropdownMenuItem<String>(
                                               value: province,
-                                              child: Text('Province $province'),
+                                              child: Text(
+                                                'Province $province',
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal),
+                                              ),
                                             );
                                           }).toList(),
                                           onChanged: (value) {
@@ -342,7 +340,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                             });
                                           },
                                         ),
-                                        SizedBox(height: 7.75 * asr),
+                                        SizedBox(height: 0.02 * sh),
 
                                         // DROPDOWN DISTRICT LISTS BASED ON PROVINCE
                                         DropdownButtonFormField<String>(
@@ -368,7 +366,12 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                                   return DropdownMenuItem<
                                                       String>(
                                                     value: district,
-                                                    child: Text(district),
+                                                    child: Text(
+                                                      district,
+                                                      style: const TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .normal),
+                                                    ),
                                                   );
                                                 }).toList()
                                               : [],
@@ -379,7 +382,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                             });
                                           },
                                         ),
-                                        SizedBox(height: 7.75 * asr),
+                                        SizedBox(height: 0.02 * sh),
 
                                         // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                                         DropdownButtonFormField<String>(
@@ -405,7 +408,12 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                                   return DropdownMenuItem<
                                                       String>(
                                                     value: locallevel,
-                                                    child: Text(locallevel),
+                                                    child: Text(
+                                                      locallevel,
+                                                      style: const TextStyle(
+                                                          fontWeight: FontWeight
+                                                              .normal),
+                                                    ),
                                                   );
                                                 }).toList()
                                               : [],
@@ -415,7 +423,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                             });
                                           },
                                         ),
-                                        SizedBox(height: 7.75 * asr),
+                                        SizedBox(height: 0.02 * sh),
 
                                         TextField(
                                           controller: wardNoController,
@@ -433,14 +441,14 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                   // end of selection search
 
                                   // Making Search button
-                                  SizedBox(height: 7.75 * asr),
+                                  SizedBox(height: 0.02 * sh),
                                   Container(
-                                    height: 20.4 * asr,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 25),
+                                    height: 0.05 * sh,
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 0.2 * sw),
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                          BorderRadius.circular(25.75 * asr),
+                                          BorderRadius.circular(0.05 * sh),
                                       color: const Color(0xffFF0025),
                                     ),
                                     //calling insert function when button is pressed
@@ -457,7 +465,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           style: TextStyle(
                                               color: const Color.fromARGB(
                                                   255, 255, 255, 255),
-                                              fontSize: 8.26 * asr),
+                                              fontSize: 0.02 * sh),
                                         ),
                                       ),
                                     ),
@@ -466,36 +474,36 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                   // search button end
                                   //search results start
 
-                                  SizedBox(height: 7.75 * asr),
+                                  SizedBox(height: 0.02 * sh),
                                   Text(
                                     'Searched results', // import total members from database
                                     style: TextStyle(
-                                      fontSize: 7.75 * asr,
+                                      fontSize: 0.015 * sh,
                                       fontWeight: FontWeight.w300,
                                       color: const Color(0xffaba7a7),
                                     ),
                                   ),
 
-                                  SizedBox(height: 2.58 * asr),
+                                  SizedBox(height: 0.005 * sh),
 
                                   Text(
                                     '$searchResultcount', // import count number from database as per matched query
                                     style: TextStyle(
-                                      fontSize: 15.5 * asr,
+                                      fontSize: 0.04 * sh,
                                       fontWeight: FontWeight.bold,
                                       color: const Color(0xffFF0025),
                                     ),
                                   ),
 
-                                  SizedBox(height: 2.58 * asr),
+                                  SizedBox(height: 0.005 * sh),
                                   Container(
-                                    height: 10.33 * asr,
-                                    width: 77.5 * asr,
+                                    height: 0.025 * sh,
+                                    width: 0.4 * sw,
                                     margin: EdgeInsets.symmetric(
-                                        horizontal: 12.9 * asr),
+                                        horizontal: 0.03 * sw),
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                          BorderRadius.circular(25.75 * asr),
+                                          BorderRadius.circular(0.05 * sh),
                                       color: const Color(0xffFF0025),
                                     ),
                                     //calling insert function when button is pressed
@@ -529,11 +537,11 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           style: TextStyle(
                                             color: const Color.fromARGB(
                                                 255, 255, 255, 255),
-                                            fontSize: 7.23 * asr,
+                                            fontSize: 0.015 * sh,
                                             decoration:
                                                 TextDecoration.underline,
                                             decorationColor: Colors.white,
-                                            decorationThickness: 1.03 * asr,
+                                            decorationThickness: 0.002 * sh,
                                           ),
                                         ),
                                       ),
@@ -549,22 +557,22 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                             child: Column(children: [
                               Padding(
                                   padding: EdgeInsets.symmetric(
-                                    horizontal: 15.5 * asr,
+                                    horizontal: 0.05 * sw,
                                   ),
                                   child: Column(
                                     children: [
-                                      SizedBox(height: 2.58 * asr),
+                                      SizedBox(height: 0.005 * sh),
                                       Text(
                                         '[Note: Only Admins are allow to fill the new blood bank details form.]',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: const Color(0xFFF44336),
-                                          fontSize: 8.26 * asr,
+                                          fontSize: 0.02 * sh,
                                         ),
                                         textAlign: TextAlign.left,
                                       ),
 
-                                      SizedBox(height: 2.58 * asr),
+                                      SizedBox(height: 0.005 * sh),
                                       TextField(
                                         controller: nameCont,
                                         decoration: const InputDecoration(
@@ -574,7 +582,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                         ),
                                         maxLength: 30,
                                       ),
-                                      SizedBox(height: 2.58 * asr),
+                                      SizedBox(height: 0.005 * sh),
 
                                       //DROPDOWN PROVINCE
                                       DropdownButtonFormField<String>(
@@ -621,7 +629,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           });
                                         },
                                       ),
-                                      SizedBox(height: 12.24 * asr),
+                                      SizedBox(height: 0.03 * sh),
 
                                       // DROPDOWN DISTRICT LISTS BASED ON PROVINCE
                                       DropdownButtonFormField<String>(
@@ -662,7 +670,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           });
                                         },
                                       ),
-                                      SizedBox(height: 12.24 * asr),
+                                      SizedBox(height: 0.03 * sh),
 
                                       // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                                       DropdownButtonFormField<String>(
@@ -702,7 +710,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           });
                                         },
                                       ),
-                                      SizedBox(height: 10.33 * asr),
+                                      SizedBox(height: 0.025 * sh),
 
                                       TextField(
                                         controller: wardNoCont,
@@ -737,14 +745,14 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           }),
 
                                       // Making Add button
-                                      SizedBox(height: 15.5 * asr),
+                                      SizedBox(height: 0.02 * sh),
                                       Container(
-                                        height: 25.75 * asr,
+                                        height: 0.05 * sh,
                                         margin: EdgeInsets.symmetric(
-                                            horizontal: 12.9 * asr),
+                                            horizontal: 0.2 * sw),
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              25.75 * asr),
+                                          borderRadius:
+                                              BorderRadius.circular(0.05 * sh),
                                           color: const Color(0xffFF0025),
                                         ),
                                         //calling insert function when button is pressed
@@ -758,12 +766,12 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                               style: TextStyle(
                                                   color: const Color.fromARGB(
                                                       255, 255, 255, 255),
-                                                  fontSize: 9.30 * asr),
+                                                  fontSize: 0.02 * sh),
                                             ),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 15.5 * asr),
+                                      SizedBox(height: 0.03 * sh),
                                     ],
                                   )),
                             ]),
@@ -780,8 +788,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                 child: CircularProgressIndicator(
                   valueColor: const AlwaysStoppedAnimation<Color>(
                       Colors.red), // Color of the progress indicator
-                  strokeWidth:
-                      2.58 * asr, // Thickness of the progress indicator
+                  strokeWidth: 0.01 * sw, // Thickness of the progress indicator
                   backgroundColor: Colors.black.withOpacity(
                       0.5), // Background color of the progress indicator
                 ),
@@ -794,6 +801,8 @@ class _SearchBloodBankState extends State<SearchBloodBank>
     setState(() {
       isLoading = true;
     });
+    // Define a regular expression to match only numbers
+    RegExp numericRegex = RegExp(r'^[0-9]+$');
     if (nameCont.text.trim() != '' &&
         selectProvince != null &&
         selectDistrict != null &&
@@ -802,8 +811,15 @@ class _SearchBloodBankState extends State<SearchBloodBank>
         wardNoCont.text.trim() != '0' &&
         phoneCont.text.trim() != '' &&
         phoneNumberError == false) {
-      regBloodBank();
-      isLoading = false;
+      if (numericRegex.hasMatch(phoneCont.text.trim())) {
+        regBloodBank();
+        isLoading = false;
+      } else {
+        CustomSnackBar.showUnsuccess(
+            context: context,
+            message: "Contact number should contain only numbers.",
+            icon: Icons.info);
+      }
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,

@@ -136,14 +136,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 20.4 * asr,
+        toolbarHeight: 0.045 * sh,
         title: Text(
           'Settings',
           style: TextStyle(
-            fontSize: 10.33 * asr,
+            fontSize: 0.025 * sh,
           ),
         ),
         centerTitle: true,
@@ -167,40 +166,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
         SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
-              left: 15.5 * asr, right: 15.5 * asr, top: 0, bottom: 0,
-              //horizontal: 30,
+              left: 0.07 * sw,
+              right: 0.07 * sw,
+              top: 0,
+              bottom: 0,
             ),
             child: Center(
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                /*
-                Padding(
-                  padding: const EdgeInsets.only(top: 15.5*asr),
-                  child: Container(
-                      height: 30,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF444242),
-                        borderRadius: BorderRadius.only(),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Set Appointment',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      )),
-                ),
-
-                */
-
-                SizedBox(height: 12.9 * asr),
+                SizedBox(height: 0.03 * sh),
                 TextField(
                   controller: emailController,
                   style: const TextStyle(
@@ -212,8 +188,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   maxLength: 50,
                 ),
-                SizedBox(height: 2.58 * asr),
-
+                SizedBox(height: 0.005 * sh),
                 TextField(
                   controller: usernameController,
                   style: const TextStyle(
@@ -225,20 +200,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   maxLength: 30,
                 ),
-                SizedBox(height: 2.58 * asr),
+                SizedBox(height: 0.005 * sh),
 
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: Text(
                     'To change your password :',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.red,
-                      fontSize: 14,
+                      fontSize: 0.03 * sw,
                     ),
                   ),
                 ),
-                SizedBox(height: 2.58 * asr),
+                SizedBox(height: 0.005 * sh),
                 TextField(
                   controller: oldPasswordController,
                   style: const TextStyle(
@@ -265,7 +240,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   maxLength: 20,
                 ),
 
-                SizedBox(height: 2.58 * asr),
+                SizedBox(height: 0.005 * sh),
 
                 TextField(
                   controller: passwordController,
@@ -292,15 +267,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   obscureText: !_isPasswordVisible,
                   maxLength: 20,
                 ),
-                SizedBox(height: 15.5 * asr),
+                SizedBox(height: 0.05 * sh),
 
-                // Making send button
-                SizedBox(height: 15.5 * asr),
+                // Making Apply changes button
+                SizedBox(height: 0.05 * sh),
                 Container(
-                  height: 20.4 * asr,
-                  margin: EdgeInsets.symmetric(horizontal: 12.9 * asr),
+                  height: 0.05 * sh,
+                  margin: EdgeInsets.symmetric(horizontal: 0.03 * sw),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25.75 * asr),
+                    borderRadius: BorderRadius.circular(0.05 * sh),
                     color: const Color(0xffBF371A),
                   ),
                   //calling insert function when button is pressed
@@ -328,12 +303,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         "Apply Changes",
                         style: TextStyle(
                             color: const Color.fromARGB(255, 255, 255, 255),
-                            fontSize: 9.30 * asr),
+                            fontSize: 0.02 * sh),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 15.5 * asr),
+                SizedBox(height: 0.05 * sh),
               ],
             )),
           ),
@@ -345,7 +320,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Center(
             child: CircularProgressIndicator(
               valueColor: const AlwaysStoppedAnimation<Color>(Colors.red),
-              strokeWidth: 2.58 * asr,
+              strokeWidth: 0.01 * sw,
               backgroundColor: Colors.black.withOpacity(0.5),
             ),
           ),

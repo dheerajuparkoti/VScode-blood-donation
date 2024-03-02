@@ -287,9 +287,9 @@ class _MainPageState extends State<MainPage> {
                           children: [
                             Expanded(
                               child: Text(
-                                "Urgent A+ Blood Needed Welcome to “Mobile Blood Bank Nepal” where we prioritize your privacy. This policy outlines how we collect, use, disclose, and protect your information when you use our app. By using the app, you agree to this privacy policy and our terms of service. Hurry up this is dheeraj uparkoti from dangihat nepal Urlabari Morang",
+                                "Urgent A+ Blood Needed Welcome to “Mobile Blood Bank Nepal” where we prioritize your privacy. This policy outlines how we collect, use, disclose, and protect your information when you use our app. By using the app, you agree to this privacy policy and our terms of service. Hurry up this is dheeraj uparkoti from dangihat nepal Urlabari Morang!",
                                 style: TextStyle(
-                                    fontSize: 6.2 * asr,
+                                    fontSize: 0.015 * sh,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w300),
                               ),
@@ -302,7 +302,7 @@ class _MainPageState extends State<MainPage> {
 
                       // FOR TOTAL MEMBERS SHOWN
 
-                      SizedBox(height: 5.1 * asr),
+                      SizedBox(height: 0.01 * sh),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [

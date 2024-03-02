@@ -476,7 +476,7 @@ class _ProfileState extends State<Profile> {
                               Padding(
                                 padding: EdgeInsets.only(right: 2.58 * asr),
                                 child: CircleAvatar(
-                                  radius: 28.05 * asr,
+                                  radius: 0.12 * sw,
 
                                   backgroundImage: isValidUrl
                                       ? NetworkImage(profilePic)
@@ -567,7 +567,7 @@ class _ProfileState extends State<Profile> {
                                   Text(
                                     address, // import data for address
                                     style: TextStyle(
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.012 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
