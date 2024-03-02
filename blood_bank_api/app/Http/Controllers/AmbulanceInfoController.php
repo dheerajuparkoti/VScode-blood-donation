@@ -137,6 +137,7 @@ class AmbulanceInfoController extends Controller
         } else {
             return response()->json(['success' => false, 'message' => 'Failed to add ambulance.'], 400);
         }
+        //okay
     }
 
 
