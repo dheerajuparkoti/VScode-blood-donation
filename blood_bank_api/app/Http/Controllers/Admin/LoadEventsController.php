@@ -78,7 +78,7 @@ class LoadEventsController extends Controller
         $event->eventDate = $validatedData['eventDate'];
         $event->eventTime = $validatedData['eventTime'];
       //  $event->doId = $validatedData['doId'];
-        $event->doId = 3;
+        $event->doId = 1;
 
         // Save the event
         $event->save();

@@ -37,7 +37,7 @@ class BloodBankInfoController extends Controller
     {
         $storeData = $request->all();  
         // Set doId
-        $storeData['doId'] = 2;
+        $storeData['doId'] = 1;
         
         // Create AmbulanceInfo instance with modified store data
         BloodBankInfo::create($storeData);

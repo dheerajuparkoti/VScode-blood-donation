@@ -28,17 +28,6 @@ class AmbulanceInfoController extends Controller
      */
     
 
-     /*
-
-    public function create(Request $request)
-    {
-    
-    $formData = $this->renderForm($request);
-   
-   return view('admin.ambulance.create', $formData);
-   return view('admin.ambulance.create');
-    }
-    */
     
     public function create(Request $request)
     {
@@ -63,7 +52,7 @@ class AmbulanceInfoController extends Controller
 {
     $storeData = $request->all();  
     // Set doId
-    $storeData['doId'] = 3;
+    $storeData['doId'] = 1;
     
     // Create AmbulanceInfo instance with modified store data
     AmbulanceInfo::create($storeData);
@@ -163,19 +152,7 @@ class AmbulanceInfoController extends Controller
  
          }
     }
-    /*
-
-    public function renderForm(Request $request)
-{
-    $provinces = DistrictData::getProvinces();
-    $districts = DistrictData::getDistricts($request->input('province_id')); // Pass the selected province ID if needed
-    $localLevels = DistrictData::getLocalLevels($request->input('district_id')); // Pass the selected district ID if needed
-
-    // Return the data as an array
-    return ['provinces' => $provinces, 'districts' => $districts, 'localLevels' => $localLevels];
-}
-*/
-
+ 
 
 public function getDistricts(Request $request)
 {

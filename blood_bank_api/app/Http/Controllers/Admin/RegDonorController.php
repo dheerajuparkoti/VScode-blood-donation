@@ -18,10 +18,7 @@ class RegDonorController extends Controller
      */
     public function index()
     {
-        /*
-        $donors = RegDonor::orderBy('created_at', 'desc')->paginate(25); 
-        return view('admin.donor.index',compact('donors'));
-        */
+    
         $donors = RegDonor::with('user') // Eager load the 'user' relationship
                   ->orderBy('created_at', 'desc')
                   ->paginate(25);
@@ -45,7 +42,7 @@ return view('admin.donor.index', compact('donors'));
     {
         $storeData = $request->all();  
         // Set userId
-        $storeData['userId'] = 15;
+        $storeData['userId'] = 1;
         
         // Create AmbulanceInfo instance with modified store data
         RegDonor::create($storeData);
