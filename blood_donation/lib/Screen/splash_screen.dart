@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'package:blood_donation/Screen/home_screen.dart';
 import 'package:blood_donation/Screen/sign_in_up_screen.dart';
+import 'package:blood_donation/provider/user_provider.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,6 +19,36 @@ class _LoginState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _checkInternetAndNavigate();
+    _checkUserLoggedIn();
+  }
+
+  Future<void> _checkUserLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? authToken = prefs.getString('authToken');
+    UserProvider userProvider = UserProvider();
+
+    if (authToken != null) {
+      final userId = prefs.getInt('userId');
+      final donorId = prefs.getInt('donorId');
+      final accountType = prefs.getString('accountType');
+      userProvider.setUserId(userId!);
+      userProvider.setDonorId(donorId!);
+      userProvider.setUserAccountType(accountType!);
+      // Use the fetched information as needed
+      print('I am hre User ID: $userId');
+      print('Donor ID: $donorId');
+      print('Account Type: $accountType');
+
+      if (mounted) {
+        setState(() {
+          isLoading = false; // Set isLoading to false after 5 seconds
+        });
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      }
+    }
   }
 
   Future<void> _checkInternetAndNavigate() async {
