@@ -53,7 +53,7 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
     };
 
     var res = await CallApi().searchAmbulance(
-        data, 'LoadAmbulanceInfo'); //function name from Controller
+        data, 'loadAmbulanceInfo'); //function name from Controller
     if (res.statusCode == 200) {
       // Parse the response and update the UI with the count
       //final count = int.parse(res.body);

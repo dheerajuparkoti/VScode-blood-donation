@@ -56,34 +56,35 @@ Route::middleware('auth:api')->post('/logout',[AuthController::class,'logout']);
 Route::post('/checkUserExists',[RegUserController::class,'checkUserExists']); // for Checking Email or Phone for reset password
 
 
-Route::post('/SearchBlood',[SearchBloodController::class,'SearchBlood']); // method from SearchBloodcontroller
-Route::post('/LoadProfile',[LoadProfileController::class,'LoadProfile']); // method from LoadProfilecontroller
-Route::post('/showProfile',[LoadProfileController::class,'LoadProfile']); // method from LoadProfilecontroller
+Route::post('/searchBlood',[SearchBloodController::class,'searchBlood']); // method from SearchBloodcontroller
+Route::post('/loadProfile',[LoadProfileController::class,'loadProfile']); // method from LoadProfilecontroller
+//Route::post('/showProfile',[LoadProfileController::class,'loadProfile']); // method from LoadProfilecontroller
 
 // signUp user 
-Route::post('/RegUser',[RegUserController::class,'RegUser']); // for user registration
-Route::post('/RegDonor',[RegDonorController::class,'RegDonor']); // for donor registration
+Route::post('/regUser',[RegUserController::class,'regUser']); // for user registration
+Route::post('/regDonor',[RegDonorController::class,'regDonor']); // for donor registration
 
 
 //fetchUserData for settings screen
 Route::post('/fetchingUserData',[RegUserController::class,'fetchingUserData']); 
+
 //updatingUserData for settings screen
 Route::post('/updateUserData',[RegUserController::class,'updateUserData']); 
 
 // Donor profile update
-Route::post('/UpdateDonorProfile',[RegDonorController::class,'UpdateDonorProfile']); // for donor registration
+Route::post('/updateDonorProfile',[RegDonorController::class,'updateDonorProfile']); // for donor registration
 
 // count total no. of donors 
-Route::get('/DonorCountsByBloodGroup',[RegDonorController::class,'DonorCountsByBloodGroup']); // for counting
+Route::get('/donorCountsByBloodGroup',[RegDonorController::class,'donorCountsByBloodGroup']); // for counting
 Route::post('/getTopDonors',[RegDonorController::class,'getTopDonors']); // for counting
 
-Route::post('/RequestBlood',[RequestBloodController::class,'RequestBlood']); // for making request blood i.e fill the request blood form
-Route::post('/LoadOtherRequests',[RequestBloodController::class,'LoadOtherRequests']); // for making request blood i.e fill the request blood form
+Route::post('/requestBlood',[RequestBloodController::class,'requestBlood']); // for making request blood i.e fill the request blood form
+Route::post('/loadOtherRequests',[RequestBloodController::class,'loadOtherRequests']); // for making request blood i.e fill the request blood form
 
-Route::post('/EmergencyRequestBlood',[EmergencyRequestBloodController::class,'EmergencyRequestBlood']); // for saving emergency request blood form
-Route::post('/LoadEmergencyRequests',[EmergencyRequestBloodController::class,'LoadEmergencyRequests']); // for saving emergency request blood form
+Route::post('/emergencyRequestBlood',[EmergencyRequestBloodController::class,'emergencyRequestBlood']); // for saving emergency request blood form
+Route::post('/loadEmergencyRequests',[EmergencyRequestBloodController::class,'loadEmergencyRequests']); // for saving emergency request blood form
 
-Route::post('/LoadMyRequests', [LoadRequestController::class, 'LoadMyRequests']); // for retrieving all my requests from request_blood and emergency_request_blood table
+Route::post('/loadMyRequests', [LoadRequestController::class, 'loadMyRequests']); // for retrieving all my requests from request_blood and emergency_request_blood table
 
 Route::post('/loadNotification', [NotificationController::class, 'loadNotification']); // for retrieving all my requests from request_blood and emergency_request_blood table
 Route::post('/notificationReadErId',[NotificationController::class,'notificationReadErId']);
@@ -91,21 +92,21 @@ Route::post('/notificationReadReId',[NotificationController::class,'notification
 Route::post('/notificationReadEvent',[NotificationController::class,'notificationReadEvent']);
 
 
-Route::post('/SetAppointment',[SetAppointmentController::class,'SetAppointment']); // setting Appointment 
-Route::post('/LoadEvents',[LoadEventsController::class,'LoadEvents']); // loading Events
+Route::post('/setAppointment',[SetAppointmentController::class,'setAppointment']); // setting Appointment 
+Route::post('/loadEvents',[LoadEventsController::class,'loadEvents']); // loading Events
 
-Route::post('/LoadAmbulanceInfo',[AmbulanceInfoController::class,'LoadAmbulanceInfo']); // loading Ambulance data
+Route::post('/loadAmbulanceInfo',[AmbulanceInfoController::class,'loadAmbulanceInfo']); // loading Ambulance data
 Route::post('/regAmbulance',[AmbulanceInfoController::class,'regAmbulance']); // Adding Ambulance data
 
-Route::post('/LoadBloodBankInfo',[BloodBankInfoController::class,'LoadBloodBankInfo']); // loading BloodBank data
+Route::post('/loadBloodBankInfo',[BloodBankInfoController::class,'loadBloodBankInfo']); // loading BloodBank data
 Route::post('/regBloodBank',[BloodBankInfoController::class,'regBloodBank']); // Adding BloodBank data
 
 Route::post('/test',[TestController::class,'test']);
 
 
 // For Adding New donation records
-Route::post('/DonationHistory',[DonationHistoryController::class,'DonationHistory']); // for insertion
-Route::post('/RetrieveDonationHistory',[DonationHistoryController::class,'RetrieveDonationHistory']); // for retrieving 
+Route::post('/donationHistory',[DonationHistoryController::class,'donationHistory']); // for insertion
+Route::post('/retrieveDonationHistory',[DonationHistoryController::class,'retrieveDonationHistory']); // for retrieving 
 
 
 // For emergency_request_available_donors to make an entry 

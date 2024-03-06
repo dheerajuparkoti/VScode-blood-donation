@@ -36,7 +36,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
     };
 
     var res = await CallApi()
-        .postData(data, 'SearchBlood'); //test is table name for api
+        .postData(data, 'searchBlood'); //test is table name for api
     if (res.statusCode == 200) {
       // Parse the response and update the UI with the count
       //final count = int.parse(res.body);

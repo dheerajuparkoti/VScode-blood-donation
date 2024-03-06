@@ -176,7 +176,7 @@ class _EditProfileState extends State<EditProfile>
     };
 
     var response =
-        await CallApi().retrieveDonationHistory(data, 'DonationHistory');
+        await CallApi().retrieveDonationHistory(data, 'donationHistory');
 
     // Check if the request was successful
     // Call the API to register the user
@@ -273,7 +273,7 @@ class _EditProfileState extends State<EditProfile>
     // If an image is selected, attach it to the request
     if (_image != null) {
       var response =
-          await CallApi().uploadPhoto(data, 'UpdateDonorProfile', _image!);
+          await CallApi().uploadPhoto(data, 'updateDonorProfile', _image!);
 
       // Handle the response
       if (response.statusCode == 200) {
@@ -291,7 +291,7 @@ class _EditProfileState extends State<EditProfile>
       }
     } else {
       // If no image is selected, send only the other data
-      var response = await CallApi().postData(data, 'UpdateDonorProfile');
+      var response = await CallApi().postData(data, 'updateDonorProfile');
 
       // Check if the request was successful
       // Call the API to register the user

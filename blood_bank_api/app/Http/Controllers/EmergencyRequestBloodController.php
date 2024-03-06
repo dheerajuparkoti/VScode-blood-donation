@@ -8,7 +8,7 @@ use App\Models\EmergencyRequestBlood;
 class EmergencyRequestBloodController extends Controller
 {
     //
-    public function EmergencyRequestBlood(Request $request){
+    public function emergencyRequestBlood(Request $request){
 
         $request->validate([            
             //'profilePic'=>'nullable',
@@ -56,27 +56,7 @@ class EmergencyRequestBloodController extends Controller
 
     
 
-/*
-    public function LoadEmergencyRequests(Request $request)
-    {
-       
-
-        $allRequests = EmergencyRequestBlood::orderBy('created_at', 'desc')->get();
-
-        // Log the received user ID
-        \Log::info('Received user ID: ' . $allRequests );
-       
-    
-         // Log the retrieved data
-         \Log::info('Retrieved all request blood data: ' . json_encode($allRequests));
-    
-         return response()->json([
-             'emergencyRequestBloods' => $allRequests,
-         ]);
-       
-    }
-    */
-    public function LoadEmergencyRequests(Request $request)
+    public function loadEmergencyRequests(Request $request)
     {
         // Retrieve all emergency requests with the count of available donors
         $emergencyRequests = EmergencyRequestBlood::withCount('availableDonors')->orderBy('created_at', 'desc')->get();

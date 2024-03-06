@@ -2,7 +2,7 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id 'com.google.gms.google-services'
+    id "com.google.gms.google-services"
 }
 
 def localProperties = new Properties()
@@ -30,7 +30,7 @@ if (flutterVersionName == null) {
    }
 
 android {
-    namespace "com.example.blood_donation"
+    namespace "com.tsoftmine.mobilebloodbanknepal"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
     defaultConfig {
@@ -53,7 +53,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.app.bloodbanknepal"
+        applicationId "com.tsoftmine.mobilebloodbanknepal"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
@@ -83,6 +83,6 @@ flutter {
 
 dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
-    implementation platform('com.google.firebase:firebase-bom:32.7.2')
+    implementation platform('com.google.firebase:firebase-bom:32.7.3')
     implementation 'com.google.firebase:firebase-analytics'
 }

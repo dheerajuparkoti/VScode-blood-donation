@@ -1,13 +1,12 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:blood_donation/Screen/splash_screen.dart';
 import 'package:blood_donation/notificationservice/local_notification_service.dart';
 import 'package:blood_donation/provider/navigation_provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:blood_donation/provider/user_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 // firebase notification
 Future<void> backgroundHandler(RemoteMessage message) async {
@@ -15,25 +14,17 @@ Future<void> backgroundHandler(RemoteMessage message) async {
   (message.notification!.title);
 }
 
-Future main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
 
-  // Finally, set up the main widget tree
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => NavigationProvider()),
-        ChangeNotifierProvider(create: (context) => UserProvider()),
-      ],
-      child: const MyApp(),
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: 'AIzaSyC-QidEdKNmEMri0_N4c-kmREG5BiDBwEk',
+      appId: '1:17189376255:android:4d452ba103d4ea762a7cca',
+      messagingSenderId: '17189376255',
+      projectId: 'mobile-blood-bank-nepal-a2399',
     ),
   );
-  // Initialize Firebase and other services
-  await Firebase.initializeApp();
 
   // Set up Firebase messaging and other services
   String? deviceToken = await FirebaseMessaging.instance.getToken();
@@ -45,6 +36,21 @@ Future main() async {
   await messaging.subscribeToTopic('mobilebloodbanknepalnotifications');
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   LocalNotificationService.initialize();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => NavigationProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

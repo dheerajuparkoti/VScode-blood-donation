@@ -10,7 +10,7 @@ use Carbon\Carbon;
 class DonationHistoryController extends Controller
 {
     //
-    public function DonationHistory(Request $request)
+    public function donationHistory(Request $request)
     {
         // Step 1: Take input for userId, donorId, donatedDate
         $userId = $request->input('userId');
@@ -66,7 +66,7 @@ class DonationHistoryController extends Controller
     }
 
 
-    public function RetrieveDonationHistory(Request $request)
+    public function retrieveDonationHistory(Request $request)
     {
         // Get the donorId from the request
         $donorId = $request->input('doId');

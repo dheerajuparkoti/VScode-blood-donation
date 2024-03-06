@@ -52,7 +52,7 @@ class EmergencyRequestBloodsObserver
         'notification' => [
             'body' => $notificationBody,
             'title' => $notificationTitle,
-            'android_channel_id' => 'Blood Bank Nepal',
+            'android_channel_id' => 'Mobile Blood Bank Nepal',
             'sound' => true
         ],
         'data' => $notificationData // Include additional data
@@ -76,9 +76,9 @@ class EmergencyRequestBloodsObserver
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => $notificationJson,
             CURLOPT_HTTPHEADER => array(
-                'Authorization: key=AAAA1dOfHzM:APA91bFInBV5DhVZr8g7IoTmV-3vFG3yDftHUDzcBF4uCP55l2O3lLrnCMQmyYVLswaa7zY3JBN45OKzJWRI-8r7LOKZNtVgsdWEyxfhmx6UBzAjjRvWcaWvUeapQe9KHa72tOvzauXn',
+                'Authorization: key=AAAABACREP8:APA91bGKITEOT_juJIAPDB-CtRRrFrlG5yCSLDtrJuJR8XvmrWythds7L-p4qm1cK_DfyF8p_xaxNMR4GLXNhsaUu6imygggMKhaPVSUGPzG010RJzH0NWPXW0pArFqfZmBW5zrAHENl',
                 'Content-Type: application/json',
-                'mbbnserverkeyForAuthentication: AAAA1dOfHzM:APA91bFInBV5DhVZr8g7IoTmV-3vFG3yDftHUDzcBF4uCP55l2O3lLrnCMQmyYVLswaa7zY3JBN45OKzJWRI-8r7LOKZNtVgsdWEyxfhmx6UBzAjjRvWcaWvUeapQe9KHa72tOvzauXn'
+                'mbbnserverkeyForAuthentication: AAAABACREP8:APA91bGKITEOT_juJIAPDB-CtRRrFrlG5yCSLDtrJuJR8XvmrWythds7L-p4qm1cK_DfyF8p_xaxNMR4GLXNhsaUu6imygggMKhaPVSUGPzG010RJzH0NWPXW0pArFqfZmBW5zrAHENl'
             ),
           ));
       

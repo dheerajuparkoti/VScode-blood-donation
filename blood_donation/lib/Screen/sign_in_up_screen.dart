@@ -78,7 +78,7 @@ class _SignInSignUpState extends State<SignInSignUp>
       'deviceToken': deviceToken
     };
 
-    var response = await CallApi().postData(data, 'RegUser');
+    var response = await CallApi().postData(data, 'regUser');
     if (response.statusCode == 200) {
       CustomSnackBar.showSuccess(
         context: context,

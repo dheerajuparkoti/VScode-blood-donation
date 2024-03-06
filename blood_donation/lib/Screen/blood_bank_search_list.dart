@@ -46,7 +46,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
     });
     // Call your API to get matched results here
     // Replace 'YourApiCall' with your actual API call
-    var res = await CallApi().postData(searchCriteriaData, 'LoadBloodBankInfo');
+    var res = await CallApi().postData(searchCriteriaData, 'loadBloodBankInfo');
 
     if (res.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = json.decode(res.body);

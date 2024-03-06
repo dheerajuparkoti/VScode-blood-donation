@@ -9,7 +9,7 @@ use App\Models\RegUser;
 
 class SearchBloodController extends Controller
 {
-    public function SearchBlood(Request $request)
+    public function searchBlood(Request $request)
     {
         $bloodGroup = $request->input('bloodGroup');
         $province = $request->input('province');

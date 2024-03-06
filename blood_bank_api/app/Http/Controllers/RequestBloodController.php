@@ -8,7 +8,7 @@ use App\Models\RequestBlood;
 class RequestBloodController extends Controller
 {
     //
-    public function RequestBlood(Request $request){
+    public function requestBlood(Request $request){
 
         $request->validate([            
             //'profilePic'=>'nullable',
@@ -56,7 +56,7 @@ class RequestBloodController extends Controller
 
 
       
-public function LoadOtherRequests(Request $request)
+public function loadOtherRequests(Request $request)
 {
     //$allRequests = RequestBlood::all(); // ascending order 
 

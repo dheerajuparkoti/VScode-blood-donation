@@ -51,7 +51,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
     };
 
     var res = await CallApi().searchBloodBank(
-        data, 'LoadBloodBankInfo'); //test is table name for api
+        data, 'loadBloodBankInfo'); //test is table name for api
     if (res.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = json.decode(res.body);
 

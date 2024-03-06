@@ -56,7 +56,7 @@ class _ProfileState extends State<Profile> {
       'donorId': widget.donorId,
     };
 
-    var res = await CallApi().postData(data, 'LoadProfile');
+    var res = await CallApi().postData(data, 'loadProfile');
 
     if (res.statusCode == 200) {
       try {
@@ -116,7 +116,7 @@ class _ProfileState extends State<Profile> {
     };
 
     final res = await CallApi()
-        .retrieveDonationHistory(data, 'RetrieveDonationHistory');
+        .retrieveDonationHistory(data, 'retrieveDonationHistory');
     if (res.statusCode == 200) {
       final donationData = jsonDecode(res.body);
 

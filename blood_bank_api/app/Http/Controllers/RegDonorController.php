@@ -13,7 +13,7 @@ class RegDonorController extends Controller
 {
     //
     
-    public function RegDonor(Request $request)
+    public function regDonor(Request $request)
     {
          // Validation
     $request->validate([
@@ -60,7 +60,7 @@ class RegDonorController extends Controller
     
 
 // count total members available and count blood group to show in main screen
-public function DonorCountsByBloodGroup()
+public function donorCountsByBloodGroup()
 {
     $bloodGroups = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
     $counts = [];
@@ -110,42 +110,9 @@ return response()->json($result);
 
 
 // update donors profile 
-public function UpdateDonorProfile(Request $request)
+public function updateDonorProfile(Request $request)
 {
-    /* working for other data not picture
-
-    // Validation
-    $request->validate([
-        // Define your validation rules here
-    ]);
-
-    // Fetch the donor from the reg_donors table based on the donorId
-    $regDonor = RegDonor::find($request->post('donorId'));
-
-    // Check if the donor exists
-    if (!$regDonor) {
-        return response()->json(['success' => false, 'message' => 'Donor not found.'], 404);
-    }
-
-    // Update the donor data
-    $regDonor->fullName = $request->post('fullName');
-    $regDonor->dob = $request->post('dob');
-    $regDonor->gender = $request->post('gender');
-    $regDonor->bloodGroup = $request->post('bloodGroup');
-    $regDonor->province = $request->post('province');
-    $regDonor->district = $request->post('district');
-    $regDonor->localLevel = $request->post('localLevel');
-    $regDonor->wardNo = $request->post('wardNo');
-    $regDonor->phone = $request->post('phone');
-    $regDonor->userId = $request->post('userId');
-
-    // Save the updated donor data
-    if ($regDonor->save()) {
-        return response()->json(['success' => true, 'message' => 'Donor data updated successfully!'], 200);
-    } else {
-        return response()->json(['success' => false, 'message' => 'Failed to update donor data.'], 400);
-    }
-    */
+   
  // Validation
  $request->validate([
     'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // adjust the maximum file size as needed

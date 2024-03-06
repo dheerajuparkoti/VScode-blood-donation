@@ -86,7 +86,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
       'doId': userProvider.userId,
     };
 
-    var res = await CallApi().setAppoint(data, 'SetAppointment');
+    var res = await CallApi().setAppoint(data, 'setAppointment');
 
     if (res != null) {
       //  var body = jsonDecode(res.body);
@@ -169,7 +169,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
       'donorId': userProvider.donorId,
     };
 
-    var res = await CallApi().loadAllEvents(data, 'LoadEvents');
+    var res = await CallApi().loadAllEvents(data, 'loadEvents');
 
     if (res.statusCode == 200) {
       try {

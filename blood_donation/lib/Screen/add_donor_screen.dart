@@ -118,7 +118,7 @@ class _AddNewDonorState extends State<AddNewDonor>
       'userId': userProvider.userId,
     };
 
-    var response = await CallApi().postData(data, 'RegDonor');
+    var response = await CallApi().postData(data, 'regDonor');
     // Handle the response
     if (response.statusCode == 200) {
       // ignore: use_build_context_synchronously

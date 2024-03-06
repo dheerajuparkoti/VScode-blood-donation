@@ -154,7 +154,7 @@ class _RequestScreenState extends State<RequestScreen>
     };
 
     var res = await CallApi()
-        .requestBlood(data, 'RequestBlood'); //test is table name for api
+        .requestBlood(data, 'requestBlood'); //test is table name for api
 
     // Check if the response is not null
     if (res != null) {
@@ -202,7 +202,7 @@ class _RequestScreenState extends State<RequestScreen>
     };
 
     var res = await CallApi().emergencyRequestBlood(
-        data, 'EmergencyRequestBlood'); //test is table name for api
+        data, 'emergencyRequestBlood'); //test is table name for api
 
     // Check if the response is not null
     if (res != null) {
@@ -239,7 +239,7 @@ class _RequestScreenState extends State<RequestScreen>
       'doId': userProvider.donorId,
     };
 
-    var res = await CallApi().loadAllMyRequests(data, 'LoadMyRequests');
+    var res = await CallApi().loadAllMyRequests(data, 'loadMyRequests');
 
     if (res.statusCode == 200) {
       try {
@@ -294,7 +294,7 @@ class _RequestScreenState extends State<RequestScreen>
       'doId': userProvider.donorId,
     };
 
-    var res = await CallApi().loadAllMyRequests(data, 'LoadOtherRequests');
+    var res = await CallApi().loadAllMyRequests(data, 'loadOtherRequests');
 
     if (res.statusCode == 200) {
       try {

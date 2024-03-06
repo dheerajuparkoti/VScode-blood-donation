@@ -9,7 +9,7 @@ use App\Models\SetAppointment;
 class SetAppointmentController extends Controller
 {
     //
-    public function SetAppointment(Request $request){
+    public function setAppointment(Request $request){
 
         $request->validate([            
             //'profilePic'=>'nullable',

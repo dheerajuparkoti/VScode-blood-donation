@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "918378454835",
-    "project_id": "mobile-blood-bank-nepal",
-    "storage_bucket": "mobile-blood-bank-nepal.appspot.com"
+    "project_number": "17189376255",
+    "project_id": "mobile-blood-bank-nepal-a2399",
+    "storage_bucket": "mobile-blood-bank-nepal-a2399.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:918378454835:android:62ab8433506249ff99e846",
+        "mobilesdk_app_id": "1:17189376255:android:4d452ba103d4ea762a7cca",
         "android_client_info": {
-          "package_name": "com.app.bloodbanknepal"
+          "package_name": "com.tsoftmine.mobilebloodbanknepal"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDcfQcUHh6CcvqiwKVCAn0f5n2YCn6w4l0"
+          "current_key": "AIzaSyC-QidEdKNmEMri0_N4c-kmREG5BiDBwEk"
         }
       ],
       "services": {

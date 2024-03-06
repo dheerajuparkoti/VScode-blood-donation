@@ -72,7 +72,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
     });
 
     var res =
-        await CallApi().loadEmergencyRequests({}, 'LoadEmergencyRequests');
+        await CallApi().loadEmergencyRequests({}, 'loadEmergencyRequests');
 
     if (res.statusCode == 200) {
       try {

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class RegUserController extends Controller
 {
 
-    public function RegUser(Request $request)
+    public function regUser(Request $request)
     {
         // Check if the donor already exists in reg_donors table
         $existingDonor = RegDonor::where('phone', $request->input('phone'))

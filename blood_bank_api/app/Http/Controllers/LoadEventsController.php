@@ -9,31 +9,10 @@ use App\Models\EventStatus;
 
 class LoadEventsController extends Controller
 {
-    //
-    
-    
-    /*
-    public function LoadEvents(Request $request)
-    {     
-
-        
-        $allRequests = LoadEvents::all();     
-       
-    
-         // Log the retrieved data
-         \Log::info('Retrieved all request blood data: ' . json_encode($allRequests));
-    
-         return response()->json([
-             'responseEvents' => $allRequests,
-         ]);
-       
-    }
-    
-    */
-    
+   
 
 
-    public function LoadEvents(Request $request)
+    public function loadEvents(Request $request)
 {     
  // Retrieve the donor ID from the request
  $donorId = $request->input('donorId');

@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   fetchDonorCounts() async {
     // bool isConnected = await ConnectivityUtil.isInternetConnected();
     // if (isConnected) {
-    final res = await CallApi().countDonors({}, 'DonorCountsByBloodGroup');
+    final res = await CallApi().countDonors({}, 'donorCountsByBloodGroup');
     if (res.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = json.decode(res.body);
       if (mounted) {
