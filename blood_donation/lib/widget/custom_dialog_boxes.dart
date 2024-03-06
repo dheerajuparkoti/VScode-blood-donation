@@ -6,9 +6,7 @@ class CustomDialog {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        double sw = MediaQuery.of(context).size.width;
         double sh = MediaQuery.of(context).size.height;
-        double asr = sh / sw;
         return AlertDialog(
           content: SizedBox(
             width: double.maxFinite, // Adjust the width as needed
@@ -20,20 +18,20 @@ class CustomDialog {
                   style: TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,
-                    fontSize: 9.30 * asr,
+                    fontSize: 0.025 * sh,
                   ),
                 ),
-                SizedBox(height: 5.1 * asr),
+                SizedBox(height: 0.005 * sh),
                 Icon(
                   iconData,
                   color: Colors.red,
-                  size: 20.4 * asr,
+                  size: 0.05 * sh,
                 ),
-                SizedBox(height: 5.1 * asr),
+                SizedBox(height: 0.005 * sh),
                 Text(
                   message,
                   style: TextStyle(
-                    fontSize: 8.26 * asr,
+                    fontSize: 0.018 * sh,
                   ),
                 ),
               ],
@@ -50,7 +48,7 @@ class CustomDialog {
               child: Text(
                 'OK',
                 style: TextStyle(
-                  fontSize: 9.30 * asr,
+                  fontSize: 0.018 * sh,
                 ),
               ),
             ),
@@ -72,16 +70,14 @@ class CustomDialog {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        double sw = MediaQuery.of(context).size.width;
         double sh = MediaQuery.of(context).size.height;
-        double asr = sh / sw;
         return AlertDialog(
           title: Text(
             title,
             style: TextStyle(
               color: Colors.red,
               fontWeight: FontWeight.bold,
-              fontSize: 8.26 * asr,
+              fontSize: 0.025 * sh,
             ),
           ),
           content: Column(
@@ -90,13 +86,13 @@ class CustomDialog {
               Icon(
                 iconData,
                 color: Colors.red,
-                size: 15.5 * asr,
+                size: 0.05 * sh,
               ),
-              SizedBox(height: 5.1 * asr),
+              SizedBox(height: 0.005 * sh),
               Text(
                 message,
                 style: TextStyle(
-                  fontSize: 8.26 * asr,
+                  fontSize: 0.018 * sh,
                 ),
               ),
             ],
@@ -113,7 +109,7 @@ class CustomDialog {
               child: Text(
                 'Yes',
                 style: TextStyle(
-                  fontSize: 9.30 * asr,
+                  fontSize: 0.018 * sh,
                 ),
               ),
             ),
@@ -127,7 +123,7 @@ class CustomDialog {
               child: Text(
                 'No',
                 style: TextStyle(
-                  fontSize: 9.30 * asr,
+                  fontSize: 0.018 * sh,
                 ),
               ),
             ),
@@ -149,8 +145,7 @@ class CustomSnackBar {
     SnackBarBehavior behavior = SnackBarBehavior.floating,
   }) {
     double sw = MediaQuery.of(context).size.width;
-    double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -160,14 +155,14 @@ class CustomSnackBar {
               icon,
               color: Colors.white,
             ),
-            SizedBox(width: 4.08 * asr),
+            SizedBox(width: 0.05 * sw),
             Flexible(
               child: Text(
                 message,
                 style: const TextStyle(color: Colors.white),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
                 maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
             ),
           ],
@@ -189,8 +184,7 @@ class CustomSnackBar {
     SnackBarBehavior behavior = SnackBarBehavior.floating,
   }) {
     double sw = MediaQuery.of(context).size.width;
-    double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
@@ -200,14 +194,14 @@ class CustomSnackBar {
               icon,
               color: Colors.white,
             ),
-            SizedBox(width: 4.08 * asr),
+            SizedBox(width: 0.05 * sw),
             Flexible(
               child: Text(
                 message,
                 style: const TextStyle(color: Colors.white),
-                textAlign: TextAlign.start,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
+                textAlign: TextAlign.start,
               ),
             ),
           ],

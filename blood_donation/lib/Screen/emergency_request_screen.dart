@@ -71,7 +71,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
       isLoading = true; // Set loading to true when starting to load data
     });
 
-    var res = await CallApi().loadAllMyRequests({}, 'LoadEmergencyRequests');
+    var res =
+        await CallApi().loadEmergencyRequests({}, 'LoadEmergencyRequests');
 
     if (res.statusCode == 200) {
       try {
@@ -101,7 +102,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
     Map<int, int> parsedDonorCounts = {};
     if (donorCountsJson is Map) {
       donorCountsJson.forEach((key, value) {
-        parsedDonorCounts[int.tryParse(key) ?? 0] = value;
+        parsedDonorCounts[int.parse(key)] = int.tryParse(value)!;
       });
     }
     return parsedDonorCounts;
@@ -179,7 +180,6 @@ class _EmergencyRequestState extends State<EmergencyRequest>
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
     super.build(context);
 
     return Scaffold(
@@ -203,9 +203,9 @@ class _EmergencyRequestState extends State<EmergencyRequest>
 
         //HEADER
         Padding(
-          padding: EdgeInsets.only(top: 15.5 * asr),
+          padding: EdgeInsets.only(top: 0.045 * sh),
           child: Container(
-              height: 15.5 * asr,
+              height: 0.04 * sh,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.green,
@@ -216,7 +216,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                   '"Donate Blood Save Life Now"',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 10.39 * asr,
+                    fontSize: 0.025 * sh,
                     fontWeight: FontWeight.bold,
                     color: const Color.fromARGB(255, 255, 255, 255),
                   ),
@@ -226,9 +226,9 @@ class _EmergencyRequestState extends State<EmergencyRequest>
 
         Padding(
           padding: EdgeInsets.only(
-            top: 35.7 * asr,
-            left: 0.51 * asr,
-            right: 0.51 * asr,
+            top: 0.08 * sh,
+            left: 0.005 * sw,
+            right: 0.005 * sw,
             bottom: 0.0,
           ),
           child: Container(
@@ -237,8 +237,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(5.1 * asr),
-                topRight: Radius.circular(5.1 * asr),
+                topLeft: Radius.circular(0 * sh),
+                topRight: Radius.circular(0 * sh),
               ),
             ),
             child: SingleChildScrollView(
@@ -247,10 +247,10 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                 children: <Widget>[
                   Padding(
                       padding: EdgeInsets.only(
-                        left: 5.1 * asr,
-                        right: 5.1 * asr,
+                        left: 0.03 * sw,
+                        right: 0.01 * sw,
                         bottom: 0,
-                        top: 0.0,
+                        top: 0.02 * sh,
                       ),
                       child: Align(
                         alignment: Alignment.bottomLeft,
@@ -259,7 +259,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                           style: TextStyle(
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
-                            fontSize: 8.26 * asr,
+                            fontSize: 0.02 * sh,
                           ),
                         ),
                       )),
@@ -275,20 +275,20 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                             donorCounts[emergencyRequestId] ?? 0;
 
                         return SizedBox(
-                          height: 147.9 * asr,
+                          height: 0.355 * sh,
                           child: Card(
                             margin: const EdgeInsets.all(0.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0.0),
                             ),
-                            elevation: 0.51 * asr,
+                            elevation: 0.0012 * sh,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 // First Row Container
                                 Container(
-                                  height: 15.5 * asr,
-                                  padding: EdgeInsets.all(2.58 * asr),
+                                  height: 0.037 * sh,
+                                  padding: EdgeInsets.all(0.005 * sh),
                                   color: const Color(0xFF444242),
                                   child: Row(
                                     mainAxisAlignment:
@@ -311,8 +311,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                 // Second Row Container
 
                                 Container(
-                                  height: 110 * asr,
-                                  padding: EdgeInsets.all(5.1 * asr),
+                                  height: 0.265 * sh,
+                                  padding: EdgeInsets.all(0.012 * sh),
                                   color: Colors.white,
                                   child: Align(
                                     alignment: Alignment.centerLeft,
@@ -328,13 +328,13 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Patient Name : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Text(
                                               '${emergencyData['fullName']}',
                                               style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                           ],
                                         ),
@@ -344,13 +344,13 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Required Pint : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Text(
                                               '${emergencyData['requiredPint']}',
                                               style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                           ],
                                         ),
@@ -360,13 +360,13 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Case Detail : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Text(
                                               '${emergencyData['caseDetail']}',
                                               style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                           ],
                                         ),
@@ -376,13 +376,13 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Contact Person : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Text(
                                               '${emergencyData['contactPersonName']}',
                                               style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                           ],
                                         ),
@@ -392,13 +392,13 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Phone : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Text(
                                               '${emergencyData['contactNo']}',
                                               style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                           ],
                                         ),
@@ -408,13 +408,13 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Hospital : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Text(
                                               '${emergencyData['hospitalName']}',
                                               style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                           ],
                                         ),
@@ -424,14 +424,14 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Address : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Expanded(
                                               child: Text(
                                                 '${emergencyData['localLevel']}-${emergencyData['wardNo']}, ${emergencyData['district']}, Pro. ${emergencyData['province']}',
                                                 style: TextStyle(
                                                     color: Colors.red,
-                                                    fontSize: 6.2 * asr),
+                                                    fontSize: 0.015 * sh),
                                                 overflow: TextOverflow.ellipsis,
                                                 maxLines:
                                                     2, // Adjust this value as needed
@@ -446,7 +446,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Date & Time : ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Text(
                                               //  '${emergencyData['requiredDate']}, ${emergencyData['requiredTime']}',
@@ -454,7 +454,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
 
                                               style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                           ],
                                         ),
@@ -464,13 +464,13 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                               'Donors Available Up-to-date: ',
                                               style: TextStyle(
                                                   color: Colors.black,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                             Text(
                                               donorCount.toString(),
                                               style: TextStyle(
                                                   color: Colors.red,
-                                                  fontSize: 6.2 * asr),
+                                                  fontSize: 0.015 * sh),
                                             ),
                                           ],
                                         ),
@@ -482,8 +482,8 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                 // Third Row Container
 
                                 Container(
-                                  height: 20.4 * asr,
-                                  padding: EdgeInsets.all(1.5 * asr),
+                                  height: 0.05 * sh,
+                                  padding: EdgeInsets.all(0.008 * sw),
                                   color: const Color(0xFF8CC653),
                                   child: Row(
                                     mainAxisAlignment:
@@ -497,12 +497,12 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                           },
                                           icon: Icon(
                                             Icons.phone,
-                                            size: 7.23 * asr,
+                                            size: 0.017 * sh,
                                             color: Colors.green,
                                           ),
                                           label: Text('Call',
                                               style: TextStyle(
-                                                fontSize: 6.2 * asr,
+                                                fontSize: 0.012 * sh,
                                                 color: Colors.green,
                                               )),
                                           style: TextButton.styleFrom(
@@ -515,7 +515,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 1.29 * asr),
+                                      SizedBox(width: 0.008 * sw),
                                       Expanded(
                                         child: TextButton.icon(
                                           onPressed: () {
@@ -534,12 +534,12 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                           },
                                           icon: Icon(
                                             Icons.share,
-                                            size: 7.23 * asr,
+                                            size: 0.017 * sh,
                                             color: Colors.blue,
                                           ),
                                           label: Text('Share',
                                               style: TextStyle(
-                                                fontSize: 6.2 * asr,
+                                                fontSize: 0.015 * sh,
                                                 color: Colors.blue,
                                               )),
                                           style: TextButton.styleFrom(
@@ -552,7 +552,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 1.29 * asr),
+                                      SizedBox(width: 0.008 * sw),
                                       Expanded(
                                         flex: 2,
                                         child: TextButton.icon(
@@ -574,12 +574,12 @@ class _EmergencyRequestState extends State<EmergencyRequest>
                                           },
                                           icon: Icon(
                                             Icons.waving_hand,
-                                            size: 7.23 * asr,
+                                            size: 0.017 * sh,
                                             color: Colors.red,
                                           ),
                                           label: Text("I'm Available",
                                               style: TextStyle(
-                                                fontSize: 6.2 * asr,
+                                                fontSize: 0.015 * sh,
                                                 color: Colors.red,
                                               )),
                                           style: TextButton.styleFrom(
@@ -616,7 +616,7 @@ class _EmergencyRequestState extends State<EmergencyRequest>
             child: CircularProgressIndicator(
               valueColor: const AlwaysStoppedAnimation<Color>(
                   Colors.red), // Color of the progress indicator
-              strokeWidth: 2.58 * asr, // Thickness of the progress indicator
+              strokeWidth: 0.01 * sw, // Thickness of the progress indicator
               backgroundColor: Colors.black.withOpacity(
                   0.5), // Background color of the progress indicator
             ),

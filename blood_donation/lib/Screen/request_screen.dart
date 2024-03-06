@@ -259,7 +259,7 @@ class _RequestScreenState extends State<RequestScreen>
       } catch (e) {
         CustomDialog.showAlertDialog(
           context,
-          'Server Error',
+          'Server Error I am here',
           'There was an error connecting to the server. Please try again later.',
           Icons.error_outline,
         );
@@ -269,7 +269,7 @@ class _RequestScreenState extends State<RequestScreen>
       // Handle different status codes appropriately
       CustomDialog.showAlertDialog(
         context,
-        'Network Error',
+        'Network Error im in second ',
         'There was an error connecting to the server. Please try again later.',
         Icons.error_outline,
       );
@@ -313,7 +313,7 @@ class _RequestScreenState extends State<RequestScreen>
       } catch (e) {
         CustomDialog.showAlertDialog(
           context,
-          'Server Error',
+          'Server Error load other request error',
           'There was an error connecting to the server. Please try again later.',
           Icons.error_outline,
         );
@@ -336,7 +336,7 @@ class _RequestScreenState extends State<RequestScreen>
     Map<int, int> parsedDonorCounts = {};
     if (donorCountsJson is Map) {
       donorCountsJson.forEach((key, value) {
-        parsedDonorCounts[int.tryParse(key) ?? 0] = value;
+        parsedDonorCounts[int.parse(key)] = int.tryParse(value)!;
       });
     }
     return parsedDonorCounts;
@@ -347,24 +347,17 @@ class _RequestScreenState extends State<RequestScreen>
   // Sending data to emergency_request_available_donors when Im available button clicked
 
   rAvailableDonors(int reqId) async {
-    // if (userProvider != null) {
     var data = {
       'rAvailableId': reqId,
-      // 'donorAvailableId': userProvider!.donorId,
       'donorAvailableId': userProvider.donorId,
     };
 
     var res = await CallApi().erDonors(data,
         'rAvailableDonors'); //this is method name defined in controller and api.php route
 
-    // Check if the response is not null
     if (res != null) {
       var body = jsonDecode(res.body);
-      // print('Response body: $body'); // Print the response body for debugging
-
-      // Check if 'success' key exists and is not null
       if (body.containsKey('success') && body['success'] != null) {
-        // Check if 'success' is a boolean
         if (body['success'] is bool && body['success']) {
           // print('Request successful!'); // Request was successful
         } else {
@@ -384,8 +377,6 @@ class _RequestScreenState extends State<RequestScreen>
 
   @override
   bool get wantKeepAlive => true;
-
-//Date Time Picker
 
   DateTime selectedDate = DateTime.now();
   final TextEditingController requiredDateController = TextEditingController();
@@ -459,7 +450,6 @@ class _RequestScreenState extends State<RequestScreen>
   }
 
 // delete myRequest
-// Function to delete request
   Future<void> deleteRequest(int requestId) async {
     var data = {
       'requestId': requestId,
@@ -514,7 +504,6 @@ class _RequestScreenState extends State<RequestScreen>
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
     super.build(context); // to maintain state between two tabs
 
     return Scaffold(
@@ -534,8 +523,8 @@ class _RequestScreenState extends State<RequestScreen>
                 ],
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(0.15 * sh),
-                bottomRight: Radius.circular(0.25 * sh),
+                bottomLeft: Radius.circular(0.25 * sh),
+                bottomRight: Radius.circular(0.5 * sh),
               ),
             ),
           ),
@@ -618,7 +607,7 @@ class _RequestScreenState extends State<RequestScreen>
                       SingleChildScrollView(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 15.5 * asr,
+                            horizontal: 0.07 * sw,
                           ),
                           child: Center(
                               child: Column(
@@ -984,7 +973,7 @@ class _RequestScreenState extends State<RequestScreen>
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 15.5 * asr),
+                              SizedBox(height: 0.02 * sh),
                             ],
                           )),
                         ),
@@ -999,7 +988,7 @@ class _RequestScreenState extends State<RequestScreen>
                           children: <Widget>[
                             Padding(
                                 padding: EdgeInsets.only(
-                                  left: 5.1 * asr,
+                                  left: 0.03 * sw,
                                   bottom: 0,
                                   top: 0,
                                 ),
@@ -1010,7 +999,7 @@ class _RequestScreenState extends State<RequestScreen>
                                     style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                     ),
                                   ),
                                 )),
@@ -1039,22 +1028,22 @@ class _RequestScreenState extends State<RequestScreen>
                                   }
 
                                   return SizedBox(
-                                    height: 147.9 * asr,
+                                    height: 0.355 * sh,
                                     child: Card(
                                       margin: const EdgeInsets.all(0.0),
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(0.0),
                                       ),
-                                      elevation: 0.51 * asr,
+                                      elevation: 0.0013 * sh,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: <Widget>[
                                           // First Row Container
                                           Container(
-                                            height: 15.5 * asr,
-                                            padding: EdgeInsets.all(2.58 * asr),
+                                            height: 0.037 * sh,
+                                            padding: EdgeInsets.all(0.005 * sh),
                                             color: const Color(0xFF444242),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1078,8 +1067,8 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Second Row Container
 
                                           Container(
-                                            height: 110 * asr,
-                                            padding: EdgeInsets.all(5.1 * asr),
+                                            height: 0.265 * sh,
+                                            padding: EdgeInsets.all(0.012 * sh),
                                             color: Colors.white,
                                             child: Align(
                                               alignment: Alignment.centerLeft,
@@ -1097,14 +1086,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${requestData['fullName']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1115,14 +1104,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${requestData['requiredPint']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1133,14 +1122,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${requestData['caseDetail']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1151,14 +1140,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${requestData['contactPersonName']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1169,14 +1158,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${requestData['contactNo']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1187,14 +1176,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${requestData['hospitalName']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1205,7 +1194,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Expanded(
                                                         child: Text(
@@ -1213,7 +1202,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                           style: TextStyle(
                                                               color: Colors.red,
                                                               fontSize:
-                                                                  6.2 * asr),
+                                                                  0.015 * sh),
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           maxLines:
@@ -1231,14 +1220,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${requestData['requiredDate']}, ${_formatTimeFromDatabase(requestData['requiredTime'])}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1247,13 +1236,13 @@ class _RequestScreenState extends State<RequestScreen>
                                                       'Donors Available Up-to-date: ',
                                                       style: TextStyle(
                                                           color: Colors.black,
-                                                          fontSize: 6.2 * asr),
+                                                          fontSize: 0.015 * sh),
                                                     ),
                                                     Text(
                                                       '${allMydonorCount ?? 'Loading...'}',
                                                       style: TextStyle(
                                                           color: Colors.red,
-                                                          fontSize: 6.2 * asr),
+                                                          fontSize: 0.015 * sh),
                                                     ),
                                                   ]),
                                                 ],
@@ -1264,8 +1253,8 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Third Row Container
 
                                           Container(
-                                            height: 20.4 * asr,
-                                            padding: EdgeInsets.all(1.5 * asr),
+                                            height: 0.05 * sh,
+                                            padding: EdgeInsets.all(0.008 * sw),
                                             color: const Color(0xFF8CC653),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1305,12 +1294,12 @@ class _RequestScreenState extends State<RequestScreen>
                                                     },
                                                     icon: Icon(
                                                       Icons.delete_forever,
-                                                      size: 7.23 * asr,
+                                                      size: 0.017 * sh,
                                                       color: Colors.red,
                                                     ),
                                                     label: Text('Delete',
                                                         style: TextStyle(
-                                                          fontSize: 6.2 * asr,
+                                                          fontSize: 0.015 * sh,
                                                           color: Colors.red,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1329,18 +1318,18 @@ class _RequestScreenState extends State<RequestScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(width: 1.29 * asr),
+                                                SizedBox(width: 0.008 * sw),
                                                 Expanded(
                                                   child: TextButton.icon(
                                                     onPressed: () {},
                                                     icon: Icon(
                                                       Icons.map,
-                                                      size: 7.23 * asr,
+                                                      size: 0.017 * sh,
                                                       color: Colors.blue,
                                                     ),
                                                     label: Text('Map View',
                                                         style: TextStyle(
-                                                          fontSize: 6.2 * asr,
+                                                          fontSize: 0.015 * sh,
                                                           color: Colors.blue,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1359,7 +1348,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(width: 1.29 * asr),
+                                                SizedBox(width: 0.008 * sw),
                                                 Expanded(
                                                   child: TextButton.icon(
                                                     onPressed: () {
@@ -1408,12 +1397,13 @@ class _RequestScreenState extends State<RequestScreen>
                                                     },
                                                     icon: Icon(
                                                       Icons.list,
-                                                      size: 7.23 * asr,
+                                                      size: 0.017 * sh,
                                                       color: Colors.green,
                                                     ),
                                                     label: Text('List View',
                                                         style: TextStyle(
-                                                            fontSize: 6.2 * asr,
+                                                            fontSize:
+                                                                0.015 * sh,
                                                             color:
                                                                 Colors.green)),
                                                     style: TextButton.styleFrom(
@@ -1457,7 +1447,7 @@ class _RequestScreenState extends State<RequestScreen>
                           children: <Widget>[
                             Padding(
                                 padding: EdgeInsets.only(
-                                  left: 5.1 * asr,
+                                  left: 0.02 * sh,
                                   bottom: 0,
                                   top: 0,
                                 ),
@@ -1468,7 +1458,7 @@ class _RequestScreenState extends State<RequestScreen>
                                     style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 8.26 * asr,
+                                      fontSize: 0.02 * sh,
                                     ),
                                   ),
                                 )),
@@ -1484,22 +1474,22 @@ class _RequestScreenState extends State<RequestScreen>
                                   final int donorCount =
                                       donorCounts[requestId] ?? 0;
                                   return SizedBox(
-                                    height: 150 * asr,
+                                    height: 0.355 * sh,
                                     child: Card(
                                       margin: const EdgeInsets.all(0.0),
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(0.0),
                                       ),
-                                      elevation: 0.51 * asr,
+                                      elevation: 0.0012 * sh,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: <Widget>[
                                           // First Row Container
                                           Container(
-                                            height: 15.5 * asr,
-                                            padding: EdgeInsets.all(2.58 * asr),
+                                            height: 0.037 * sh,
+                                            padding: EdgeInsets.all(0.005 * sh),
                                             color: const Color(0xFF444242),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1523,8 +1513,8 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Second Row Container
 
                                           Container(
-                                            height: 110 * asr,
-                                            padding: EdgeInsets.all(5.1 * asr),
+                                            height: 0.265 * sh,
+                                            padding: EdgeInsets.all(0.012 * sh),
                                             color: Colors.white,
                                             child: Align(
                                               alignment: Alignment.centerLeft,
@@ -1542,14 +1532,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['fullName']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1560,14 +1550,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['requiredPint']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1578,14 +1568,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['caseDetail']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1596,14 +1586,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['contactPersonName']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1614,14 +1604,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['contactNo']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1632,14 +1622,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['hospitalName']}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1650,7 +1640,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Expanded(
                                                         child: Text(
@@ -1658,7 +1648,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                           style: TextStyle(
                                                               color: Colors.red,
                                                               fontSize:
-                                                                  6.2 * asr),
+                                                                  0.015 * sh),
                                                           overflow: TextOverflow
                                                               .ellipsis,
                                                           maxLines:
@@ -1676,14 +1666,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         '${otherRequestData['requiredDate']}, ${_formatTimeFromDatabase(otherRequestData['requiredTime'])}',
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1694,14 +1684,14 @@ class _RequestScreenState extends State<RequestScreen>
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                       Text(
                                                         donorCount.toString(),
                                                         style: TextStyle(
                                                             color: Colors.red,
                                                             fontSize:
-                                                                6.2 * asr),
+                                                                0.015 * sh),
                                                       ),
                                                     ],
                                                   ),
@@ -1713,8 +1703,8 @@ class _RequestScreenState extends State<RequestScreen>
                                           // Third Row Container
 
                                           Container(
-                                            height: 20.4 * asr,
-                                            padding: EdgeInsets.all(1.5 * asr),
+                                            height: 0.05 * sh,
+                                            padding: EdgeInsets.all(0.008 * sw),
                                             color: const Color(0xFF8CC653),
                                             child: Row(
                                               mainAxisAlignment:
@@ -1729,12 +1719,12 @@ class _RequestScreenState extends State<RequestScreen>
                                                     },
                                                     icon: Icon(
                                                       Icons.phone,
-                                                      size: 7.23 * asr,
+                                                      size: 0.017 * sh,
                                                       color: Colors.green,
                                                     ),
                                                     label: Text('Call',
                                                         style: TextStyle(
-                                                          fontSize: 6.2 * asr,
+                                                          fontSize: 0.015 * sh,
                                                           color: Colors.green,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1749,7 +1739,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(width: 1.29 * asr),
+                                                SizedBox(width: 0.008 * sw),
                                                 Expanded(
                                                   child: TextButton.icon(
                                                     onPressed: () {
@@ -1768,12 +1758,12 @@ class _RequestScreenState extends State<RequestScreen>
                                                     },
                                                     icon: Icon(
                                                       Icons.share,
-                                                      size: 7.23 * asr,
+                                                      size: 0.017 * sh,
                                                       color: Colors.blue,
                                                     ),
                                                     label: Text('Share',
                                                         style: TextStyle(
-                                                          fontSize: 6.2 * asr,
+                                                          fontSize: 0.015 * sh,
                                                           color: Colors.blue,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1788,7 +1778,7 @@ class _RequestScreenState extends State<RequestScreen>
                                                     ),
                                                   ),
                                                 ),
-                                                SizedBox(width: 1.29 * asr),
+                                                SizedBox(width: 0.008 * sw),
                                                 Expanded(
                                                   flex: 2,
                                                   child: TextButton.icon(
@@ -1804,12 +1794,12 @@ class _RequestScreenState extends State<RequestScreen>
                                                     },
                                                     icon: Icon(
                                                       Icons.waving_hand,
-                                                      size: 7.23 * asr,
+                                                      size: 0.017 * sh,
                                                       color: Colors.red,
                                                     ),
                                                     label: Text("I'm Available",
                                                         style: TextStyle(
-                                                          fontSize: 6.2 * asr,
+                                                          fontSize: 0.015 * sh,
                                                           color: Colors.red,
                                                         )),
                                                     style: TextButton.styleFrom(
@@ -1826,10 +1816,6 @@ class _RequestScreenState extends State<RequestScreen>
                                                 ),
                                               ],
                                             ),
-                                          ),
-
-                                          SizedBox(
-                                            height: 2.58 * asr,
                                           ),
                                         ],
                                       ),
@@ -1855,7 +1841,7 @@ class _RequestScreenState extends State<RequestScreen>
               child: CircularProgressIndicator(
                 valueColor: const AlwaysStoppedAnimation<Color>(
                     Colors.red), // Color of the progress indicator
-                strokeWidth: 2.58 * asr, // Thickness of the progress indicator
+                strokeWidth: 0.01 * sw, // Thickness of the progress indicator
                 backgroundColor: Colors.black.withOpacity(
                     0.5), // Background color of the progress indicator
               ),

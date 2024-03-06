@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:blood_donation/Screen/sign_in_up_screen.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -32,27 +31,23 @@ class _LoginState extends State<SplashScreen> {
   }
 
   void _showNoInternetDialog() {
-    double sw = MediaQuery.of(context).size.width;
-    double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => AlertDialog(
-        title: Row(
+        title: const Row(
           children: [
-            const Icon(
+            Icon(
               Icons.error,
               color: Colors.red, // Set the color of the error icon to red
             ),
             SizedBox(
-                width: 4.08 *
-                    asr), // Add some spacing between the icon and the text
+                width: 8), // Add some spacing between the icon and the text
             Text(
               'No Internet',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 9.30 * asr,
+                fontSize: 18.0,
                 color: Colors.red, // Set the color of the title text to red
               ),
             ),
@@ -90,9 +85,6 @@ class _LoginState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double sw = MediaQuery.of(context).size.width;
-    double sh = MediaQuery.of(context).size.height;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -110,8 +102,8 @@ class _LoginState extends State<SplashScreen> {
             ),
             child: Center(
               child: SizedBox(
-                width: 0.7 * sw,
-                height: 0.25 * sh,
+                width: 300.0,
+                height: 300.0,
                 child: Image.asset(
                   'images/mbblogo.png',
                   fit: BoxFit.contain,
@@ -120,19 +112,19 @@ class _LoginState extends State<SplashScreen> {
             ),
           ),
           if (isLoading) // Show custom styled circular progress indicator if isLoading is true
-            Positioned(
+            const Positioned(
               left: 0,
               right: 0,
-              bottom: 0.025 * sh, // Adjust bottom value as needed
+              bottom: 20, // Adjust bottom value as needed
               child: Center(
                 child: SizedBox(
-                  width: 0.05 * sh,
-                  height: 0.05 * sh,
+                  width: 50,
+                  height: 50,
                   child: CircularProgressIndicator(
-                    valueColor: const AlwaysStoppedAnimation<Color>(
+                    valueColor: AlwaysStoppedAnimation<Color>(
                       Colors.white, // Change color of the progress indicator
                     ),
-                    strokeWidth: 0.01 * sw, // Adjust strokeWidth as needed
+                    strokeWidth: 5, // Adjust strokeWidth as needed
                     backgroundColor: Colors
                         .black12, // Change background color of the progress indicator
                     semanticsLabel: 'Loading', // Add a semantics label

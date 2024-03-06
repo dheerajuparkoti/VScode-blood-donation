@@ -77,7 +77,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   notifiReadEr(int erId) async {
     var data = {
       'erId': erId,
-      'doId': userProvider!.donorId,
+      'doId': userProvider?.donorId,
     };
 
     var res = await CallApi().notificationRead(data, 'notificationReadErId');
@@ -97,7 +97,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   notifiReadRe(int rId) async {
     var data = {
       'rId': rId,
-      'doId': userProvider!.donorId,
+      'doId': userProvider?.userId,
     };
 
     var res = await CallApi().notificationRead(data, 'notificationReadReId');
@@ -147,8 +147,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0.045 * sh,
@@ -233,10 +231,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           final bool isEventReadByDonor =
                               loadingNotificationWithDonorId
                                   .any((notification) {
-                            final dynamic evId = notification[
-                                'evId']; // Use dynamic type for flexibility
+                            final dynamic evId = (notification[
+                                'evId']); // Use dynamic type for flexibility
                             final dynamic notificationEventId =
-                                notificationData['evId'];
+                                (notificationData['evId']);
 
                             // Check if both erId fields are not null and match
                             return evId != null &&
@@ -248,36 +246,39 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           return InkWell(
                             onTap: () {
                               if (notificationData['erId'] != null) {
-                                notifiReadEr(notificationData['erId']);
+                                notifiReadEr(
+                                    (int.parse(notificationData['erId'])));
 
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => EmergencyRequest(
-                                      notificationErId: notificationData[
-                                          'erId'], // Pass the required parameter
+                                      notificationErId: int.parse(notificationData[
+                                          'erId']), // Pass the required parameter
                                     ),
                                   ),
                                 );
                               } else if (notificationData['rId'] != null) {
-                                notifiReadRe(notificationData['rId']);
+                                notifiReadRe(
+                                    int.parse(notificationData['rId']));
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => RequestScreen(
-                                      notificationReId: notificationData[
-                                          'rId'], // Pass the required parameter
+                                      notificationReId: int.parse(notificationData[
+                                          'rId']), // Pass the required parameter
                                     ),
                                   ),
                                 );
                               } else if (notificationData['evId'] != null) {
-                                notifiReadEvent(notificationData['evId']);
+                                notifiReadEvent(
+                                    int.parse(notificationData['evId']));
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => EventsAppointments(
-                                      notificationEvId: notificationData[
-                                          'evId'], // Pass the required parameter
+                                      notificationEvId: int.parse(notificationData[
+                                          'evId']), // Pass the required parameter
                                     ),
                                   ),
                                 );
@@ -286,9 +287,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             child: Card(
                               margin: const EdgeInsets.all(0.0),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0 * asr),
+                                borderRadius: BorderRadius.circular(0 * sh),
                               ),
-                              elevation: 0.51 * asr,
+                              elevation: 0.0012 * sh,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
@@ -297,7 +298,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                     height: 0.07 * sh,
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 0.025 * sw,
-                                        vertical: 0 * asr),
+                                        vertical: 0 * sh),
                                     color: isErReadByDonor
                                         ? const Color.fromARGB(
                                             255, 51, 103, 163)

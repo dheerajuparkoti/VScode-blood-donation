@@ -204,6 +204,7 @@ if ($request->hasFile('image')) {
     // Store the new profile picture
     $imagePath = $request->file('image')->store('profile_pictures');
     $regDonor->profilePic = $imagePath;
+   
 }
 // Save the updated donor data
 if ($regDonor->save()) {

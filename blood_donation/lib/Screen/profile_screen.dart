@@ -71,19 +71,18 @@ class _ProfileState extends State<Profile> {
           loadingUserData = userData;
           loadingProfile = profileData;
           isLoading = false;
-
           donorId = loadingProfile['donorId'] ?? 0;
           profilePic = loadingProfile['profilePic'] ?? '';
           fullName = loadingProfile['fullName'] ?? '';
           dob = loadingProfile['dob'] ?? '';
           gender = loadingProfile['gender'] ?? '';
           bloodGroup = loadingProfile['bloodGroup'] ?? '';
-          province = loadingProfile['province'] ?? 0;
+          province = int.parse(loadingProfile['province']);
           district = loadingProfile['district'] ?? '';
           localLevel = loadingProfile['localLevel'] ?? '';
-          wardNo = loadingProfile['wardNo'] ?? 0;
+          wardNo = int.parse(loadingProfile['wardNo']);
           phone = loadingProfile['phone'] ?? '';
-          email = loadingProfile['email'] ?? 'N/A';
+          email = loadingProfile['email'] ?? "N/A";
           canDonate = loadingProfile['canDonate'] ?? '';
           accountType = loadingUserData['accountType'] ?? 'Guest';
           address = "$localLevel $wardNo, $district, P-$province";
@@ -151,8 +150,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isValidUrl = Uri.tryParse(profilePic)?.isAbsolute ?? false;
-
     // Access the UserProvider
     UserProvider userProvider = Provider.of<UserProvider>(context);
     Text('User ID: ${userProvider.userId}');
@@ -178,36 +175,15 @@ class _ProfileState extends State<Profile> {
       editBtnText = "Back";
     }
 
-    /*
-    if (userProvider.accountType == 'Member' &&
-        userProvider.donorId == donorId) {
-      editBtnText = "Edit";
-    } else if (userProvider.accountType == 'Admin' &&
-        userProvider.donorId == donorId) {
-      editBtnText = "Edit";
-    } else if (userProvider.accountType == 'Admin' &&
-        userProvider.donorId != donorId) {
-      editBtnText = "Edit";
-    } else if (userProvider.accountType == 'SuperAdmin' &&
-        userProvider.donorId == donorId) {
-      editBtnText = "Edit";
-    } else if (userProvider.accountType == 'Admin' &&
-        userProvider.donorId != donorId) {
-      editBtnText = "Edit";
-    } else {
-      editBtnText = "Back";
-    }
-    */
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 20.4 * asr,
+          toolbarHeight: 0.05 * sh,
           title: Text(
             'Profile : $donorId',
             style: TextStyle(
-              fontSize: 10.33 * asr,
+              fontSize: 0.025 * sh,
             ),
           ),
           centerTitle: true,
@@ -233,27 +209,27 @@ class _ProfileState extends State<Profile> {
             SingleChildScrollView(
                 child: Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 8.26 * asr,
-                      vertical: 8.26 * asr,
+                      horizontal: 0.03 * sw,
+                      vertical: 0.01 * sh,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          height: 15.5 * asr,
-                          width: 51.5 * asr,
+                          width: 0.25 * sw,
+                          height: 0.035 * sh,
                           decoration: BoxDecoration(
                             color: const Color(0xFF444242),
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(18.1 * asr),
-                              bottomRight: Radius.circular(18.1 * asr),
+                              topRight: Radius.circular(0.05 * sh),
+                              bottomRight: Radius.circular(0.05 * sh),
                             ),
                           ),
-                          padding: EdgeInsets.only(left: 8.26 * asr),
+                          padding: EdgeInsets.only(left: 0.03 * sw),
                           child: Text(
                             'Profile',
                             style: TextStyle(
-                              fontSize: 10.33 * asr,
+                              fontSize: 0.020 * sh,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
@@ -262,7 +238,7 @@ class _ProfileState extends State<Profile> {
 
                         // Details of Donor Profile
                         SizedBox(
-                            height: 8.26 * asr), // providing vertical spacing
+                            height: 0.01 * sh), // providing vertical spacing
                         Row(
                           children: [
                             Column(
@@ -274,14 +250,14 @@ class _ProfileState extends State<Profile> {
                                   // get name from user database
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 10.33 * asr,
+                                    fontSize: 0.025 * sh,
                                     color: const Color(0xffBF371A),
                                   ),
                                 ),
 
                                 //for underline
                                 Container(
-                                  height: 1.03 * asr, // Height of the underline
+                                  height: 0.002 * sh, // Height of the underline
                                   color: Colors.white,
                                   width:
                                       0.9 * sw, // Adjust the width accordingly
@@ -293,8 +269,7 @@ class _ProfileState extends State<Profile> {
 
                         Padding(
                           padding: EdgeInsets.symmetric(
-                            //horizontal: 8.26*asr,
-                            vertical: 3.06 * asr,
+                            vertical: 0.005 * sh,
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -308,7 +283,7 @@ class _ProfileState extends State<Profile> {
                                       'Date of Birth',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -316,7 +291,7 @@ class _ProfileState extends State<Profile> {
                                       'Phone No.',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -324,7 +299,7 @@ class _ProfileState extends State<Profile> {
                                       'Account Type',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -332,7 +307,7 @@ class _ProfileState extends State<Profile> {
                                       'Blood Group',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -340,7 +315,7 @@ class _ProfileState extends State<Profile> {
                                       'Donation Times',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -348,7 +323,7 @@ class _ProfileState extends State<Profile> {
                                       'Can Donate',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -359,7 +334,7 @@ class _ProfileState extends State<Profile> {
                               //second column starts
                               Padding(
                                 padding:
-                                    EdgeInsets.symmetric(horizontal: 5.1 * asr),
+                                    EdgeInsets.symmetric(horizontal: 0.01 * sw),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -367,35 +342,35 @@ class _ProfileState extends State<Profile> {
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -403,7 +378,7 @@ class _ProfileState extends State<Profile> {
                                       ':',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -420,35 +395,35 @@ class _ProfileState extends State<Profile> {
                                   Text(
                                     dob,
                                     style: TextStyle(
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     phone,
                                     style: TextStyle(
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     accountType,
                                     style: TextStyle(
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     bloodGroup,
                                     style: TextStyle(
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     totalDonationTimesForDonor.toString(),
                                     style: TextStyle(
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
@@ -460,7 +435,7 @@ class _ProfileState extends State<Profile> {
                                             : 'Yes'),
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
@@ -469,24 +444,24 @@ class _ProfileState extends State<Profile> {
                               //Third Column Ends
 
                               SizedBox(
-                                width: 10.0 * asr,
+                                width: 0.05 * sw,
                               ),
 
-                              // Check if 'profilePic' is a valid URL
                               Padding(
-                                padding: EdgeInsets.only(right: 2.58 * asr),
+                                padding: EdgeInsets.only(right: 0.01 * sh),
                                 child: CircleAvatar(
                                   radius: 0.12 * sw,
-
-                                  backgroundImage: isValidUrl
-                                      ? NetworkImage(profilePic)
-                                      : null, // Set to null if 'profilePicUrl' is not a valid URL
-                                  child: isValidUrl
-                                      ? null // Don't show a child widget if 'profilePicUrl' is a valid URL
-                                      : const Icon(
+                                  backgroundImage: profilePic.isNotEmpty
+                                      ? NetworkImage(
+                                          'http://192.168.1.68/$profilePic')
+                                      : null,
+                                  child: (profilePic == "NA")
+                                      ? const Icon(
                                           Icons.person,
                                           color: Colors.red,
-                                        ),
+                                          size: 50,
+                                        )
+                                      : null,
                                 ),
                               ),
                             ],
@@ -495,15 +470,14 @@ class _ProfileState extends State<Profile> {
 
                         //making underline
                         Container(
-                          height: 1.03 * asr, // Height of the underline
+                          height: 0.002 * sh, // Height of the underline
                           color: Colors.white,
-                          width: 155 * asr, // Adjust the width accordingly
+                          width: 0.8 * sw, // Adjust the width accordingly
                         ),
 
                         Padding(
                           padding: EdgeInsets.symmetric(
-                            //horizontal: 8.26*asr,
-                            vertical: 3.06 * asr,
+                            vertical: 0.005 * sh,
                           ),
                           child: Row(
                             children: [
@@ -516,7 +490,7 @@ class _ProfileState extends State<Profile> {
                                       'Address',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -524,7 +498,7 @@ class _ProfileState extends State<Profile> {
                                       'E-mail',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w300,
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -535,7 +509,7 @@ class _ProfileState extends State<Profile> {
                               //second column starts
                               Padding(
                                 padding:
-                                    EdgeInsets.symmetric(horizontal: 5.1 * asr),
+                                    EdgeInsets.symmetric(horizontal: 0.01 * sh),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -543,14 +517,14 @@ class _ProfileState extends State<Profile> {
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
                                     Text(
                                       ':',
                                       style: TextStyle(
-                                        fontSize: 6.2 * asr,
+                                        fontSize: 0.015 * sh,
                                         color: const Color(0xffffffff),
                                       ),
                                     ),
@@ -567,14 +541,14 @@ class _ProfileState extends State<Profile> {
                                   Text(
                                     address, // import data for address
                                     style: TextStyle(
-                                      fontSize: 0.013 * sh,
+                                      fontSize: 0.014 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
                                   Text(
                                     email,
                                     style: TextStyle(
-                                      fontSize: 0.013 * sh,
+                                      fontSize: 0.014 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
@@ -587,31 +561,32 @@ class _ProfileState extends State<Profile> {
 
                         //making underline
                         Container(
-                          height: 1.03 * asr, // Height of the underline
+                          height: 0.002 * sh, // Height of the underline
                           color: Colors.white,
-                          width: 155 * asr, // Adjust the width accordingly
+                          width: 0.7 * sw, // Adjust the width accordingly
                         ),
 
                         // DONATION HISTORY RECORDS
-                        SizedBox(height: 8.26 * asr),
+                        SizedBox(height: 0.03 * sh),
                         Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                height: 15.5 * asr,
-                                width: 103.3 * asr,
+                                width: 0.4 * sw,
+                                height: 0.035 * sh,
                                 decoration: BoxDecoration(
                                   color: const Color(0xFF444242),
                                   borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(18.1 * asr),
-                                    bottomRight: Radius.circular(18.1 * asr),
+                                    topRight: Radius.circular(0.05 * sh),
+                                    bottomRight: Radius.circular(0.05 * sh),
                                   ),
                                 ),
-                                padding: EdgeInsets.only(left: 8.26 * asr),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 0.03 * sw, vertical: 0.0),
                                 child: Text(
                                   'Donation History',
                                   style: TextStyle(
-                                    fontSize: 10.33 * asr,
+                                    fontSize: 0.020 * sh,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -622,56 +597,13 @@ class _ProfileState extends State<Profile> {
                         //Row Headers
 
                         // for underline
+
                         Container(
-                          height: 0.51 * asr, // Height of the underline
+                          height: 0.001 * sh, // Height of the underline
                           color: Colors.white,
-                          width:
-                              double.infinity, // Adjust the width accordingly
+                          width: 1 * sw, // Adjust the width accordingly
                         ),
-/*
-                        const Padding(
-                          padding: EdgeInsets.all(5.0),
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  'Date',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 6.2*asr,
-                                    color: Color(0xffffffff),
-                                  ),
-                                ),
-                                Text(
-                                  'No. of Pints',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 6.2*asr,
-                                    color: Color(0xffffffff),
-                                  ),
-                                ),
-                                Text(
-                                  'Hospital',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 6.2*asr,
-                                    color: Color(0xffffffff),
-                                  ),
-                                ),
-                                Text(
-                                  'Address',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 6.2*asr,
-                                    color: Color(0xffffffff),
-                                  ),
-                                ),
-                              ]),
-                        ),
-                        */
                         SizedBox(
-                          height: 300, // Adjust height as needed
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: DataTable(
@@ -681,7 +613,7 @@ class _ProfileState extends State<Profile> {
                                     'Donated Date',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   ),
@@ -691,7 +623,7 @@ class _ProfileState extends State<Profile> {
                                   'Donated To',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 6.2 * asr,
+                                    fontSize: 0.015 * sh,
                                     color: const Color(0xffffffff),
                                   ),
                                 )),
@@ -700,7 +632,7 @@ class _ProfileState extends State<Profile> {
                                   'No. of Pint',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 6.2 * asr,
+                                    fontSize: 0.015 * sh,
                                     color: const Color(0xffffffff),
                                   ),
                                 )),
@@ -709,7 +641,7 @@ class _ProfileState extends State<Profile> {
                                   'Contact',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 6.2 * asr,
+                                    fontSize: 0.015 * sh,
                                     color: const Color(0xffffffff),
                                   ),
                                 )),
@@ -720,7 +652,7 @@ class _ProfileState extends State<Profile> {
                                     '${record['donatedDate']}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   )),
@@ -728,7 +660,7 @@ class _ProfileState extends State<Profile> {
                                     '${record['donatedTo']}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   )),
@@ -736,7 +668,7 @@ class _ProfileState extends State<Profile> {
                                     '${record['bloodPint']}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   )),
@@ -744,7 +676,7 @@ class _ProfileState extends State<Profile> {
                                     '${record['contact']}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 6.2 * asr,
+                                      fontSize: 0.015 * sh,
                                       color: const Color(0xffffffff),
                                     ),
                                   )),
@@ -768,7 +700,7 @@ class _ProfileState extends State<Profile> {
 
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: 0.0, horizontal: 2.58 * asr),
+                      vertical: 0.0, horizontal: 0.01 * sw),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -788,16 +720,14 @@ class _ProfileState extends State<Profile> {
                                 color: Colors.green,
                               )),
                           style: TextButton.styleFrom(
-                            backgroundColor: const Color(
-                                0xFFFFFFFF), // Change the button color
+                            backgroundColor: const Color(0xFFFFFFFF),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  5.1 * asr), // Adjust the border radius
+                              borderRadius: BorderRadius.circular(0.015 * sh),
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: 2.58 * asr),
+                      SizedBox(width: 0.01 * sw),
                       Expanded(
                         child: TextButton.icon(
                           onPressed: () {
@@ -817,12 +747,12 @@ class _ProfileState extends State<Profile> {
                                 0xFFFFFFFF), // Change the button color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  5.1 * asr), // Adjust the border radius
+                                  0.015 * sh), // Adjust the border radius
                             ),
                           ),
                         ),
                       ),
-                      SizedBox(width: 2.58 * asr),
+                      SizedBox(width: 0.01 * sw),
                       Expanded(
                         child: TextButton.icon(
                           onPressed: () {
@@ -855,7 +785,7 @@ class _ProfileState extends State<Profile> {
                                 0xFFFFFFFF), // Change the button color
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
-                                  5.1 * asr), // Adjust the border radius
+                                  0.015 * sh), // Adjust the border radius
                             ),
                           ),
                         ),
@@ -872,7 +802,7 @@ class _ProfileState extends State<Profile> {
                   valueColor: const AlwaysStoppedAnimation<Color>(
                     Colors.red,
                   ),
-                  strokeWidth: 2.58 * asr,
+                  strokeWidth: 0.01 * sw,
                   backgroundColor: Colors.black.withOpacity(0.5),
                 ),
               ),

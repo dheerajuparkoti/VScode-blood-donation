@@ -168,8 +168,8 @@ class _AvailableListViewState extends State<AvailableListView> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Profile(
-                                        donorId: result[
-                                            'donorAvailableId']), //passing user id to profile screen
+                                        donorId: int.parse(result[
+                                            'donorAvailableId'])), //passing user id to profile screen
                                   ),
                                 );
                               },

@@ -66,7 +66,6 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
     return Scaffold(
         body: Stack(
       children: [

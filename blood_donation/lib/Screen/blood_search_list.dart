@@ -166,13 +166,14 @@ class _BloodSearchListState extends State<BloodSearchList> {
                                     false;
                             return InkWell(
                               onTap: () {
+                                int passDonorId = int.parse(result['donorId']);
                                 // Navigate to the new screen here
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Profile(
-                                        donorId: result[
-                                            'donorId']), //passing user id to profile screen
+                                        donorId:
+                                            passDonorId), //passing user id to profile screen
                                   ),
                                 );
                               },

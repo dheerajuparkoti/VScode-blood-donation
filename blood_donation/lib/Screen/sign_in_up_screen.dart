@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 import 'dart:convert';
+import 'package:blood_donation/Screen/home_screen.dart';
 import 'package:blood_donation/data/internet_connectivity.dart';
-import 'package:blood_donation/main.dart';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/notificationservice/local_notification_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -157,7 +157,7 @@ class _SignInSignUpState extends State<SignInSignUp>
       }
 
       // Check if the age falls within the desired range (18 to 60)
-      return age >= 18 && age <= 60;
+      return age >= 16 && age <= 60;
     } else {
       return false; // Return false if DOB is null
     }
@@ -220,17 +220,7 @@ class _SignInSignUpState extends State<SignInSignUp>
     );
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(_handleTabChange);
-    //getDeviceTokenToSendNotification();
   }
-
-/*
-  Future<void> getDeviceTokenToSendNotification() async {
-    final FirebaseMessaging fcm = FirebaseMessaging.instance;
-    final token = await fcm.getToken();
-    deviceTokenToSendPushNotification = token.toString();
-    print("Token Value $deviceTokenToSendPushNotification");
-  }
-  */
 
 // HANDLE TAB CHANGES START HERE
   void _handleTabChange() {
@@ -279,7 +269,6 @@ class _SignInSignUpState extends State<SignInSignUp>
 
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
 
     return Scaffold(
       //resizeToAvoidBottomInset: false,
@@ -287,7 +276,6 @@ class _SignInSignUpState extends State<SignInSignUp>
       body: Stack(
         children: <Widget>[
           Container(
-            // height: 155 * asr,
             height: 0.45 * sh,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
@@ -299,17 +287,15 @@ class _SignInSignUpState extends State<SignInSignUp>
                 ],
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(77.50 * asr),
-                bottomRight: Radius.circular(155 * asr),
+                bottomLeft: Radius.circular(0.25 * sh),
+                bottomRight: Radius.circular(0.5 * sh),
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: 15.5 * asr, vertical: 7.75 * asr),
+                horizontal: 0.08 * sw, vertical: 0.025 * sh),
             child: SizedBox(
-              //width: 155 * asr,
-              //height: 103.3 * asr,
               width: 0.7 * sw,
               height: 0.25 * sh,
               child: Image.asset(
@@ -320,39 +306,36 @@ class _SignInSignUpState extends State<SignInSignUp>
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-              //horizontal: 15.50 * asr,
-              //vertical: 15.50 * asr,
-              horizontal: 0.05 * sw,
+              horizontal: 0.08 * sw,
               vertical: 0.03 * sh,
             ),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: double.infinity,
-                //height: 310 * asr,
                 height: 0.75 * sh,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(18 * asr),
-                    topRight: Radius.circular(18 * asr),
-                    bottomLeft: Radius.circular(18 * asr),
-                    bottomRight: Radius.circular(18 * asr),
+                    topLeft: Radius.circular(0.05 * sh),
+                    topRight: Radius.circular(0.05 * sh),
+                    bottomLeft: Radius.circular(0.05 * sh),
+                    bottomRight: Radius.circular(0.05 * sh),
                   ),
                 ),
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 10.33 * asr,
+                      height: 0.025 * sh,
                     ),
                     TabBar(
                       indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.2 * asr),
+                        borderRadius: BorderRadius.circular(0.03 * sh),
                         color: const Color(0xffFF0025),
                       ),
                       controller: _tabController,
                       isScrollable: true,
-                      labelPadding: const EdgeInsets.symmetric(horizontal: 30),
+                      labelPadding: EdgeInsets.symmetric(horizontal: 0.1 * sw),
                       indicatorSize: TabBarIndicatorSize.tab,
                       tabs: <Widget>[
                         Tab(
@@ -383,14 +366,15 @@ class _SignInSignUpState extends State<SignInSignUp>
                         physics:
                             const NeverScrollableScrollPhysics(), // restricting Swipe left or right between two tabs
                         children: <Widget>[
-// SIGN IN CONTENTS START HERE
+                          // SIGN IN CONTENTS START HERE
                           SingleChildScrollView(
                             child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 15.5 * asr,
+                                  horizontal: 0.05 * sw,
                                 ),
                                 child: Column(
                                   children: [
+                                    SizedBox(height: 0.025 * sh),
                                     TextField(
                                       controller: signInUsernameController,
                                       decoration: const InputDecoration(
@@ -426,7 +410,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       obscureText: !_isPasswordVisible,
                                       maxLength: 20,
                                     ),
-                                    SizedBox(height: 15.5 * asr),
+                                    SizedBox(height: 0.01 * sh),
 
                                     TextButton(
                                       onPressed: () {
@@ -442,7 +426,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         style: TextStyle(
                                           color: const Color.fromRGBO(
                                               158, 158, 158, 1),
-                                          fontSize: 8.25 * asr,
+                                          fontSize: 0.015 * sh,
                                           decoration: TextDecoration.underline,
                                           decorationColor:
                                               const Color(0xffFF0025),
@@ -452,14 +436,14 @@ class _SignInSignUpState extends State<SignInSignUp>
                                     ),
 
                                     // Making Login button
-                                    SizedBox(height: 15.5 * asr),
+
                                     Container(
-                                      height: 25.75 * asr,
+                                      height: 0.06 * sh,
                                       margin: EdgeInsets.symmetric(
-                                          horizontal: 12.9 * asr),
+                                          horizontal: 0.1 * sw),
                                       decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(25.75 * asr),
+                                            BorderRadius.circular(0.03 * sh),
                                         color: const Color(0xffFF0025),
                                       ),
 
@@ -519,7 +503,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                             style: TextStyle(
                                                 color: const Color.fromARGB(
                                                     255, 255, 255, 255),
-                                                fontSize: 9.30 * asr),
+                                                fontSize: 0.022 * sh),
                                           ),
                                         ),
                                       ),
@@ -534,7 +518,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                           SingleChildScrollView(
                             child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 15.5 * asr,
+                                  horizontal: 0.05 * sw,
                                 ),
                                 child: Column(
                                   children: [
@@ -547,7 +531,6 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       ),
                                       maxLength: 30,
                                     ),
-                                    SizedBox(height: 2.58 * asr),
 
                                     TextField(
                                       controller: dobController,
@@ -602,7 +585,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 12.4 * asr),
+                                    SizedBox(height: 0.02 * sh),
 
                                     DropdownButtonFormField<String>(
                                       decoration: const InputDecoration(
@@ -646,7 +629,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       },
                                     ),
 
-                                    SizedBox(height: 12.4 * asr),
+                                    SizedBox(height: 0.02 * sh),
 
                                     DropdownButtonFormField<String>(
                                       decoration: const InputDecoration(
@@ -684,7 +667,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 12.4 * asr),
+                                    SizedBox(height: 0.02 * sh),
 
                                     DropdownButtonFormField<String>(
                                       decoration: const InputDecoration(
@@ -724,7 +707,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 12.4 * asr),
+                                    SizedBox(height: 0.02 * sh),
 
                                     // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                                     DropdownButtonFormField<String>(
@@ -764,7 +747,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 12.4 * asr),
+                                    SizedBox(height: 0.02 * sh),
 
                                     TextField(
                                       //controller: _textControllers['wardNo'],
@@ -880,14 +863,14 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       ),
 
                                     //making sign up button
-                                    SizedBox(height: 15.5 * asr),
+                                    SizedBox(height: 0.02 * sh),
                                     Container(
-                                      height: 25.75 * asr,
+                                      height: 0.06 * sh,
                                       margin: EdgeInsets.symmetric(
-                                          horizontal: 12.9 * asr),
+                                          horizontal: 0.1 * sw),
                                       decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(25.75 * asr),
+                                            BorderRadius.circular(0.03 * sh),
                                         color: const Color(0xffFF0025),
                                       ),
                                       child: InkWell(
@@ -919,12 +902,12 @@ class _SignInSignUpState extends State<SignInSignUp>
                                             style: TextStyle(
                                                 color: const Color.fromARGB(
                                                     255, 255, 255, 255),
-                                                fontSize: 9.30 * asr),
+                                                fontSize: 0.022 * sh),
                                           ),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 15.5 * asr),
+                                    SizedBox(height: 0.025 * sh),
                                   ],
                                 )),
                           ),
@@ -945,7 +928,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                 valueColor: const AlwaysStoppedAnimation<Color>(
                   Colors.red,
                 ),
-                strokeWidth: 5.0,
+                strokeWidth: 0.01 * sw,
                 backgroundColor: Colors.black.withOpacity(0.5),
               ),
             ),
@@ -959,6 +942,7 @@ class _SignInSignUpState extends State<SignInSignUp>
     setState(() {
       isLoading = true;
     });
+    RegExp numericRegex = RegExp(r'^[0-9]+$');
     if (fullnameController.text.trim() != '' &&
         dobController.text.trim() != '' &&
         selectedGender != null &&
@@ -976,8 +960,16 @@ class _SignInSignUpState extends State<SignInSignUp>
         confirmPasswordController.text.trim() != '' &&
         (newPasswordController.text.trim() ==
             confirmPasswordController.text.trim())) {
-      regUser();
-      isLoading = false;
+      if (numericRegex.hasMatch(phoneController.text.trim())) {
+        regUser();
+        isLoading = false;
+      } else {
+        CustomSnackBar.showUnsuccess(
+            context: context,
+            message: "Contact number should contain only numbers.",
+            icon: Icons.info);
+        isLoading = false;
+      }
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,
@@ -1019,7 +1011,7 @@ class _SignInSignUpState extends State<SignInSignUp>
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const MainPage(),
+            builder: (context) => const HomeScreen(),
           ),
         );
       }
@@ -1097,10 +1089,7 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   @override
   Widget build(BuildContext context) {
     // Get the screen width and height
-    double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
-
     return AlertDialog(
       title: const Text('Reset Password'),
       content: Column(
@@ -1118,7 +1107,7 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
               labelText: 'Phone',
             ),
           ),
-          SizedBox(height: 8.25 * asr),
+          SizedBox(height: 0.02 * sh),
           ElevatedButton(
             onPressed: isLoading
                 ? null

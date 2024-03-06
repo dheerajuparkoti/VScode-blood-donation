@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
 
 class CallApi {
-  final String baseUrl = "http://192.168.100.50:8000/api/";
+  final String baseUrl = "https://mobilebloodbanknepal.com/api/";
+  //final String baseUrl = "http://192.168.1.68:8000/api/";
 
   final String loginUrl = "login";
 
@@ -33,7 +34,7 @@ class CallApi {
 
           prefs.setInt(
               'donorId', donorId); // Store donorId in SharedPreferences
-          //print('Saved authToken to SharedPreferences');
+          print('Saved authToken to SharedPreferences');
 
           return responseData;
         } else {
@@ -124,6 +125,15 @@ class CallApi {
     final myRequestsUrl = baseUrl + apiUrl;
     return await http.post(
       Uri.parse(myRequestsUrl),
+      body: jsonEncode(data),
+      headers: _setHeaders(),
+    );
+  }
+
+  loadEmergencyRequests(data, apiUrl) async {
+    final erRequestsUrl = baseUrl + apiUrl;
+    return await http.post(
+      Uri.parse(erRequestsUrl),
       body: jsonEncode(data),
       headers: _setHeaders(),
     );

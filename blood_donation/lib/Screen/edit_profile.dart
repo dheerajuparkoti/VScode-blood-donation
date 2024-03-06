@@ -107,7 +107,7 @@ class _EditProfileState extends State<EditProfile>
       }
 
       // Check if the age falls within the desired range (18 to 60)
-      return age >= 18 && age <= 60;
+      return age >= 16 && age <= 60;
     } else {
       return false; // Return false if DOB is null
     }
@@ -137,7 +137,7 @@ class _EditProfileState extends State<EditProfile>
         donatedDateController.clear();
         donatedToController.clear();
         contactController.clear();
-        bloodPintController.clear();
+        bloodPintController.text = "1";
         dobController.clear();
       } else if (_tabController.index == 1) {
         fetchDonorData();
@@ -150,7 +150,7 @@ class _EditProfileState extends State<EditProfile>
       donatedDateController.clear();
       donatedToController.clear();
       contactController.clear();
-      bloodPintController.clear();
+      bloodPintController.text = "1";
       dobController.clear();
       fullnameController.clear();
       wardNoController.clear();
@@ -171,7 +171,7 @@ class _EditProfileState extends State<EditProfile>
       'donorId': widget.passedDonorId,
       'donatedDate': donatedDateController.text.trim(),
       'donatedTo': donatedToController.text.trim(),
-      'bloodPint': bloodPintController.text.trim(),
+      'bloodPint': "1",
       'contact': contactController.text.trim(),
     };
 
@@ -239,6 +239,7 @@ class _EditProfileState extends State<EditProfile>
         wardNoController.text = data['wardNo']?.toString() ?? '';
         phoneController.text = data['phone']?.toString() ?? '';
         profilePic = data['profilePic'] ?? '';
+        print("The profile picture url from database is $profilePic");
       });
     } else {
       CustomDialog.showAlertDialog(
@@ -368,8 +369,9 @@ class _EditProfileState extends State<EditProfile>
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
+        print('image is slected $_image');
       } else {
-        // print('No image selected.');
+        print('No image selected.');
       }
     });
   }
@@ -392,14 +394,13 @@ class _EditProfileState extends State<EditProfile>
     }
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFD3B5B5),
       body: Stack(
         children: <Widget>[
           Container(
-            height: 155 * asr,
+            height: 0.45 * sh,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -410,46 +411,40 @@ class _EditProfileState extends State<EditProfile>
                 ],
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(77.5 * asr),
-                bottomRight: Radius.circular(103.3 * asr),
+                bottomLeft: Radius.circular(0.25 * sh),
+                bottomRight: Radius.circular(0.5 * sh),
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 10.33 * asr,
-              vertical: 10.33 * asr,
+              horizontal: 0.05 * sw,
+              vertical: 0.05 * sh,
             ),
             child: Container(
-              width: sw,
-              height: sh,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(18.1 * asr),
-                  topRight: Radius.circular(18.1 * asr),
-                  bottomLeft: Radius.circular(18.1 * asr),
-                  bottomRight: Radius.circular(18.1 * asr),
+                  topLeft: Radius.circular(0.05 * sh),
+                  topRight: Radius.circular(0.05 * sh),
+                  bottomLeft: Radius.circular(0.05 * sh),
+                  bottomRight: Radius.circular(0.05 * sh),
                 ),
               ),
               child: Column(children: [
                 Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(170, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(18.1 * asr),
-                      topRight: Radius.circular(18.1 * asr),
-                      // bottomLeft: Radius.circular(18.1*asr),
-                      // bottomRight: Radius.circular(18.1*asr),
-                    ),
-                  ),
-
                   // Set to transparent
-                  padding: EdgeInsets.only(top: 5.1 * asr, bottom: 5.1 * asr),
+                  padding: EdgeInsets.only(
+                      top: 0.02 * sh,
+                      bottom: 0.02 * sh,
+                      left: 0.02 * sw,
+                      right: 0.02 * sw),
 
                   child: TabBar(
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7.75 * asr),
+                      borderRadius: BorderRadius.circular(0.03 * sh),
                       color: const Color(0xffFF0025),
                     ),
                     controller: _tabController,
@@ -489,10 +484,8 @@ class _EditProfileState extends State<EditProfile>
                       //code for add donation record  i.e 1st tab
                       SingleChildScrollView(
                         child: Padding(
-                          padding: EdgeInsets.only(
-                            left: 15.5 * asr, right: 15.5 * asr, top: 0,
-                            bottom: 0,
-                            //horizontal: 30,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 0.05 * sw,
                           ),
                           child: Center(
                               child: Column(
@@ -500,9 +493,10 @@ class _EditProfileState extends State<EditProfile>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(top: 15.5 * asr),
+                                padding: EdgeInsets.only(
+                                    top: 0.025 * sh, bottom: 0.025 * sh),
                                 child: Container(
-                                    height: 15.5 * asr,
+                                    height: 0.04 * sh,
                                     width: double.infinity,
                                     decoration: const BoxDecoration(
                                       color: Color(0xFF444242),
@@ -513,7 +507,7 @@ class _EditProfileState extends State<EditProfile>
                                         'Blood Donation Data',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          fontSize: 10.33 * asr,
+                                          fontSize: 0.02 * sh,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
@@ -521,7 +515,7 @@ class _EditProfileState extends State<EditProfile>
                                     )),
                               ),
 
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.005 * sh),
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
@@ -529,11 +523,11 @@ class _EditProfileState extends State<EditProfile>
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.red,
-                                    fontSize: 7.23 * asr,
+                                    fontSize: 0.017 * sh,
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 2.58 * asr),
+                              SizedBox(height: 0.005 * sh),
 
                               TextField(
                                 controller: donatedDateController,
@@ -542,7 +536,7 @@ class _EditProfileState extends State<EditProfile>
                                 decoration: InputDecoration(
                                   hintText: "Donated Date (yyyy/mm/dd)",
                                   errorText: selectedDateError
-                                      ? 'You cant set donation date for future'
+                                      ? 'You cannot set donation date for future'
                                       : null,
                                   hintStyle:
                                       const TextStyle(color: Color(0xffaba7a7)),
@@ -553,7 +547,8 @@ class _EditProfileState extends State<EditProfile>
                                 ),
                               ),
 
-                              SizedBox(height: 10.33 * asr),
+                              SizedBox(height: 0.03 * sh),
+
                               TextField(
                                 controller: donatedToController,
                                 decoration: const InputDecoration(
@@ -563,15 +558,16 @@ class _EditProfileState extends State<EditProfile>
                                 ),
                                 maxLength: 50,
                               ),
-                              SizedBox(height: 2.58 * asr),
+
                               TextField(
                                 controller: bloodPintController,
+                                readOnly: true,
                                 decoration: const InputDecoration(
                                   hintText: "Blood Pint",
                                   hintStyle:
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
-                                maxLength: 2,
+                                maxLength: 1,
                                 keyboardType: TextInputType.phone,
                               ),
                               TextField(
@@ -594,17 +590,16 @@ class _EditProfileState extends State<EditProfile>
                                       contactNumberError = value.length != 10;
                                     });
                                   }),
-                              SizedBox(height: 2.58 * asr),
-
+                              SizedBox(height: 0.02 * sh),
                               // Making Add button
-                              SizedBox(height: 15.5 * asr),
+
                               Container(
-                                height: 20.4 * asr,
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 12.9 * asr),
+                                height: 0.05 * sh,
+                                margin:
+                                    EdgeInsets.symmetric(horizontal: 0.2 * sw),
                                 decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.circular(25.75 * asr),
+                                      BorderRadius.circular(0.05 * sh),
                                   color: const Color(0xffFF0025),
                                 ),
                                 //calling insert function when button is pressed
@@ -632,12 +627,12 @@ class _EditProfileState extends State<EditProfile>
                                       style: TextStyle(
                                           color: Color.fromARGB(
                                               255, 255, 255, 255),
-                                          fontSize: 9.30 * asr),
+                                          fontSize: 0.02 * sh),
                                     ),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 15.5 * asr),
+                              SizedBox(height: 0.03 * sh),
                             ],
                           )),
                         ),
@@ -650,17 +645,17 @@ class _EditProfileState extends State<EditProfile>
                         child: Column(children: [
                           Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal: 15.5 * asr,
+                                horizontal: 0.05 * sw,
                               ),
                               child: Column(
                                 children: [
-                                  SizedBox(height: 2.58 * asr),
+                                  SizedBox(height: 0.005 * sh),
                                   Text(
                                     headerNote,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFFF44336),
-                                      fontSize: 8.26 * asr,
+                                      fontSize: 0.015 * sh,
                                     ),
                                     textAlign: TextAlign.left,
                                   ),
@@ -672,43 +667,38 @@ class _EditProfileState extends State<EditProfile>
                                       child: Stack(
                                         alignment: Alignment.center,
                                         children: [
-                                          /*
-                                          CircleAvatar(
-                                            radius: 51.5 * asr,
-                                            backgroundColor: Colors.grey,
-                                            // backgroundImage: profilePic != null ? NetworkImage(profilePic) : AssetImage('assets/default_avatar.png'),
-                                            // backgroundImage: _image != null ? FileImage(_image!) : null,
-                                            backgroundImage: _image != null
-                                                ? FileImage(_image!)
-                                                : null,
-                                            child: _image == null
-                                                ? Icon(
-                                                    Icons.person,
-                                                    size: 38.25 * asr,
-                                                    color: Colors.white,
-                                                  )
-                                                : null,
-                                          ),
-*/
+                                          if (profilePic.isNotEmpty)
+                                            CircleAvatar(
+                                              radius: 0.1 * sh,
+                                              backgroundImage: NetworkImage(
+                                                'https://mobilebloodbanknepal.com/$profilePic',
+                                              ),
+                                              child: (profilePic == 'NA')
+                                                  ? const Icon(
+                                                      Icons.person,
+                                                      color: Colors.red,
+                                                      size: 50,
+                                                    )
+                                                  : null,
+                                            ),
+                                          if (_image != null)
+                                            CircleAvatar(
+                                              radius: 0.1 * sh,
+                                              backgroundImage:
+                                                  FileImage(_image!),
+                                            ),
+
+                                          // If both profilePic and _image are empty or null, display a default icon
+
                                           // Use profilePic as String in CircleAvatar widget
 
-                                          CircleAvatar(
-                                            radius: 100.0,
-                                            backgroundImage: NetworkImage(
-                                                'https://cdn2.vectorstock.com/i/1000x1000/23/91/small-size-emoticon-vector-9852391.jpg'),
-                                            child: const Icon(
-                                              Icons.person,
-                                              color: Colors.red,
-                                            ),
-                                          ),
-
                                           Container(
-                                            padding: EdgeInsets.all(4.08 * asr),
+                                            padding: EdgeInsets.all(0.005 * sh),
                                             decoration: BoxDecoration(
                                               color: Colors.black54,
                                               borderRadius:
                                                   BorderRadius.circular(
-                                                      10.39 * asr),
+                                                      0.05 * sw),
                                             ),
                                             child: const Text(
                                               'Change Profile',
@@ -722,7 +712,7 @@ class _EditProfileState extends State<EditProfile>
                                   ),
                                   // end of circular avatar
 
-                                  SizedBox(height: 2.58 * asr),
+                                  SizedBox(height: 0.005 * sh),
                                   TextField(
                                     controller: fullnameController,
                                     decoration: const InputDecoration(
@@ -732,7 +722,6 @@ class _EditProfileState extends State<EditProfile>
                                     ),
                                     maxLength: 30,
                                   ),
-                                  SizedBox(height: 2.58 * asr),
 
                                   TextField(
                                     controller: dobController,
@@ -784,7 +773,7 @@ class _EditProfileState extends State<EditProfile>
                                       });
                                     },
                                   ),
-                                  SizedBox(height: 12.24 * asr),
+                                  SizedBox(height: 0.005 * sh),
 
                                   //CAN DONATE
                                   DropdownButtonFormField<String>(
@@ -823,7 +812,7 @@ class _EditProfileState extends State<EditProfile>
                                     },
                                   ),
 
-                                  SizedBox(height: 12.24 * asr),
+                                  SizedBox(height: 0.03 * sh),
 
                                   //DROPDOWN BLOOD GROUP
                                   DropdownButtonFormField<String>(
@@ -864,7 +853,7 @@ class _EditProfileState extends State<EditProfile>
                                     },
                                   ),
 
-                                  SizedBox(height: 12.24 * asr),
+                                  SizedBox(height: 0.03 * sh),
 
                                   //DROPDOWN PROVINCE
                                   DropdownButtonFormField<String>(
@@ -899,7 +888,7 @@ class _EditProfileState extends State<EditProfile>
                                       });
                                     },
                                   ),
-                                  SizedBox(height: 12.24 * asr),
+                                  SizedBox(height: 0.03 * sh),
 
                                   // DROPDOWN DISTRICT LISTS BASED ON PROVINCE
                                   DropdownButtonFormField<String>(
@@ -935,7 +924,7 @@ class _EditProfileState extends State<EditProfile>
                                       });
                                     },
                                   ),
-                                  SizedBox(height: 12.24 * asr),
+                                  SizedBox(height: 0.03 * sh),
                                   // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                                   DropdownButtonFormField<String>(
                                     decoration: const InputDecoration(
@@ -969,7 +958,6 @@ class _EditProfileState extends State<EditProfile>
                                       });
                                     },
                                   ),
-                                  SizedBox(height: 10.33 * asr),
 
                                   TextField(
                                     //controller: _textControllers['wardNo'],
@@ -1004,14 +992,14 @@ class _EditProfileState extends State<EditProfile>
                                       }),
 
                                   // Making SignUp button
-                                  SizedBox(height: 15.5 * asr),
+                                  SizedBox(height: 0.02 * sh),
                                   Container(
-                                    height: 25.75 * asr,
+                                    height: 0.05 * sh,
                                     margin: EdgeInsets.symmetric(
-                                        horizontal: 12.9 * asr),
+                                        horizontal: 0.2 * sw),
                                     decoration: BoxDecoration(
                                       borderRadius:
-                                          BorderRadius.circular(25.75 * asr),
+                                          BorderRadius.circular(0.05 * sh),
                                       color: const Color(0xffFF0025),
                                     ),
                                     //calling insert function when button is pressed
@@ -1019,18 +1007,18 @@ class _EditProfileState extends State<EditProfile>
                                       onTap: () {
                                         validationFields();
                                       },
-                                      child: const Center(
+                                      child: Center(
                                         child: Text(
                                           "Update Now",
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 255, 255, 255),
-                                              fontSize: 18),
+                                              fontSize: 0.02 * sh),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(height: 15.5 * asr),
+                                  SizedBox(height: 0.03 * sh),
                                 ],
                               )),
                         ]),
@@ -1049,7 +1037,7 @@ class _EditProfileState extends State<EditProfile>
               child: CircularProgressIndicator(
                 valueColor: const AlwaysStoppedAnimation<Color>(
                     Colors.red), // Color of the progress indicator
-                strokeWidth: 2.58 * asr, // Thickness of the progress indicator
+                strokeWidth: 0.01 * sw, // Thickness of the progress indicator
                 backgroundColor: Colors.black.withOpacity(
                     0.5), // Background color of the progress indicator
               ),
@@ -1063,6 +1051,7 @@ class _EditProfileState extends State<EditProfile>
     setState(() {
       isLoading = true;
     });
+    RegExp numericRegex = RegExp(r'^[0-9]+$');
     if (fullnameController.text.trim() != '' &&
         dobController.text.trim() != '' &&
         selectedGender != null &&
@@ -1075,8 +1064,16 @@ class _EditProfileState extends State<EditProfile>
         phoneController.text.trim() != '' &&
         phoneNumberError == false &&
         dobError == false) {
-      updateProfile();
-      isLoading = false;
+      if (numericRegex.hasMatch(phoneController.text.trim())) {
+        updateProfile();
+        isLoading = false;
+      } else {
+        CustomSnackBar.showUnsuccess(
+            context: context,
+            message: "Contact number should contain only numbers.",
+            icon: Icons.info);
+        isLoading = false;
+      }
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,

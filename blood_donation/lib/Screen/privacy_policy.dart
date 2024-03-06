@@ -7,14 +7,13 @@ class PrivacyPolicy extends StatelessWidget {
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 20.4 * asr,
+        toolbarHeight: 0.05 * sh,
         title: Text(
           'Privacy Policy',
           style: TextStyle(
-            fontSize: 10.39 * asr,
+            fontSize: 0.025 * sh,
           ),
         ),
         centerTitle: true,
@@ -37,30 +36,30 @@ class PrivacyPolicy extends StatelessWidget {
 
         SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(8.26 * asr),
+            padding: EdgeInsets.all(0.01 * sh),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  width: 51.5 * asr,
-                  height: 15.5 * asr,
+                  width: 0.25 * sw,
+                  height: 0.04 * sh,
                   decoration: BoxDecoration(
                     color: const Color(0xFF444242),
                     borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(18.1 * asr),
-                      bottomRight: Radius.circular(18.1 * asr),
+                      topRight: Radius.circular(0.05 * sh),
+                      bottomRight: Radius.circular(0.05 * sh),
                     ),
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: 5.1 * asr, vertical: 0.0),
+                        horizontal: 0.03 * sw, vertical: 0.0),
                     child: Center(
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'We Are',
                           style: TextStyle(
-                            fontSize: 10.39 * asr,
+                            fontSize: 0.020 * sh,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -78,12 +77,12 @@ class PrivacyPolicy extends StatelessWidget {
                           'MOBILE BLOOD BANK NEPAL',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 10.39 * asr,
+                            fontSize: 0.025 * sh,
                             color: const Color(0xffBF371A),
                           ),
                         ),
                         Container(
-                          height: 1.03 * asr, // Height of the underline
+                          height: 0.002 * sh, // Height of the underline
                           color: Colors.white,
                           width: 0.9 * sw, // Adjust the width accordingly
                         ),
@@ -92,7 +91,7 @@ class PrivacyPolicy extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.all(5.1 * asr),
+                  padding: EdgeInsets.all(0.01 * sh),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -102,7 +101,7 @@ class PrivacyPolicy extends StatelessWidget {
                             text:
                                 'Welcome to “Mobile Blood Bank Nepal” where we prioritize your privacy. This policy outlines how we collect, use, disclose, and protect your information when you use our app. By using the app, you agree to this privacy policy and our terms of service.',
                             style: TextStyle(
-                              fontSize: 6.2 * asr,
+                              fontSize: 0.015 * sh,
                               fontWeight: FontWeight.w300,
                               color: const Color(0xFFFFFFFF),
                             ),
@@ -119,8 +118,8 @@ class PrivacyPolicy extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 51.5 * asr,
-                        height: 51.5 * asr,
+                        width: 0.25 * sw,
+                        height: 0.12 * sh,
                         child: Image.asset(
                           'images/logo.png',
                           fit: BoxFit.contain,
@@ -130,47 +129,47 @@ class PrivacyPolicy extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 103.3 * asr,
-                  height: 15.5 * asr,
+                  width: 0.4 * sw,
+                  height: 0.04 * sh,
                   decoration: BoxDecoration(
                     color: const Color(0xFF444242),
                     borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(18.1 * asr),
-                      bottomRight: Radius.circular(18.1 * asr),
+                      topRight: Radius.circular(0.05 * sh),
+                      bottomRight: Radius.circular(0.05 * sh),
                     ),
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: 5.1 * asr, vertical: 0.0),
+                        horizontal: 0.03 * sw, vertical: 0.0),
                     child: Center(
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Privacy & Policy',
                           style: TextStyle(
-                            fontSize: 10.39 * asr,
+                            fontSize: 0.020 * sh,
                             fontWeight: FontWeight.bold,
-                            color: const Color(0xFFFFFFFF),
+                            color: Colors.white,
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: 5.1 * asr),
+                SizedBox(height: 0.005 * sh),
                 Container(
-                  height: 1.03 * asr, // Height of the underline
+                  height: 0.002 * sh, // Height of the underline
                   color: Colors.white,
-                  width: 155 * asr, // Adjust the width accordingly
+                  width: 0.9 * sw, // Adjust the width accordingly
                 ),
                 Padding(
-                  padding: EdgeInsets.all(5.1 * asr),
+                  padding: EdgeInsets.all(0.01 * sh),
                   child: RichText(
                     text: TextSpan(
                       text:
                           'Welcome to “Mobile Blood Bank Nepal” where we prioritize your privacy. This policy outlines how we collect, use, disclose, and protect your information when you use our app. By using the app, you agree to this privacy policy and our terms of service.',
                       style: TextStyle(
-                        fontSize: 6.2 * asr,
+                        fontSize: 0.015 * sh,
                         fontWeight: FontWeight.w300,
                         color: const Color(0xFFFFFFFF),
                       ),

@@ -78,7 +78,7 @@ class _AddNewDonorState extends State<AddNewDonor>
       }
 
       // Check if the age falls within the desired range (18 to 60)
-      return age >= 18 && age <= 60;
+      return age >= 16 && age <= 60;
     } else {
       return false; // Return false if DOB is null
     }
@@ -228,14 +228,14 @@ class _AddNewDonorState extends State<AddNewDonor>
     super.build(context);
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
+
     return Scaffold(
       //resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFD3B5B5),
       body: Stack(
         children: <Widget>[
           Container(
-            height: 155.0 * asr,
+            height: 0.45 * sh,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 begin: Alignment.topCenter,
@@ -246,15 +246,15 @@ class _AddNewDonorState extends State<AddNewDonor>
                 ],
               ),
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(77.5 * asr),
-                bottomRight: Radius.circular(103.3 * asr),
+                bottomLeft: Radius.circular(0.25 * sh),
+                bottomRight: Radius.circular(0.5 * sh),
               ),
             ),
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: 10.3 * asr,
-              vertical: 10.3 * asr,
+              horizontal: 0.05 * sw,
+              vertical: 0.05 * sh,
             ),
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -262,28 +262,24 @@ class _AddNewDonorState extends State<AddNewDonor>
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(18.1 * asr),
-                  topRight: Radius.circular(18.1 * asr),
-                  bottomLeft: Radius.circular(18.1 * asr),
-                  bottomRight: Radius.circular(18.1 * asr),
+                  topLeft: Radius.circular(0.05 * sh),
+                  topRight: Radius.circular(0.05 * sh),
+                  bottomLeft: Radius.circular(0.05 * sh),
+                  bottomRight: Radius.circular(0.05 * sh),
                 ),
               ),
               child: Column(children: [
                 Container(
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(170, 255, 255, 255),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(18.1 * asr),
-                      topRight: Radius.circular(18.1 * asr),
-                    ),
-                  ),
-
                   // Set to transparent
-                  padding: EdgeInsets.only(top: 5.1 * asr, bottom: 5.1 * asr),
+                  padding: EdgeInsets.only(
+                      top: 0.02 * sh,
+                      bottom: 0.02 * sh,
+                      left: 0.02 * sw,
+                      right: 0.02 * sw),
 
                   child: TabBar(
                     indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7.75 * asr),
+                      borderRadius: BorderRadius.circular(0.03 * sh),
                       color: const Color(0xffFF0025),
                     ),
                     controller: _tabController,
@@ -325,22 +321,22 @@ class _AddNewDonorState extends State<AddNewDonor>
                           child: Column(children: [
                             Padding(
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 15.5 * asr,
+                                  horizontal: 0.05 * sw,
                                 ),
                                 child: Column(
                                   children: [
-                                    SizedBox(height: 2.58 * asr),
+                                    SizedBox(height: 0.005 * sh),
                                     Text(
                                       '[Note: Only Admins are allow to fill the new donor form. The donor must use this details to register in our app.]',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: const Color(0xFFF44336),
-                                        fontSize: 8.26 * asr,
+                                        fontSize: 0.02 * sh,
                                       ),
                                       textAlign: TextAlign.left,
                                     ),
 
-                                    SizedBox(height: 2.58 * asr),
+                                    SizedBox(height: 0.005 * sh),
                                     TextField(
                                       //controller: _textControllers['fullName'],
                                       controller: fullnameController,
@@ -351,7 +347,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       ),
                                       maxLength: 30,
                                     ),
-                                    SizedBox(height: 2.58 * asr),
+                                    SizedBox(height: 0.005 * sh),
 
                                     TextField(
                                       //controller: _dateController,
@@ -361,7 +357,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       decoration: InputDecoration(
                                         hintText: "*Date of Birth (yyyy/mm/dd)",
                                         errorText: dobError
-                                            ? 'Age must be between 18-60 to donate blood'
+                                            ? 'Age must be between 16-60 to donate blood'
                                             : null,
                                         hintStyle: const TextStyle(
                                             color: Color(0xffaba7a7)),
@@ -409,7 +405,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 12.24 * asr),
+                                    SizedBox(height: 0.03 * sh),
 
                                     //DROPDOWN BLOOD GROUP
                                     DropdownButtonFormField<String>(
@@ -454,7 +450,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       },
                                     ),
 
-                                    SizedBox(height: 12.24 * asr),
+                                    SizedBox(height: 0.03 * sh),
 
                                     //DROPDOWN PROVINCE
                                     DropdownButtonFormField<String>(
@@ -493,7 +489,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 12.24 * asr),
+                                    SizedBox(height: 0.03 * sh),
 
                                     // DROPDOWN DISTRICT LISTS BASED ON PROVINCE
                                     DropdownButtonFormField<String>(
@@ -534,7 +530,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 12.24 * asr),
+                                    SizedBox(height: 0.03 * sh),
 
                                     // DROPDOWN FOR LOCAL LEVELS BASEDS ON SELECTED DISTRICTS
                                     DropdownButtonFormField<String>(
@@ -574,7 +570,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 10.3 * asr),
+                                    SizedBox(height: 0.03 * sh),
 
                                     TextField(
                                       //controller: _textControllers['wardNo'],
@@ -618,16 +614,15 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       ),
                                       maxLength: 30,
                                     ),
-
-                                    // Making SignUp button
-                                    SizedBox(height: 15.5 * asr),
+                                    // making add donor button
+                                    SizedBox(height: 0.02 * sh),
                                     Container(
-                                      height: 25.75 * asr,
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 25),
+                                      height: 0.05 * sh,
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 0.2 * sw),
                                       decoration: BoxDecoration(
                                         borderRadius:
-                                            BorderRadius.circular(25.75 * asr),
+                                            BorderRadius.circular(0.05 * sh),
                                         color: const Color(0xffFF0025),
                                       ),
                                       //calling insert function when button is pressed
@@ -641,12 +636,12 @@ class _AddNewDonorState extends State<AddNewDonor>
                                             style: TextStyle(
                                                 color: const Color.fromARGB(
                                                     255, 255, 255, 255),
-                                                fontSize: 9.30 * asr),
+                                                fontSize: 0.02 * sh),
                                           ),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 15.5 * asr),
+                                    SizedBox(height: 0.03 * sh),
                                   ],
                                 )),
                           ]),
@@ -658,15 +653,15 @@ class _AddNewDonorState extends State<AddNewDonor>
                         //HEADER
                         SingleChildScrollView(
                           child: Padding(
-                            padding: EdgeInsets.all(12.9 * asr),
+                            padding: EdgeInsets.only(top: 0.01 * sh),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
                                       padding: EdgeInsets.only(
-                                        left: 5.1 * asr,
+                                        left: 0.03 * sw,
                                         bottom: 0,
-                                        top: 0.0,
+                                        top: 0,
                                       ),
                                       child: Align(
                                         alignment: Alignment.bottomLeft,
@@ -675,7 +670,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                           style: TextStyle(
                                             color: Colors.red,
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 8.26 * asr,
+                                            fontSize: 0.02 * sh,
                                           ),
                                         ),
                                       )),
@@ -687,8 +682,8 @@ class _AddNewDonorState extends State<AddNewDonor>
                                                 Color>(
                                             Colors
                                                 .red), // Color of the progress indicator
-                                        strokeWidth: 2.58 *
-                                            asr, // Thickness of the progress indicator
+                                        strokeWidth: 0.01 *
+                                            sw, // Thickness of the progress indicator
                                         backgroundColor: Colors.black.withOpacity(
                                             0.5), // Background color of the progress indicator
                                       ),
@@ -731,18 +726,18 @@ class _AddNewDonorState extends State<AddNewDonor>
                                               children: <Widget>[
                                                 // for underline
                                                 Container(
-                                                  height: 0.51 *
-                                                      asr, // Height of the underline
+                                                  height: 0.001 *
+                                                      sh, // Height of the underline
                                                   color: Colors.green,
                                                   //width:300.0, // Adjust the width accordingly
                                                 ),
 
                                                 Padding(
                                                   padding:
-                                                      EdgeInsets.all(5.1 * asr),
+                                                      EdgeInsets.all(0.03 * sw),
                                                   child: Row(children: [
                                                     CircleAvatar(
-                                                      radius: 10.3 * asr,
+                                                      radius: 0.05 * sw,
                                                       backgroundImage: isValidUrl
                                                           ? NetworkImage(
                                                               profilePicUrl)
@@ -753,7 +748,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                                               .person), // Show an icon if 'profilePicUrl' is not a valid URL
                                                     ),
                                                     SizedBox(
-                                                      width: 12.9 * asr,
+                                                      width: 0.05 * sw,
                                                     ),
                                                     // Text('Name: ${result['fullname']}'),
                                                     Text(result['fullname']),
@@ -780,6 +775,10 @@ class _AddNewDonorState extends State<AddNewDonor>
   }
 
   void validationFields() {
+    setState(() {
+      isLoading = true;
+    });
+    RegExp numericRegex = RegExp(r'^[0-9]+$');
     if (fullnameController.text.trim() != '' &&
         dobController.text.trim() != '' &&
         phoneNumberError == false &&
@@ -791,12 +790,22 @@ class _AddNewDonorState extends State<AddNewDonor>
         selectedLocalLevel != null &&
         wardNoController.text.trim() != '' &&
         phoneController.text.trim() != '') {
-      regDonor();
+      if (numericRegex.hasMatch(phoneController.text.trim())) {
+        regDonor();
+        isLoading = false;
+      } else {
+        CustomSnackBar.showUnsuccess(
+            context: context,
+            message: "Contact number should contain only numbers.",
+            icon: Icons.info);
+      }
+      isLoading = false;
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,
           message: "Please fill all fields correctly indicated as *.",
           icon: Icons.info);
     }
+    isLoading = false;
   }
 }

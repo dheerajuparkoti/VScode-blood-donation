@@ -28,7 +28,6 @@ class NavigationDrawerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
 
     final safeArea =
         EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top);
@@ -38,7 +37,7 @@ class NavigationDrawerScreen extends StatelessWidget {
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      width: isCollapsed ? 28.56 * asr : sw * 1.0,
+      width: isCollapsed ? 0.14 * sw : sw * 1.0,
       child: Drawer(
         child: Container(
           color: const Color(0xff161616),
@@ -46,7 +45,7 @@ class NavigationDrawerScreen extends StatelessWidget {
             children: [
               Container(
                 padding:
-                    EdgeInsets.symmetric(vertical: 12.24 * asr).add(safeArea),
+                    EdgeInsets.symmetric(vertical: 0.03 * sh).add(safeArea),
                 width: double.infinity,
                 color: const Color(0xff161616),
                 child: buildHeader(isCollapsed),
@@ -59,7 +58,7 @@ class NavigationDrawerScreen extends StatelessWidget {
               const Divider(color: Colors.white70),
 
               buildCollapseIcon(context, isCollapsed),
-              SizedBox(height: 3.06 * asr), // Add a small space below the icon
+              SizedBox(height: 0.007 * sh), // Add a small space below the icon
             ],
           ),
         ),
@@ -139,22 +138,25 @@ class NavigationDrawerScreen extends StatelessWidget {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text(
-                  'Logout Confirmation',
-                  style: TextStyle(fontSize: 20), // Set font size for the title
-                ),
-                content: RichText(
-                  text: const TextSpan(
-                    text: 'Are you sure you want to logout? ',
-                    style: TextStyle(
+                content: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Are you sure you want to logout?',
+                      style: TextStyle(
                         color: Colors.black,
-                        fontSize: 16), // Set font size for the content
-                    children: [
-                      WidgetSpan(
-                        child: Icon(Icons.warning, color: Colors.red),
+                        fontSize: 16,
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                        height:
+                            5), // Adjust the height between text and icon if needed
+                    Icon(
+                      Icons.info,
+                      color: Colors.red,
+                      size: 50.0,
+                    ),
+                  ],
                 ),
                 actions: <Widget>[
                   TextButton(
@@ -214,11 +216,11 @@ class NavigationDrawerScreen extends StatelessWidget {
   Widget buildCollapseIcon(BuildContext context, bool isCollapsed) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
-    double size = 25.75 * asr;
+
+    double size = 0.06 * sh;
     final icon = isCollapsed ? Icons.arrow_forward_ios : Icons.arrow_back_ios;
     final alignment = isCollapsed ? Alignment.center : Alignment.centerRight;
-    final margin = isCollapsed ? null : EdgeInsets.only(right: 10.33 * asr);
+    final margin = isCollapsed ? null : EdgeInsets.only(right: 0.05 * sw);
     final width = isCollapsed ? double.infinity : size;
 
     return Container(
@@ -247,7 +249,7 @@ class NavigationDrawerScreen extends StatelessWidget {
       ? Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 12),
+              padding: const EdgeInsets.only(left: 10),
               child: SizedBox(
                 width: 30,
                 height: 30,

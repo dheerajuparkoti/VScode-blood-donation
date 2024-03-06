@@ -193,8 +193,8 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                   ],
                 ),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(0.15 * sh),
-                  bottomRight: Radius.circular(0.25 * sh),
+                  bottomLeft: Radius.circular(0.25 * sh),
+                  bottomRight: Radius.circular(0.5 * sh),
                 ),
               ),
             ),

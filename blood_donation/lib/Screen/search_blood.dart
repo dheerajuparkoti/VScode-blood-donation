@@ -95,7 +95,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
   Widget build(BuildContext context) {
     double sw = MediaQuery.of(context).size.width;
     double sh = MediaQuery.of(context).size.height;
-    double asr = sh / sw;
+
     return Scaffold(
         resizeToAvoidBottomInset: true,
         body: Stack(
@@ -112,8 +112,8 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                   ],
                 ),
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(0.15 * sh),
-                  bottomRight: Radius.circular(0.25 * sh),
+                  bottomLeft: Radius.circular(0.25 * sh),
+                  bottomRight: Radius.circular(0.5 * sh),
                 ),
               ),
             ),
@@ -121,7 +121,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
 
             Padding(
               padding: EdgeInsets.symmetric(
-                  horizontal: 15.5 * asr, vertical: 7.75 * asr),
+                  horizontal: 0.08 * sw, vertical: 0.025 * sh),
               child: SizedBox(
                 width: 0.7 * sw,
                 height: 0.25 * sh,
@@ -149,10 +149,10 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(18.1 * asr),
-                      topRight: Radius.circular(18.1 * asr),
-                      bottomLeft: Radius.circular(18.1 * asr),
-                      bottomRight: Radius.circular(18.1 * asr),
+                      topLeft: Radius.circular(0.05 * sh),
+                      topRight: Radius.circular(0.05 * sh),
+                      bottomLeft: Radius.circular(0.05 * sh),
+                      bottomRight: Radius.circular(0.05 * sh),
                     ),
                   ),
                   child: SingleChildScrollView(
@@ -161,9 +161,8 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                         children: [
                           //HEADER
                           Padding(
-                            padding: EdgeInsets.only(top: 15.5 * asr),
+                            padding: EdgeInsets.only(top: 0.05 * sh),
                             child: Container(
-                                //height: 15.5 * asr,
                                 height: 0.04 * sh,
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
@@ -430,8 +429,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                           Container(
                             height: 0.025 * sh,
                             width: 0.4 * sw,
-                            margin:
-                                EdgeInsets.symmetric(horizontal: 12.9 * asr),
+                            margin: EdgeInsets.symmetric(horizontal: 0.1 * sw),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(0.05 * sh),
                               color: const Color(0xffFF0025),
