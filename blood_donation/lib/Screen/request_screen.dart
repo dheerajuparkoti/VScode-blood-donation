@@ -259,7 +259,7 @@ class _RequestScreenState extends State<RequestScreen>
       } catch (e) {
         CustomDialog.showAlertDialog(
           context,
-          'Server Error I am here',
+          'Server Error',
           'There was an error connecting to the server. Please try again later.',
           Icons.error_outline,
         );
@@ -269,7 +269,7 @@ class _RequestScreenState extends State<RequestScreen>
       // Handle different status codes appropriately
       CustomDialog.showAlertDialog(
         context,
-        'Network Error im in second ',
+        'Network Error',
         'There was an error connecting to the server. Please try again later.',
         Icons.error_outline,
       );
@@ -313,7 +313,7 @@ class _RequestScreenState extends State<RequestScreen>
       } catch (e) {
         CustomDialog.showAlertDialog(
           context,
-          'Server Error load other request error',
+          'Server Error',
           'There was an error connecting to the server. Please try again later.',
           Icons.error_outline,
         );
@@ -359,18 +359,28 @@ class _RequestScreenState extends State<RequestScreen>
       var body = jsonDecode(res.body);
       if (body.containsKey('success') && body['success'] != null) {
         if (body['success'] is bool && body['success']) {
-          // print('Request successful!'); // Request was successful
+          CustomSnackBar.showSuccess(
+              context: context,
+              message: "Thank you for responding the request.",
+              icon: Icons.info);
         } else {
-          // Handle the case where 'success' is not true
-          //print('Request failed: ${body['message']}'); // Print error message
+          CustomSnackBar.showUnsuccess(
+              context: context,
+              message: "Sorry, you've already responded to the request.",
+              icon: Icons.info);
         }
       } else {
-        // Handle the case where 'success' key is missing or null
-        // print('Invalid response format: Missing or null "success" key.');
+        CustomSnackBar.showUnsuccess(
+            context: context,
+            message: "Internal Server Error",
+            icon: Icons.info);
       }
     } else {
-      // Handle the case where the response is null
-      // print('Null response received.');
+      CustomSnackBar.showUnsuccess(
+          context: context,
+          message:
+              " Sorry, the blood requested has been deleted or is no longer available.",
+          icon: Icons.info);
     }
     // }
   }
@@ -1321,7 +1331,13 @@ class _RequestScreenState extends State<RequestScreen>
                                                 SizedBox(width: 0.008 * sw),
                                                 Expanded(
                                                   child: TextButton.icon(
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      CustomSnackBar.showSuccess(
+                                                          context: context,
+                                                          message:
+                                                              "Sorry, this feature is currently unavailable or under maintenance.",
+                                                          icon: Icons.info);
+                                                    },
                                                     icon: Icon(
                                                       Icons.map,
                                                       size: 0.017 * sh,

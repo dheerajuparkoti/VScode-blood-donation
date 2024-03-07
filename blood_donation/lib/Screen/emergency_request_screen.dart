@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/provider/user_provider.dart';
+import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -131,18 +132,32 @@ class _EmergencyRequestState extends State<EmergencyRequest>
         if (body.containsKey('success') && body['success'] != null) {
           // Check if 'success' is a boolean
           if (body['success'] is bool && body['success']) {
-            // print('Request successful!'); // Request was successful
+            // ignore: use_build_context_synchronously
+            CustomSnackBar.showSuccess(
+                context: context,
+                message: "Thank you for responding the request.",
+                icon: Icons.info);
           } else {
-            // Handle the case where 'success' is not true
-            //print('Request failed: ${body['message']}'); // Print error message
+            // ignore: use_build_context_synchronously
+            CustomSnackBar.showUnsuccess(
+                context: context,
+                message: "Sorry, you've already responded to the request.",
+                icon: Icons.info);
           }
         } else {
-          // Handle the case where 'success' key is missing or null
-          // print('Invalid response format: Missing or null "success" key.');
+          // ignore: use_build_context_synchronously
+          CustomSnackBar.showUnsuccess(
+              context: context,
+              message: "Internal Server Error",
+              icon: Icons.info);
         }
       } else {
-        // Handle the case where the response is null
-        // print('Null response received.');
+        // ignore: use_build_context_synchronously
+        CustomSnackBar.showUnsuccess(
+            context: context,
+            message:
+                "Sorry, the blood requested has been deleted or is no longer available.",
+            icon: Icons.info);
       }
     }
   }

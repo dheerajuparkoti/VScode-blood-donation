@@ -88,7 +88,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
     };
 
     var response = await CallApi().addBloodBank(data, 'regBloodBank');
-    print(data);
+
     // Handle the response
     if (response.statusCode == 200) {
       CustomSnackBar.showSuccess(

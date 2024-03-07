@@ -5,6 +5,8 @@ import 'package:blood_donation/Screen/emergency_request_screen.dart';
 import 'package:blood_donation/Screen/request_screen.dart';
 import 'package:blood_donation/Screen/search_blood.dart';
 import 'package:blood_donation/api/api.dart';
+import 'package:blood_donation/data/internet_connectivity.dart';
+import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:blood_donation/widget/navigation_drawer_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -27,17 +29,15 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     fetchDonorCounts();
     topDonorList();
-    //_startTimer();
+    _startTimer();
   }
 
-/*
   void _startTimer() {
     _timer = Timer.periodic(
-        const Duration(seconds: 5), (Timer t) => fetchDonorCounts());
-    _timer1 =
-        Timer.periodic(const Duration(seconds: 5), (Timer t) => topDonorList());
+        const Duration(seconds: 10), (Timer t) => fetchDonorCounts());
+    _timer1 = Timer.periodic(
+        const Duration(seconds: 10), (Timer t) => topDonorList());
   }
-  */
 
   bool stopDisplayDialog = false;
 
@@ -54,14 +54,13 @@ class _HomeScreenState extends State<HomeScreen> {
           totalDonors = jsonResponse['totalDonors'];
           bloodGroupCounts =
               Map<String, int>.from(jsonResponse['bloodGroupCounts']);
-          print(bloodGroupCounts);
         });
       }
-      //  } else {
+      // } else {
       // throw Exception(
-      // 'Failed to load donor counts. Status code: ${res.statusCode}');
-      //   }
-      //} else {
+      //   'Failed to load donor counts. Status code: ${res.statusCode}');
+      //}
+      // } else {
       /*
       // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
@@ -71,12 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
         Icons.error_outline,
       );
       */
-      // ignore: use_build_context_synchronously
-      //  CustomSnackBar.showUnsuccess(
-      //     context: context,
-      //     message:
-      //         'Network Error, There was an error connecting to the server. Please check your internet connection.',
-      //     icon: Icons.error_outline);
+      //ignore: use_build_context_synchronously
+      //CustomSnackBar.showUnsuccess(
+      //  context: context,
+      //message:
+      //  'Network Error, There was an error connecting to the server. Please check your internet connection.',
+      //icon: Icons.error_outline);
     }
   }
 
@@ -86,21 +85,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
 // TOP 3 DONOR LIST TO SHOW IN MAIN SCREEN STARTS HERE
   topDonorList() async {
-    //  bool isConnected = await ConnectivityUtil.isInternetConnected();
-    //  if (isConnected) {
-    final res = await CallApi().topDonors({}, 'getTopDonors');
-    if (res.statusCode == 200) {
-      final List<dynamic> jsonResponse = json.decode(res.body);
-      if (mounted) {
-        setState(() {
-          topDonors = jsonResponse.cast<Map<String, dynamic>>();
-        });
+    bool isConnected = await ConnectivityUtil.isInternetConnected();
+    if (isConnected) {
+      final res = await CallApi().topDonors({}, 'getTopDonors');
+      if (res.statusCode == 200) {
+        final List<dynamic> jsonResponse = json.decode(res.body);
+        if (mounted) {
+          setState(() {
+            topDonors = jsonResponse.cast<Map<String, dynamic>>();
+          });
+        }
+      } else {
+        throw Exception(
+            'Failed to load donor lists. Status code: ${res.statusCode}');
       }
-      //  } else {
-      //    throw Exception(
-      //      'Failed to load donor lists. Status code: ${res.statusCode}');
-      //  }
-      //  } else {
+    } else {
       /*
       // ignore: use_build_context_synchronously
       CustomDialog.showAlertDialog(
@@ -111,11 +110,10 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       */
       // ignore: use_build_context_synchronously
-      //  CustomSnackBar.showUnsuccess(
-      //      context: context,
-      //      message:
-      //           'Network Error, There was an error connecting to the server. Please check your internet connection.',
-      //       icon: Icons.error_outline);
+      CustomSnackBar.showUnsuccess(
+          context: context,
+          message: 'Network Error, Please check your internet connection.',
+          icon: Icons.error_outline);
     }
   }
 
@@ -139,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: NavigationDrawerScreen(),
       appBar: AppBar(
         title: Text(
-          'Mobile Blood Bank Nepal',
+          'Welcome To',
           style: TextStyle(
             fontSize: 0.025 * sh,
             color: Colors.white,
@@ -205,13 +203,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: Text(
-                                "Urgent A+ Blood Needed Welcome to “Mobile Blood Bank Nepal” where we prioritize your privacy. This policy outlines how we collect, use, disclose, and protect your information when you use our app. By using the app, you agree to this privacy policy and our terms of service. Hurry up this is dheeraj uparkoti from dangihat nepal Urlabari Morang!",
-                                style: TextStyle(
-                                    fontSize: 0.015 * sh,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w300),
+                              child: SizedBox(
+                                width: 0.75 * sw,
+                                height: 0.12 * sh,
+                                child: Image.asset(
+                                  'images/mbblogo.png',
+                                  fit: BoxFit.contain,
+                                ),
                               ),
+                              /*
+                              child: Text(
+                                "Welcome to “Mobile Blood Bank Nepal” ",
+                                style: TextStyle(
+                                    fontSize: 0.02 * sh,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              */
                             ),
                           ],
                         ),

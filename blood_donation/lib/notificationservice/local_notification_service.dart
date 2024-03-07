@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LocalNotificationService {
@@ -14,9 +15,7 @@ class LocalNotificationService {
     _notificationsPlugin.initialize(
       initializationSettings,
       onSelectNotification: (String? id) async {
-        print("onSelectNotification");
         if (id!.isNotEmpty) {
-          print("Router Value1234 $id");
           // Navigator.of(context).push(
           //   MaterialPageRoute(
           //     builder: (context) => DemoScreen(
@@ -49,7 +48,9 @@ class LocalNotificationService {
         payload: message.data['_id'],
       );
     } on Exception catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

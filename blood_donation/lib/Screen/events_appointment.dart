@@ -161,26 +161,25 @@ class _EventsAppointmentsState extends State<EventsAppointments>
 // Load Events
   List<dynamic> loadingEvents = [];
 
-  Future<void> loadEvents() async {
+  loadEvents() async {
     setState(() {
       isLoading = true; // Set loading to true when starting to load data
     });
     var data = {
       'donorId': userProvider.donorId,
     };
-
     var res = await CallApi().loadAllEvents(data, 'loadEvents');
 
     if (res.statusCode == 200) {
       try {
         final Map<String, dynamic> jsonResponse = json.decode(res.body);
-
-        // Use null-aware operator to handle the case where the key is not present or is null
         final List<dynamic> loadedEvents = jsonResponse['responseEvents'];
 
         setState(() {
           loadingEvents = loadedEvents;
-          isLoading = false; // Set loading to false after data is loaded
+
+          // Set loading to false after data is loaded
+          isLoading = false;
         });
       } catch (e) {
         isLoading = false; // Ensure to set loading to false on error

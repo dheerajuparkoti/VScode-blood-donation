@@ -58,7 +58,7 @@ Route::post('/checkUserExists',[RegUserController::class,'checkUserExists']); //
 
 Route::post('/searchBlood',[SearchBloodController::class,'searchBlood']); // method from SearchBloodcontroller
 Route::post('/loadProfile',[LoadProfileController::class,'loadProfile']); // method from LoadProfilecontroller
-//Route::post('/showProfile',[LoadProfileController::class,'loadProfile']); // method from LoadProfilecontroller
+Route::post('/showProfile',[LoadProfileController::class,'loadProfile']); // method from LoadProfilecontroller
 
 // signUp user 
 Route::post('/regUser',[RegUserController::class,'regUser']); // for user registration
@@ -126,7 +126,7 @@ Route::post('/adminAddedDonors',[RegDonorController::class,'adminAddedDonors']);
 // Event Status
 Route::post('/likeEvent',[EventStatusController::class,'likeEvent']);
 Route::post('/attendEvent',[EventStatusController::class,'attendEvent']); 
-Route::post('/loadEvents',[EventStatusController::class,'loadEvents']); 
+//Route::post('/loadEvents',[EventStatusController::class,'loadEvents']); 
 
 
 //delete my request

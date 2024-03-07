@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:blood_donation/Screen/home_screen.dart';
 import 'package:blood_donation/Screen/sign_in_up_screen.dart';
-import 'package:blood_donation/provider/user_provider.dart';
+//import 'package:blood_donation/provider/user_provider.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -19,9 +18,10 @@ class _LoginState extends State<SplashScreen> {
   void initState() {
     super.initState();
     _checkInternetAndNavigate();
-    _checkUserLoggedIn();
+    //_checkUserLoggedIn();
   }
 
+/*
   Future<void> _checkUserLoggedIn() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? authToken = prefs.getString('authToken');
@@ -35,9 +35,6 @@ class _LoginState extends State<SplashScreen> {
       userProvider.setDonorId(donorId!);
       userProvider.setUserAccountType(accountType!);
       // Use the fetched information as needed
-      print('I am hre User ID: $userId');
-      print('Donor ID: $donorId');
-      print('Account Type: $accountType');
 
       if (mounted) {
         setState(() {
@@ -45,11 +42,12 @@ class _LoginState extends State<SplashScreen> {
         });
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(builder: (context) => const SignInSignUp()),
         );
       }
     }
   }
+  */
 
   Future<void> _checkInternetAndNavigate() async {
     // Check internet connectivity
@@ -118,6 +116,7 @@ class _LoginState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double sw = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: [
@@ -145,7 +144,7 @@ class _LoginState extends State<SplashScreen> {
             ),
           ),
           if (isLoading) // Show custom styled circular progress indicator if isLoading is true
-            const Positioned(
+            Positioned(
               left: 0,
               right: 0,
               bottom: 20, // Adjust bottom value as needed
@@ -154,10 +153,10 @@ class _LoginState extends State<SplashScreen> {
                   width: 50,
                   height: 50,
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
+                    valueColor: const AlwaysStoppedAnimation<Color>(
                       Colors.white, // Change color of the progress indicator
                     ),
-                    strokeWidth: 5, // Adjust strokeWidth as needed
+                    strokeWidth: 0.01 * sw, // Adjust strokeWidth as needed
                     backgroundColor: Colors
                         .black12, // Change background color of the progress indicator
                     semanticsLabel: 'Loading', // Add a semantics label

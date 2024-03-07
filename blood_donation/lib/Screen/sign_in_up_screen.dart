@@ -59,9 +59,7 @@ class _SignInSignUpState extends State<SignInSignUp>
       isLoading = true;
     });
     String? deviceToken = await FirebaseMessaging.instance.getToken();
-    if (deviceToken != null) {
-      print("Device Token is from signUp state $deviceToken");
-    }
+    if (deviceToken != null) {}
     var data = {
       'email': emailController.text.trim(),
       'username': usernameController.text.trim(),
@@ -177,10 +175,7 @@ class _SignInSignUpState extends State<SignInSignUp>
 
     FirebaseMessaging.instance.getInitialMessage().then(
       (message) {
-        print("FirebaseMessaging.instance.getInitialMessage");
-        print("Im closed calling from signin screen");
         if (message != null) {
-          print("New Notification");
           // if (message.data['_id'] != null) {
           //   Navigator.of(context).push(
           //     MaterialPageRoute(
@@ -197,11 +192,7 @@ class _SignInSignUpState extends State<SignInSignUp>
     // 2. This method only call when App in forground it mean app must be opened
     FirebaseMessaging.onMessage.listen(
       (message) {
-        print("FirebaseMessaging.onMessage.listen");
         if (message.notification != null) {
-          print(message.notification!.title);
-          print(message.notification!.body);
-          print("message.data11 im from signin screen ${message.data}");
           LocalNotificationService.createanddisplaynotification(message);
         }
       },
@@ -210,12 +201,7 @@ class _SignInSignUpState extends State<SignInSignUp>
     // 3. This method only call when App in background and not terminated(not closed)
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) {
-        print("FirebaseMessaging.onMessageOpenedApp.listen");
-        if (message.notification != null) {
-          print(message.notification!.title);
-          print(message.notification!.body);
-          print("message.data22 from sign in screen ${message.data['_id']}");
-        }
+        if (message.notification != null) {}
       },
     );
     _tabController = TabController(length: 2, vsync: this);
@@ -1091,7 +1077,12 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
     // Get the screen width and height
     double sh = MediaQuery.of(context).size.height;
     return AlertDialog(
-      title: const Text('Reset Password'),
+      title: Text(
+        'Reset Password',
+        style: TextStyle(
+          fontSize: 0.025 * sh,
+        ),
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -1203,8 +1194,9 @@ String generateRandomPassword() {
 // SENDING EMAIL FUNCTIONALITY START HERE
 Future<bool> sendEmail(String email, String appPassword) async {
   try {
-    String username = 'civilconsultancychoice@gmail.com'; // Your Gmail address
-    String password = 'cvwo ayel etvf cinq'; // Your Gmail password
+    String username =
+        'infomobilebloodbanknepal@gmail.com'; // Your Gmail address
+    String password = 'hwqw awib ikys faiv'; // Your Gmail password
 
     // ignore: deprecated_member_use
     final smtpServer = gmail(username, password);
@@ -1214,7 +1206,7 @@ Future<bool> sendEmail(String email, String appPassword) async {
       ..recipients.add(email) // Recipient's email address
       ..subject = 'Password Reset'
       ..text =
-          'Please do not share this password. The password is $appPassword ';
+          'Please do not share this password. The new password is $appPassword ';
 
     await send(message, smtpServer);
     return true; // Return true if email was sent successfully

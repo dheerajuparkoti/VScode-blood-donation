@@ -110,15 +110,15 @@ class _AvailableListViewState extends State<AvailableListView> {
         Padding(
           padding: EdgeInsets.only(
             top: 0.08 * sh,
-            left: 0.03 * sw,
-            right: 0.03 * sw,
+            left: 0.01 * sw,
+            right: 0.01 * sw,
             bottom: 0.0,
           ),
           child: Container(
             width: sw,
             height: sh,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color.fromARGB(255, 14, 14, 14),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(0.025 * sh),
                 topRight: Radius.circular(0.025 * sh),
@@ -128,7 +128,7 @@ class _AvailableListViewState extends State<AvailableListView> {
             ),
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(0.03 * sw),
+                padding: EdgeInsets.all(0.00 * sw),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -143,7 +143,7 @@ class _AvailableListViewState extends State<AvailableListView> {
                             child: Text(
                               'Available Donors up-to-date : ${donorData.length}',
                               style: TextStyle(
-                                color: Colors.red,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 0.02 * sh,
                               ),
@@ -178,14 +178,15 @@ class _AvailableListViewState extends State<AvailableListView> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(0.0),
                                 ),
-                                elevation: 0.0,
+                                color: const Color.fromARGB(255, 103, 137, 103),
+                                elevation: 0.00 * sw,
                                 child: Stack(
                                   children: <Widget>[
                                     // for underline
                                     Container(
                                       height:
                                           0.001 * sh, // Height of the underline
-                                      color: Colors.green,
+                                      color: Colors.white,
                                       //width:300.0, // Adjust the width accordingly
                                     ),
 
@@ -195,7 +196,8 @@ class _AvailableListViewState extends State<AvailableListView> {
                                         CircleAvatar(
                                           radius: 0.05 * sw,
                                           backgroundImage: isValidUrl
-                                              ? NetworkImage(profilePicUrl)
+                                              ? NetworkImage(
+                                                  'https://mobilebloodbanknepal.com/$profilePicUrl')
                                               : null, // Set to null if 'profilePicUrl' is not a valid URL
                                           child: isValidUrl
                                               ? null // Don't show a child widget if 'profilePicUrl' is a valid URL
@@ -206,7 +208,15 @@ class _AvailableListViewState extends State<AvailableListView> {
                                           width: 0.05 * sw,
                                         ),
                                         // Text('Name: ${result['fullname']}'),
-                                        Text(result['fullname']),
+                                        Text(
+                                          result['fullname'],
+                                          style: const TextStyle(
+                                            color: Colors
+                                                .white, // Set foreground color (text color)
+                                            fontSize: 16.0, // Set font size
+                                            // Add more text style properties as needed
+                                          ),
+                                        ),
                                       ]),
                                     ),
                                   ],

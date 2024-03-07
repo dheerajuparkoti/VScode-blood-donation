@@ -109,7 +109,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
       });
     } else {
       // Handle error
-      print(' ${res.statusCode}');
     }
   }
 
@@ -130,10 +129,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       setState(() {
         loadingNotifications();
       });
-    } else {
-      // Handle error
-      print(' ${res.statusCode}');
-    }
+    } else {}
   }
 
 // ending of notification status
@@ -158,7 +154,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
         centerTitle: true,
         foregroundColor: const Color.fromRGBO(255, 255, 255, 1),
-        backgroundColor: const Color.fromARGB(255, 125, 27, 27),
+        backgroundColor: const Color.fromARGB(255, 14, 14, 14),
       ),
       //resizeToAvoidBottomInset: false,
 
@@ -169,8 +165,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomRight,
               colors: [
-                Color.fromARGB(255, 125, 27, 27),
-                Color.fromARGB(255, 198, 84, 59),
+                Color.fromARGB(255, 14, 14, 14),
+                Color.fromARGB(255, 25, 25, 25),
               ],
             ),
           ),

@@ -71,7 +71,7 @@ class _ProfileState extends State<Profile> {
           loadingUserData = userData;
           loadingProfile = profileData;
           isLoading = false;
-          donorId = loadingProfile['donorId'] ?? 0;
+          donorId = (loadingProfile['donorId']);
           profilePic = loadingProfile['profilePic'] ?? '';
           fullName = loadingProfile['fullName'] ?? '';
           dob = loadingProfile['dob'] ?? '';
@@ -144,8 +144,8 @@ class _ProfileState extends State<Profile> {
   }
 
   // Function to share content
-  void shareContent() {
-    Share.share('Check out this amazing content!');
+  void shareContent(String content) {
+    Share.share(content);
   }
 
   @override
@@ -199,8 +199,8 @@ class _ProfileState extends State<Profile> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomRight,
                   colors: [
-                    Color(0xFF2D2D2D),
-                    Color(0xFF2D2D2D),
+                    Color.fromARGB(255, 14, 14, 14),
+                    Color.fromARGB(255, 38, 38, 38),
                   ],
                 ),
               ),
@@ -431,8 +431,8 @@ class _ProfileState extends State<Profile> {
                                     totalDonationTimesForDonor == 0
                                         ? canDonate
                                         : (lastDonationExceeds72Days
-                                            ? 'No'
-                                            : 'Yes'),
+                                            ? 'Yes'
+                                            : 'No'),
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 0.015 * sh,
@@ -453,7 +453,7 @@ class _ProfileState extends State<Profile> {
                                   radius: 0.12 * sw,
                                   backgroundImage: profilePic.isNotEmpty
                                       ? NetworkImage(
-                                          'http://192.168.1.68/$profilePic')
+                                          'https://mobilebloodbanknepal.com/$profilePic')
                                       : null,
                                   child: (profilePic == "NA")
                                       ? const Icon(
@@ -732,7 +732,17 @@ class _ProfileState extends State<Profile> {
                         child: TextButton.icon(
                           onPressed: () {
                             // Handle first button press
-                            shareContent(); // Call the share function
+                            shareContent(
+                              '\t "Donor Profile - $accountType" \n'
+                              'Name: $fullName\n'
+                              'Phone: $phone\n'
+                              'Blood Group: $bloodGroup\n'
+                              'Donation Times: $totalDonationTimesForDonor\n'
+                              'Can Donate ?: $canDonate\n'
+                              'Address: $address\n'
+                              'Email: $email\n'
+                              'App: Mobile Blood Bank Nepal',
+                            ); // Call the share function
                           },
                           icon: const Icon(
                             Icons.share,

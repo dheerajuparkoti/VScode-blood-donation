@@ -279,7 +279,7 @@ class _SearchAmbulanceState extends State<SearchAmbulance>
                                         ),
                                         child: Center(
                                           child: Text(
-                                            'Search Blood Bank Info By',
+                                            'Search Ambulance Info By',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               fontSize: 0.025 * sh,

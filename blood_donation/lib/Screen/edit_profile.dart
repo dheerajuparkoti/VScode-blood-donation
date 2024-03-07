@@ -137,7 +137,7 @@ class _EditProfileState extends State<EditProfile>
         donatedDateController.clear();
         donatedToController.clear();
         contactController.clear();
-        bloodPintController.text = "1";
+        bloodPintController.text = "";
         dobController.clear();
       } else if (_tabController.index == 1) {
         fetchDonorData();
@@ -150,7 +150,7 @@ class _EditProfileState extends State<EditProfile>
       donatedDateController.clear();
       donatedToController.clear();
       contactController.clear();
-      bloodPintController.text = "1";
+      bloodPintController.text = "";
       dobController.clear();
       fullnameController.clear();
       wardNoController.clear();
@@ -239,7 +239,6 @@ class _EditProfileState extends State<EditProfile>
         wardNoController.text = data['wardNo']?.toString() ?? '';
         phoneController.text = data['phone']?.toString() ?? '';
         profilePic = data['profilePic'] ?? '';
-        print("The profile picture url from database is $profilePic");
       });
     } else {
       CustomDialog.showAlertDialog(
@@ -369,10 +368,7 @@ class _EditProfileState extends State<EditProfile>
     setState(() {
       if (pickedFile != null) {
         _image = File(pickedFile.path);
-        print('image is slected $_image');
-      } else {
-        print('No image selected.');
-      }
+      } else {}
     });
   }
 
@@ -563,7 +559,7 @@ class _EditProfileState extends State<EditProfile>
                                 controller: bloodPintController,
                                 readOnly: true,
                                 decoration: const InputDecoration(
-                                  hintText: "Blood Pint",
+                                  hintText: "1 Blood Pint",
                                   hintStyle:
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
@@ -730,7 +726,7 @@ class _EditProfileState extends State<EditProfile>
                                     decoration: InputDecoration(
                                       labelText: "Date of Birth (yyyy/mm/dd)",
                                       errorText: dobError
-                                          ? 'Age must be between 18-60 to donate blood'
+                                          ? 'Age must be between 16-60 to donate blood'
                                           : null,
                                       labelStyle: const TextStyle(
                                           color: Color(0xffaba7a7)),

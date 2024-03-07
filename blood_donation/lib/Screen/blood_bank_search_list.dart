@@ -110,15 +110,15 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
         Padding(
           padding: EdgeInsets.only(
             top: 0.08 * sh,
-            left: 0.03 * sw,
-            right: 0.03 * sw,
+            left: 0.01 * sw,
+            right: 0.01 * sw,
             bottom: 0.0,
           ),
           child: Container(
             width: sw,
             height: sh,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: const Color.fromARGB(255, 14, 14, 14),
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(0.025 * sh),
                 topRight: Radius.circular(0.025 * sh),
@@ -128,7 +128,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
             ),
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(0.03 * sw),
+                padding: EdgeInsets.all(0.0 * sw),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -143,7 +143,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                             child: Text(
                               'Searched Results : ${matchedResults.length}',
                               style: TextStyle(
-                                color: Colors.red,
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 0.02 * sh,
                               ),
@@ -172,14 +172,15 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                     Container(
                                       height:
                                           0.001 * sh, // Height of the underline
-                                      color: Colors.red,
+                                      color: Colors.white,
                                       //width:300.0, // Adjust the width accordingly
                                     ),
                                     //First Row container
                                     Container(
-                                      height: 0.06 * sh,
+                                      height: 0.068 * sh,
                                       padding: EdgeInsets.all(0.02 * sw),
-                                      color: const Color(0xFFFFFFFF),
+                                      color: const Color.fromARGB(
+                                          255, 103, 137, 103),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -191,7 +192,7 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                                 fontSize: 0.017 * sh,
                                                 fontWeight: FontWeight.bold,
                                                 color: const Color.fromARGB(
-                                                    255, 1, 1, 1),
+                                                    255, 255, 255, 255),
                                               ),
                                               maxLines: 2,
                                             ),
@@ -199,13 +200,18 @@ class _BloodBankSearchListState extends State<BloodBankSearchList> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 0.005 * sh),
+
                                     //Second  Row container
 
                                     Container(
                                       height: 0.06 * sh,
-                                      padding: EdgeInsets.all(0.02 * sw),
-                                      color: const Color(0xFFFFFFFF),
+                                      padding: EdgeInsets.only(
+                                          top: 0.02 * sw,
+                                          bottom: 0.02 * sw,
+                                          left: 0.02 * sw,
+                                          right: 0.02 * sw),
+                                      color: const Color.fromARGB(
+                                          255, 103, 137, 103),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,

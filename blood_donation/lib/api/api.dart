@@ -1,31 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
 
-class AuthService {
-  final SharedPreferences _prefs;
-
-  AuthService(this._prefs);
-
-  bool isLoggedIn() {
-    return _prefs.getString('authToken') != null;
-  }
-
-  void saveLoginState() {
-    _prefs.setBool('isLoggedIn', true);
-  }
-
-  void removeLoginState() {
-    _prefs.remove('isLoggedIn');
-  }
-}
-
 class CallApi {
-  //final String baseUrl = "https://mobilebloodbanknepal.com/api/";
-  final String baseUrl = "http://192.168.1.64:8000/api/";
+  final String baseUrl = "https://mobilebloodbanknepal.com/api/";
 
   final String loginUrl = "login";
 
@@ -53,8 +33,6 @@ class CallApi {
 
           prefs.setInt('donorId', donorId);
           prefs.setString('accountType', accountType);
-
-          print('Saved authToken to SharedPreferences');
 
           return responseData;
         } else {

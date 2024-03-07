@@ -710,8 +710,8 @@ class _AddNewDonorState extends State<AddNewDonor>
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) => Profile(
-                                                    donorId: result[
-                                                        'donorId']), //passing user id to profile screen
+                                                    donorId: int.parse(result[
+                                                        'donorId'])), //passing user id to profile screen
                                               ),
                                             );
                                           },

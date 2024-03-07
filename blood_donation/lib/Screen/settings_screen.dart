@@ -156,8 +156,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               begin: Alignment.topCenter,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF2D2D2D),
-                Color(0xFF2D2D2D),
+                Color.fromARGB(255, 14, 14, 14),
+                Color.fromARGB(255, 38, 38, 38),
               ],
             ),
           ),

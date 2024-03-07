@@ -35,8 +35,8 @@ class _AboutUsState extends State<AboutUs> {
               begin: Alignment.topCenter,
               end: Alignment.bottomRight,
               colors: [
-                Color(0xFF2D2D2D),
-                Color(0xFF2D2D2D),
+                Color.fromARGB(255, 14, 14, 14),
+                Color.fromARGB(255, 38, 38, 38),
               ],
             ),
           ),
@@ -74,6 +74,66 @@ class _AboutUsState extends State<AboutUs> {
                         ),
                       ),
                     ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'LEADERSHIP FOR CHANGE',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 0.02 * sh,
+                            color: const Color(0xffBF371A),
+                          ),
+                        ),
+                        Container(
+                          height: 0.002 * sh, // Height of the underline
+                          color: Colors.white,
+                          width: 0.9 * sw, // Adjust the width accordingly
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.all(0.01 * sh),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(
+                            text: '',
+                            style: TextStyle(
+                              fontSize: 0.015 * sh,
+                              fontWeight: FontWeight.w300,
+                              color: const Color(0xFFFFFFFF),
+                            ),
+                            children: const <TextSpan>[
+                              TextSpan(
+                                text: '',
+                                style: TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontWeight: FontWeight.bold,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 0.25 * sw,
+                        height: 0.12 * sh,
+                        child: Image.asset(
+                          'images/leadership_logo.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Row(
@@ -132,30 +192,6 @@ class _AboutUsState extends State<AboutUs> {
                               ),
                               TextSpan(
                                 text:
-                                    '\n# Coordinating with governmental and non-governmental organizations to organize and organize service programs.',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
-                              TextSpan(
-                                text:
-                                    "\n# Conduct various research activities to achieve the organization's goals and objectives, develop short-term and long-term resources and tools, and provide awards and scholarships for human upliftment activities.",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\n# To cooperate in building youth-friendly local level.',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
-                              TextSpan(
-                                text:
                                     '\n# Advocating the rights of youth, women, children, senior citizens, persons with disabilities and doing targeted work for that group.',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w300,
@@ -165,21 +201,6 @@ class _AboutUsState extends State<AboutUs> {
                               TextSpan(
                                 text:
                                     '\n# Conducting programs such as youth conferences, youth festivals, workshops.',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
-                              TextSpan(
-                                text:
-                                    '\n# To develop the capacity of the youth and to encourage youth entrepreneurship to conduct various activities including trainings, conferences, seminars.',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  color: Color(0xFFFFFFFF),
-                                ),
-                              ),
-                              TextSpan(
-                                text: '\n# Doing other public welfare works.',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w300,
                                   color: Color(0xFFFFFFFF),
@@ -276,7 +297,7 @@ class _AboutUsState extends State<AboutUs> {
                           'LIONS INTERNATIONAL',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 0.025 * sh,
+                            fontSize: 0.02 * sh,
                             color: const Color(0xffBF371A),
                           ),
                         ),
@@ -326,66 +347,6 @@ class _AboutUsState extends State<AboutUs> {
                         height: 0.12 * sh,
                         child: Image.asset(
                           'images/lions_international_logo.png',
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'LEADERSHIP FOR CHANGE',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 0.025 * sh,
-                            color: const Color(0xffBF371A),
-                          ),
-                        ),
-                        Container(
-                          height: 0.002 * sh, // Height of the underline
-                          color: Colors.white,
-                          width: 0.9 * sw, // Adjust the width accordingly
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.all(0.01 * sh),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: RichText(
-                          text: TextSpan(
-                            text: '',
-                            style: TextStyle(
-                              fontSize: 0.015 * sh,
-                              fontWeight: FontWeight.w300,
-                              color: const Color(0xFFFFFFFF),
-                            ),
-                            children: const <TextSpan>[
-                              TextSpan(
-                                text: '',
-                                style: TextStyle(
-                                  color: Color(0xFFFFFFFF),
-                                  fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 0.25 * sw,
-                        height: 0.12 * sh,
-                        child: Image.asset(
-                          'images/leadership_logo.png',
                           fit: BoxFit.contain,
                         ),
                       ),
