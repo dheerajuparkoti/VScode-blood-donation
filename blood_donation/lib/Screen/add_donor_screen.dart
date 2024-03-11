@@ -371,7 +371,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       readOnly: true,
                                       onTap: () => _selectDate(context),
                                       decoration: InputDecoration(
-                                        hintText: "*Date of Birth (yyyy/mm/dd)",
+                                        hintText: "*Select Date of Birth",
                                         errorText: dobController.text.isEmpty
                                             ? null
                                             : (dobError

@@ -123,7 +123,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2024),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
     if (picked != null && picked != selectedDate) {
@@ -868,7 +868,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                 readOnly: true,
                                 onTap: () => _selectDate(context),
                                 decoration: InputDecoration(
-                                  hintText: "Set Date (yyyy/mm/dd)",
+                                  hintText: "Select Date",
                                   errorText: setDateError
                                       ? 'Appointment date cannot be in the past'
                                       : null,

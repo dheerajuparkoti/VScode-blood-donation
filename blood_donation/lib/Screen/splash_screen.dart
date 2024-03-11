@@ -159,7 +159,8 @@ class _LoginState extends State<SplashScreen> {
                     strokeWidth: 0.01 * sw, // Adjust strokeWidth as needed
                     backgroundColor: Colors
                         .black12, // Change background color of the progress indicator
-                    semanticsLabel: 'Loading', // Add a semantics label
+                    semanticsLabel:
+                        'Loading Mobile Blood Bank Nepal', // Add a semantics label
                   ),
                 ),
               ),

@@ -744,7 +744,7 @@ class _EditProfileState extends State<EditProfile>
                                     readOnly: true,
                                     onTap: () => _selectDate(context),
                                     decoration: InputDecoration(
-                                      labelText: "Date of Birth (yyyy/mm/dd)",
+                                      labelText: "Select Date of Birth",
                                       errorText: dobController.text.isEmpty
                                           ? null
                                           : (dobError

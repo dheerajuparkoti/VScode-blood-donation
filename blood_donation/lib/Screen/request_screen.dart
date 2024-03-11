@@ -397,7 +397,7 @@ class _RequestScreenState extends State<RequestScreen>
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
-      firstDate: DateTime(2024),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2101),
     );
     if (picked != null && picked != selectedDate) {
@@ -803,7 +803,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 readOnly: true,
                                 onTap: () => _selectDate(context),
                                 decoration: InputDecoration(
-                                  hintText: "Required Date (yyyy/mm/dd)",
+                                  hintText: "Select Required Date",
                                   errorText: requiredDateController.text.isEmpty
                                       ? null
                                       : (selectedDateError

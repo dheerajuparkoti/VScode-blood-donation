@@ -130,6 +130,7 @@ class _SignInSignUpState extends State<SignInSignUp>
       initialDate: selectedDate,
       firstDate: DateTime(1920),
       lastDate: DateTime(2101),
+      helpText: 'Select a date of birth in AD',
     );
     if (picked != null && picked != selectedDate) {
       setState(() {
@@ -395,17 +396,22 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         hintStyle: const TextStyle(
                                             color: Color(0xffaba7a7)),
                                         icon: const Icon(Icons.lock),
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              _isPasswordVisible =
-                                                  !_isPasswordVisible;
-                                            });
-                                          },
-                                          child: Icon(
-                                            _isPasswordVisible
-                                                ? Icons.visibility
-                                                : Icons.visibility_off,
+                                        suffixIcon: Semantics(
+                                          label: _isPasswordVisible
+                                              ? 'Hide Password'
+                                              : 'Show Password',
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                _isPasswordVisible =
+                                                    !_isPasswordVisible;
+                                              });
+                                            },
+                                            child: Icon(
+                                              _isPasswordVisible
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -530,20 +536,23 @@ class _SignInSignUpState extends State<SignInSignUp>
                                 ),
                                 child: Column(
                                   children: [
-                                    TextField(
-                                      controller: fullnameController,
-                                      decoration: const InputDecoration(
-                                        hintText: "Full Name",
-                                        hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
-                                      ),
-                                      maxLength: 30,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter.allow(
-                                          RegExp(
-                                              r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                    Semantics(
+                                      label: 'Enter Fullname',
+                                      child: TextField(
+                                        controller: fullnameController,
+                                        decoration: const InputDecoration(
+                                          hintText: "Full Name",
+                                          hintStyle: TextStyle(
+                                              color: Color(0xffaba7a7)),
                                         ),
-                                      ],
+                                        maxLength: 30,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                            RegExp(
+                                                r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                          ),
+                                        ],
+                                      ),
                                     ),
 
                                     TextField(
@@ -551,7 +560,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       readOnly: true,
                                       onTap: () => _selectDate(context),
                                       decoration: InputDecoration(
-                                        hintText: "Date of Birth (yyyy/mm/dd)",
+                                        hintText: "Select Date of Birth",
                                         errorText: dobController.text.isEmpty
                                             ? null
                                             : (dobError
@@ -566,6 +575,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         ),
                                       ),
                                     ),
+                                    SizedBox(height: 0.02 * sh),
 
                                     DropdownButtonFormField<String>(
                                       decoration: const InputDecoration(
@@ -764,26 +774,29 @@ class _SignInSignUpState extends State<SignInSignUp>
                                     ),
                                     SizedBox(height: 0.02 * sh),
 
-                                    TextField(
-                                      controller: wardNoController,
-                                      keyboardType: TextInputType.phone,
-                                      decoration: InputDecoration(
-                                        hintText: "Ward No.",
-                                        errorText: (wardNoController
-                                                    .text.isNotEmpty &&
-                                                int.tryParse(wardNoController
-                                                        .text)! >
-                                                    33)
-                                            ? 'Ward number cannot be greater than 33'
-                                            : null,
-                                        hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                    Semantics(
+                                      label: "Enter Ward Number",
+                                      child: TextField(
+                                        controller: wardNoController,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          hintText: "Ward No.",
+                                          errorText: (wardNoController
+                                                      .text.isNotEmpty &&
+                                                  int.tryParse(wardNoController
+                                                          .text)! >
+                                                      33)
+                                              ? 'Ward number cannot be greater than 33'
+                                              : null,
+                                          hintStyle: const TextStyle(
+                                              color: Color(0xffaba7a7)),
+                                        ),
+                                        maxLength: 2,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly, // Allow only digits
+                                        ],
                                       ),
-                                      maxLength: 2,
-                                      inputFormatters: [
-                                        FilteringTextInputFormatter
-                                            .digitsOnly, // Allow only digits
-                                      ],
                                     ),
 
                                     TextField(
@@ -864,17 +877,22 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         hintText: "New Password",
                                         hintStyle: const TextStyle(
                                             color: Color(0xffaba7a7)),
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              _isPasswordVisible =
-                                                  !_isPasswordVisible;
-                                            });
-                                          },
-                                          child: Icon(
-                                            _isPasswordVisible
-                                                ? Icons.visibility
-                                                : Icons.visibility_off,
+                                        suffixIcon: Semantics(
+                                          label: _isPasswordVisible
+                                              ? 'Hide New Password'
+                                              : 'Show New Password',
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                _isPasswordVisible =
+                                                    !_isPasswordVisible;
+                                              });
+                                            },
+                                            child: Icon(
+                                              _isPasswordVisible
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -893,17 +911,22 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         hintText: "Confirm Password",
                                         hintStyle: const TextStyle(
                                             color: Color(0xffaba7a7)),
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              _isConfirmPasswordVisible =
-                                                  !_isConfirmPasswordVisible;
-                                            });
-                                          },
-                                          child: Icon(
-                                            _isConfirmPasswordVisible
-                                                ? Icons.visibility
-                                                : Icons.visibility_off,
+                                        suffixIcon: Semantics(
+                                          label: _isPasswordVisible
+                                              ? 'Hide Confirm Password'
+                                              : 'Show Confirm Password',
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                _isConfirmPasswordVisible =
+                                                    !_isConfirmPasswordVisible;
+                                              });
+                                            },
+                                            child: Icon(
+                                              _isConfirmPasswordVisible
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -1233,10 +1256,10 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
                       isLoading = false;
                     });
                   },
-            child: isLoading
-                ? const CircularProgressIndicator()
-                : const Text('Reset Password'),
+            child: const Text('Submit'),
           ),
+          if (isLoading)
+            const CircularProgressIndicator(), // Show CircularProgressIndicator if isLoading is true
         ],
       ),
     );
