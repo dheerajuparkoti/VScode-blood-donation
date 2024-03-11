@@ -377,7 +377,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: const InputDecoration(
                                         hintText: "Enter Username or Email",
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                         icon: Icon(Icons.person),
                                       ),
                                       maxLength: 30,
@@ -394,7 +394,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: InputDecoration(
                                         hintText: "Enter Password",
                                         hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                         icon: const Icon(Icons.lock),
                                         suffixIcon: Semantics(
                                           label: _isPasswordVisible
@@ -438,8 +438,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       child: Text(
                                         "Forgot Password ?",
                                         style: TextStyle(
-                                          color: const Color.fromRGBO(
-                                              158, 158, 158, 1),
+                                          color: const Color(0xFF959595),
                                           fontSize: 0.015 * sh,
                                           decoration: TextDecoration.underline,
                                           decorationColor:
@@ -543,7 +542,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         decoration: const InputDecoration(
                                           hintText: "Full Name",
                                           hintStyle: TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xFF858585)),
                                         ),
                                         maxLength: 30,
                                         inputFormatters: [
@@ -567,7 +566,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                                 ? 'Age must be between 16-60 to donate blood'
                                                 : null),
                                         hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                         suffixIcon: GestureDetector(
                                           onTap: () => _selectDate(context),
                                           child:
@@ -581,16 +580,16 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: 'Select Gender',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedGender,
                                       items: ['Male', 'Female', 'Others']
@@ -616,16 +615,16 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: 'Select blood Group',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedBloodGroup,
                                       items: [
@@ -660,16 +659,16 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: 'Select Province',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedProvince,
                                       items: ['1', '2', '3', '4', '5', '6', '7']
@@ -698,16 +697,16 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: 'Select District',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedDistrict,
                                       items: selectedProvince != null
@@ -739,16 +738,16 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: 'Select Local Level',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedLocalLevel,
                                       items: selectedDistrict != null
@@ -789,7 +788,8 @@ class _SignInSignUpState extends State<SignInSignUp>
                                               ? 'Ward number cannot be greater than 33'
                                               : null,
                                           hintStyle: const TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                            color: Color(0xFF858585),
+                                          ),
                                         ),
                                         maxLength: 2,
                                         inputFormatters: [
@@ -810,7 +810,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                                 ? 'Phone number must be 10 digits'
                                                 : null),
                                         hintStyle: const TextStyle(
-                                          color: Color(0xffaba7a7),
+                                          color: Color(0xff858585),
                                         ),
                                       ),
                                       maxLength: 10,
@@ -832,7 +832,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: InputDecoration(
                                         hintText: "E-mail",
                                         hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                         errorText: emailController.text.isEmpty
                                             ? null
                                             : (isEmailEmpty
@@ -862,7 +862,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: const InputDecoration(
                                         hintText: "Username",
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       maxLength: 20,
                                       inputFormatters: [
@@ -876,7 +876,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: InputDecoration(
                                         hintText: "New Password",
                                         hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                         suffixIcon: Semantics(
                                           label: _isPasswordVisible
                                               ? 'Hide New Password'
@@ -910,7 +910,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       decoration: InputDecoration(
                                         hintText: "Confirm Password",
                                         hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                         suffixIcon: Semantics(
                                           label: _isPasswordVisible
                                               ? 'Hide Confirm Password'

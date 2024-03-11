@@ -852,7 +852,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                 decoration: const InputDecoration(
                                   hintText: "Appointment About",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 50,
                                 inputFormatters: [
@@ -873,7 +873,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                       ? 'Appointment date cannot be in the past'
                                       : null,
                                   hintStyle:
-                                      const TextStyle(color: Color(0xffaba7a7)),
+                                      const TextStyle(color: Color(0xff858585)),
                                   suffixIcon: GestureDetector(
                                     onTap: () => _selectDate(context),
                                     child: const Icon(Icons.calendar_today),
@@ -889,7 +889,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                 decoration: InputDecoration(
                                   hintText: "Set Time",
                                   hintStyle:
-                                      const TextStyle(color: Color(0xffaba7a7)),
+                                      const TextStyle(color: Color(0xff858585)),
                                   suffixIcon: GestureDetector(
                                     onTap: () => _selectTime(context),
                                     child: const Icon(Icons.access_time),
@@ -903,7 +903,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                 decoration: const InputDecoration(
                                   hintText: "Remarks",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 30,
                                 inputFormatters: [

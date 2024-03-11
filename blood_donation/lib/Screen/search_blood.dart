@@ -197,16 +197,16 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                   decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Color(0xffaba7a7)),
+                                          BorderSide(color: Color(0xff858585)),
                                     ),
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Color(0xffaba7a7)),
+                                          BorderSide(color: Color(0xff858585)),
                                     ),
                                     hintText: 'Select blood Group',
                                     border: InputBorder.none,
                                     hintStyle:
-                                        TextStyle(color: Color(0xffaba7a7)),
+                                        TextStyle(color: Color(0xff858585)),
                                   ),
                                   value: selectedBloodGroup,
                                   items: [
@@ -240,16 +240,16 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                   decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Color(0xffaba7a7)),
+                                          BorderSide(color: Color(0xff858585)),
                                     ),
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Color(0xffaba7a7)),
+                                          BorderSide(color: Color(0xff858585)),
                                     ),
                                     hintText: 'Select Province',
                                     border: InputBorder.none,
                                     hintStyle:
-                                        TextStyle(color: Color(0xffaba7a7)),
+                                        TextStyle(color: Color(0xff858585)),
                                   ),
                                   value: selectedProvince,
                                   items: ['1', '2', '3', '4', '5', '6', '7']
@@ -279,16 +279,16 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                   decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Color(0xffaba7a7)),
+                                          BorderSide(color: Color(0xff858585)),
                                     ),
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Color(0xffaba7a7)),
+                                          BorderSide(color: Color(0xff858585)),
                                     ),
                                     hintText: 'Select District',
                                     border: InputBorder.none,
                                     hintStyle:
-                                        TextStyle(color: Color(0xffaba7a7)),
+                                        TextStyle(color: Color(0xff858585)),
                                   ),
                                   value: selectedDistrict,
                                   items: selectedProvince != null
@@ -320,16 +320,16 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                   decoration: const InputDecoration(
                                     enabledBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Color(0xffaba7a7)),
+                                          BorderSide(color: Color(0xff858585)),
                                     ),
                                     focusedBorder: UnderlineInputBorder(
                                       borderSide:
-                                          BorderSide(color: Color(0xffaba7a7)),
+                                          BorderSide(color: Color(0xff858585)),
                                     ),
                                     hintText: 'Select Local Level',
                                     border: InputBorder.none,
                                     hintStyle:
-                                        TextStyle(color: Color(0xffaba7a7)),
+                                        TextStyle(color: Color(0xff858585)),
                                   ),
                                   value: selectedLocalLevel,
                                   items: selectedDistrict != null
@@ -368,7 +368,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                         ? 'Ward number cannot be greater than 33'
                                         : null,
                                     hintStyle: const TextStyle(
-                                        color: Color(0xffaba7a7)),
+                                        color: Color(0xff858585)),
                                   ),
                                   maxLength: 2,
                                   inputFormatters: [
@@ -420,7 +420,7 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                             style: TextStyle(
                               fontSize: 0.015 * sh,
                               fontWeight: FontWeight.w300,
-                              color: const Color(0xffaba7a7),
+                              color: const Color(0xff858585),
                             ),
                           ),
 

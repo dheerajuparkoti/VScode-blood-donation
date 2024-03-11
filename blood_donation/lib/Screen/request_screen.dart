@@ -669,7 +669,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   hintText: "Full Name",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 30,
                                 inputFormatters: [
@@ -685,16 +685,16 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xffaba7a7)),
+                                        BorderSide(color: Color(0xff858585)),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xffaba7a7)),
+                                        BorderSide(color: Color(0xff858585)),
                                   ),
                                   hintText: 'Select blood Group',
                                   border: InputBorder.none,
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 value: selectedBloodGroup,
                                 items: [
@@ -730,7 +730,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   hintText: "Required pint",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 1,
                                 inputFormatters: [
@@ -745,7 +745,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   hintText: "Case Detail",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 30,
                                 inputFormatters: [
@@ -761,7 +761,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   hintText: "Contact Person Name",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 30,
                                 inputFormatters: [
@@ -783,7 +783,7 @@ class _RequestScreenState extends State<RequestScreen>
                                             ? 'Phone number must be 10 digits'
                                             : null),
                                     hintStyle: const TextStyle(
-                                        color: Color(0xffaba7a7)),
+                                        color: Color(0xff858585)),
                                   ),
                                   maxLength: 10,
                                   inputFormatters: [
@@ -810,7 +810,7 @@ class _RequestScreenState extends State<RequestScreen>
                                           ? 'You cannot set required date in the past.'
                                           : null),
                                   hintStyle:
-                                      const TextStyle(color: Color(0xffaba7a7)),
+                                      const TextStyle(color: Color(0xff858585)),
                                   suffixIcon: GestureDetector(
                                     child: const Icon(Icons.calendar_today),
                                   ),
@@ -825,7 +825,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: InputDecoration(
                                   hintText: "Required Time",
                                   hintStyle:
-                                      const TextStyle(color: Color(0xffaba7a7)),
+                                      const TextStyle(color: Color(0xff858585)),
                                   suffixIcon: GestureDetector(
                                     onTap: () => _selectTime(context),
                                     child: const Icon(Icons.access_time),
@@ -851,7 +851,7 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   hintText: "Hospital Name",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 30,
                                 inputFormatters: [
@@ -867,16 +867,16 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xffaba7a7)),
+                                        BorderSide(color: Color(0xff858585)),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xffaba7a7)),
+                                        BorderSide(color: Color(0xff858585)),
                                   ),
                                   hintText: 'Select Province',
                                   border: InputBorder.none,
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 value: selectedProvince,
                                 items: ['1', '2', '3', '4', '5', '6', '7']
@@ -906,16 +906,16 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xffaba7a7)),
+                                        BorderSide(color: Color(0xff858585)),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xffaba7a7)),
+                                        BorderSide(color: Color(0xff858585)),
                                   ),
                                   hintText: 'Select District',
                                   border: InputBorder.none,
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 value: selectedDistrict,
                                 items: selectedProvince != null
@@ -946,16 +946,16 @@ class _RequestScreenState extends State<RequestScreen>
                                 decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xffaba7a7)),
+                                        BorderSide(color: Color(0xff858585)),
                                   ),
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide:
-                                        BorderSide(color: Color(0xffaba7a7)),
+                                        BorderSide(color: Color(0xff858585)),
                                   ),
                                   hintText: 'Select Local Level',
                                   border: InputBorder.none,
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 value: selectedLocalLevel,
                                 items: selectedDistrict != null
@@ -993,7 +993,7 @@ class _RequestScreenState extends State<RequestScreen>
                                       ? 'Ward number cannot be greater than 33'
                                       : null,
                                   hintStyle:
-                                      const TextStyle(color: Color(0xffaba7a7)),
+                                      const TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 2,
                                 inputFormatters: [

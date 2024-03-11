@@ -301,16 +301,16 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           decoration: const InputDecoration(
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: Color(0xffaba7a7)),
+                                                  color: Color(0xff858585)),
                                             ),
                                             focusedBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: Color(0xffaba7a7)),
+                                                  color: Color(0xff858585)),
                                             ),
                                             hintText: 'Select Province',
                                             border: InputBorder.none,
                                             hintStyle: TextStyle(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           value: selectedProvince,
                                           items: [
@@ -348,16 +348,16 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           decoration: const InputDecoration(
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: Color(0xffaba7a7)),
+                                                  color: Color(0xff858585)),
                                             ),
                                             focusedBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: Color(0xffaba7a7)),
+                                                  color: Color(0xff858585)),
                                             ),
                                             hintText: 'Select District',
                                             border: InputBorder.none,
                                             hintStyle: TextStyle(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           value: selectedDistrict,
                                           items: selectedProvince != null
@@ -390,16 +390,16 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                           decoration: const InputDecoration(
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: Color(0xffaba7a7)),
+                                                  color: Color(0xff858585)),
                                             ),
                                             focusedBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                  color: Color(0xffaba7a7)),
+                                                  color: Color(0xff858585)),
                                             ),
                                             hintText: 'Select Local Level',
                                             border: InputBorder.none,
                                             hintStyle: TextStyle(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           value: selectedLocalLevel,
                                           items: selectedDistrict != null
@@ -440,7 +440,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                                 ? 'Ward number cannot be greater than 33'
                                                 : null,
                                             hintStyle: const TextStyle(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           maxLength: 2,
                                           inputFormatters: [
@@ -493,7 +493,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                     style: TextStyle(
                                       fontSize: 0.015 * sh,
                                       fontWeight: FontWeight.w300,
-                                      color: const Color(0xffaba7a7),
+                                      color: const Color(0xff858585),
                                     ),
                                   ),
 
@@ -591,7 +591,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                         decoration: const InputDecoration(
                                           hintText: "*Blood Bank Name",
                                           hintStyle: TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         maxLength: 30,
                                         inputFormatters: [
@@ -608,16 +608,16 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                         decoration: const InputDecoration(
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           hintText: '*Select Province',
                                           border: InputBorder.none,
                                           hintStyle: TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         value: selectProvince,
                                         items: [
@@ -655,16 +655,16 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                         decoration: const InputDecoration(
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           hintText: '*Select District',
                                           border: InputBorder.none,
                                           hintStyle: TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         value: selectDistrict,
                                         items: selectProvince != null
@@ -696,16 +696,16 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                         decoration: const InputDecoration(
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: Color(0xffaba7a7)),
+                                                color: Color(0xff858585)),
                                           ),
                                           hintText: '*Select Local Level',
                                           border: InputBorder.none,
                                           hintStyle: TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         value: selectLocalLevel,
                                         items: selectDistrict != null
@@ -744,7 +744,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                               ? 'Ward number cannot be greater than 33'
                                               : null,
                                           hintStyle: const TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         maxLength: 2,
                                         inputFormatters: [
@@ -764,7 +764,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                                   ? 'Phone number must be 10 digits'
                                                   : null),
                                           hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7),
+                                            color: Color(0xff858585),
                                           ),
                                         ),
                                         maxLength: 10,

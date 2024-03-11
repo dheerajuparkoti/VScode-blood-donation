@@ -353,7 +353,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       decoration: const InputDecoration(
                                         hintText: "*Full Name",
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       maxLength: 30,
                                       inputFormatters: [
@@ -378,7 +378,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                                 ? 'Age must be between 16-60 to donate blood'
                                                 : null),
                                         hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                         suffixIcon: GestureDetector(
                                           onTap: () => _selectDate(context),
                                           child:
@@ -393,16 +393,16 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: '*Select Gender',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedGender,
                                       items: ['Male', 'Female', 'Others']
@@ -430,16 +430,16 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: '*Select blood Group',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedBloodGroup,
                                       items: [
@@ -475,16 +475,16 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: '*Select Province',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedProvince,
                                       items: ['1', '2', '3', '4', '5', '6', '7']
@@ -514,16 +514,16 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: '*Select District',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedDistrict,
                                       items: selectedProvince != null
@@ -555,16 +555,16 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       decoration: const InputDecoration(
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         hintText: '*Select Local Level',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       value: selectedLocalLevel,
                                       items: selectedDistrict != null
@@ -604,7 +604,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                             ? 'Ward number cannot be greater than 33'
                                             : null,
                                         hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       maxLength: 2,
                                       inputFormatters: [
@@ -626,7 +626,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                                   ? 'Phone number must be 10 digits'
                                                   : null),
                                           hintStyle: const TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                              color: Color(0xff858585)),
                                         ),
                                         maxLength: 10,
                                         inputFormatters: [
@@ -655,7 +655,7 @@ class _AddNewDonorState extends State<AddNewDonor>
                                                     ? null
                                                     : 'Invalid email address')),
                                         hintStyle: const TextStyle(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       maxLength: 30,
                                       inputFormatters: [

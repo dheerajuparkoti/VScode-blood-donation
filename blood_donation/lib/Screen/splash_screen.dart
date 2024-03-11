@@ -149,18 +149,19 @@ class _LoginState extends State<SplashScreen> {
               right: 0,
               bottom: 20, // Adjust bottom value as needed
               child: Center(
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                      Colors.white, // Change color of the progress indicator
+                child: Semantics(
+                  label: 'Loading Mobile Blood Bank Nepal',
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        Colors.white, // Change color of the progress indicator
+                      ),
+                      strokeWidth: 0.01 * sw, // Adjust strokeWidth as needed
+                      backgroundColor: Colors
+                          .black12, // Change background color of the progress indicator
                     ),
-                    strokeWidth: 0.01 * sw, // Adjust strokeWidth as needed
-                    backgroundColor: Colors
-                        .black12, // Change background color of the progress indicator
-                    semanticsLabel:
-                        'Loading Mobile Blood Bank Nepal', // Add a semantics label
                   ),
                 ),
               ),

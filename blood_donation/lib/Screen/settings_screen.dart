@@ -184,7 +184,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   decoration: const InputDecoration(
                     labelText: "Your Email",
-                    labelStyle: TextStyle(color: Color(0xffaba7a7)),
+                    labelStyle: TextStyle(color: Color(0xff858585)),
                   ),
                   maxLength: 50,
                 ),
@@ -196,7 +196,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   decoration: const InputDecoration(
                     labelText: "Your Username",
-                    labelStyle: TextStyle(color: Color(0xffaba7a7)),
+                    labelStyle: TextStyle(color: Color(0xff858585)),
                   ),
                   maxLength: 30,
                 ),
@@ -221,7 +221,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   decoration: InputDecoration(
                     labelText: "Enter Old Password",
-                    labelStyle: const TextStyle(color: Color(0xffaba7a7)),
+                    labelStyle: const TextStyle(color: Color(0xff858585)),
                     icon: const Icon(Icons.lock),
                     suffixIcon: GestureDetector(
                       onTap: () {
@@ -249,7 +249,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   decoration: InputDecoration(
                     labelText: "Enter New Password",
-                    labelStyle: const TextStyle(color: Color(0xffaba7a7)),
+                    labelStyle: const TextStyle(color: Color(0xff858585)),
                     icon: const Icon(Icons.lock),
                     suffixIcon: GestureDetector(
                       onTap: () {

@@ -536,7 +536,7 @@ class _EditProfileState extends State<EditProfile>
                                       ? 'You cannot set donation date for future'
                                       : null,
                                   hintStyle:
-                                      const TextStyle(color: Color(0xffaba7a7)),
+                                      const TextStyle(color: Color(0xff858585)),
                                   suffixIcon: GestureDetector(
                                     onTap: () => _selectDate(context),
                                     child: const Icon(Icons.calendar_today),
@@ -551,7 +551,7 @@ class _EditProfileState extends State<EditProfile>
                                 decoration: const InputDecoration(
                                   hintText: "Donated To",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 30,
                                 inputFormatters: [
@@ -568,7 +568,7 @@ class _EditProfileState extends State<EditProfile>
                                 decoration: const InputDecoration(
                                   hintText: "1 Blood Pint",
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      TextStyle(color: Color(0xff858585)),
                                 ),
                                 maxLength: 1,
                                 keyboardType: TextInputType.phone,
@@ -579,14 +579,14 @@ class _EditProfileState extends State<EditProfile>
                                   decoration: InputDecoration(
                                     hintText: "Contact",
                                     hintStyle:
-                                        TextStyle(color: Color(0xffaba7a7)),
+                                        TextStyle(color: Color(0xff858585)),
                                     errorText: contactController.text.isEmpty
                                         ? null
                                         : (contactNumberError
                                             ? 'Contact number must be 10 digits'
                                             : null),
                                     labelStyle:
-                                        TextStyle(color: Color(0xffaba7a7)),
+                                        TextStyle(color: Color(0xff858585)),
                                   ),
                                   maxLength: 10,
                                   inputFormatters: [
@@ -728,7 +728,7 @@ class _EditProfileState extends State<EditProfile>
                                     decoration: const InputDecoration(
                                       labelText: "Full Name",
                                       labelStyle:
-                                          TextStyle(color: Color(0xffaba7a7)),
+                                          TextStyle(color: Color(0xff858585)),
                                     ),
                                     maxLength: 30,
                                     inputFormatters: [
@@ -751,7 +751,7 @@ class _EditProfileState extends State<EditProfile>
                                               ? 'Age must be between 16-60 to donate blood'
                                               : null),
                                       labelStyle: const TextStyle(
-                                          color: Color(0xffaba7a7)),
+                                          color: Color(0xff858585)),
                                       suffixIcon: GestureDetector(
                                         onTap: () => _selectDate(context),
                                         child: const Icon(Icons.calendar_today),
@@ -765,16 +765,16 @@ class _EditProfileState extends State<EditProfile>
                                     decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       labelText: 'Select Gender',
                                       border: InputBorder.none,
                                       labelStyle:
-                                          TextStyle(color: Color(0xffaba7a7)),
+                                          TextStyle(color: Color(0xff858585)),
                                     ),
                                     value: selectedGender,
                                     items: ['Male', 'Female', 'Others']
@@ -798,11 +798,11 @@ class _EditProfileState extends State<EditProfile>
                                     decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       labelText:
                                           'Are you able to donate blood ?',
@@ -837,16 +837,16 @@ class _EditProfileState extends State<EditProfile>
                                     decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       labelText: 'Select blood Group',
                                       border: InputBorder.none,
                                       labelStyle:
-                                          TextStyle(color: Color(0xffaba7a7)),
+                                          TextStyle(color: Color(0xff858585)),
                                     ),
                                     value: selectedBloodGroup,
                                     items: [
@@ -878,16 +878,16 @@ class _EditProfileState extends State<EditProfile>
                                     decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       labelText: 'Select Province',
                                       border: InputBorder.none,
                                       labelStyle:
-                                          TextStyle(color: Color(0xffaba7a7)),
+                                          TextStyle(color: Color(0xff858585)),
                                     ),
                                     value: selectedProvince,
                                     items: ['1', '2', '3', '4', '5', '6', '7']
@@ -913,16 +913,16 @@ class _EditProfileState extends State<EditProfile>
                                     decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       labelText: 'Select District',
                                       border: InputBorder.none,
                                       labelStyle:
-                                          TextStyle(color: Color(0xffaba7a7)),
+                                          TextStyle(color: Color(0xff858585)),
                                     ),
                                     value: selectedDistrict,
                                     items: selectedProvince != null
@@ -948,16 +948,16 @@ class _EditProfileState extends State<EditProfile>
                                     decoration: const InputDecoration(
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Color(0xffaba7a7)),
+                                            color: Color(0xff858585)),
                                       ),
                                       labelText: 'Select Local Level',
                                       border: InputBorder.none,
                                       labelStyle:
-                                          TextStyle(color: Color(0xffaba7a7)),
+                                          TextStyle(color: Color(0xff858585)),
                                     ),
                                     value: selectedLocalLevel,
                                     items: selectedDistrict != null
@@ -991,7 +991,7 @@ class _EditProfileState extends State<EditProfile>
                                           ? 'Ward number cannot be greater than 33'
                                           : null,
                                       labelStyle:
-                                          TextStyle(color: Color(0xffaba7a7)),
+                                          TextStyle(color: Color(0xff858585)),
                                     ),
                                     maxLength: 2,
                                     inputFormatters: [
@@ -1012,7 +1012,7 @@ class _EditProfileState extends State<EditProfile>
                                                 ? 'Phone number must be 10 digits'
                                                 : null),
                                         labelStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                            TextStyle(color: Color(0xff858585)),
                                       ),
                                       maxLength: 10,
                                       inputFormatters: [
