@@ -7,6 +7,7 @@ import 'package:blood_donation/notificationservice/local_notification_service.da
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'dart:math'; // for generating min 8 digit new password
@@ -28,8 +29,11 @@ class _SignInSignUpState extends State<SignInSignUp>
   late TabController _tabController;
   bool isLoading = false;
   bool passwordsMatch = true;
+  bool confirmPasswordTyping = false;
   bool phoneNumberError = false;
   bool dobError = false;
+  bool emailValid = false;
+  bool isEmailEmpty = true;
   String deviceTokenToSendPushNotification = "";
 
   TextEditingController fullnameController = TextEditingController();
@@ -249,6 +253,12 @@ class _SignInSignUpState extends State<SignInSignUp>
     super.dispose();
   }
 
+  bool validateEmail(String email) {
+    final RegExp emailRegex =
+        RegExp(r'^[\w-]+(?:\.[\w-]+)*@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context); // to maintain state between two tabs
@@ -370,6 +380,12 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         icon: Icon(Icons.person),
                                       ),
                                       maxLength: 30,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                              r'[a-zA-Z0-9!@#$%^&*()-_=+;:,./?`~]'),
+                                        ),
+                                      ],
                                     ),
 
                                     TextField(
@@ -395,6 +411,12 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       ),
                                       obscureText: !_isPasswordVisible,
                                       maxLength: 20,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                              r'[a-zA-Z0-9!@#$%^&*()-_=+;:,./?`~]'),
+                                        ),
+                                      ],
                                     ),
                                     SizedBox(height: 0.01 * sh),
 
@@ -516,6 +538,12 @@ class _SignInSignUpState extends State<SignInSignUp>
                                             TextStyle(color: Color(0xffaba7a7)),
                                       ),
                                       maxLength: 30,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                              r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                        ),
+                                      ],
                                     ),
 
                                     TextField(
@@ -524,9 +552,11 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       onTap: () => _selectDate(context),
                                       decoration: InputDecoration(
                                         hintText: "Date of Birth (yyyy/mm/dd)",
-                                        errorText: dobError
-                                            ? 'Age must be between 18-60 to donate blood'
-                                            : null,
+                                        errorText: dobController.text.isEmpty
+                                            ? null
+                                            : (dobError
+                                                ? 'Age must be between 16-60 to donate blood'
+                                                : null),
                                         hintStyle: const TextStyle(
                                             color: Color(0xffaba7a7)),
                                         suffixIcon: GestureDetector(
@@ -535,7 +565,6 @@ class _SignInSignUpState extends State<SignInSignUp>
                                               const Icon(Icons.calendar_today),
                                         ),
                                       ),
-                                      maxLength: 30,
                                     ),
 
                                     DropdownButtonFormField<String>(
@@ -736,45 +765,83 @@ class _SignInSignUpState extends State<SignInSignUp>
                                     SizedBox(height: 0.02 * sh),
 
                                     TextField(
-                                      //controller: _textControllers['wardNo'],
                                       controller: wardNoController,
                                       keyboardType: TextInputType.phone,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         hintText: "Ward No.",
-                                        hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                        errorText: (wardNoController
+                                                    .text.isNotEmpty &&
+                                                int.tryParse(wardNoController
+                                                        .text)! >
+                                                    33)
+                                            ? 'Ward number cannot be greater than 33'
+                                            : null,
+                                        hintStyle: const TextStyle(
+                                            color: Color(0xffaba7a7)),
                                       ),
                                       maxLength: 2,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter
+                                            .digitsOnly, // Allow only digits
+                                      ],
                                     ),
 
                                     TextField(
-                                        controller: phoneController,
-                                        keyboardType: TextInputType.phone,
-                                        decoration: InputDecoration(
-                                          hintText: "Phone Number",
-                                          errorText: phoneNumberError
-                                              ? 'Phone number must be 10 digits'
-                                              : null,
-                                          hintStyle: const TextStyle(
-                                              color: Color(0xffaba7a7)),
+                                      controller: phoneController,
+                                      keyboardType: TextInputType.phone,
+                                      decoration: InputDecoration(
+                                        hintText: "Phone Number",
+                                        errorText: phoneController.text.isEmpty
+                                            ? null
+                                            : (phoneNumberError
+                                                ? 'Phone number must be 10 digits'
+                                                : null),
+                                        hintStyle: const TextStyle(
+                                          color: Color(0xffaba7a7),
                                         ),
-                                        maxLength: 10,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            // Check if the length of phone number is not 10
-                                            phoneNumberError =
-                                                value.length != 10;
-                                          });
-                                        }),
+                                      ),
+                                      maxLength: 10,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(
+                                            10), // Ensures maxLength is respected
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          // Check if the length of phone number is not 10
+                                          phoneNumberError = value.length != 10;
+                                        });
+                                      },
+                                    ),
+
                                     TextField(
-                                      // controller: _textControllers['email'],
                                       controller: emailController,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         hintText: "E-mail",
-                                        hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                        hintStyle: const TextStyle(
+                                            color: Color(0xffaba7a7)),
+                                        errorText: emailController.text.isEmpty
+                                            ? null
+                                            : (isEmailEmpty
+                                                ? null
+                                                : (emailValid
+                                                    ? null
+                                                    : 'Invalid email address')),
                                       ),
                                       maxLength: 30,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                              r'[a-zA-Z0-9!@#$%^&*()-_=+;:,./?`~]'),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          emailValid = validateEmail(value);
+                                          isEmailEmpty = value
+                                              .isEmpty; // Update isEmailEmpty
+                                        });
+                                      },
                                     ),
 
                                     TextField(
@@ -784,11 +851,14 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         hintStyle:
                                             TextStyle(color: Color(0xffaba7a7)),
                                       ),
-                                      maxLength: 30,
+                                      maxLength: 20,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.deny(
+                                            RegExp(r'\s')), // Deny whitespace
+                                      ],
                                     ),
 
                                     TextField(
-                                      //controller: _textControllers['newPassword'],
                                       controller: newPasswordController,
                                       decoration: InputDecoration(
                                         hintText: "New Password",
@@ -810,6 +880,12 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       ),
                                       obscureText: !_isPasswordVisible,
                                       maxLength: 20,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                              r'[a-zA-Z0-9!@#$%^&*()-_=+;:,./?`~]'),
+                                        ),
+                                      ],
                                     ),
                                     TextField(
                                       controller: confirmPasswordController,
@@ -833,16 +909,27 @@ class _SignInSignUpState extends State<SignInSignUp>
                                       ),
                                       obscureText: !_isConfirmPasswordVisible,
                                       maxLength: 20,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                              r'[a-zA-Z0-9!@#$%^&*()-_=+;:,./?`~]'),
+                                        ),
+                                      ],
                                       onChanged: (value) {
                                         setState(() {
-                                          // Check if the passwords match
-                                          passwordsMatch = value ==
-                                              newPasswordController.text;
+                                          confirmPasswordTyping = true;
+                                          if (confirmPasswordTyping) {
+                                            passwordsMatch = value ==
+                                                newPasswordController.text;
+                                          }
                                         });
                                       },
                                     ),
                                     // Show error message if passwords don't match
-                                    if (!passwordsMatch)
+                                    if (!passwordsMatch &&
+                                        confirmPasswordTyping &&
+                                        confirmPasswordController
+                                            .text.isNotEmpty)
                                       const Text(
                                         'Passwords do not match',
                                         style: TextStyle(color: Colors.red),
@@ -937,6 +1024,8 @@ class _SignInSignUpState extends State<SignInSignUp>
         selectedDistrict != null &&
         selectedLocalLevel != null &&
         wardNoController.text.trim() != '' &&
+        ((wardNoController.text.isNotEmpty &&
+            int.tryParse(wardNoController.text)! <= 33)) &&
         phoneController.text.trim() != '' &&
         phoneNumberError == false &&
         dobError == false &&
@@ -945,7 +1034,9 @@ class _SignInSignUpState extends State<SignInSignUp>
         newPasswordController.text.trim() != '' &&
         confirmPasswordController.text.trim() != '' &&
         (newPasswordController.text.trim() ==
-            confirmPasswordController.text.trim())) {
+            confirmPasswordController.text.trim()) &&
+        (emailController.text.isEmpty ||
+            (emailController.text.isNotEmpty && isEmailEmpty || emailValid))) {
       if (numericRegex.hasMatch(phoneController.text.trim())) {
         regUser();
         isLoading = false;

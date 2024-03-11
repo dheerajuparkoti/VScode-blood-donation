@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart'; // for date format
 import 'package:blood_donation/api/api.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class _EventsAppointmentsState extends State<EventsAppointments>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late TabController _tabController;
   bool isLoading = false; // for circular progress bar
+  bool setDateError = false;
 
   TextEditingController aboutController = TextEditingController();
   TextEditingController remarksController = TextEditingController();
@@ -127,9 +129,24 @@ class _EventsAppointmentsState extends State<EventsAppointments>
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        setDateController.text = "${picked.year}/${picked.month}/${picked.day}";
+        setDateController.text = picked.toString().split(" ")[0];
+        _validSelectedDate(setDateController.text);
       });
     }
+  }
+
+  bool isValidSelectedDate(String selectedDate) {
+    DateTime? selectDate = DateTime.tryParse(selectedDate);
+    DateTime currentDate = DateTime.now();
+
+    // Check if DOB is not null and is less than or equal to today's date
+    return selectDate != null && selectDate.isAfter(currentDate);
+  }
+
+  void _validSelectedDate(String selectedDate) {
+    setState(() {
+      setDateError = !isValidSelectedDate(selectedDate);
+    });
   }
 
 // Function to make a phone call
@@ -838,6 +855,12 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
                                 maxLength: 50,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(
+                                        r'[a-zA-Z0-9!@#$%^&*()-_=+;:,./?`~]'),
+                                  ),
+                                ],
                               ),
 
                               TextField(
@@ -846,6 +869,9 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                 onTap: () => _selectDate(context),
                                 decoration: InputDecoration(
                                   hintText: "Set Date (yyyy/mm/dd)",
+                                  errorText: setDateError
+                                      ? 'Appointment date cannot be in the past'
+                                      : null,
                                   hintStyle:
                                       const TextStyle(color: Color(0xffaba7a7)),
                                   suffixIcon: GestureDetector(
@@ -880,6 +906,12 @@ class _EventsAppointmentsState extends State<EventsAppointments>
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
                                 maxLength: 30,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(
+                                        r'[a-zA-Z0-9!@#$%^&*()-_=+;:,./?`~]'),
+                                  ),
+                                ],
                               ),
                               SizedBox(height: 0.02 * sh),
                               // Making send button
@@ -941,12 +973,13 @@ class _EventsAppointmentsState extends State<EventsAppointments>
     if (aboutController.text.trim() != '' &&
         setDateController.text.trim() != '' &&
         setTimeController.text.trim() != '' &&
-        remarksController.text.trim() != '') {
+        remarksController.text.trim() != '' &&
+        setDateError == false) {
       setAppointment();
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,
-          message: "Please fill all fields indicated as *.",
+          message: "Please fill all fields correctly indicated as *.",
           icon: Icons.info);
     }
   }

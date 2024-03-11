@@ -5,6 +5,7 @@ import 'package:blood_donation/Screen/splash_screen.dart';
 import 'package:blood_donation/notificationservice/local_notification_service.dart';
 import 'package:blood_donation/provider/navigation_provider.dart';
 import 'package:blood_donation/provider/user_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -32,6 +33,9 @@ void main() async {
     ),
   );
 
+  // Check and request permission for scheduling exact alarms
+  await _checkAndRequestPermission();
+
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: 'AIzaSyC-QidEdKNmEMri0_N4c-kmREG5BiDBwEk',
@@ -45,6 +49,13 @@ void main() async {
   await messaging.subscribeToTopic('mobilebloodbanknepalnotifications');
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   LocalNotificationService.initialize();
+}
+
+Future<void> _checkAndRequestPermission() async {
+  PermissionStatus status = await Permission.notification.status;
+  if (!status.isGranted) {
+    await Permission.notification.request();
+  }
 }
 
 class MyApp extends StatelessWidget {

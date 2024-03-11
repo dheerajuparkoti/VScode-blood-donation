@@ -76,7 +76,7 @@ class DistrictData
                     'Manang',
                     'Mustang',
                     'Myagdi',
-                    'Nawalpur',
+                    'Nawalparasi East',
                     'Parbat',
                     'Syangja',
                     'Tanahu'
@@ -89,7 +89,7 @@ class DistrictData
                     'Gulmi',
                     'Kapilvastu',
                     'Palpa',
-                    'Parasi',
+                    'Nawalparasi West',
                     'Rupandehi',
                     'Dang',
                     'Rukum East',
@@ -865,7 +865,7 @@ class DistrictData
                         'Tillotama Mun.'
                     ];
                     break;
-                    case'Kapilbastu': [
+                    case'Kapilvastu': [
                         'Yashodhara Ru. Mun.',
                         'Bijayanagar Ru. Mun.',
                         'Mayadevi Ru. Mun.',

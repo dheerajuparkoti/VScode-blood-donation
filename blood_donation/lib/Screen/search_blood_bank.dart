@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:blood_donation/data/district_data.dart';
 import 'package:blood_donation/api/api.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SearchBloodBank extends StatefulWidget {
@@ -428,12 +429,24 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                         TextField(
                                           controller: wardNoController,
                                           keyboardType: TextInputType.phone,
-                                          decoration: const InputDecoration(
+                                          decoration: InputDecoration(
                                             hintText: "Ward No.",
-                                            hintStyle: TextStyle(
+                                            errorText: (wardNoController
+                                                        .text.isNotEmpty &&
+                                                    int.tryParse(
+                                                            wardNoController
+                                                                .text)! >
+                                                        33)
+                                                ? 'Ward number cannot be greater than 33'
+                                                : null,
+                                            hintStyle: const TextStyle(
                                                 color: Color(0xffaba7a7)),
                                           ),
                                           maxLength: 2,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter
+                                                .digitsOnly, // Allow only digits
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -581,6 +594,12 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                               color: Color(0xffaba7a7)),
                                         ),
                                         maxLength: 30,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                            RegExp(
+                                                r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                          ),
+                                        ],
                                       ),
                                       SizedBox(height: 0.005 * sh),
 
@@ -715,34 +734,54 @@ class _SearchBloodBankState extends State<SearchBloodBank>
                                       TextField(
                                         controller: wardNoCont,
                                         keyboardType: TextInputType.phone,
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           hintText: "*Ward No.",
-                                          hintStyle: TextStyle(
+                                          errorText: (wardNoCont
+                                                      .text.isNotEmpty &&
+                                                  int.tryParse(
+                                                          wardNoCont.text)! >
+                                                      33)
+                                              ? 'Ward number cannot be greater than 33'
+                                              : null,
+                                          hintStyle: const TextStyle(
                                               color: Color(0xffaba7a7)),
                                         ),
                                         maxLength: 2,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly, // Allow only digits
+                                        ],
                                       ),
 
                                       TextField(
-                                          // controller:_textControllers['phoneNumber'],
-                                          controller: phoneCont,
-                                          keyboardType: TextInputType.phone,
-                                          decoration: InputDecoration(
-                                            hintText: "*Phone Number",
-                                            errorText: phoneNumberError
-                                                ? 'Phone number must be 10 digits'
-                                                : null,
-                                            hintStyle: const TextStyle(
-                                                color: Color(0xffaba7a7)),
+                                        controller: phoneCont,
+                                        keyboardType: TextInputType.phone,
+                                        decoration: InputDecoration(
+                                          hintText: "*Phone No.",
+                                          errorText: phoneCont.text.isEmpty
+                                              ? null
+                                              : (phoneNumberError
+                                                  ? 'Phone number must be 10 digits'
+                                                  : null),
+                                          hintStyle: const TextStyle(
+                                            color: Color(0xffaba7a7),
                                           ),
-                                          maxLength: 10,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              // Check if the length of phone number is not 10
-                                              phoneNumberError =
-                                                  value.length != 10;
-                                            });
-                                          }),
+                                        ),
+                                        maxLength: 10,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          LengthLimitingTextInputFormatter(
+                                              10), // Ensures maxLength is respected
+                                        ],
+                                        onChanged: (value) {
+                                          setState(() {
+                                            // Check if the length of phone number is not 10
+                                            phoneNumberError =
+                                                value.length != 10;
+                                          });
+                                        },
+                                      ),
 
                                       // Making Add button
                                       SizedBox(height: 0.02 * sh),
@@ -810,7 +849,10 @@ class _SearchBloodBankState extends State<SearchBloodBank>
         wardNoCont.text.trim() != '' &&
         wardNoCont.text.trim() != '0' &&
         phoneCont.text.trim() != '' &&
-        phoneNumberError == false) {
+        phoneNumberError == false &&
+        (wardNoCont.text.isEmpty ||
+            (wardNoCont.text.isNotEmpty &&
+                int.tryParse(wardNoCont.text)! <= 33))) {
       if (numericRegex.hasMatch(phoneCont.text.trim())) {
         regBloodBank();
         isLoading = false;
@@ -819,6 +861,7 @@ class _SearchBloodBankState extends State<SearchBloodBank>
             context: context,
             message: "Contact number should contain only numbers.",
             icon: Icons.info);
+        isLoading = false;
       }
     } else {
       CustomSnackBar.showUnsuccess(

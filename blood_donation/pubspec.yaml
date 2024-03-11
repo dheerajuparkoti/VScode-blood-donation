@@ -29,7 +29,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
-    sdk: flutter  
+    sdk: flutter 
+  permission_handler: ^10.3.0 
   intl: ^0.17.0
   mailer: ^5.1.0 
   image_picker: ^1.0.2

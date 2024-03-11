@@ -5,6 +5,7 @@ import 'package:blood_donation/provider/user_provider.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class AddNewDonor extends StatefulWidget {
@@ -21,6 +22,9 @@ class _AddNewDonorState extends State<AddNewDonor>
   bool isLoading = false;
   bool phoneNumberError = false;
   bool dobError = false;
+  bool emailValid = false;
+  bool isEmailEmpty = true;
+
   TextEditingController fullnameController = TextEditingController();
   TextEditingController wardNoController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -196,6 +200,12 @@ class _AddNewDonorState extends State<AddNewDonor>
     _tabController.dispose();
   }
 
+  bool validateEmail(String email) {
+    final RegExp emailRegex =
+        RegExp(r'^[\w-]+(?:\.[\w-]+)*@([\w-]+\.)+[\w-]{2,4}$');
+    return emailRegex.hasMatch(email);
+  }
+
   void _handleTabChange() {
     setState(() {});
     if (_tabController.index == 0) {
@@ -346,6 +356,12 @@ class _AddNewDonorState extends State<AddNewDonor>
                                             TextStyle(color: Color(0xffaba7a7)),
                                       ),
                                       maxLength: 30,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                              r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                        ),
+                                      ],
                                     ),
                                     SizedBox(height: 0.005 * sh),
 
@@ -356,9 +372,11 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       onTap: () => _selectDate(context),
                                       decoration: InputDecoration(
                                         hintText: "*Date of Birth (yyyy/mm/dd)",
-                                        errorText: dobError
-                                            ? 'Age must be between 16-60 to donate blood'
-                                            : null,
+                                        errorText: dobController.text.isEmpty
+                                            ? null
+                                            : (dobError
+                                                ? 'Age must be between 16-60 to donate blood'
+                                                : null),
                                         hintStyle: const TextStyle(
                                             color: Color(0xffaba7a7)),
                                         suffixIcon: GestureDetector(
@@ -367,8 +385,8 @@ class _AddNewDonorState extends State<AddNewDonor>
                                               const Icon(Icons.calendar_today),
                                         ),
                                       ),
-                                      maxLength: 30,
                                     ),
+                                    SizedBox(height: 0.03 * sh),
 
                                     //DROPDOWN Gender
                                     DropdownButtonFormField<String>(
@@ -576,12 +594,23 @@ class _AddNewDonorState extends State<AddNewDonor>
                                       //controller: _textControllers['wardNo'],
                                       controller: wardNoController,
                                       keyboardType: TextInputType.phone,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         hintText: "*Ward No.",
-                                        hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                        errorText: (wardNoController
+                                                    .text.isNotEmpty &&
+                                                int.tryParse(wardNoController
+                                                        .text)! >
+                                                    33)
+                                            ? 'Ward number cannot be greater than 33'
+                                            : null,
+                                        hintStyle: const TextStyle(
+                                            color: Color(0xffaba7a7)),
                                       ),
                                       maxLength: 2,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter
+                                            .digitsOnly, // Allow only digits
+                                      ],
                                     ),
 
                                     TextField(
@@ -590,13 +619,22 @@ class _AddNewDonorState extends State<AddNewDonor>
                                         keyboardType: TextInputType.phone,
                                         decoration: InputDecoration(
                                           hintText: "*Phone Number",
-                                          errorText: phoneNumberError
-                                              ? 'Phone number must be 10 digits'
-                                              : null,
+                                          errorText: phoneController
+                                                  .text.isEmpty
+                                              ? null
+                                              : (phoneNumberError
+                                                  ? 'Phone number must be 10 digits'
+                                                  : null),
                                           hintStyle: const TextStyle(
                                               color: Color(0xffaba7a7)),
                                         ),
                                         maxLength: 10,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter
+                                              .digitsOnly,
+                                          LengthLimitingTextInputFormatter(
+                                              10), // Ensures maxLength is respected
+                                        ],
                                         onChanged: (value) {
                                           setState(() {
                                             // Check if the length of phone number is not 10
@@ -607,12 +645,32 @@ class _AddNewDonorState extends State<AddNewDonor>
                                     TextField(
                                       // controller: _textControllers['email'],
                                       controller: emailController,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         hintText: "E-mail",
-                                        hintStyle:
-                                            TextStyle(color: Color(0xffaba7a7)),
+                                        errorText: emailController.text.isEmpty
+                                            ? null
+                                            : (isEmailEmpty
+                                                ? null
+                                                : (emailValid
+                                                    ? null
+                                                    : 'Invalid email address')),
+                                        hintStyle: const TextStyle(
+                                            color: Color(0xffaba7a7)),
                                       ),
                                       maxLength: 30,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(
+                                              r'[a-zA-Z0-9!@#$%^&*()-_=+;:,./?`~]'),
+                                        ),
+                                      ],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          emailValid = validateEmail(value);
+                                          isEmailEmpty = value
+                                              .isEmpty; // Update isEmailEmpty
+                                        });
+                                      },
                                     ),
                                     // making add donor button
                                     SizedBox(height: 0.02 * sh),
@@ -789,7 +847,11 @@ class _AddNewDonorState extends State<AddNewDonor>
         selectedDistrict != null &&
         selectedLocalLevel != null &&
         wardNoController.text.trim() != '' &&
-        phoneController.text.trim() != '') {
+        ((wardNoController.text.isNotEmpty &&
+            int.tryParse(wardNoController.text)! <= 33)) &&
+        phoneController.text.trim() != '' &&
+        (emailController.text.isEmpty ||
+            (emailController.text.isNotEmpty && isEmailEmpty || emailValid))) {
       if (numericRegex.hasMatch(phoneController.text.trim())) {
         regDonor();
         isLoading = false;

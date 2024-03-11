@@ -256,25 +256,25 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 );
                               } else if (notificationData['rId'] != null) {
                                 notifiReadRe(
-                                    int.parse(notificationData['rId']));
+                                    (int.parse(notificationData['rId'])));
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => RequestScreen(
-                                      notificationReId: int.parse(notificationData[
-                                          'rId']), // Pass the required parameter
+                                      notificationReId: (int.parse(notificationData[
+                                          'rId'])), // Pass the required parameter
                                     ),
                                   ),
                                 );
                               } else if (notificationData['evId'] != null) {
                                 notifiReadEvent(
-                                    int.parse(notificationData['evId']));
+                                    (int.parse(notificationData['evId'])));
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => EventsAppointments(
-                                      notificationEvId: int.parse(notificationData[
-                                          'evId']), // Pass the required parameter
+                                      notificationEvId: (int.parse(notificationData[
+                                          'evId'])), // Pass the required parameter
                                     ),
                                   ),
                                 );

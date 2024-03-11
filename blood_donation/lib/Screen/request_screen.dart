@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:blood_donation/Screen/available_list.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
@@ -28,6 +29,7 @@ class _RequestScreenState extends State<RequestScreen>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late TabController _tabController;
   bool isLoading = false; // for circular progress bar
+  bool selectedDateError = false;
 
 //Patient Details Declaration
   TextEditingController fullNameController = TextEditingController();
@@ -401,10 +403,27 @@ class _RequestScreenState extends State<RequestScreen>
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
-        requiredDateController.text =
-            "${picked.year}/${picked.month}/${picked.day}";
+        requiredDateController.text = picked.toString().split(" ")[0];
+        _validSelectedDate(requiredDateController.text);
       });
     }
+  }
+
+  bool isValidSelectedDate(String selectedDate) {
+    DateTime? selectDate = DateTime.tryParse(selectedDate);
+    DateTime currentDate = DateTime.now();
+
+    // Return false if selectDate is strictly before today's date (ignoring time)
+    return selectDate != null &&
+        selectDate.year >= currentDate.year &&
+        selectDate.month >= currentDate.month &&
+        selectDate.day >= currentDate.day;
+  }
+
+  void _validSelectedDate(String selectedDate) {
+    setState(() {
+      selectedDateError = !isValidSelectedDate(selectedDate);
+    });
   }
 
 // Function to make a phone call
@@ -653,6 +672,12 @@ class _RequestScreenState extends State<RequestScreen>
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
                                 maxLength: 30,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(
+                                        r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                  ),
+                                ],
                               ),
 
                               //DROPDOWN BLOOD GROUP
@@ -708,6 +733,11 @@ class _RequestScreenState extends State<RequestScreen>
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
                                 maxLength: 1,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(
+                                      1), // Ensures maxLength is respected
+                                ],
                               ),
 
                               TextField(
@@ -718,6 +748,12 @@ class _RequestScreenState extends State<RequestScreen>
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
                                 maxLength: 30,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(
+                                        r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                  ),
+                                ],
                               ),
 
                               TextField(
@@ -728,6 +764,12 @@ class _RequestScreenState extends State<RequestScreen>
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
                                 maxLength: 30,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(
+                                        r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                  ),
+                                ],
                               ),
 
                               TextField(
@@ -735,13 +777,20 @@ class _RequestScreenState extends State<RequestScreen>
                                   keyboardType: TextInputType.phone,
                                   decoration: InputDecoration(
                                     hintText: "Contact No.",
-                                    errorText: phoneNumberError
-                                        ? 'Phone number must be 10 digits'
-                                        : null,
+                                    errorText: contactNoController.text.isEmpty
+                                        ? null
+                                        : (phoneNumberError
+                                            ? 'Phone number must be 10 digits'
+                                            : null),
                                     hintStyle: const TextStyle(
                                         color: Color(0xffaba7a7)),
                                   ),
                                   maxLength: 10,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(
+                                        10), // Ensures maxLength is respected
+                                  ],
                                   onChanged: (value) {
                                     setState(() {
                                       // Check if the length of phone number is not 10
@@ -755,16 +804,20 @@ class _RequestScreenState extends State<RequestScreen>
                                 onTap: () => _selectDate(context),
                                 decoration: InputDecoration(
                                   hintText: "Required Date (yyyy/mm/dd)",
+                                  errorText: requiredDateController.text.isEmpty
+                                      ? null
+                                      : (selectedDateError
+                                          ? 'You cannot set required date in the past.'
+                                          : null),
                                   hintStyle:
                                       const TextStyle(color: Color(0xffaba7a7)),
                                   suffixIcon: GestureDetector(
-                                    onTap: () => _selectDate(context),
                                     child: const Icon(Icons.calendar_today),
                                   ),
                                 ),
                               ),
 
-                              SizedBox(height: 0.02 * sh),
+                              SizedBox(height: 0.03 * sh),
                               TextField(
                                 controller: requiredTimeController,
                                 readOnly: true,
@@ -801,6 +854,12 @@ class _RequestScreenState extends State<RequestScreen>
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
                                 maxLength: 30,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(
+                                        r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                  ),
+                                ],
                               ),
 
                               //DROPDOWN PROVINCE
@@ -925,12 +984,22 @@ class _RequestScreenState extends State<RequestScreen>
                                 //controller: _textControllers['wardNo'],
                                 controller: wardNoController,
                                 keyboardType: TextInputType.phone,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: "Ward No.",
+                                  errorText: (wardNoController
+                                              .text.isNotEmpty &&
+                                          int.tryParse(wardNoController.text)! >
+                                              33)
+                                      ? 'Ward number cannot be greater than 33'
+                                      : null,
                                   hintStyle:
-                                      TextStyle(color: Color(0xffaba7a7)),
+                                      const TextStyle(color: Color(0xffaba7a7)),
                                 ),
                                 maxLength: 2,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter
+                                      .digitsOnly, // Allow only digits
+                                ],
                               ),
                               SizedBox(height: 0.005 * sh),
 
@@ -1886,7 +1955,10 @@ class _RequestScreenState extends State<RequestScreen>
         selectedLocalLevel != null &&
         wardNoController.text.trim() != '' &&
         wardNoController.text.trim() != '0' &&
-        phoneNumberError == false) {
+        ((wardNoController.text.isNotEmpty &&
+            int.tryParse(wardNoController.text)! <= 33)) &&
+        phoneNumberError == false &&
+        selectedDateError == false) {
       // Check if the phone number contains only numbers
       if (numericRegex.hasMatch(contactNoController.text.trim())) {
         CustomDialog.showConfirmationDialog(
@@ -1910,7 +1982,7 @@ class _RequestScreenState extends State<RequestScreen>
     } else {
       CustomSnackBar.showUnsuccess(
           context: context,
-          message: "Please fill all fields.",
+          message: "Please fill all fields correctly.",
           icon: Icons.info);
     }
   }

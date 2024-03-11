@@ -126,7 +126,6 @@ Route::post('/adminAddedDonors',[RegDonorController::class,'adminAddedDonors']);
 // Event Status
 Route::post('/likeEvent',[EventStatusController::class,'likeEvent']);
 Route::post('/attendEvent',[EventStatusController::class,'attendEvent']); 
-//Route::post('/loadEvents',[EventStatusController::class,'loadEvents']); 
 
 
 //delete my request

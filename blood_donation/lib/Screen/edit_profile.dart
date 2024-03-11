@@ -8,6 +8,7 @@ import 'package:blood_donation/data/district_data.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -552,7 +553,13 @@ class _EditProfileState extends State<EditProfile>
                                   hintStyle:
                                       TextStyle(color: Color(0xffaba7a7)),
                                 ),
-                                maxLength: 50,
+                                maxLength: 30,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp(
+                                        r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                  ),
+                                ],
                               ),
 
                               TextField(
@@ -573,13 +580,20 @@ class _EditProfileState extends State<EditProfile>
                                     hintText: "Contact",
                                     hintStyle:
                                         TextStyle(color: Color(0xffaba7a7)),
-                                    errorText: contactNumberError
-                                        ? 'Phone number must be 10 digits'
-                                        : null,
+                                    errorText: contactController.text.isEmpty
+                                        ? null
+                                        : (contactNumberError
+                                            ? 'Contact number must be 10 digits'
+                                            : null),
                                     labelStyle:
                                         TextStyle(color: Color(0xffaba7a7)),
                                   ),
                                   maxLength: 10,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(
+                                        10), // Ensures maxLength is respected
+                                  ],
                                   onChanged: (value) {
                                     setState(() {
                                       // Check if the length of phone number is not 10
@@ -717,6 +731,12 @@ class _EditProfileState extends State<EditProfile>
                                           TextStyle(color: Color(0xffaba7a7)),
                                     ),
                                     maxLength: 30,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(
+                                            r'^[a-zA-Z ]+$'), // Regular expression pattern for English alphabets and space
+                                      ),
+                                    ],
                                   ),
 
                                   TextField(
@@ -725,9 +745,11 @@ class _EditProfileState extends State<EditProfile>
                                     onTap: () => _selectDate(context),
                                     decoration: InputDecoration(
                                       labelText: "Date of Birth (yyyy/mm/dd)",
-                                      errorText: dobError
-                                          ? 'Age must be between 16-60 to donate blood'
-                                          : null,
+                                      errorText: dobController.text.isEmpty
+                                          ? null
+                                          : (dobError
+                                              ? 'Age must be between 16-60 to donate blood'
+                                              : null),
                                       labelStyle: const TextStyle(
                                           color: Color(0xffaba7a7)),
                                       suffixIcon: GestureDetector(
@@ -735,8 +757,8 @@ class _EditProfileState extends State<EditProfile>
                                         child: const Icon(Icons.calendar_today),
                                       ),
                                     ),
-                                    maxLength: 30,
                                   ),
+                                  SizedBox(height: 0.03 * sh),
 
                                   //DROPDOWN Gender
                                   DropdownButtonFormField<String>(
@@ -769,7 +791,7 @@ class _EditProfileState extends State<EditProfile>
                                       });
                                     },
                                   ),
-                                  SizedBox(height: 0.005 * sh),
+                                  SizedBox(height: 0.03 * sh),
 
                                   //CAN DONATE
                                   DropdownButtonFormField<String>(
@@ -959,12 +981,23 @@ class _EditProfileState extends State<EditProfile>
                                     //controller: _textControllers['wardNo'],
                                     controller: wardNoController,
                                     keyboardType: TextInputType.phone,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       labelText: "Ward No.",
+                                      errorText: (wardNoController
+                                                  .text.isNotEmpty &&
+                                              int.tryParse(
+                                                      wardNoController.text)! >
+                                                  33)
+                                          ? 'Ward number cannot be greater than 33'
+                                          : null,
                                       labelStyle:
                                           TextStyle(color: Color(0xffaba7a7)),
                                     ),
                                     maxLength: 2,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter
+                                          .digitsOnly, // Allow only digits
+                                    ],
                                   ),
 
                                   TextField(
@@ -973,13 +1006,20 @@ class _EditProfileState extends State<EditProfile>
                                       keyboardType: TextInputType.phone,
                                       decoration: InputDecoration(
                                         labelText: "Phone Number",
-                                        errorText: phoneNumberError
-                                            ? 'Phone number must be 10 digits'
-                                            : null,
+                                        errorText: phoneController.text.isEmpty
+                                            ? null
+                                            : (phoneNumberError
+                                                ? 'Phone number must be 10 digits'
+                                                : null),
                                         labelStyle:
                                             TextStyle(color: Color(0xffaba7a7)),
                                       ),
                                       maxLength: 10,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(
+                                            10), // Ensures maxLength is respected
+                                      ],
                                       onChanged: (value) {
                                         setState(() {
                                           // Check if the length of phone number is not 10
@@ -1057,6 +1097,8 @@ class _EditProfileState extends State<EditProfile>
         selectedLocalLevel != null &&
         wardNoController.text.trim() != '' &&
         wardNoController.text.trim() != '0' &&
+        ((wardNoController.text.isNotEmpty &&
+            int.tryParse(wardNoController.text)! <= 33)) &&
         phoneController.text.trim() != '' &&
         phoneNumberError == false &&
         dobError == false) {

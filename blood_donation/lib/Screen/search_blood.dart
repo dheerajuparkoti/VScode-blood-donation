@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/Screen/blood_search_list.dart';
+import 'package:flutter/services.dart';
 
 class SearchBloodGroup extends StatefulWidget {
   const SearchBloodGroup({Key? key}) : super(key: key);
@@ -357,12 +358,23 @@ class _SearchBloodGroupState extends State<SearchBloodGroup> {
                                 TextField(
                                   controller: wardNoController,
                                   keyboardType: TextInputType.phone,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     hintText: "Ward No.",
-                                    hintStyle:
-                                        TextStyle(color: Color(0xffaba7a7)),
+                                    errorText: (wardNoController
+                                                .text.isNotEmpty &&
+                                            int.tryParse(
+                                                    wardNoController.text)! >
+                                                33)
+                                        ? 'Ward number cannot be greater than 33'
+                                        : null,
+                                    hintStyle: const TextStyle(
+                                        color: Color(0xffaba7a7)),
                                   ),
                                   maxLength: 2,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter
+                                        .digitsOnly, // Allow only digits
+                                  ],
                                 ),
                               ],
                             ),

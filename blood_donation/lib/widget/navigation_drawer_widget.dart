@@ -170,11 +170,12 @@ class NavigationDrawerScreen extends StatelessWidget {
                     onPressed: () {
                       // Perform logout operation
                       callApi.logout();
-                      Navigator.pushReplacement(
-                        context,
+                      Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
                           builder: (context) => const SignInSignUp(),
                         ),
+                        (route) =>
+                            false, // Remove all routes until the new route
                       );
                     },
                     child:
