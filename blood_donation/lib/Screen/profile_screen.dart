@@ -181,7 +181,7 @@ class _ProfileState extends State<Profile> {
         appBar: AppBar(
           toolbarHeight: 0.05 * sh,
           title: Text(
-            'Profile : $donorId',
+            'Profile',
             style: TextStyle(
               fontSize: 0.025 * sh,
             ),
