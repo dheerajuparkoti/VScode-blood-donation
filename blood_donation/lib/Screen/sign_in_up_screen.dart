@@ -18,7 +18,7 @@ import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
 
 class SignInSignUp extends StatefulWidget {
-  const SignInSignUp({Key? key}) : super(key: key);
+  const SignInSignUp({super.key});
 
   @override
   State<SignInSignUp> createState() => _SignInSignUpState();
@@ -1174,7 +1174,7 @@ Future<bool> checkUserExists(
 
 // FORGOT PASSWORD SEND EMAIL TO RESET THE PASSWORD OF THE ACCOUNT
 class ForgotPasswordDialog extends StatefulWidget {
-  const ForgotPasswordDialog({Key? key}) : super(key: key);
+  const ForgotPasswordDialog({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -1269,7 +1269,7 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
 
 // RESET PASSWORD DIALOG START HERE  ------------------------------------------
 class ResetMessageDialog extends StatelessWidget {
-  const ResetMessageDialog({Key? key}) : super(key: key);
+  const ResetMessageDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

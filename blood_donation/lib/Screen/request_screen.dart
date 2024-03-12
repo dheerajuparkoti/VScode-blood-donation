@@ -18,8 +18,7 @@ import '../provider/user_provider.dart';
 
 class RequestScreen extends StatefulWidget {
   final int notificationReId;
-  const RequestScreen({Key? key, required this.notificationReId})
-      : super(key: key);
+  const RequestScreen({super.key, required this.notificationReId});
 
   @override
   State<RequestScreen> createState() => _RequestScreenState();

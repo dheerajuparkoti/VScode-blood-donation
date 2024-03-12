@@ -10,7 +10,7 @@ import '../provider/user_provider.dart';
 class Profile extends StatefulWidget {
   final int donorId; // receiving id of user
 
-  const Profile({Key? key, required this.donorId}) : super(key: key);
+  const Profile({super.key, required this.donorId});
 
   @override
   State<Profile> createState() => _ProfileState();

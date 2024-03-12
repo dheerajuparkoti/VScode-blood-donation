@@ -9,7 +9,7 @@ import 'package:blood_donation/Screen/blood_search_list.dart';
 import 'package:flutter/services.dart';
 
 class SearchBloodGroup extends StatefulWidget {
-  const SearchBloodGroup({Key? key}) : super(key: key);
+  const SearchBloodGroup({super.key});
 
   @override
   State<SearchBloodGroup> createState() => _SearchBloodGroupState();

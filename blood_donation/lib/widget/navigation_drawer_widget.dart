@@ -20,7 +20,7 @@ import 'package:blood_donation/provider/navigation_provider.dart';
 import 'package:provider/provider.dart';
 
 class NavigationDrawerScreen extends StatelessWidget {
-  NavigationDrawerScreen({Key? key}) : super(key: key);
+  NavigationDrawerScreen({super.key});
 
   final padding = const EdgeInsets.symmetric(horizontal: 20);
   final CallApi callApi = CallApi();

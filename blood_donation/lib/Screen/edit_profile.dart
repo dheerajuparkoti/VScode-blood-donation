@@ -15,7 +15,7 @@ import 'package:image_picker/image_picker.dart';
 class EditProfile extends StatefulWidget {
   final int
       passedDonorId; // receiving donorid of selected user from profile screen
-  const EditProfile({Key? key, required this.passedDonorId}) : super(key: key);
+  const EditProfile({super.key, required this.passedDonorId});
 
   @override
   State<EditProfile> createState() => _EditProfileState();

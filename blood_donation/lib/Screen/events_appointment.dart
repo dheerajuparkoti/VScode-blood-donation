@@ -16,8 +16,7 @@ import '../provider/user_provider.dart';
 
 class EventsAppointments extends StatefulWidget {
   final int notificationEvId;
-  const EventsAppointments({Key? key, required this.notificationEvId})
-      : super(key: key);
+  const EventsAppointments({super.key, required this.notificationEvId});
 
   @override
   State<EventsAppointments> createState() => _EventsAppointmentsState();

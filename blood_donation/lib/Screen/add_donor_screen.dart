@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class AddNewDonor extends StatefulWidget {
-  const AddNewDonor({Key? key}) : super(key: key);
+  const AddNewDonor({super.key});
 
   @override
   State<AddNewDonor> createState() => _AddNewDonorState();

@@ -12,7 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SearchAmbulance extends StatefulWidget {
-  const SearchAmbulance({Key? key}) : super(key: key);
+  const SearchAmbulance({super.key});
 
   @override
   State<SearchAmbulance> createState() => _SearchAmbulanceState();

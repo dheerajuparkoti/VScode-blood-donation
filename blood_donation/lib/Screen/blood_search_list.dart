@@ -6,8 +6,7 @@ import 'package:blood_donation/api/api.dart';
 
 class BloodSearchList extends StatefulWidget {
   final Map<String, dynamic> searchCriteriaData; // importing user search input
-  const BloodSearchList({Key? key, required this.searchCriteriaData})
-      : super(key: key);
+  const BloodSearchList({super.key, required this.searchCriteriaData});
 
   @override
   State<BloodSearchList> createState() => _BloodSearchListState();

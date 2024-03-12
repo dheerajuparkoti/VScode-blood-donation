@@ -6,8 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AmbulanceSearchList extends StatefulWidget {
   final Map<String, dynamic> searchCriteriaData; // importing user search input
-  const AmbulanceSearchList({Key? key, required this.searchCriteriaData})
-      : super(key: key);
+  const AmbulanceSearchList({super.key, required this.searchCriteriaData});
 
   @override
   State<AmbulanceSearchList> createState() => _AmbulanceSearchListState();

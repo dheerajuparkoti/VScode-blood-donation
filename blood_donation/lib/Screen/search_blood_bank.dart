@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SearchBloodBank extends StatefulWidget {
-  const SearchBloodBank({Key? key}) : super(key: key);
+  const SearchBloodBank({super.key});
 
   @override
   State<SearchBloodBank> createState() => _SearchBloodBankState();

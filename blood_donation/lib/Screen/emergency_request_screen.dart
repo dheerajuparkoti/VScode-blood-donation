@@ -11,8 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 class EmergencyRequest extends StatefulWidget {
   final int notificationErId;
 
-  const EmergencyRequest({Key? key, required this.notificationErId})
-      : super(key: key);
+  const EmergencyRequest({super.key, required this.notificationErId});
 
   @override
   State<EmergencyRequest> createState() => _EmergencyRequestState();

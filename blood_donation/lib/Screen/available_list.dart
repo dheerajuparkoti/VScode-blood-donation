@@ -7,8 +7,7 @@ class AvailableListView extends StatefulWidget {
   final int passedId; // receiving id of user
   final String requestType; // receiving requestType
   const AvailableListView(
-      {Key? key, required this.passedId, required this.requestType})
-      : super(key: key);
+      {super.key, required this.passedId, required this.requestType});
 
   @override
   State<AvailableListView> createState() => _AvailableListViewState();
