@@ -5,56 +5,55 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
 
 class CallApi {
-  final String baseUrl = "https://mobilebloodbanknepal.com/api/";
-  //final String baseUrl = "http://192.168.1.67:8000/api/";
+  //final String baseUrl = "https://mobilebloodbanknepal.com/api/";
+  final String baseUrl = "http://192.168.1.67:8000/api/";
 
   final String loginUrl = "login";
 
 // for login and logout session
   Future<Map<String, dynamic>> login(String username, String password) async {
-    try {
-      final response = await http.post(
-        Uri.parse(baseUrl + loginUrl),
-        body: {'identifier': username, 'password': password},
-      );
+  try {
+    final response = await http.post(
+      Uri.parse(baseUrl + loginUrl),
+      body: {'identifier': username, 'password': password},
+    );
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> responseData = json.decode(response.body);
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+      // Extract token information
+      String token = responseData['token']['id'].toString(); // Use the token id or any field you need
+      String rememberToken = responseData['remember_token'] ?? '';
+      int userId = responseData['userId'] ?? 0;
+      int donorId = responseData['donorId'] ?? 0;
+      String accountType = responseData['accountType'] ?? '';
+     
 
-        if (responseData.containsKey('token')) {
-          final dynamic token = responseData['token'];
-          final dynamic userId = responseData['userId'];
-          final dynamic donorId = responseData['donorId'];
-          final dynamic accountType = responseData['accountType'];
+      // Store the token and remember_token in SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('authToken', token); // Ensure this is the correct token you need
+      await prefs.setString('remember_token', rememberToken); // Store remember token
+      await prefs.setInt('userId', userId);
+      await prefs.setInt('donorId', donorId);
+      await prefs.setString('accountType', accountType);
 
-          // Store the token in shared_preferences
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setString('authToken', token.toString()); // Convert to string
-          prefs.setInt('userId', userId);
+      return responseData;
 
-          prefs.setInt('donorId', donorId);
-          prefs.setString('accountType', accountType);
-
-          return responseData;
-        } else {
-          throw Exception('Invalid response format or token not found');
-        }
-      } else if (response.statusCode == 401) {
-        // Handle unauthorized (invalid username or password) case
-        throw Exception('401');
-      } else {
-        // Handle other error cases
-        throw Exception(
-            'Failed to log in. Status code: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Failed to log in: $e');
+    } else if (response.statusCode == 401) {
+      // Handle unauthorized (invalid username or password) case
+      throw Exception('401');
+    } else {
+      // Handle other error cases
+      throw Exception('Failed to log in. Status code: ${response.statusCode}');
     }
+  } catch (e) {
+    throw Exception('Failed to log in: $e');
   }
+}
+
 
   Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.remove('authToken');
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
   }
 
   // Future<http.Response> postData(

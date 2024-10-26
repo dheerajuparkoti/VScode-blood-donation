@@ -99,8 +99,10 @@ class NavigationDrawerScreen extends StatelessWidget {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
     int? profileId = userProvider.donorId;
+    print(profileId);
 
     if (profileId != null) {
+     
       switch (index) {
         case 0:
           navigateTo(Profile(donorId: profileId));
@@ -110,7 +112,8 @@ class NavigationDrawerScreen extends StatelessWidget {
           navigateTo(const AddNewDonor());
           break;
         case 2:
-          navigateTo(const NotificationScreen());
+          
+          // navigateTo(const NotificationScreen(message: message));
           break;
         case 3:
           navigateTo(const EventsAppointments(

@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:blood_donation/Screen/home_screen.dart';
 import 'package:blood_donation/data/internet_connectivity.dart';
 import 'package:blood_donation/api/api.dart';
-import 'package:blood_donation/notificationservice/local_notification_service.dart';
+import 'package:blood_donation/notificationservice/get_device_token.dart';
+import 'package:blood_donation/notificationservice/notification_service.dart'; 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_donation/data/district_data.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:blood_donation/provider/user_provider.dart';
 import 'dart:math'; // for generating min 8 digit new password
@@ -16,6 +18,7 @@ import 'package:blood_donation/widget/custom_dialog_boxes.dart';
 // for sending email using gmail
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInSignUp extends StatefulWidget {
   const SignInSignUp({super.key});
@@ -62,8 +65,10 @@ class _SignInSignUpState extends State<SignInSignUp>
     setState(() {
       isLoading = true;
     });
-    String? deviceToken = await FirebaseMessaging.instance.getToken();
-    if (deviceToken != null) {}
+     // Get the device token
+     NotificationService notificationService =NotificationService();
+    String deviceToken = await notificationService.getDeviceToken();
+
     var data = {
       'email': emailController.text.trim(),
       'username': usernameController.text.trim(),
@@ -198,7 +203,7 @@ class _SignInSignUpState extends State<SignInSignUp>
     FirebaseMessaging.onMessage.listen(
       (message) {
         if (message.notification != null) {
-          LocalNotificationService.createanddisplaynotification(message);
+          // LocalNotificationService.createanddisplaynotification(message);
         }
       },
     );
@@ -426,28 +431,7 @@ class _SignInSignUpState extends State<SignInSignUp>
                                     ),
                                     SizedBox(height: 0.01 * sh),
 
-                                    TextButton(
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              const ForgotPasswordDialog(),
-                                        );
-                                        // loginData(context);
-                                      },
-                                      child: Text(
-                                        "Forgot Password ?",
-                                        style: TextStyle(
-                                          color: const Color(0xFF959595),
-                                          fontSize: 0.015 * sh,
-                                          decoration: TextDecoration.underline,
-                                          decorationColor:
-                                              const Color(0xffFF0025),
-                                          decorationThickness: 0.5,
-                                        ),
-                                      ),
-                                    ),
-
+                                    
                                     // Making Login button
 
                                     Container(
@@ -521,6 +505,29 @@ class _SignInSignUpState extends State<SignInSignUp>
                                         ),
                                       ),
                                     ),
+                                       TextButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              const ForgotPasswordDialog(),
+                                        );
+                                        // loginData(context);
+                                      },
+                                      child: Text(
+                                        "Forgot Password ?",
+                                        style: TextStyle(
+                                          color: const Color(0xFF959595),
+                                          fontSize: 0.015 * sh,
+                                          decoration: TextDecoration.underline,
+                                          decorationColor:
+                                              const Color(0xffFF0025),
+                                          decorationThickness: 0.5,
+                                        ),
+                                      ),
+                                    ),
+
+                                    
                                   ],
                                 )),
                           ),
@@ -1096,24 +1103,33 @@ class _SignInSignUpState extends State<SignInSignUp>
           await callApi.login(username, password);
 
       if (response.containsKey('token') && response.containsKey('userId')) {
-        // Store the token and user ID globally
-        // final String token = response['token'];
-        final int userId = response['userId'];
-        final int donorId = response['donorId'];
-        final String accountType = response['accountType'];
 
-        final UserProvider userProvider =
-            Provider.of<UserProvider>(context, listen: false);
-        userProvider.setUserId(userId);
-        userProvider.setDonorId(donorId);
-        userProvider.setUserAccountType(accountType);
-        // Navigate to the home screen or another screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
-          ),
-        );
+    final dynamic token = response['token'];
+    final int userId = response['userId'];
+    final int donorId = response['donorId'];
+    final String accountType = response['accountType'];
+
+    // Print the token and other user information
+    print("TOKEN IS = $token");
+    print("USER ID IS = $userId");
+    print("DONOR ID IS = $donorId");
+    print("ACCOUNT TYPE IS = $accountType");
+
+    // Store the token and user ID globally
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('rememberToken', token.toString());
+
+    // Store other user information as well
+
+    print("Login Successful, token saved.");
+
+    final UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
+    userProvider.setUserId(userId);
+    userProvider.setDonorId(donorId);
+    userProvider.setUserAccountType(accountType);
+
+    // Navigate to the home screen or another screen
+  Get.off(() => const HomeScreen());
       }
     } catch (e) {
       if (e is Exception && e.toString().contains('401') ||
@@ -1125,6 +1141,7 @@ class _SignInSignUpState extends State<SignInSignUp>
           Icons.warning_rounded,
         );
       } else {
+         print("Login failed");
         CustomDialog.showAlertDialog(
           context,
           'Network Error',

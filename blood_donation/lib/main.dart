@@ -1,28 +1,41 @@
+import 'package:blood_donation/notificationservice/fcm_service.dart';
+import 'package:blood_donation/notificationservice/get_server_key.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:blood_donation/Screen/splash_screen.dart';
-import 'package:blood_donation/notificationservice/local_notification_service.dart';
 import 'package:blood_donation/provider/navigation_provider.dart';
 import 'package:blood_donation/provider/user_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:provider/provider.dart';
+import 'package:blood_donation/notificationservice/notification_service.dart';
+import 'package:get/get.dart';
 
-// firebase notification
-Future<void> backgroundHandler(RemoteMessage message) async {
-  message.data.toString();
-  (message.notification!.title);
+@pragma('vm:entry-point')
+// Firebase notification background handler
+Future<void> _firebaseBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  // (options: defaultFirebaseAppName.currentPlatform);
 }
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+//  await Firebase.initializeApp(options: DefaultFirebaseOpetions.currentPlatform);
+await Firebase.initializeApp();
+   FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundHandler);
 
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+// Get the server key token
+  GetServerKey serverKey = GetServerKey();
+  String accessToken = await serverKey.getServerKeyToken();
+  print('Access Token: $accessToken'); // Print the access token for testing
 
+
+ 
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  await messaging.subscribeToTopic('mobilebloodbanknepalnotifications');
+  
+  // Now run the app
   runApp(
     MultiProvider(
       providers: [
@@ -32,38 +45,34 @@ void main() async {
       child: const MyApp(),
     ),
   );
-
-  // Check and request permission for scheduling exact alarms
-  await _checkAndRequestPermission();
-
-  await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: 'AIzaSyC-QidEdKNmEMri0_N4c-kmREG5BiDBwEk',
-      appId: '1:17189376255:android:4d452ba103d4ea762a7cca',
-      messagingSenderId: '17189376255',
-      projectId: 'mobile-blood-bank-nepal-a2399',
-    ),
-  );
-
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-  await messaging.subscribeToTopic('mobilebloodbanknepalnotifications');
-  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  LocalNotificationService.initialize();
 }
 
-Future<void> _checkAndRequestPermission() async {
-  PermissionStatus status = await Permission.notification.status;
-  if (!status.isGranted) {
-    await Permission.notification.request();
-  }
-}
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  final NotificationService notificationService = NotificationService();
+
+  @override
+  void initState() {
+    super.initState();
+    // Request notification permission when the app starts
+    notificationService.requestNotificationPermission();
+    notificationService.getDeviceToken();
+    FcmService.firebaseInit();
+    notificationService.firebaseInit(context);
+    notificationService.setupInteractMessage(context);
+
+
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       showSemanticsDebugger: false,
       title: 'Mobile Blood Bank Nepal',

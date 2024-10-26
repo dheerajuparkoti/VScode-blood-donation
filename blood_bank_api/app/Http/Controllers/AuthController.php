@@ -57,14 +57,20 @@ class AuthController extends Controller
 
 public function login(Request $request)
 {
-    $validator = Validator::make($request->all(), [
-        'identifier' => 'required',
-        'password' => 'required',
+
+    $request->validate([
+        'identifier'=>'required',
+        'password'=>'required',
     ]);
 
-    if ($validator->fails()) {
-        return response()->json(['error' => $validator->errors()], 401);
-    }
+    // $validator = Validator::make($request->all(), [
+    //     'identifier' => 'required',
+    //     'password' => 'required',
+    // ]);
+
+    // if ($validator->fails()) {
+    //     return response()->json(['error' => $validator->errors()], 401);
+    // }
 
     $user = User::where('username', $request->input('identifier'))
                 ->orWhere('email', $request->input('identifier'))
@@ -87,18 +93,37 @@ public function login(Request $request)
     }
 
     // Set the remember_token
-    $user->remember_token = Str::random(60); // Or use any logic to generate a token
+    $rememberToken = Str::random(60); // Create a random token
+    $user->remember_token = $rememberToken; // Assign the generated token to the user
     $user->save();
 
     $token = $user->createToken('MyApp')->accessToken;
 
-    return response()->json(['token' => $token, 'userId' => $user->id, 'donorId' => $donor->donorId,'accountType'=>$user->accountType], 200);
+    return response()->json(['token' => $token, 'userId' => $user->id, 'donorId' => $donor->donorId,'accountType'=>$user->accountType,'remember_token'=>$rememberToken], 200);
 }
 
 
+public function user(Request $request)
+    {
+        // Authenticated user information can be returned here
+        return response()->json($request->user());
+    }
+
 
 public function logout(Request $request) {
+    // Revoke the user's token
     $request->user()->token()->revoke();
+
+    // Clear the remember_token
+    $request->user()->update(['remember_token' => null]);
+
+    // Log the user's logout information
+    Log::info('User logged out', [
+        'user_id' => $request->user()->id,
+        'email' => $request->user()->email,
+        'logout_time' => now()
+    ]);
+
     return response()->json(['message' => 'Successfully logged out']);
 }
 }

@@ -43,7 +43,7 @@ class CustomDialog {
                 Navigator.of(context).pop();
               },
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                foregroundColor: WidgetStateProperty.all<Color>(Colors.red),
               ),
               child: Text(
                 'OK',
@@ -104,7 +104,7 @@ class CustomDialog {
                 Navigator.of(context).pop(); // Close the dialog
               },
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                foregroundColor: WidgetStateProperty.all<Color>(Colors.red),
               ),
               child: Text(
                 'Yes',
@@ -118,7 +118,7 @@ class CustomDialog {
                 Navigator.of(context).pop();
               },
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                foregroundColor: WidgetStateProperty.all<Color>(Colors.red),
               ),
               child: Text(
                 'No',
