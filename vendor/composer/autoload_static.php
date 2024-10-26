@@ -604,6 +604,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\NotifyCanDonate' => __DIR__ . '/../..' . '/app/Console/Commands/NotifyCanDonate.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Exports\\Admin\\AmbulanceInfoExport' => __DIR__ . '/../..' . '/app/Exports/Admin/AmbulanceInfoExport.php',
@@ -623,6 +624,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\BloodBankInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/BloodBankInfoController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DeviceTokenController' => __DIR__ . '/../..' . '/app/Http/Controllers/DeviceTokenController.php',
         'App\\Http\\Controllers\\DonationHistoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/DonationHistoryController.php',
         'App\\Http\\Controllers\\EmergencyRequestAvailableDonorsController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmergencyRequestAvailableDonorsController.php',
         'App\\Http\\Controllers\\EmergencyRequestBloodController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmergencyRequestBloodController.php',
@@ -640,6 +642,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckRememberToken' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckRememberToken.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -654,6 +657,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Models\\AmbulanceInfo' => __DIR__ . '/../..' . '/app/Models/AmbulanceInfo.php',
         'App\\Models\\Auth' => __DIR__ . '/../..' . '/app/Models/Auth.php',
         'App\\Models\\BloodBankInfo' => __DIR__ . '/../..' . '/app/Models/BloodBankInfo.php',
+        'App\\Models\\DeviceToken' => __DIR__ . '/../..' . '/app/Models/DeviceToken.php',
         'App\\Models\\DonationHistory' => __DIR__ . '/../..' . '/app/Models/DonationHistory.php',
         'App\\Models\\EmergencyRequestAvailableDonors' => __DIR__ . '/../..' . '/app/Models/EmergencyRequestAvailableDonors.php',
         'App\\Models\\EmergencyRequestBlood' => __DIR__ . '/../..' . '/app/Models/EmergencyRequestBlood.php',

@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\NotifyCanDonate' => $baseDir . '/app/Console/Commands/NotifyCanDonate.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Exports\\Admin\\AmbulanceInfoExport' => $baseDir . '/app/Exports/Admin/AmbulanceInfoExport.php',
@@ -25,6 +26,7 @@ return array(
     'App\\Http\\Controllers\\AuthController' => $baseDir . '/app/Http/Controllers/AuthController.php',
     'App\\Http\\Controllers\\BloodBankInfoController' => $baseDir . '/app/Http/Controllers/BloodBankInfoController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\DeviceTokenController' => $baseDir . '/app/Http/Controllers/DeviceTokenController.php',
     'App\\Http\\Controllers\\DonationHistoryController' => $baseDir . '/app/Http/Controllers/DonationHistoryController.php',
     'App\\Http\\Controllers\\EmergencyRequestAvailableDonorsController' => $baseDir . '/app/Http/Controllers/EmergencyRequestAvailableDonorsController.php',
     'App\\Http\\Controllers\\EmergencyRequestBloodController' => $baseDir . '/app/Http/Controllers/EmergencyRequestBloodController.php',
@@ -42,6 +44,7 @@ return array(
     'App\\Http\\Controllers\\TestController' => $baseDir . '/app/Http/Controllers/TestController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
+    'App\\Http\\Middleware\\CheckRememberToken' => $baseDir . '/app/Http/Middleware/CheckRememberToken.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -56,6 +59,7 @@ return array(
     'App\\Models\\AmbulanceInfo' => $baseDir . '/app/Models/AmbulanceInfo.php',
     'App\\Models\\Auth' => $baseDir . '/app/Models/Auth.php',
     'App\\Models\\BloodBankInfo' => $baseDir . '/app/Models/BloodBankInfo.php',
+    'App\\Models\\DeviceToken' => $baseDir . '/app/Models/DeviceToken.php',
     'App\\Models\\DonationHistory' => $baseDir . '/app/Models/DonationHistory.php',
     'App\\Models\\EmergencyRequestAvailableDonors' => $baseDir . '/app/Models/EmergencyRequestAvailableDonors.php',
     'App\\Models\\EmergencyRequestBlood' => $baseDir . '/app/Models/EmergencyRequestBlood.php',
