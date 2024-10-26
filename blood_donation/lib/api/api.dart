@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path/path.dart' as path;
 
 class CallApi {
-  final String baseUrl = "https://mobilebloodbanknepal.com/api/";
-  //final String baseUrl = "http://192.168.1.67:8000/api/";
+  //final String baseUrl = "https://mobilebloodbanknepal.com/api/";
+  final String baseUrl = "http://192.168.1.64:8000/api/";
 
   final String loginUrl = "login";
 

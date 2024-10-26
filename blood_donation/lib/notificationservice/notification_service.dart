@@ -3,7 +3,10 @@
 import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
+import 'package:blood_donation/Screen/emergency_request_screen.dart';
+import 'package:blood_donation/Screen/events_appointment.dart';
 import 'package:blood_donation/Screen/notification_screen.dart';
+import 'package:blood_donation/Screen/request_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -162,7 +165,19 @@ Future<void> handleMessage(BuildContext context,RemoteMessage message)async{
   print(
     "Navigating to notification screen, message data: ${message.data}"
   );
- Get.to(() => NotificationScreen());
+  if(message.data['screen']=='notifyCanDonate'){
+     Get.to(() => NotificationScreen(message: message));
+  }
+  else if (message.data['screen']=='emergencyBloodRequest'){
+    Get.to(()=>EmergencyRequest());
+  }
+  else if (message.data['screen']=='otherBloodRequest'){
+    Get.to(()=>RequestScreen());
+  }
+  else{
+    Get.to(()=>EventsAppointments());
+  }
+
 }
 
 

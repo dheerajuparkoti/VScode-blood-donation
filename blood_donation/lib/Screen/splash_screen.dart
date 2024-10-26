@@ -64,7 +64,7 @@ class _LoginState extends State<SplashScreen> {
 
       // Use the fetched information as needed
     Timer(const Duration(seconds: 2), () {
-      if (rememberToken != null && rememberToken.isNotEmpty)  {
+      if (rememberToken != null)  {
         // If remember token exists, navigate to HomeScreen
         Get.off(() => const HomeScreen());
       } else {

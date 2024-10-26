@@ -9,9 +9,9 @@ import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyRequest extends StatefulWidget {
-  final int notificationErId;
+  final int? notificationErId;
 
-  const EmergencyRequest({super.key, required this.notificationErId});
+  const EmergencyRequest({super.key, this.notificationErId});
 
   @override
   State<EmergencyRequest> createState() => _EmergencyRequestState();
@@ -71,8 +71,10 @@ class _EmergencyRequestState extends State<EmergencyRequest>
       isLoading = true; // Set loading to true when starting to load data
     });
 
-    var res =
-        await CallApi().loadEmergencyRequests({}, 'loadEmergencyRequests');
+      // Send notificationErId as part of the request body if it exists
+ final requestPayload = widget.notificationErId != null ? {'notificationErId': widget.notificationErId} : {};
+
+      var res = await CallApi().loadEmergencyRequests(requestPayload, 'loadEmergencyRequests');
 
     if (res.statusCode == 200) {
       try {

@@ -15,8 +15,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../provider/user_provider.dart';
 
 class EventsAppointments extends StatefulWidget {
-  final int notificationEvId;
-  const EventsAppointments({super.key, required this.notificationEvId});
+  final int? notificationEvId;
+  const EventsAppointments({super.key,  this.notificationEvId});
 
   @override
   State<EventsAppointments> createState() => _EventsAppointmentsState();

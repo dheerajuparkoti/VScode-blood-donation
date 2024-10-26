@@ -237,6 +237,7 @@ import 'package:blood_donation/Screen/request_screen.dart';
 import 'package:blood_donation/Screen/sign_in_up_screen.dart';
 import 'package:blood_donation/api/api.dart';
 import 'package:blood_donation/provider/user_provider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -244,7 +245,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({super.key});
+  // const NotificationScreen({super.key});
+  final RemoteMessage? message;
+  const NotificationScreen({super.key, this.message});
 
   @override
   State<NotificationScreen> createState() => _NotificationScreenState();
@@ -556,63 +559,45 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 );
                               }
                             },
-                            child: Card(
-                              margin: const EdgeInsets.all(0.0),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0 * sh),
-                              ),
-                              elevation: 0.0012 * sh,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  // First Row Container
-                                  Container(
-                                    height: 0.07 * sh,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 0.025 * sw,
-                                        vertical: 0 * sh),
-                                    color: isErReadByDonor
-                                        ? const Color.fromARGB(
-                                            255, 51, 103, 163)
-                                        : isReReadByDonor
-                                            ? const Color.fromARGB(
-                                                255, 51, 103, 163)
-                                            : isEventReadByDonor
-                                                ? const Color.fromARGB(
-                                                    255, 51, 103, 163)
-                                                : const Color(0xC9272727),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Flexible(
-                                          // Wrap with Flexible widget
-                                          
-                                          child: Text(
-                                            notificationData['erId'] != null
-                                                ? 'New emergency request available. Tap here to view details. Request no. is ${notificationData['erId']}'
-                                                : notificationData['rId'] !=
-                                                        null
-                                                    ? 'New request available. Tap here to view details. Request no. is: ${notificationData['rId']}'
-                                                    : notificationData[
-                                                                'evId'] !=
-                                                            null
-                                                        ? 'New event available. Tap here to view details. Event no. is: ${notificationData['evId']}'
-                                                        : 'Unknown notification type',
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(height: 0.001 * sh),
-                                ],
-                              ),
-                            ),
+  // A Card with ListTile for clean, minimalist design
+child: Card(
+  margin: const EdgeInsets.all(0.0),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(0),
+  ),
+  elevation: 0.0012 * sh,
+  color: isErReadByDonor || isReReadByDonor || isEventReadByDonor
+      ? const Color.fromARGB(255, 51, 103, 163)
+      : const Color(0xC9272727), // Apply color based on read status
+  child: ListTile(
+    contentPadding: EdgeInsets.symmetric(
+      horizontal: 0.025 * sw,
+      vertical: 0.01 * sh,
+    ),
+    leading: const Icon(Icons.notifications_active, color: Colors.white),
+    title: Text(
+      widget.message?.notification?.title?.toString() ?? 'No Title',
+      style: const TextStyle(color: Colors.white),
+    ),
+    subtitle: Text(
+      notificationData['erId'] != null
+          ? 'New emergency request available. Tap here to view details. Request no. is ${notificationData['erId']}'
+          : notificationData['rId'] != null
+              ? 'New request available. Tap here to view details. Request no. is: ${notificationData['rId']}'
+              : notificationData['evId'] != null
+                  ? 'New Event Available. Event no. is: ${notificationData['evId']}'
+                  : '${widget.message?.notification?.body?.toString()}',
+      style: const TextStyle(color: Colors.white),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+    ),
+    trailing: Text(
+      widget.message?.data.toString() ?? 'No data available',
+      style: const TextStyle(color: Colors.white),
+    ),
+  ),
+),
+
                           );
                         })
                   ],

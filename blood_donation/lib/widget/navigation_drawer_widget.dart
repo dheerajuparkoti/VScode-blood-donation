@@ -113,7 +113,7 @@ class NavigationDrawerScreen extends StatelessWidget {
           break;
         case 2:
           
-          // navigateTo(const NotificationScreen(message: message));
+          navigateTo(const NotificationScreen());
           break;
         case 3:
           navigateTo(const EventsAppointments(

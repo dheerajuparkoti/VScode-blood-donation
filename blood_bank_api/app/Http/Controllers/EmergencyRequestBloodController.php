@@ -58,21 +58,26 @@ class EmergencyRequestBloodController extends Controller
 
     public function loadEmergencyRequests(Request $request)
     {
-        // Retrieve all emergency requests with the count of available donors
-        $emergencyRequests = EmergencyRequestBlood::withCount('availableDonors')->orderBy('created_at', 'desc')->get();
-    
+        // Fetch the notification ID from the request if it exists
+    $notificationErId = $request->input('notificationErId');
+
+  // Retrieve emergency requests, prioritizing the notificationErId, followed by the others in descending order
+    $emergencyRequests = EmergencyRequestBlood::withCount('availableDonors')
+        ->when($notificationErId, function ($query, $notificationErId) {
+            $query->orderByRaw("FIELD(emergencyRequestId, ?) DESC", [$notificationErId]);
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         // Log the retrieved data
-        \Log::info('Retrieved all emergency request blood data: ' . json_encode($emergencyRequests));
-     // Extract the counts and map them to the request ID
+      \Log::info('Retrieved emergency request blood data: ' . json_encode($emergencyRequests));
+
     $donorCounts = $emergencyRequests->pluck('available_donors_count', 'emergencyRequestId');
 
-    
-        // Return response with emergency request data and count numbers
-        return response()->json([
-            'emergencyRequestBloods' => $emergencyRequests,
-            'donorCounts' => $donorCounts,
-       
-        ]);
+    return response()->json([
+        'emergencyRequestBloods' => $emergencyRequests,
+        'donorCounts' => $donorCounts,
+    ]);
         
     }
 
